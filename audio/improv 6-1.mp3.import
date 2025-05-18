@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://egl133uj7tr"
+path="res://.godot/imported/improv 6-1.mp3-20c231b07b4ca017a6f7091f75cebb1d.mp3str"
+
+[deps]
+
+source_file="res://audio/improv 6-1.mp3"
+dest_files=["res://.godot/imported/improv 6-1.mp3-20c231b07b4ca017a6f7091f75cebb1d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

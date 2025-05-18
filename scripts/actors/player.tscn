@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
+
+[ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/player.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://audio/jump.wav" id="5"]
+
+[sub_resource type="RectangleShape2D" id="11"]
+size = Vector2(25, 77.5)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_mask = 30
+floor_constant_speed = true
+platform_on_leave = 2
+platform_floor_layers = 4294967042
+script = ExtResource("3")
+walk_speed = 200.0
+jump_speed = -500.0
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="Graphics"]
+offset_left = -12.0
+offset_top = -41.0
+offset_right = 15.0
+offset_bottom = 39.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Graphics"]
+offset_left = -11.0
+offset_top = -40.0
+offset_right = 14.0
+offset_bottom = 37.0
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+target_position = Vector2(0, 6)
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.25, -1.25001)
+shape = SubResource("11")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5")
+volume_db = -3.0

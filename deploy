@@ -1,0 +1,4 @@
+#!/bin/bash
+
+godot --headless --export-release "Web" builds/web/index.html 
+butler push builds/web alwaysrice/generosity:web
