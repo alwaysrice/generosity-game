@@ -102,15 +102,20 @@ animation = &"jump"
 offset = Vector2(-140, 0)
 flip_h = true
 
-[node name="PlatformDetector" parent="." index="1"]
-position = Vector2(-11.7, 36.25)
+[node name="CliffDetector" parent="." index="1"]
+position = Vector2(0, 62.5)
+target_position = Vector2(16.25, 11.25)
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="PlatformDetector" parent="." index="2"]
+position = Vector2(-9.53674e-07, 63.75)
+target_position = Vector2(9.53674e-07, 13.75)
+
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.800004, 1.25)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }

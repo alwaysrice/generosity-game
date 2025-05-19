@@ -22,11 +22,13 @@ drag_vertical_enabled = true
 [node name="Level" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_7jktm")]
 camera = NodePath("../Camera")
 
-[node name="Witch" parent="Level" instance=ExtResource("3_i7ys0")]
+[node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
 position = Vector2(531, 454)
+following = NodePath("../Cat")
 
-[node name="Cat" parent="Level" instance=ExtResource("4_tsiel")]
+[node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(193, 459)
+following = NodePath("../Witch")
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 100

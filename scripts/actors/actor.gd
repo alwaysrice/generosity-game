@@ -4,7 +4,9 @@ class_name Actor extends CharacterBody2D
 @export var accel_speed = 100 * 6.0
 @export var jump_speed = -725.0
 @export var fall_speed_max = 700
-@export var is_player := false
+@export var follow_distance = 100
+var is_player := false
+@export var following: Actor
 
 var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
@@ -12,7 +14,17 @@ var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 var can_double_jump := false
 var should_jump := false
 
+var action_history = []
 
+func afk_behaviour(delta: float):
+	var dist = following.global_position - global_position
+	if dist.x > follow_distance || dist.x < -follow_distance:
+		velocity.x = move_toward(velocity.x, sign(dist.x) * walk_speed, accel_speed * delta)
+		if $CliffDetector.is_colliding():
+			try_jump()
+	else:
+		velocity.x = move_toward(velocity.x, 0, accel_speed * delta)
+	
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
@@ -21,9 +33,12 @@ func _physics_process(delta: float) -> void:
 	if is_player and (Input.is_action_just_pressed("jump") or should_jump):
 		try_jump()
 	velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
-
-	var direction: float = Input.get_axis("move_left", "move_right") * walk_speed * int(is_player)
-	velocity.x = move_toward(velocity.x, direction, accel_speed * delta)
+	
+	if is_player:
+		var direction: float = Input.get_axis("move_left", "move_right") * walk_speed * int(is_player)
+		velocity.x = move_toward(velocity.x, direction, accel_speed * delta)
+	else:
+		afk_behaviour(delta)
 
 	if not is_zero_approx(velocity.x):
 		if velocity.x > 0.0:
