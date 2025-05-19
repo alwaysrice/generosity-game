@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ttib3dbsm7t"]
+
+[ext_resource type="Texture2D" uid="uid://4dqm3tbe5krv" path="res://images/Walk Cycle - Witch/WCW-04.PNG" id="1_lh5xe"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Wcw-04" type="Sprite2D" parent="."]
+position = Vector2(655, 462)
+scale = Vector2(0.18275, 0.18275)
+texture = ExtResource("1_lh5xe")

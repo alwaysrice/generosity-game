@@ -25,5 +25,4 @@ position = Vector2(9.53674e-07, 5)
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-0.625001, -0.625001)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_gsgih")

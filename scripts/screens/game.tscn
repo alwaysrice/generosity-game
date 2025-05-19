@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=8 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
+[ext_resource type="Script" uid="uid://ne82d4pl36ow" path="res://scripts/utils/mouse_camera.gd" id="2_tsiel"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_i7ys0"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
+[ext_resource type="Texture2D" uid="uid://gvrfkej0y7y" path="res://images/prite.PNG" id="7_okwes"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("camera", "cat", "witch")]
 process_mode = 3
@@ -18,6 +20,8 @@ limit_smoothed = true
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+script = ExtResource("2_tsiel")
+metadata/_custom_type_script = "uid://ne82d4pl36ow"
 
 [node name="Level" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_7jktm")]
 camera = NodePath("../Camera")
@@ -35,3 +39,32 @@ layer = 100
 
 [node name="PauseMenu" parent="InterfaceLayer" instance=ExtResource("4_eow3j")]
 visible = false
+
+[node name="Label" type="Label" parent="InterfaceLayer"]
+offset_left = 32.0
+offset_top = 54.0
+offset_right = 72.0
+offset_bottom = 77.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 297.0
+offset_top = 547.0
+offset_right = 388.0
+offset_bottom = 570.0
+text = "Larger lines"
+
+[node name="Prite" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(339, 648)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_okwes")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = 623.0
+offset_top = 489.0
+offset_right = 745.0
+offset_bottom = 599.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="changed_zoom" from="Camera" to="." method="_on_camera_changed_zoom"]

@@ -13,12 +13,15 @@ var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var graphics := $Graphics as Node2D
 var can_double_jump := false
 var should_jump := false
+var is_jumping = false
 
 var action_history = []
 
 func afk_behaviour(delta: float):
 	var dist = following.global_position - global_position
-	if dist.x > follow_distance || dist.x < -follow_distance:
+	if is_jumping:
+		velocity.x = move_toward(velocity.x, sign(velocity.x) * walk_speed, accel_speed * delta)
+	elif dist.x > follow_distance || dist.x < -follow_distance:
 		velocity.x = move_toward(velocity.x, sign(dist.x) * walk_speed, accel_speed * delta)
 		if $CliffDetector.is_colliding():
 			try_jump()
@@ -62,6 +65,7 @@ func get_new_animation() -> String:
 			animation_new = "walk"
 		else:
 			animation_new = "idle"
+		is_jumping = false
 	else:
 		if velocity.y > 0.0:
 			animation_new = "fall"
@@ -73,6 +77,7 @@ func get_new_animation() -> String:
 func try_jump() -> void:
 	if is_on_floor():
 		$JumpSound.pitch_scale = 1.0
+		is_jumping = true
 	elif can_double_jump:
 		can_double_jump = false
 		$JumpSound.pitch_scale = 1.5

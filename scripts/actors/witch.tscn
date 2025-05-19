@@ -92,13 +92,14 @@ _data = {
 }
 
 [node name="Witch" instance=ExtResource("1_mmq6v")]
+scale = Vector2(1, 1)
 script = ExtResource("2_f42kh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
 position = Vector2(-9.53674e-07, 0)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"jump"
+animation = &"idle"
 offset = Vector2(-140, 0)
 flip_h = true
 

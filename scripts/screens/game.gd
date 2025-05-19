@@ -56,3 +56,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(&"switch_character"):
 		switch_player()
 		
+
+
+func _on_camera_changed_zoom(zoom: Vector2) -> void:
+	print(zoom)
+
+	$InterfaceLayer/Label.text = str(zoom)
