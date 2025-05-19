@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://vh7pmputa7r3"]
+
+[ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
+[ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://audio/jump.wav" id="2_7h0px"]
+
+[node name="Actor" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_mask = 30
+floor_constant_speed = true
+platform_on_leave = 2
+platform_floor_layers = 4294967042
+script = ExtResource("1_gr3rb")
+jump_speed = -500.0
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+target_position = Vector2(0, 6)
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.25, -1.25001)
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_7h0px")
+volume_db = -3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

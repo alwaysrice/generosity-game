@@ -1,26 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=6 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
-[ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/player.tscn" id="3_ryrav"]
+[ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_i7ys0"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
+[ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" node_paths=PackedStringArray("camera", "cat", "witch")]
 process_mode = 3
 script = ExtResource("1_fc0e3")
+camera = NodePath("Camera")
+cat = NodePath("Level/Cat")
+witch = NodePath("Level/Witch")
 
-[node name="Level" parent="." instance=ExtResource("2_7jktm")]
-
-[node name="Player" parent="Level" instance=ExtResource("3_ryrav")]
-position = Vector2(531, 367)
-
-[node name="Camera" type="Camera2D" parent="Level/Player"]
-position = Vector2(12.5, -3.75)
-scale = Vector2(1.25, 1.25)
+[node name="Camera" type="Camera2D" parent="."]
 limit_smoothed = true
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Level" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_7jktm")]
+camera = NodePath("../Camera")
+
+[node name="Witch" parent="Level" instance=ExtResource("3_i7ys0")]
+position = Vector2(531, 454)
+
+[node name="Cat" parent="Level" instance=ExtResource("4_tsiel")]
+position = Vector2(193, 459)
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 100

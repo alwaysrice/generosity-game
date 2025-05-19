@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var camera: Camera2D
+
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)
 	var get_tilemap_bounds = func(t, r):
@@ -11,18 +13,19 @@ func get_bounds() -> Rect2:
 				r.size.x = max(i.x, r.size.x)
 				r.size.y = max(i.y, r.size.y)
 		return r
-	rect.size = $Sprite2D.texture.get_size() * $Sprite2D.scale
-	rect.position = $Sprite2D.global_position
+	for child in get_children():
+		if child is Sprite2D:
+			rect.position.x = min(child.global_position.x, rect.position.x)
+			rect.position.y = min(child.global_position.y, rect.position.y)
+			rect.size.x = max(child.global_position.x + child.texture.get_size().x * child.scale.x, rect.size.x)
+			rect.size.y = max(child.global_position.y + child.texture.get_size().y * child.scale.y, rect.size.y)
 	return rect
 
-func _ready():
-	for child in get_children():
-		if child is Player:
-			var camera = child.get_node("Camera")
-			var bounds := get_bounds()
-			print(bounds)
-			assert(camera)
-			camera.limit_left = bounds.position.x
-			camera.limit_top = bounds.position.y
-			camera.limit_right = bounds.position.x  + bounds.size.x
-			camera.limit_bottom = bounds.position.y +bounds.size.y
+func _ready():	
+	var bounds := get_bounds()
+	print(bounds)
+	assert(camera)
+	camera.limit_left = bounds.position.x
+	camera.limit_top = bounds.position.y 
+	camera.limit_right = bounds.size.x
+	camera.limit_bottom = bounds.size.y 

@@ -1,0 +1,116 @@
+[gd_scene load_steps=18 format=3 uid="uid://b68iki5mx8dwx"]
+
+[ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
+[ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_f42kh"]
+[ext_resource type="Texture2D" uid="uid://b5bpdev7hi4o6" path="res://images/Walk Cycle - Witch/WCW-01.PNG" id="3_885mi"]
+[ext_resource type="Texture2D" uid="uid://dh12uct1ot4hf" path="res://images/Walk Cycle - Witch/WCW-02.PNG" id="4_ks07l"]
+[ext_resource type="Texture2D" uid="uid://61wgrxfyfoke" path="res://images/Walk Cycle - Witch/WCW-03.PNG" id="5_h0o6b"]
+[ext_resource type="Texture2D" uid="uid://4dqm3tbe5krv" path="res://images/Walk Cycle - Witch/WCW-04.PNG" id="6_162t3"]
+[ext_resource type="Texture2D" uid="uid://iik0soi03hg3" path="res://images/Walk Cycle - Witch/WCW-05.PNG" id="7_nbe8u"]
+[ext_resource type="Texture2D" uid="uid://ghcxttu3swai" path="res://images/Walk Cycle - Witch/WCW-06.PNG" id="8_gs3nu"]
+[ext_resource type="Texture2D" uid="uid://box4p1jo1kxyp" path="res://images/Walk Cycle - Witch/WCW-07.PNG" id="9_jhf12"]
+[ext_resource type="Texture2D" uid="uid://b1ymrhhmrqo7n" path="res://images/Walk Cycle - Witch/WCW-08.PNG" id="10_eeuds"]
+[ext_resource type="Texture2D" uid="uid://dmu4anydd5nh" path="res://images/Walk Cycle - Witch/WCW-09.PNG" id="11_n1bwh"]
+[ext_resource type="Texture2D" uid="uid://dtqy6xk44yekr" path="res://images/Walk Cycle - Witch/WCW-10.PNG" id="12_fw45v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uubtp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_162t3")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_162t3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_162t3")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_885mi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ks07l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h0o6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_162t3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbe8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gs3nu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jhf12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_eeuds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n1bwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fw45v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_885mi"]
+radius = 20.0
+height = 130.0
+
+[sub_resource type="Animation" id="Animation_885mi"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_ks07l"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ks07l"]
+_data = {
+&"idle": SubResource("Animation_885mi"),
+&"walk": SubResource("Animation_ks07l")
+}
+
+[node name="Witch" instance=ExtResource("1_mmq6v")]
+script = ExtResource("2_f42kh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
+position = Vector2(-9.53674e-07, 0)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_uubtp")
+animation = &"jump"
+offset = Vector2(-140, 0)
+flip_h = true
+
+[node name="PlatformDetector" parent="." index="1"]
+position = Vector2(-11.7, 36.25)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0.800004, 1.25)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("CapsuleShape2D_885mi")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_ks07l")
+}

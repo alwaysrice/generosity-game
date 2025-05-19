@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctgumjaytuoch"]
+[gd_scene load_steps=8 format=3 uid="uid://ctgumjaytuoch"]
 
 [ext_resource type="Script" uid="uid://cfe7ke146oucc" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="AudioStream" uid="uid://egl133uj7tr" path="res://audio/improv 6-1.mp3" id="2_w0h25"]
 
 [sub_resource type="Gradient" id="Gradient_yy828"]
-offsets = PackedFloat32Array(0.0526316, 0.754386, 1)
-colors = PackedColorArray(0.798236, 0.851562, 0.671936, 1, 0.648438, 1, 0.862671, 1, 0.86672, 0.882812, 0.866971, 1)
+offsets = PackedFloat32Array(0.0175439, 0.754386, 1)
+colors = PackedColorArray(0.250034, 0.28441, 0.419271, 1, 0.393494, 0.488647, 0.799479, 1, 0.535583, 0.695825, 0.846354, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7lnir"]
 gradient = SubResource("Gradient_yy828")
@@ -17,20 +17,29 @@ fill_to = Vector2(0.537037, 1)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yy828"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lnir"]
-size = Vector2(1044, 37)
+size = Vector2(1032, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0h25"]
+size = Vector2(1032, 38)
 
 [node name="Level" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_w0h25")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-92, -165)
-scale = Vector2(1, 1.12875)
+position = Vector2(-165, -320)
+scale = Vector2(1.05231, 1.55875)
+texture = SubResource("GradientTexture2D_7lnir")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1196, -320)
+scale = Vector2(1.05332, 1.55875)
 texture = SubResource("GradientTexture2D_7lnir")
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-55, 592)
+position = Vector2(-308, 710)
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
@@ -38,10 +47,25 @@ physics_material_override = SubResource("PhysicsMaterial_yy828")
 offset_right = 1032.0
 offset_bottom = 38.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(512, 20.5)
+position = Vector2(516, 19)
 shape = SubResource("RectangleShape2D_7lnir")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(759, 710)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_yy828")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_right = 1032.0
+offset_bottom = 38.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(516, 19)
+shape = SubResource("RectangleShape2D_w0h25")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_w0h25")
