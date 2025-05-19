@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5bpdev7hi4o6"
-path="res://.godot/imported/WCW-01.PNG-8bc3812e35a074c20e6c4863388bc7f8.ctex"
+uid="uid://dg6rycn504gpt"
+path="res://.godot/imported/WCW-06.PNG-9a9a6a6abb478a9c280f4bb42a3e2097.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Walk Cycle - Witch/WCW-01.PNG"
-dest_files=["res://.godot/imported/WCW-01.PNG-8bc3812e35a074c20e6c4863388bc7f8.ctex"]
+source_file="res://images/Witch - Walk Cycle/WCW-06.PNG"
+dest_files=["res://.godot/imported/WCW-06.PNG-9a9a6a6abb478a9c280f4bb42a3e2097.ctex"]
 
 [params]
 

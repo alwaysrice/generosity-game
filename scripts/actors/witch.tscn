@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
 [ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_f42kh"]
-[ext_resource type="Texture2D" uid="uid://b5bpdev7hi4o6" path="res://images/Walk Cycle - Witch/WCW-01.PNG" id="3_885mi"]
-[ext_resource type="Texture2D" uid="uid://dh12uct1ot4hf" path="res://images/Walk Cycle - Witch/WCW-02.PNG" id="4_ks07l"]
-[ext_resource type="Texture2D" uid="uid://61wgrxfyfoke" path="res://images/Walk Cycle - Witch/WCW-03.PNG" id="5_h0o6b"]
-[ext_resource type="Texture2D" uid="uid://4dqm3tbe5krv" path="res://images/Walk Cycle - Witch/WCW-04.PNG" id="6_162t3"]
-[ext_resource type="Texture2D" uid="uid://iik0soi03hg3" path="res://images/Walk Cycle - Witch/WCW-05.PNG" id="7_nbe8u"]
-[ext_resource type="Texture2D" uid="uid://ghcxttu3swai" path="res://images/Walk Cycle - Witch/WCW-06.PNG" id="8_gs3nu"]
-[ext_resource type="Texture2D" uid="uid://box4p1jo1kxyp" path="res://images/Walk Cycle - Witch/WCW-07.PNG" id="9_jhf12"]
-[ext_resource type="Texture2D" uid="uid://b1ymrhhmrqo7n" path="res://images/Walk Cycle - Witch/WCW-08.PNG" id="10_eeuds"]
-[ext_resource type="Texture2D" uid="uid://dmu4anydd5nh" path="res://images/Walk Cycle - Witch/WCW-09.PNG" id="11_n1bwh"]
-[ext_resource type="Texture2D" uid="uid://dtqy6xk44yekr" path="res://images/Walk Cycle - Witch/WCW-10.PNG" id="12_fw45v"]
+[ext_resource type="Texture2D" uid="uid://bwkdh52k6bdg0" path="res://images/Witch - Walk Cycle/WCW-04.PNG" id="3_885mi"]
+[ext_resource type="Texture2D" uid="uid://b87q3d3nk0k2x" path="res://images/Witch - Walk Cycle/WCW-01.PNG" id="4_ks07l"]
+[ext_resource type="Texture2D" uid="uid://doj176um341ww" path="res://images/Witch - Walk Cycle/WCW-02.PNG" id="5_h0o6b"]
+[ext_resource type="Texture2D" uid="uid://2bg0b7cu8sde" path="res://images/Witch - Walk Cycle/WCW-03.PNG" id="6_162t3"]
+[ext_resource type="Texture2D" uid="uid://edg6iweh7dtk" path="res://images/Witch - Walk Cycle/WCW-05.PNG" id="7_nbe8u"]
+[ext_resource type="Texture2D" uid="uid://dg6rycn504gpt" path="res://images/Witch - Walk Cycle/WCW-06.PNG" id="8_gs3nu"]
+[ext_resource type="Texture2D" uid="uid://bpau2xo3j7472" path="res://images/Witch - Walk Cycle/WCW-07.PNG" id="9_jhf12"]
+[ext_resource type="Texture2D" uid="uid://c8hkl5n2jth1i" path="res://images/Witch - Walk Cycle/WCW-08.PNG" id="10_eeuds"]
+[ext_resource type="Texture2D" uid="uid://b2xq4yfnu16y3" path="res://images/Witch - Walk Cycle/WCW-09.PNG" id="11_n1bwh"]
+[ext_resource type="Texture2D" uid="uid://b50qeugpurqrw" path="res://images/Witch - Walk Cycle/WCW-10.PNG" id="12_fw45v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uubtp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_162t3")
+"texture": ExtResource("3_885mi")
 }],
 "loop": true,
 "name": &"fall",
@@ -25,7 +25,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_162t3")
+"texture": ExtResource("3_885mi")
 }],
 "loop": true,
 "name": &"idle",
@@ -33,16 +33,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_162t3")
+"texture": ExtResource("3_885mi")
 }],
 "loop": true,
 "name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_885mi")
-}, {
 "duration": 1.0,
 "texture": ExtResource("4_ks07l")
 }, {
@@ -51,6 +48,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_162t3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_885mi")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_nbe8u")
@@ -72,7 +72,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_885mi"]
@@ -99,7 +99,7 @@ script = ExtResource("2_f42kh")
 position = Vector2(-9.53674e-07, 0)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"idle"
+animation = &"walk"
 offset = Vector2(-140, 0)
 flip_h = true
 
