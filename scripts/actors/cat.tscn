@@ -21,8 +21,8 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CliffDetector" parent="." index="1"]
-position = Vector2(12.5, 83.125)
-target_position = Vector2(10, 5)
+position = Vector2(6.25, 78.75)
+target_position = Vector2(8.75, 7.5)
 
 [node name="PlatformDetector" parent="." index="2"]
 position = Vector2(9.53674e-07, 79.375)

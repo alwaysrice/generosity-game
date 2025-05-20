@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctgumjaytuoch"]
+[gd_scene load_steps=10 format=3 uid="uid://ctgumjaytuoch"]
 
 [ext_resource type="Script" uid="uid://cfe7ke146oucc" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="AudioStream" uid="uid://egl133uj7tr" path="res://audio/improv 6-1.mp3" id="2_w0h25"]
@@ -17,6 +17,9 @@ fill_to = Vector2(0.537037, 1)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yy828"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lnir"]
+size = Vector2(1032, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqc35"]
 size = Vector2(1032, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0h25"]
@@ -49,6 +52,22 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(516, 19)
 shape = SubResource("RectangleShape2D_7lnir")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(170, 748)
+rotation = -1.57079
+collision_layer = 16
+collision_mask = 16
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D3"]
+offset_right = 1032.0
+offset_bottom = 38.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(516, 19)
+shape = SubResource("RectangleShape2D_qqc35")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(1275, 710)

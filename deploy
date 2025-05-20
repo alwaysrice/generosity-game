@@ -1,4 +1,6 @@
 #!/bin/bash
 
 godot --headless --export-release "Web" builds/web/index.html 
+cp images/logo/index.png builds/web/index.png
 butler push builds/web alwaysrice/generosity:web
+
