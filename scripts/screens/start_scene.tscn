@@ -147,14 +147,14 @@ script = ExtResource("1_vs8n3")
 title = NodePath("Title")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1167.0
-offset_bottom = 665.0
+offset_right = 1152.0
+offset_bottom = 648.0
 color = Color(0.153097, 0.184522, 0.335938, 1)
 
 [node name="Img5295" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.270588)
-position = Vector2(583.5, 332.5)
-scale = Vector2(1.41971, 1.30906)
+position = Vector2(576, 323.999)
+scale = Vector2(1.40146, 1.27559)
 texture = ExtResource("2_rbidj")
 
 [node name="Title" type="Label" parent="."]

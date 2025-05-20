@@ -61,6 +61,18 @@ tracks/3/keys = {
 "clips": PackedStringArray("1"),
 "times": PackedFloat32Array(2.06667)
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Level/Witch:should_follow")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_yd2g3"]
 length = 0.001
@@ -83,6 +95,18 @@ tracks/1/path = NodePath("Level/Cat:should_follow")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Level/Witch:should_follow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -116,12 +140,10 @@ camera = NodePath("../Camera")
 [node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
 position = Vector2(460, 627)
 following = NodePath("../Cat")
-should_follow = true
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(1481, 626)
 following = NodePath("../Witch")
-should_follow = true
 
 [node name="Deadzone" type="Area2D" parent="Level"]
 position = Vector2(197, 716)
@@ -158,7 +180,6 @@ offset_bottom = 23.0
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="."]
 process_mode = 1
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_6b25k")
 }
