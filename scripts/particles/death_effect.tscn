@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bssv3qmv1tenu"]
+
+[node name="DeathEffect" type="CPUParticles2D"]
+emitting = false
+amount = 30
+lifetime = 1.09
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.89
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(0, 0, 0, 1)

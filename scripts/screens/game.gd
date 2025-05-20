@@ -6,6 +6,9 @@ class_name Game extends Node
 @export var cat: Cat
 @export var witch: Witch
 
+func _ready() -> void:
+	if not $StoryPlayer.active:
+		switch_witch()
 	
 func switch_witch():
 	switch_player(witch)
@@ -53,3 +56,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_camera_changed_zoom(zoom: Vector2) -> void:
 	print(zoom)
 	$InterfaceLayer/Label.text = str(zoom)
+
+
+func _on_deadzone_body_entered(body: Node2D) -> void:
+	var actor = body as Actor
+	var last_position
+	if actor is Witch: last_position = $Level/Cat.position
+	else: last_position = $Level/Witch.position
+	actor.die(last_position)
+
+
+func _on_death(actor: Actor) -> void:
+	actor.revive()

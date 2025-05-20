@@ -18,8 +18,23 @@ var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 var can_double_jump := false
 var should_jump := false
 var is_jumping = false
+var is_dead = false
+var spawn_point = Vector2.ZERO
+signal on_death(actor: Actor)
 
 var action_history = []
+
+func revive():
+	is_dead = false
+	graphics.modulate = Color.WHITE
+	position = spawn_point
+	spawn_point = Vector2.ZERO
+
+func die(pos: Vector2):
+	spawn_point = pos
+	$DeathEffect.emitting = true
+	graphics.modulate = Color.TRANSPARENT
+	is_dead = true
 
 func afk_behaviour(delta: float):
 	if not following or not should_follow: return
@@ -41,6 +56,7 @@ func afk_behaviour(delta: float):
 	
 
 func _physics_process(delta: float) -> void:
+	if is_dead: return
 	if is_on_floor():
 		can_double_jump = true
 		
@@ -93,6 +109,7 @@ func get_new_animation() -> String:
 
 
 func try_jump() -> void:
+	if is_dead: return
 	if is_on_floor():
 		$JumpSound.pitch_scale = 1.0
 		is_jumping = true
@@ -103,3 +120,7 @@ func try_jump() -> void:
 		return
 	velocity.y = jump_speed
 	$JumpSound.play()
+
+
+func _on_death_effect_finished() -> void:
+	on_death.emit(self)
