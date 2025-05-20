@@ -24,14 +24,6 @@ func switch_player(who: Actor = null):
 	who.is_player = true
 	camera.reset_smoothing()
 		
-	var tween = create_tween()
-	#tween.tween_property(camera, "global_position", who.global_position, 1.0)\
-	#.set_trans(Tween.TRANS_SINE)\
-	#.set_ease(Tween.EASE_IN_OUT)
-	#tween.tween_callback(func(): 
-		#camera.position_smoothing_enabled = true
-#
-		#)
 
 
 func _unhandled_input(event: InputEvent) -> void:

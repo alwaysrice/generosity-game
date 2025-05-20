@@ -1,10 +1,13 @@
 class_name Actor extends CharacterBody2D
 
 @export var walk_speed = 100.0
-@export var accel_speed = 100 * 6.0
+@export var run_speed = 300.0
+@export var walk_accel = 6.0
+@export var run_accel = 6.0
 @export var jump_speed = -725.0
 @export var fall_speed_max = 700
 @export var follow_distance = 100
+@export var follow_distance_run = 200
 var is_player := false
 @export var following: Actor
 
@@ -19,14 +22,20 @@ var action_history = []
 
 func afk_behaviour(delta: float):
 	var dist = following.global_position - global_position
+	var speed = walk_speed
+	var accel = walk_accel
+	if dist.x > follow_distance_run || dist.x < -follow_distance_run:
+		speed = run_speed	
+		accel = run_accel
+	
 	if is_jumping:
-		velocity.x = move_toward(velocity.x, sign(velocity.x) * walk_speed, accel_speed * delta)
+		velocity.x = move_toward(velocity.x, sign(velocity.x) * speed, accel * speed * delta)
 	elif dist.x > follow_distance || dist.x < -follow_distance:
-		velocity.x = move_toward(velocity.x, sign(dist.x) * walk_speed, accel_speed * delta)
+		velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
 		if $CliffDetector.is_colliding():
 			try_jump()
 	else:
-		velocity.x = move_toward(velocity.x, 0, accel_speed * delta)
+		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)
 	
 
 func _physics_process(delta: float) -> void:
@@ -38,8 +47,13 @@ func _physics_process(delta: float) -> void:
 	velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
 	
 	if is_player:
-		var direction: float = Input.get_axis("move_left", "move_right") * walk_speed * int(is_player)
-		velocity.x = move_toward(velocity.x, direction, accel_speed * delta)
+		var speed = walk_speed
+		var accel = walk_accel
+		if Input.is_action_pressed("run"):
+			speed = run_speed
+			accel = run_accel
+		var direction: float = Input.get_axis("move_left", "move_right") * speed * int(is_player)
+		velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
 	else:
 		afk_behaviour(delta)
 
@@ -63,6 +77,8 @@ func get_new_animation() -> String:
 	if is_on_floor():
 		if absf(velocity.x) > 0.1:
 			animation_new = "walk"
+			if Input.is_action_pressed("run"):
+				animation_new = "run"
 		else:
 			animation_new = "idle"
 		is_jumping = false

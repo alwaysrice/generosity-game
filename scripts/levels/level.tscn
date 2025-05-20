@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://egl133uj7tr" path="res://audio/improv 6-1.mp3" id="2_w0h25"]
 
 [sub_resource type="Gradient" id="Gradient_yy828"]
-offsets = PackedFloat32Array(0.0175439, 0.754386, 1)
+offsets = PackedFloat32Array(0, 0.754386, 1)
 colors = PackedColorArray(0.250034, 0.28441, 0.419271, 1, 0.393494, 0.488647, 0.799479, 1, 0.535583, 0.695825, 0.846354, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7lnir"]
@@ -30,19 +30,13 @@ process_mode = 1
 script = ExtResource("1_w0h25")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-165, -320)
-scale = Vector2(1.05231, 1.55875)
-texture = SubResource("GradientTexture2D_7lnir")
-centered = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(1196, -320)
-scale = Vector2(1.05332, 1.55875)
+position = Vector2(-562, -589)
+scale = Vector2(2.80538, 2.8425)
 texture = SubResource("GradientTexture2D_7lnir")
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-308, 710)
+position = Vector2(208, 710)
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
@@ -57,7 +51,7 @@ position = Vector2(516, 19)
 shape = SubResource("RectangleShape2D_7lnir")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(759, 710)
+position = Vector2(1275, 710)
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
@@ -76,7 +70,7 @@ volume_db = 12.0
 autoplay = true
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(724, 710)
+position = Vector2(1240, 710)
 collision_layer = 2
 collision_mask = 2
 

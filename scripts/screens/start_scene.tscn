@@ -1,0 +1,172 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmphkmk74pbm4"]
+
+[ext_resource type="Script" uid="uid://die1jykpmkjor" path="res://scripts/screens/start_scene.gd" id="1_vs8n3"]
+[ext_resource type="Texture2D" uid="uid://c1rfist2qygio" path="res://images/IMG_5295.webp" id="2_rbidj"]
+
+[sub_resource type="Animation" id="Animation_rbidj"]
+resource_name = "title_ready"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.13333, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"allow_proceed"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"title_animate", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b2gxe"]
+resource_name = "title_animate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.462745), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_06nut"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_44rle"]
+resource_name = "enter_game"
+length = 2.0
+capture_included = true
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.06667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enter_game"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.06667),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(0.117647, 0.156863, 0.266667, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b2gxe"]
+_data = {
+&"RESET": SubResource("Animation_06nut"),
+&"enter_game": SubResource("Animation_44rle"),
+&"title_animate": SubResource("Animation_b2gxe"),
+&"title_ready": SubResource("Animation_rbidj")
+}
+
+[node name="StartScene" type="Node2D" node_paths=PackedStringArray("title")]
+script = ExtResource("1_vs8n3")
+title = NodePath("Title")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1167.0
+offset_bottom = 665.0
+color = Color(0.153097, 0.184522, 0.335938, 1)
+
+[node name="Img5295" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.270588)
+position = Vector2(583.5, 332.5)
+scale = Vector2(1.41971, 1.30906)
+texture = ExtResource("2_rbidj")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 443.0
+offset_top = 310.0
+offset_right = 709.0
+offset_bottom = 338.0
+theme_override_font_sizes/font_size = 20
+text = "Nyota and the Moon Palace"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_b2gxe")
+}
+autoplay = "title_ready"

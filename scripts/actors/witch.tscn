@@ -71,6 +71,41 @@ animations = [{
 "texture": ExtResource("12_fw45v")
 }],
 "loop": true,
+"name": &"run",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ks07l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h0o6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_162t3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_885mi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbe8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gs3nu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jhf12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_eeuds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n1bwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fw45v")
+}],
+"loop": true,
 "name": &"walk",
 "speed": 12.0
 }]
@@ -99,7 +134,7 @@ script = ExtResource("2_f42kh")
 position = Vector2(-9.53674e-07, 0)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"walk"
+animation = &"run"
 offset = Vector2(-140, 0)
 flip_h = true
 
