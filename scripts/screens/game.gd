@@ -2,15 +2,15 @@ class_name Game extends Node
 
 
 @onready var _pause_menu := $InterfaceLayer/PauseMenu as PauseMenu
-@export var camera: Camera2D
+@export var camera: Camera
 @export var cat: Cat
 @export var witch: Witch
 
-func _ready() -> void:
+	
+func switch_witch():
 	switch_player(witch)
 	
 func switch_player(who: Actor = null):
-	camera.get_parent().remove_child(camera)
 	if !who:
 		assert(cat.is_player != witch.is_player)
 		cat.is_player = !cat.is_player
@@ -20,9 +20,9 @@ func switch_player(who: Actor = null):
 		cat.is_player = false
 		witch.is_player = false
 		
-	who.add_child(camera)
+	camera.enabled = true
 	who.is_player = true
-	camera.reset_smoothing()
+	camera.target = who
 		
 
 
@@ -52,5 +52,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_camera_changed_zoom(zoom: Vector2) -> void:
 	print(zoom)
-
 	$InterfaceLayer/Label.text = str(zoom)

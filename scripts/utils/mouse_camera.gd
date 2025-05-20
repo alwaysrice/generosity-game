@@ -1,4 +1,4 @@
-extends Camera2D
+extends Camera
 class_name DraggableCamera
 
 signal changed_zoom(zoom: Vector2)

@@ -10,6 +10,7 @@ class_name Actor extends CharacterBody2D
 @export var follow_distance_run = 200
 var is_player := false
 @export var following: Actor
+@export var should_follow = false
 
 var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
@@ -21,6 +22,7 @@ var is_jumping = false
 var action_history = []
 
 func afk_behaviour(delta: float):
+	if not following or not should_follow: return
 	var dist = following.global_position - global_position
 	var speed = walk_speed
 	var accel = walk_accel

@@ -4,14 +4,14 @@
 [ext_resource type="AudioStream" uid="uid://egl133uj7tr" path="res://audio/improv 6-1.mp3" id="2_w0h25"]
 
 [sub_resource type="Gradient" id="Gradient_yy828"]
-offsets = PackedFloat32Array(0, 0.754386, 1)
-colors = PackedColorArray(0.250034, 0.28441, 0.419271, 1, 0.393494, 0.488647, 0.799479, 1, 0.535583, 0.695825, 0.846354, 1)
+offsets = PackedFloat32Array(0, 0.183099, 0.754386, 1)
+colors = PackedColorArray(0.250034, 0.28441, 0.419271, 1, 0.162386, 0.0878025, 0.315104, 1, 0.393494, 0.488647, 0.799479, 1, 0.535583, 0.695825, 0.846354, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7lnir"]
 gradient = SubResource("Gradient_yy828")
 width = 1300
 height = 800
-fill_from = Vector2(0.524691, 0)
+fill_from = Vector2(0.547368, 0)
 fill_to = Vector2(0.537037, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yy828"]
