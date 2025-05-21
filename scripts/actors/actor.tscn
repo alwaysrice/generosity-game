@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=3 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
 [ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://audio/jump.wav" id="2_7h0px"]
-[ext_resource type="PackedScene" uid="uid://bssv3qmv1tenu" path="res://scripts/particles/death_effect.tscn" id="3_7h0px"]
 
 [node name="Actor" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
@@ -34,10 +33,21 @@ volume_db = -3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="DeathEffect" parent="." instance=ExtResource("3_7h0px")]
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-scale_amount_min = 15.0
-scale_amount_max = 15.0
+[node name="DeathEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.96
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="finished" from="DeathEffect" to="." method="_on_death_effect_finished"]

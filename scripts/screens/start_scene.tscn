@@ -1,7 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmphkmk74pbm4"]
+[gd_scene load_steps=10 format=3 uid="uid://dmphkmk74pbm4"]
 
 [ext_resource type="Script" uid="uid://die1jykpmkjor" path="res://scripts/screens/start_scene.gd" id="1_vs8n3"]
 [ext_resource type="Texture2D" uid="uid://c1rfist2qygio" path="res://images/IMG_5295.webp" id="2_rbidj"]
+
+[sub_resource type="SystemFont" id="SystemFont_rbidj"]
+font_names = PackedStringArray("Cursive")
+font_weight = 999
+
+[sub_resource type="LabelSettings" id="LabelSettings_b2gxe"]
+font = SubResource("SystemFont_rbidj")
+font_size = 20
+outline_size = 2
+outline_color = Color(0.690104, 0.946737, 1, 1)
 
 [sub_resource type="Animation" id="Animation_06nut"]
 length = 0.001
@@ -162,8 +172,8 @@ offset_left = 443.0
 offset_top = 310.0
 offset_right = 709.0
 offset_bottom = 338.0
-theme_override_font_sizes/font_size = 20
 text = "Nyota and the Moon Palace"
+label_settings = SubResource("LabelSettings_b2gxe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

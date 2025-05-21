@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=16 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
@@ -6,13 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_i7ys0"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
+[ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="7_okwes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsiel"]
 size = Vector2(4305, 182)
 
+[sub_resource type="SystemFont" id="SystemFont_okwes"]
+font_names = PackedStringArray("Cantarell")
+font_weight = 999
+
+[sub_resource type="LabelSettings" id="LabelSettings_yd2g3"]
+font = SubResource("SystemFont_okwes")
+font_size = 18
+font_color = Color(0.962443, 1, 0.815104, 1)
+outline_size = 10
+outline_color = Color(0.346022, 0.515383, 0.674479, 1)
+
 [sub_resource type="Animation" id="Animation_okwes"]
 resource_name = "1-caged"
-length = 5.0
+length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,7 +32,7 @@ tracks/0/path = NodePath("Camera:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 1.8, 2.53333, 3.06667, 3.56667, 4.4),
+"times": PackedFloat32Array(0, 0.333333, 1.8, 3.33333, 3.86667, 5.26667, 5.83333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(485, 0), Vector2(485, 0), Vector2(485, 467), Vector2(485, 467), Vector2(1266, 467), Vector2(1266, 467), Vector2(485, 467)]
@@ -32,7 +44,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(4.93333),
+"times": PackedFloat32Array(6.36666),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -46,7 +58,7 @@ tracks/2/path = NodePath("Level/Cat:should_follow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3.61),
+"times": PackedFloat32Array(5.13333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -59,7 +71,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "clips": PackedStringArray("1"),
-"times": PackedFloat32Array(2.06667)
+"times": PackedFloat32Array(2.86667)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -68,10 +80,24 @@ tracks/4/path = NodePath("Level/Witch:should_follow")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 6.43333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StoryPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0, true],
+"method": &"play_dialogue"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_yd2g3"]
@@ -162,6 +188,16 @@ script = ExtResource("2_tsiel")
 metadata/_custom_type_script = "uid://ne82d4pl36ow"
 metadata/_edit_group_ = true
 
+[node name="GuiLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueLabel" type="Label" parent="GuiLayer"]
+offset_left = 370.0
+offset_top = 97.0
+offset_right = 857.0
+offset_bottom = 236.0
+label_settings = SubResource("LabelSettings_yd2g3")
+horizontal_alignment = 1
+
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -174,16 +210,16 @@ offset_top = 54.0
 offset_right = 72.0
 offset_bottom = 77.0
 
-[node name="DialogueLabel" type="Label" parent="InterfaceLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="StoryPlayer" type="AnimationPlayer" parent="."]
+[node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
 libraries = {
 &"": SubResource("AnimationLibrary_6b25k")
 }
 autoplay = "1-caged"
+script = ExtResource("7_okwes")
+char_speed = 12
+dialogue_label = NodePath("../GuiLayer/DialogueLabel")
+dialogues = PackedStringArray("witch>>“Huh? What happened…? Where am I?”\nwitch>>“A cage?”\nwitch>>“Wait, where’s—”")
 
 [node name="DialoguePlayer" type="AnimationPlayer" parent="."]
 process_mode = 1

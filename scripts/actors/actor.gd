@@ -30,6 +30,7 @@ func revive():
 	position = spawn_point
 	spawn_point = Vector2.ZERO
 
+
 func die(pos: Vector2):
 	spawn_point = pos
 	$DeathEffect.emitting = true

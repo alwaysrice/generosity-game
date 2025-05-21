@@ -69,6 +69,22 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(516, 19)
 shape = SubResource("RectangleShape2D_qqc35")
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(2295, 710)
+rotation = -0.261799
+collision_layer = 16
+collision_mask = 16
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D4"]
+offset_right = 1032.0
+offset_bottom = 38.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(516, 19)
+shape = SubResource("RectangleShape2D_qqc35")
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(1275, 710)
 collision_layer = 2

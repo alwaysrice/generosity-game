@@ -8,6 +8,7 @@ class_name Game extends Node
 
 func _ready() -> void:
 	if not $StoryPlayer.active:
+		$Level/Witch.should_follow = true
 		switch_witch()
 	
 func switch_witch():
@@ -48,7 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_pause_menu.close()
 		get_tree().root.set_input_as_handled()
 		
-	elif event.is_action_pressed(&"switch_character") && not $StoryPlayer.is_playing():
+	elif event.is_action_pressed(&"switch_character") && (not $StoryPlayer.is_playing() or not $StoryPlayer.active):
 		switch_player()
 		
 
@@ -60,10 +61,7 @@ func _on_camera_changed_zoom(zoom: Vector2) -> void:
 
 func _on_deadzone_body_entered(body: Node2D) -> void:
 	var actor = body as Actor
-	var last_position
-	if actor is Witch: last_position = $Level/Cat.position
-	else: last_position = $Level/Witch.position
-	actor.die(last_position)
+	actor.die(actor.following.position)
 
 
 func _on_death(actor: Actor) -> void:
