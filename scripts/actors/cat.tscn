@@ -30,3 +30,6 @@ position = Vector2(9.53674e-07, 79.375)
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(-0.625001, 73.75)
 shape = SubResource("RectangleShape2D_gsgih")
+
+[node name="SwitchEffect" parent="." index="7"]
+position = Vector2(0, 78.75)

@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbs021l2xn8qm"]
+
+[ext_resource type="Script" uid="uid://c8rt54m0kr016" path="res://scripts/puzzle/constellation.gd" id="1_nxcyq"]
+
+[sub_resource type="Gradient" id="Gradient_nxcyq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rneqt"]
+gradient = SubResource("Gradient_nxcyq")
+width = 20
+height = 20
+fill_from = Vector2(0, 1)
+
+[node name="Constellation" type="Node2D"]
+script = ExtResource("1_nxcyq")
+point_radius = 20
+magnet_radius = 30
+allow_magnet = true
+metadata/_custom_type_script = "uid://c8rt54m0kr016"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(203, 152)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D10" type="Sprite2D" parent="."]
+position = Vector2(145, 101)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D11" type="Sprite2D" parent="."]
+position = Vector2(261, 48)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(251, 262)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(361, 91)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(503, 142)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(351, 382)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(513, 392)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(193, 372)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+position = Vector2(135, 272)
+texture = SubResource("GradientTexture2D_rneqt")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(416, 226)
+rotation = 0.261799
+texture = SubResource("GradientTexture2D_rneqt")
+
+[connection signal="connected_all" from="." to="." method="_on_connected_all"]

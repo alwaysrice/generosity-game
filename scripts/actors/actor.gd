@@ -30,7 +30,6 @@ func revive():
 	position = spawn_point
 	spawn_point = Vector2.ZERO
 
-
 func die(pos: Vector2):
 	spawn_point = pos
 	$DeathEffect.emitting = true
@@ -129,6 +128,8 @@ func try_jump() -> void:
 	velocity.y = jump_speed
 	$JumpSound.play()
 
+func _on_switch(from: Actor):
+	$SwitchEffect.emitting = true
 
 func _on_death_effect_finished() -> void:
 	on_death.emit(self)

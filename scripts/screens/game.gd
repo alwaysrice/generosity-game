@@ -6,15 +6,17 @@ class_name Game extends Node
 @export var cat: Cat
 @export var witch: Witch
 
+
 func _ready() -> void:
 	if not $StoryPlayer.active:
 		$Level/Witch.should_follow = true
+		$Level/Cat.should_follow = true
 		switch_witch()
 	
 func switch_witch():
 	switch_player(witch)
 	
-func switch_player(who: Actor = null):
+func switch_player(who: Actor = null) -> Actor:
 	if !who:
 		assert(cat.is_player != witch.is_player)
 		cat.is_player = !cat.is_player
@@ -27,6 +29,8 @@ func switch_player(who: Actor = null):
 	camera.enabled = true
 	who.is_player = true
 	camera.target = who
+	
+	return who
 		
 
 
@@ -50,7 +54,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().root.set_input_as_handled()
 		
 	elif event.is_action_pressed(&"switch_character") && (not $StoryPlayer.is_playing() or not $StoryPlayer.active):
-		switch_player()
+		var new_player = switch_player()
+		new_player._on_switch(new_player.following)
 		
 
 

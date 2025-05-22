@@ -155,3 +155,6 @@ shape = SubResource("CapsuleShape2D_885mi")
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
+
+[node name="SwitchEffect" parent="." index="7"]
+position = Vector2(0, 63)

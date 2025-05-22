@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
-[ext_resource type="AudioStream" uid="uid://sjod173axgwf" path="res://audio/jump.wav" id="2_7h0px"]
+
+[sub_resource type="AudioStream" id="AudioStream_h1f37"]
+
+[sub_resource type="Curve" id="Curve_gr3rb"]
+_data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0, 0.0, 0, 0, Vector2(1, 0.0200803), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="Actor" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
@@ -28,8 +33,8 @@ collision_mask = 8
 position = Vector2(1.25, -1.25001)
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_7h0px")
-volume_db = -3.0
+stream = SubResource("AudioStream_h1f37")
+volume_db = -9.857
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -48,6 +53,45 @@ orbit_velocity_min = 1.0
 orbit_velocity_max = 1.0
 scale_amount_min = 10.0
 scale_amount_max = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="SwitchEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 4.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.31
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -100)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 5.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_gr3rb")
+color = Color(0, 0, 0, 1)
+
+[node name="life" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 20
+lifetime = 4.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.31
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -100)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_gr3rb")
 color = Color(0, 0, 0, 1)
 
 [connection signal="finished" from="DeathEffect" to="." method="_on_death_effect_finished"]

@@ -212,6 +212,7 @@ offset_bottom = 77.0
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_6b25k")
 }
