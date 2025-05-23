@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=14 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
@@ -24,7 +24,7 @@ outline_color = Color(0.346022, 0.515383, 0.674479, 1)
 
 [sub_resource type="Animation" id="Animation_okwes"]
 resource_name = "1-caged"
-length = 7.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,10 +32,10 @@ tracks/0/path = NodePath("Camera:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 1.8, 3.33333, 3.86667, 5.26667, 5.83333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333, 1.8, 3.33333, 3.86667, 5.26667, 6.33333, 6.76667, 7.63333, 8.03333, 8.76667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(485, 0), Vector2(485, 0), Vector2(485, 467), Vector2(485, 467), Vector2(1266, 467), Vector2(1266, 467), Vector2(485, 467)]
+"values": [Vector2(485, 0), Vector2(485, 0), Vector2(485, 467), Vector2(485, 467), Vector2(1266, 467), Vector2(1266, 467), Vector2(485, 467), Vector2(485, 467), Vector2(1040, 467), Vector2(1040, 467), Vector2(485, 467)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -44,9 +44,15 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(6.36666),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(8.76667, 9.06667, 9.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"switch_witch"
+}, {
+"args": [],
+"method": &"no_player"
+}, {
 "args": [],
 "method": &"switch_witch"
 }]
@@ -58,44 +64,55 @@ tracks/2/path = NodePath("Level/Cat:should_follow")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(5.13333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(5.13333, 8.76667, 9.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false, true]
 }
-tracks/3/type = "animation"
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DialoguePlayer")
+tracks/3/path = NodePath("Level/Witch:should_follow")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"clips": PackedStringArray("1"),
-"times": PackedFloat32Array(2.86667)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Level/Witch:should_follow")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 6.43333),
+"times": PackedFloat32Array(0, 9.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("StoryPlayer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(2.7),
-"transitions": PackedFloat32Array(1),
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StoryPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.7, 4.33333, 6.5, 7.8, 8.76667, 9.03333, 9.2, 9.43333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
-"args": [0, true],
+"args": ["11", true],
+"method": &"play_dialogue"
+}, {
+"args": ["12", true],
+"method": &"play_dialogue"
+}, {
+"args": ["13", true],
+"method": &"play_dialogue"
+}, {
+"args": ["14", true],
+"method": &"play_dialogue"
+}, {
+"args": [NodePath("../Level/Cat")],
+"method": &"has_key_errand"
+}, {
+"args": [NodePath("../Level/Cat"), NodePath("../Level/Witch")],
+"method": &"approach_errand"
+}, {
+"args": ["15", true],
+"method": &"play_dialogue"
+}, {
+"args": ["16", true],
 "method": &"play_dialogue"
 }]
 }
@@ -145,14 +162,6 @@ _data = {
 &"RESET": SubResource("Animation_yd2g3")
 }
 
-[sub_resource type="Animation" id="Animation_tsiel"]
-resource_name = "1"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_okwes"]
-_data = {
-&"1.1": SubResource("Animation_tsiel")
-}
-
 [node name="Game" type="Node" node_paths=PackedStringArray("camera", "cat", "witch")]
 process_mode = 3
 script = ExtResource("1_fc0e3")
@@ -168,7 +177,7 @@ position = Vector2(460, 627)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
-position = Vector2(1481, 626)
+position = Vector2(1481, 666)
 following = NodePath("../Witch")
 
 [node name="Deadzone" type="Area2D" parent="Level"]
@@ -218,15 +227,8 @@ libraries = {
 }
 autoplay = "1-caged"
 script = ExtResource("7_okwes")
-char_speed = 12
 dialogue_label = NodePath("../GuiLayer/DialogueLabel")
-dialogues = PackedStringArray("witch>>“Huh? What happened…? Where am I?”\nwitch>>“A cage?”\nwitch>>“Wait, where’s—”")
-
-[node name="DialoguePlayer" type="AnimationPlayer" parent="."]
-process_mode = 1
-libraries = {
-&"": SubResource("AnimationLibrary_okwes")
-}
+dialogues_file = "res://scripts/story/dialogues.txt"
 
 [connection signal="on_death" from="Level/Witch" to="." method="_on_death"]
 [connection signal="on_death" from="Level/Cat" to="." method="_on_death"]

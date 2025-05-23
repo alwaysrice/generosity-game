@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=3 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
-
-[sub_resource type="AudioStream" id="AudioStream_h1f37"]
 
 [sub_resource type="Curve" id="Curve_gr3rb"]
 _data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0, 0.0, 0, 0, Vector2(1, 0.0200803), 0.0, 0.0, 0, 0]
@@ -33,7 +31,6 @@ collision_mask = 8
 position = Vector2(1.25, -1.25001)
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStream_h1f37")
 volume_db = -9.857
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -57,10 +54,10 @@ color = Color(0, 0, 0, 1)
 
 [node name="SwitchEffect" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 20
-lifetime = 4.0
+amount = 4
+lifetime = 0.01
 one_shot = true
-speed_scale = 2.0
+speed_scale = 5.0
 explosiveness = 0.31
 direction = Vector2(0, 0)
 spread = 180.0

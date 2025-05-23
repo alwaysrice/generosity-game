@@ -20,6 +20,8 @@ var should_jump := false
 var is_jumping = false
 var is_dead = false
 var spawn_point = Vector2.ZERO
+var items = []
+@export var item_magnet_radius = 100
 signal on_death(actor: Actor)
 
 var action_history = []

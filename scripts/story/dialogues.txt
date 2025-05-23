@@ -1,0 +1,64 @@
+11
+“Huh? What happened…? Where am I?”
+“A cage?”
+“Wait, where’s—”
+
+12
+“Paka!”
+
+13
+“I’m glad you’re okay! I was about to start worrying.”
+“I don’t remember how I got here, but you have to help me out of this place.”
+“I would use my magic, but…”
+
+14
+“Oh, hurry and grab the key hanging there!”
+
+15
+“There’s a good kitty.”
+
+16
+“Thank goodness you were here, I don’t know what I’d do without you.”
+“My magic… I can barely feel it.”
+“It’s not completely gone, it’s just… missing.”
+“…Anyways, let’s get out of here.”
+
+0
+“Let’s get out of here first.”
+
+
+21
+“This is… the Moon Palace.”
+“Has it always been this empty?”
+
+22
+Nyota: “Hello? Can anyone hear me?”
+
+23
+“Why’s there a hole in the floor?”
+“Well, I should be able to jump over this.”
+
+24
+Nyota: “…Where is everyone?”
+
+25
+“Another gap… This is too big for me to jump over.”
+“I should have enough magic to fly over it.”
+
+26
+“This gap… I don’t think I have enough magic to fly across.”
+“Maybe we should turn back.”
+
+27
+Nyota: “Paka, come back! Darn that cat..”
+
+31
+Nyota: “What has gotten into you?”
+
+32
+“Oh, the lantern!”
+“Usually they’re lit with magic, aren’t they?”
+“Hm… let me try.”
+
+33
+Nyota: “Looks like that did something. Come on!”

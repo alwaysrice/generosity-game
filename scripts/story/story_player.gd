@@ -4,16 +4,65 @@ extends AnimationPlayer
 @export var dialogue_allow_interrupt = false
 @export var char_speed = 20
 @export var dialogue_label: Label  
-@export_multiline var dialogues: PackedStringArray
+@export_file("*.txt") var dialogues_file: String
+var dialogues = {}
 var current_line = 0
-var current_dialogue = 0
+var current_dialogue = ""
 var dialogue_finished_animating = false
-
+var errand = NoErrand.new()		
 signal dialogue_ended
+var _dialogue_tween: Tween
+
+
+class Errand:
+	func is_done() -> bool:
+		assert(false)
+		return false
+		
+class NoErrand extends Errand:
+	func is_done() -> bool:
+		assert(false)
+		return false
 	
-var _dialogue_tween = create_tween()
+class ApproachErrand:
+	var actor: Actor
+	var body: Actor
+	func is_done() -> bool:
+		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, actor.item_magnet_radius+body.item_magnet_radius)
+		
+class HasKeyErrand:
+	var actor: Actor
+	func is_done() -> bool:
+		for item in actor.items:
+			if item is Key:
+				return true
+		return false
+		
+func approach_errand(actor: NodePath, body: NodePath):
+	errand = ApproachErrand.new()
+	errand.actor = get_node(actor)
+	errand.body = get_node(body)
+	print("waiting to appraoch...")
+	pause()
+	
+func has_key_errand(actor: NodePath):
+	errand = HasKeyErrand.new()
+	errand.actor = get_node(actor)
+	print("WAITING For the key")
+	pause()
 
 func _ready() -> void:
+	var dialogue_content = FileAccess.open(dialogues_file, FileAccess.READ).get_as_text()
+	var line_groups = dialogue_content.split("\n\n")
+	for line_group in line_groups:
+		var lines = line_group.split("\n")
+		assert(lines.size()>1)
+		var idx = lines[0]
+		dialogues[idx] = []
+		for line in lines.slice(1, lines.size()):
+			dialogues[idx].append(line)
+	
+	print(dialogues)
 	dialogue_ended.connect(func():
 		dialogue_finished_animating = true
 		dialogue_label.visible_characters = 0
@@ -37,24 +86,29 @@ func _animate_dialogue(on_finished_line: Callable):
 		).set_delay(1)
 		
 func get_dialogue_lines():
-	return dialogues[current_dialogue].split("\n")
+	return dialogues[current_dialogue]
 			
 func next_dialogue():
 	dialogue_finished_animating = false
-	var lines = dialogues[current_dialogue].split("\n")
-	var line = lines[current_line].split(">>")
-	var sender = line[0]
-	var message = line[1]
+	var message = dialogues[current_dialogue][current_line]
+	assert(message)
 	dialogue_label.text = message
 	_animate_dialogue(next_dialogue)
+	
+func pause_until_approach(actor: Actor, body: Area2D):
+	body.overlaps_body(actor)
 		
-func play_dialogue(dialogue_idx: int, paused: bool = true):
+func play_dialogue(dialogue_idx: String, paused: bool = true):
 	pause()
 	current_dialogue = dialogue_idx
 	current_line = 0
 	next_dialogue()
 		
 func _process(delta: float) -> void:
+	if errand is not NoErrand and errand.is_done():
+		errand = NoErrand.new()
+		play()
+	
 	if not dialogue_auto and Input.is_action_just_released("continue_dialogue"): 
 		if dialogue_allow_interrupt:
 			_dialogue_tween.custom_step(char_speed); 
@@ -63,8 +117,3 @@ func _process(delta: float) -> void:
 			next_dialogue()
 		else: 
 			dialogue_ended.emit()
-
-
-#witch>>“Huh? What happened…? Where am I?”
-#witch>>“A cage?”
-#witch>>“Wait, where’s—”

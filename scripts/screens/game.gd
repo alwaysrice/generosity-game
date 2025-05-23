@@ -12,9 +12,17 @@ func _ready() -> void:
 		$Level/Witch.should_follow = true
 		$Level/Cat.should_follow = true
 		switch_witch()
+
 	
 func switch_witch():
 	switch_player(witch)
+	
+func no_player():
+	witch.is_player = false
+	cat.is_player = false
+	witch.velocity = Vector2.ZERO
+	cat.velocity = Vector2.ZERO
+	
 	
 func switch_player(who: Actor = null) -> Actor:
 	if !who:

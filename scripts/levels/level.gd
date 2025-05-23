@@ -23,9 +23,16 @@ func get_bounds() -> Rect2:
 
 func _ready():	
 	var bounds := get_bounds()
+	for child in get_children():
+		if child is Key:
+			child.body_entered.connect(_on_key_body_entered)
 	print(bounds)
 	assert(camera)
 	camera.limit_left = bounds.position.x
 	camera.limit_top = bounds.position.y 
 	camera.limit_right = bounds.size.x
 	camera.limit_bottom = bounds.size.y 
+
+
+func _on_key_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

@@ -146,15 +146,18 @@ target_position = Vector2(16.25, 11.25)
 position = Vector2(-9.53674e-07, 63.75)
 target_position = Vector2(9.53674e-07, 13.75)
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="ActorDetector" parent="." index="3"]
+position = Vector2(0, 51)
+
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(0.800004, 1.25)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
 
-[node name="SwitchEffect" parent="." index="7"]
-position = Vector2(0, 63)
+[node name="SwitchEffect" parent="." index="8"]
+position = Vector2(0, -64)
