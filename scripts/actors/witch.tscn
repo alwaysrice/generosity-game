@@ -119,7 +119,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_885mi"]
-height = 140.5
+height = 136.0
 
 [sub_resource type="Animation" id="Animation_885mi"]
 resource_name = "idle"
@@ -154,11 +154,17 @@ animation = &"fly"
 offset = Vector2(-140, -660)
 flip_h = true
 
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, -2)
+[node name="PlatformDetector" parent="." index="2"]
+position = Vector2(0, 68)
+
+[node name="FloorDetector" parent="." index="3"]
+position = Vector2(0, 59)
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }

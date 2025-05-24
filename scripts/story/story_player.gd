@@ -39,21 +39,36 @@ class HasKeyErrand:
 				return true
 		return false
 		
+class UseItemErrand:
+	var actor: Actor
+	var item: Key
+	func is_done() -> bool:
+		return item.is_done_using()
+		
 func approach_errand(actor: NodePath, body: NodePath):
 	errand = ApproachErrand.new()
 	errand.actor = get_node(actor)
 	errand.body = get_node(body)
-	print("waiting to appraoch...")
+	pause()
+	
+func use_item_errand(actor: NodePath, item_name: String):
+	errand = UseItemErrand.new()
+	errand.actor = get_node(actor)
+	if item_name == "Key":
+		for item in errand.actor.items:
+			if item is Key:
+				errand.item = item
+				item.use()
 	pause()
 	
 func has_key_errand(actor: NodePath):
 	errand = HasKeyErrand.new()
 	errand.actor = get_node(actor)
-	print("WAITING For the key")
 	pause()
 
 func is_in_cutscene() -> bool:
 	return (active and is_playing()) or not has_dialogue_ended
+	
 
 func _ready() -> void:
 	var dialogue_content = FileAccess.open(dialogues_file, FileAccess.READ).get_as_text()

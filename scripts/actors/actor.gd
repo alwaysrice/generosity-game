@@ -9,6 +9,7 @@ class_name Actor extends CharacterBody2D
 @export var follow_distance = 100
 @export var follow_distance_run = 200
 @export var item_magnet_radius = 100
+@export var allow_double_jump = false
 
 @export var following: Actor
 @export var should_follow = false
@@ -23,8 +24,9 @@ var is_jumping := false
 var is_flying := false
 var is_dead := false
 var is_player := false
-var last_direction = 0
-var spawn_point = Vector2.ZERO
+var last_floor_stepped: StaticBody2D
+var last_floor_stepped_pos := Vector2.ZERO
+var last_direction := 0
 var items = []
 var action_history = []
 
@@ -33,11 +35,11 @@ signal on_death(actor: Actor)
 func revive():
 	is_dead = false
 	graphics.modulate = Color.WHITE
-	position = spawn_point
-	spawn_point = Vector2.ZERO
+	
+	assert(last_floor_stepped)
+	position = last_floor_stepped_pos
 
 func die(pos: Vector2):
-	spawn_point = pos
 	$DeathEffect.emitting = true
 	graphics.modulate = Color.TRANSPARENT
 	is_dead = true
@@ -110,6 +112,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			graphics.scale.x = -1.0
 
+	if $FloorDetector.is_colliding():
+		last_floor_stepped = $FloorDetector.get_collider()
+		last_floor_stepped_pos = position
+		
 	floor_stop_on_slope = not platform_detector.is_colliding()
 	move_and_slide()
 	
@@ -151,7 +157,7 @@ func try_jump() -> void:
 	if is_on_floor():
 		$JumpSound.pitch_scale = 1.0
 		is_jumping = true
-	elif can_double_jump:
+	elif can_double_jump and allow_double_jump:
 		can_double_jump = false
 		$JumpSound.pitch_scale = 1.5
 	else:

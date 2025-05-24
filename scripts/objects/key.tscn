@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://css62kxa6gkyy"]
+[gd_scene load_steps=9 format=3 uid="uid://css62kxa6gkyy"]
 
 [ext_resource type="Script" uid="uid://d0sduu65suhp7" path="res://scripts/objects/key.gd" id="1_on6km"]
 [ext_resource type="Texture2D" uid="uid://dkdajhhna3dxv" path="res://images/key.png" id="2_oghng"]
@@ -12,6 +12,44 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_on6km"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_oghng"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_28np4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bkwfy"]
+_data = {
+&"RESET": SubResource("Animation_28np4"),
+&"idle": SubResource("Animation_oghng")
+}
 
 [node name="Key" type="Area2D"]
 script = ExtResource("1_on6km")
@@ -44,5 +82,11 @@ scale_amount_min = 5.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_oghng")
 color_ramp = SubResource("Gradient_on6km")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bkwfy")
+}
+autoplay = "idle"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

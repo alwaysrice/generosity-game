@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="7_okwes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsiel"]
-size = Vector2(4305, 182)
+size = Vector2(5149, 428)
 
 [sub_resource type="SystemFont" id="SystemFont_okwes"]
 font_names = PackedStringArray("Cantarell")
@@ -188,12 +188,10 @@ camera = NodePath("../Camera")
 
 [node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
 position = Vector2(460, 627)
-jump_speed = -500.0
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(1481, 666)
-jump_speed = -500.0
 following = NodePath("../Witch")
 
 [node name="Deadzone" type="Area2D" parent="Level"]
@@ -201,7 +199,7 @@ position = Vector2(197, 716)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Deadzone"]
-position = Vector2(1100.5, 643)
+position = Vector2(288, 766)
 shape = SubResource("RectangleShape2D_tsiel")
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -239,7 +237,6 @@ offset_bottom = 77.0
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_6b25k")
 }
