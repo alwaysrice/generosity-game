@@ -8,8 +8,9 @@ extends AnimationPlayer
 var dialogues = {}
 var current_line = 0
 var current_dialogue = ""
-var dialogue_finished_animating = false
+var has_dialogue_ended = true
 var errand = NoErrand.new()		
+var is_dialogue_playing = false
 signal dialogue_ended
 var _dialogue_tween: Tween
 
@@ -51,6 +52,9 @@ func has_key_errand(actor: NodePath):
 	print("WAITING For the key")
 	pause()
 
+func is_in_cutscene() -> bool:
+	return (active and is_playing()) or not has_dialogue_ended
+
 func _ready() -> void:
 	var dialogue_content = FileAccess.open(dialogues_file, FileAccess.READ).get_as_text()
 	var line_groups = dialogue_content.split("\n\n")
@@ -64,7 +68,7 @@ func _ready() -> void:
 	
 	print(dialogues)
 	dialogue_ended.connect(func():
-		dialogue_finished_animating = true
+		has_dialogue_ended = true
 		dialogue_label.visible_characters = 0
 		play())
 
@@ -89,7 +93,7 @@ func get_dialogue_lines():
 	return dialogues[current_dialogue]
 			
 func next_dialogue():
-	dialogue_finished_animating = false
+	has_dialogue_ended = false
 	var message = dialogues[current_dialogue][current_line]
 	assert(message)
 	dialogue_label.text = message

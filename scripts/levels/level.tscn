@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctgumjaytuoch"]
+[gd_scene load_steps=12 format=3 uid="uid://ctgumjaytuoch"]
 
 [ext_resource type="Script" uid="uid://cfe7ke146oucc" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://css62kxa6gkyy" path="res://scripts/objects/key.tscn" id="2_l4v0u"]
@@ -29,6 +29,10 @@ size = Vector2(1032, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4v0u"]
 size = Vector2(35, 38)
 
+[sub_resource type="Environment" id="Environment_l4v0u"]
+background_mode = 3
+glow_bloom = 0.74
+
 [node name="Level" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_w0h25")
@@ -40,7 +44,7 @@ texture = SubResource("GradientTexture2D_7lnir")
 centered = false
 
 [node name="Key" parent="." instance=ExtResource("2_l4v0u")]
-position = Vector2(1040, 575)
+position = Vector2(689, 649)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(208, 710)
@@ -75,18 +79,18 @@ shape = SubResource("RectangleShape2D_qqc35")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(776, 609)
-collision_layer = 16
-collision_mask = 16
+collision_layer = 8
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D5"]
 offset_right = 1032.0
-offset_bottom = 38.0
+offset_bottom = 10.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2(516, 19)
 shape = SubResource("RectangleShape2D_qqc35")
+one_way_collision = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2(2295, 710)
@@ -131,3 +135,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(17.5, 19)
 shape = SubResource("RectangleShape2D_l4v0u")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l4v0u")

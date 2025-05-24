@@ -116,6 +116,20 @@ tracks/4/keys = {
 "method": &"play_dialogue"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Level/Witch")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(9.06667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turn_right"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yd2g3"]
 length = 0.001
@@ -194,6 +208,7 @@ position = Vector2(485, 0)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_tsiel")
+offset_target = Vector2(0, -100)
 metadata/_custom_type_script = "uid://ne82d4pl36ow"
 metadata/_edit_group_ = true
 

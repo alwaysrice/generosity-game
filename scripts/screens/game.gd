@@ -61,8 +61,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_pause_menu.close()
 		get_tree().root.set_input_as_handled()
 		
-	elif event.is_action_pressed(&"switch_character") && (not $StoryPlayer.is_playing() or not $StoryPlayer.active):
+	elif event.is_action_pressed(&"switch_character") && not $StoryPlayer.is_in_cutscene():
 		var new_player = switch_player()
+		new_player.following.velocity = Vector2.ZERO
 		new_player._on_switch(new_player.following)
 		
 

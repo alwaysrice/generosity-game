@@ -56,6 +56,13 @@ func afk_behaviour(delta: float):
 	if $CliffDetector.is_colliding():
 		try_jump()
 	
+func turn_left():
+	velocity.x = 0
+	graphics.scale.x = -1
+	
+func turn_right():
+	velocity.x = 0
+	graphics.scale.x = 1
 
 func _physics_process(delta: float) -> void:
 	if is_dead: return

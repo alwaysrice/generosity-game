@@ -131,11 +131,11 @@ scale = Vector2(1, 1)
 script = ExtResource("2_f42kh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
-position = Vector2(-9.53674e-07, 0)
+position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
 animation = &"run"
-offset = Vector2(-140, 0)
+offset = Vector2(-140, -660)
 flip_h = true
 
 [node name="CliffDetector" parent="." index="1"]
@@ -146,18 +146,15 @@ target_position = Vector2(16.25, 11.25)
 position = Vector2(-9.53674e-07, 63.75)
 target_position = Vector2(9.53674e-07, 13.75)
 
-[node name="ActorDetector" parent="." index="3"]
-position = Vector2(0, 51)
-
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.800004, 1.25)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
 
-[node name="SwitchEffect" parent="." index="8"]
+[node name="SwitchEffect" parent="." index="7"]
 position = Vector2(0, -64)
