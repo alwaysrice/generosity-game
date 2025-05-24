@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://css62kxa6gkyy"]
+[gd_scene load_steps=6 format=3 uid="uid://css62kxa6gkyy"]
 
 [ext_resource type="Script" uid="uid://d0sduu65suhp7" path="res://scripts/objects/key.gd" id="1_on6km"]
+[ext_resource type="Texture2D" uid="uid://dkdajhhna3dxv" path="res://images/key.png" id="2_oghng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uaefy"]
-size = Vector2(109.5, 109.5)
+size = Vector2(47.75, 40.75)
+
+[sub_resource type="Curve" id="Curve_oghng"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_on6km"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -13,40 +18,31 @@ script = ExtResource("1_on6km")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Graphics"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Key" type="Sprite2D" parent="Graphics"]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.0761719, 0.0761719)
+texture = ExtResource("2_oghng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uaefy")
 
 [node name="CollectEffect" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 50
-lifetime = 7.46
+amount = 30
+lifetime = 5.88
 one_shot = true
-speed_scale = 5.0
+speed_scale = 10.0
 explosiveness = 1.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 150.0
-initial_velocity_max = 150.0
-orbit_velocity_min = 0.08
-orbit_velocity_max = 0.2
-linear_accel_min = -54.82
-linear_accel_max = 16.15
-scale_amount_min = 10.0
-scale_amount_max = 10.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+damping_min = 45.699
+damping_max = 50.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_oghng")
 color_ramp = SubResource("Gradient_on6km")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://di0h3srturhcv"]
+
+[sub_resource type="Gradient" id="Gradient_f5gjq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Star" type="Node2D"]
+
+[node name="CollectEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 7.46
+one_shot = true
+speed_scale = 5.0
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.08
+orbit_velocity_max = 0.2
+linear_accel_min = -54.82
+linear_accel_max = 16.15
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_f5gjq")

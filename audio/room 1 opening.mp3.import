@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfq22i3t3gvnq"
+path="res://.godot/imported/room 1 opening.mp3-2ef22a2002f6bfac58d9a6278cfe1391.mp3str"
+
+[deps]
+
+source_file="res://audio/room 1 opening.mp3"
+dest_files=["res://.godot/imported/room 1 opening.mp3-2ef22a2002f6bfac58d9a6278cfe1391.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

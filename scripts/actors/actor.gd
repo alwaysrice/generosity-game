@@ -8,23 +8,27 @@ class_name Actor extends CharacterBody2D
 @export var fall_speed_max = 700
 @export var follow_distance = 100
 @export var follow_distance_run = 200
-var is_player := false
+@export var item_magnet_radius = 100
+
 @export var following: Actor
 @export var should_follow = false
 
-var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var graphics := $Graphics as Node2D
+
+var gravity: int = ProjectSettings.get("physics/2d/default_gravity")
 var can_double_jump := false
 var should_jump := false
-var is_jumping = false
-var is_dead = false
+var is_jumping := false
+var is_flying := false
+var is_dead := false
+var is_player := false
+var last_direction = 0
 var spawn_point = Vector2.ZERO
 var items = []
-@export var item_magnet_radius = 100
-signal on_death(actor: Actor)
-
 var action_history = []
+
+signal on_death(actor: Actor)
 
 func revive():
 	is_dead = false
@@ -63,7 +67,21 @@ func turn_left():
 func turn_right():
 	velocity.x = 0
 	graphics.scale.x = 1
-
+	
+func _unhandled_input(event):
+	if event.is_action_pressed("move_right"):
+		last_direction = 1
+	elif event.is_action_pressed("move_left"):
+		last_direction = -1
+		
+func get_input_direction():
+	var right = Input.is_action_pressed("move_right")
+	var left = Input.is_action_pressed("move_left")
+	if right and left:	return last_direction
+	elif right: return 1
+	elif left: return -1
+	return 0
+		
 func _physics_process(delta: float) -> void:
 	if is_dead: return
 	if is_on_floor():
@@ -71,16 +89,17 @@ func _physics_process(delta: float) -> void:
 		
 	if is_player and (Input.is_action_just_pressed("jump") or should_jump):
 		try_jump()
-	velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
+	if not is_flying:
+		velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
 	
 	if is_player:
 		var speed = walk_speed
 		var accel = walk_accel
-		
 		if Input.is_action_pressed("run"):
 			speed = run_speed
 			accel = run_accel
-		var direction: float = Input.get_axis("move_left", "move_right") * speed * int(is_player)
+	
+		var direction: float = get_input_direction() * speed * int(is_player)
 		velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
 	else:
 		afk_behaviour(delta)
@@ -115,10 +134,13 @@ func get_new_animation() -> String:
 				animation_new = "idle"
 		is_jumping = false
 	else:
-		if velocity.y > 0.0:
+		if is_flying:
+			animation_new = "fly"
+		elif velocity.y > 0.0:
 			animation_new = "fall"
 		else:
 			animation_new = "jump"
+			
 	if Input.is_action_pressed("run") and animation_new == "walk":
 		animation_new = "run"
 	return animation_new

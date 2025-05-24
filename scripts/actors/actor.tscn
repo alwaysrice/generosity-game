@@ -13,7 +13,6 @@ floor_constant_speed = true
 platform_on_leave = 2
 platform_floor_layers = 4294967042
 script = ExtResource("1_gr3rb")
-jump_speed = -500.0
 
 [node name="Graphics" type="Node2D" parent="."]
 

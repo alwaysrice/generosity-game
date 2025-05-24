@@ -188,10 +188,12 @@ camera = NodePath("../Camera")
 
 [node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
 position = Vector2(460, 627)
+jump_speed = -500.0
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(1481, 666)
+jump_speed = -500.0
 following = NodePath("../Witch")
 
 [node name="Deadzone" type="Area2D" parent="Level"]
@@ -221,6 +223,7 @@ offset_right = 857.0
 offset_bottom = 236.0
 label_settings = SubResource("LabelSettings_yd2g3")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 100

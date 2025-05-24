@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b68iki5mx8dwx"]
+[gd_scene load_steps=20 format=3 uid="uid://b68iki5mx8dwx"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
 [ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_f42kh"]
@@ -21,6 +21,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_885mi")
+}],
+"loop": true,
+"name": &"fly",
 "speed": 5.0
 }, {
 "frames": [{
@@ -111,8 +119,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_885mi"]
-radius = 12.2
-height = 130.0
+height = 140.5
 
 [sub_resource type="Animation" id="Animation_885mi"]
 resource_name = "idle"
@@ -120,13 +127,22 @@ resource_name = "idle"
 [sub_resource type="Animation" id="Animation_ks07l"]
 resource_name = "walk"
 
+[sub_resource type="Animation" id="Animation_h0o6b"]
+resource_name = "lfy"
+
+[sub_resource type="Animation" id="Animation_162t3"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ks07l"]
 _data = {
+&"RESET": SubResource("Animation_162t3"),
+&"fly": SubResource("Animation_h0o6b"),
 &"idle": SubResource("Animation_885mi"),
 &"walk": SubResource("Animation_ks07l")
 }
 
 [node name="Witch" instance=ExtResource("1_mmq6v")]
+position = Vector2(0, -70)
 scale = Vector2(1, 1)
 script = ExtResource("2_f42kh")
 
@@ -134,21 +150,12 @@ script = ExtResource("2_f42kh")
 position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"run"
+animation = &"fly"
 offset = Vector2(-140, -660)
 flip_h = true
 
-[node name="CliffDetector" parent="." index="1"]
-position = Vector2(0, 62.5)
-target_position = Vector2(16.25, 11.25)
-
-[node name="PlatformDetector" parent="." index="2"]
-position = Vector2(-9.53674e-07, 63.75)
-target_position = Vector2(9.53674e-07, 13.75)
-
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0.800004, 1.25)
-scale = Vector2(0.999999, 0.999999)
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_885mi")
 
 [node name="AnimationPlayer" parent="." index="5"]
@@ -156,5 +163,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
 
-[node name="SwitchEffect" parent="." index="7"]
-position = Vector2(0, -64)
+[node name="FlightTimer" type="Timer" parent="." index="9"]
+wait_time = 2.0
+one_shot = true
+
+[node name="FlyTimer" type="Timer" parent="." index="10"]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="FlightTimer" to="." method="_on_flight_timer_timeout"]
+[connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]
