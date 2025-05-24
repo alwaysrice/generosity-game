@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Nyota"
-run/main_scene="res://scripts/screens/game.tscn"
+run/main_scene="uid://dmphkmk74pbm4"
 config/features=PackedStringArray("4.4")
 config/icon="uid://blk2xinet8sbf"
 boot_splash/icon="res://images/logo/icon.webp"

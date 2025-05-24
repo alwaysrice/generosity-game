@@ -32,7 +32,6 @@ position = Vector2(0, 67.5)
 
 [node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(-0.624999, 73.75)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_gsgih")
 
 [node name="JumpSound" parent="." index="5"]

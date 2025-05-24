@@ -80,7 +80,7 @@ func _ready() -> void:
 		dialogues[idx] = []
 		for line in lines.slice(1, lines.size()):
 			dialogues[idx].append(line)
-	
+
 	print(dialogues)
 	dialogue_ended.connect(func():
 		has_dialogue_ended = true
