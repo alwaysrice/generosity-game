@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 	
 	var animation := get_new_animation()
 	var graphics = $Graphics.get_child(0)
-	if graphics is AnimatedSprite2D and graphics.animation != animation:
+	if graphics is AnimatedSprite2D and graphics.animation != animation and not is_flying:
 		graphics.play(animation)
 		
 
@@ -140,9 +140,7 @@ func get_new_animation() -> String:
 				animation_new = "idle"
 		is_jumping = false
 	else:
-		if is_flying:
-			animation_new = "fly"
-		elif velocity.y > 0.0:
+		if velocity.y > 0.0:
 			animation_new = "fall"
 		else:
 			animation_new = "jump"

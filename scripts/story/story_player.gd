@@ -11,6 +11,7 @@ var current_dialogue = ""
 var has_dialogue_ended = true
 var errand = NoErrand.new()		
 var is_dialogue_playing = false
+signal dialogue_line_ended()
 signal dialogue_ended
 var _dialogue_tween: Tween
 
@@ -83,9 +84,12 @@ func _ready() -> void:
 
 	print(dialogues)
 	dialogue_ended.connect(func():
-		has_dialogue_ended = true
 		dialogue_label.visible_characters = 0
+		has_dialogue_ended = true
+		current_dialogue = ""
 		play())
+	dialogue_line_ended.connect(func():
+		)
 
 func _animate_dialogue(on_finished_line: Callable):
 	dialogue_label.visible_characters = 0
@@ -94,15 +98,19 @@ func _animate_dialogue(on_finished_line: Callable):
 		dialogue_label, 
 		"visible_characters", 
 		dialogue_label.text.length(), 
-		dialogue_label.text.length() / char_speed)
+		maxf(dialogue_label.text.length() / char_speed, 0.5))
+	_dialogue_tween.tween_callback(func():
+		dialogue_line_ended.emit()
+		)
 	
-	_dialogue_tween.tween_callback(func(): 
-		if dialogue_auto and current_line + 1 < get_dialogue_lines().size():
-			current_line += 1
-			on_finished_line.call()
-		else:
-			dialogue_ended.emit()
-		).set_delay(1)
+	if dialogue_auto:
+		_dialogue_tween.tween_callback(func(): 
+			if current_line + 1 < get_dialogue_lines().size():
+				current_line += 1
+				on_finished_line.call()
+			else:
+				dialogue_ended.emit()
+			).set_delay(1)
 		
 func get_dialogue_lines():
 	return dialogues[current_dialogue]
@@ -128,11 +136,14 @@ func _process(delta: float) -> void:
 		errand = NoErrand.new()
 		play()
 	
-	if not dialogue_auto and Input.is_action_just_released("continue_dialogue"): 
+	if current_dialogue != "" and not dialogue_auto and Input.is_action_just_released("continue_dialogue"): 
 		if dialogue_allow_interrupt:
 			_dialogue_tween.custom_step(char_speed); 
-		if (!_dialogue_tween.is_valid() && current_line < get_dialogue_lines().size()-1):
-			current_line += 1
-			next_dialogue()
-		else: 
-			dialogue_ended.emit()
+		if not _dialogue_tween.is_valid():
+			if current_line < get_dialogue_lines().size()-1:
+				print("next")
+				current_line += 1
+				next_dialogue()
+			else: 
+				print("ended")
+				dialogue_ended.emit()

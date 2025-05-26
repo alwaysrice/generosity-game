@@ -19,6 +19,9 @@ func _input(event: InputEvent) -> void:
 		can_fly = false
 		velocity.y = jump_speed
 		$FlyTimer.start()
+		var sprite = $Graphics.get_child(0)
+		if sprite is AnimatedSprite2D:
+			sprite.play(&"fly")
 
 
 func _on_flight_timer_timeout() -> void:
@@ -28,3 +31,7 @@ func _on_flight_timer_timeout() -> void:
 func _on_fly_timer_timeout() -> void:
 	$FlightTimer.start()
 	velocity.y = 0
+	var sprite = $Graphics.get_child(0)
+	if sprite is AnimatedSprite2D:
+		sprite.play(&"flight")
+	

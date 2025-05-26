@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkdajhhna3dxv" path="res://images/key.png" id="2_oghng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uaefy"]
-size = Vector2(47.75, 40.75)
+size = Vector2(45, 26)
 
 [sub_resource type="Curve" id="Curve_oghng"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -62,6 +62,7 @@ scale = Vector2(0.0761719, 0.0761719)
 texture = ExtResource("2_oghng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_uaefy")
 
 [node name="CollectEffect" type="CPUParticles2D" parent="."]
