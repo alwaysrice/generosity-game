@@ -181,7 +181,6 @@ position = Vector2(0, 67.5)
 [node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(3.75, 71.25)
 rotation = -1.5703
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_dmers")
 
 [node name="JumpSound" parent="." index="5"]

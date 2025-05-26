@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=15 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
@@ -6,174 +6,39 @@
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_i7ys0"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
+[ext_resource type="SystemFont" uid="uid://dqkurysrsmyp" path="res://fonts/dialogue-label.tres" id="6_iof5d"]
+[ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="7_6b25k"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="7_okwes"]
+[ext_resource type="AnimationLibrary" uid="uid://bli54sa8jlnr2" path="res://scripts/story/story.res" id="8_iof5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsiel"]
 size = Vector2(5149, 428)
 
-[sub_resource type="SystemFont" id="SystemFont_okwes"]
-font_names = PackedStringArray("Cantarell")
-font_weight = 999
-
 [sub_resource type="LabelSettings" id="LabelSettings_yd2g3"]
-font = SubResource("SystemFont_okwes")
+font = ExtResource("6_iof5d")
 font_size = 18
 font_color = Color(0.962443, 1, 0.815104, 1)
 outline_size = 10
 outline_color = Color(0.346022, 0.515383, 0.674479, 1)
 
-[sub_resource type="Animation" id="Animation_okwes"]
-resource_name = "1-caged"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333, 1.8, 3.33333, 3.86667, 5.26667, 6.33333, 6.76667, 7.63333, 8.03333, 8.76667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(485, 0), Vector2(485, 0), Vector2(485, 467), Vector2(485, 467), Vector2(1266, 467), Vector2(1266, 467), Vector2(485, 467), Vector2(485, 467), Vector2(1040, 467), Vector2(1040, 467), Vector2(485, 467)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(8.76667, 9.06667, 9.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"switch_witch"
-}, {
-"args": [],
-"method": &"no_player"
-}, {
-"args": [],
-"method": &"switch_witch"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Level/Cat:should_follow")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(5.13333, 8.76667, 9.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Level/Witch:should_follow")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 9.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StoryPlayer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(2.7, 4.33333, 6.5, 7.8, 8.76667, 9.03333, 9.2, 9.43333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"values": [{
-"args": ["11", true],
-"method": &"play_dialogue"
-}, {
-"args": ["12", true],
-"method": &"play_dialogue"
-}, {
-"args": ["13", true],
-"method": &"play_dialogue"
-}, {
-"args": ["14", true],
-"method": &"play_dialogue"
-}, {
-"args": [NodePath("../Level/Cat")],
-"method": &"has_key_errand"
-}, {
-"args": [NodePath("../Level/Cat"), NodePath("../Level/Witch")],
-"method": &"approach_errand"
-}, {
-"args": ["15", true],
-"method": &"play_dialogue"
-}, {
-"args": ["16", true],
-"method": &"play_dialogue"
-}]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Level/Witch")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(9.06667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"turn_right"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_yd2g3"]
+[sub_resource type="Animation" id="Animation_6b25k"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera:position")
+tracks/0/path = NodePath("InterfaceLayer/HintLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(485, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Level/Cat:should_follow")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Level/Witch:should_follow")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6b25k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iof5d"]
 _data = {
-&"1-caged": SubResource("Animation_okwes"),
-&"RESET": SubResource("Animation_yd2g3")
+&"RESET": SubResource("Animation_6b25k")
 }
 
 [node name="Game" type="Node" node_paths=PackedStringArray("camera", "cat", "witch")]
@@ -228,21 +93,43 @@ autowrap_mode = 3
 [node name="InterfaceLayer" type="CanvasLayer" parent="."]
 layer = 100
 
+[node name="BlackOverlay" type="ColorRect" parent="InterfaceLayer"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 0)
+
+[node name="HintLabel" type="Label" parent="InterfaceLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 370.0
+offset_top = 97.0
+offset_right = 857.0
+offset_bottom = 236.0
+text = "Press “X” to switch characters"
+label_settings = SubResource("LabelSettings_yd2g3")
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="PauseMenu" parent="InterfaceLayer" instance=ExtResource("4_eow3j")]
 visible = false
 
 [node name="Label" type="Label" parent="InterfaceLayer"]
+modulate = Color(1, 1, 1, 0)
 offset_left = 32.0
 offset_top = 54.0
 offset_right = 72.0
 offset_bottom = 77.0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
 libraries = {
-&"": SubResource("AnimationLibrary_6b25k")
+&"": SubResource("AnimationLibrary_iof5d"),
+&"hints": ExtResource("7_6b25k"),
+&"story": ExtResource("8_iof5d")
 }
-autoplay = "1-caged"
+autoplay = "story/1-caged"
 script = ExtResource("7_okwes")
 dialogue_auto = false
 dialogue_allow_interrupt = true

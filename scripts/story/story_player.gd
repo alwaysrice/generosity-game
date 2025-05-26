@@ -1,4 +1,4 @@
-extends AnimationPlayer
+class_name Playwright extends AnimationPlayer
 
 @export var dialogue_auto = true
 @export var dialogue_allow_interrupt = false
@@ -9,7 +9,7 @@ var dialogues = {}
 var current_line = 0
 var current_dialogue = ""
 var has_dialogue_ended = true
-var errand = NoErrand.new()		
+var errand_list = []
 var is_dialogue_playing = false
 signal dialogue_line_ended()
 signal dialogue_ended
@@ -17,43 +17,105 @@ var _dialogue_tween: Tween
 
 
 class Errand:
+	var _is_done = false
+	var playwright: Playwright
+	
+	func force_complete():
+		_is_done = true
+		
 	func is_done() -> bool:
-		assert(false)
-		return false
+		return _is_done
+		
+	func complete():
+		assert(playwright)
+		playwright.play()
 		
 class NoErrand extends Errand:
 	func is_done() -> bool:
 		assert(false)
 		return false
 	
-class ApproachErrand:
+class ApproachErrand extends Errand:
 	var actor: Actor
 	var body: Actor
 	func is_done() -> bool:
 		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, actor.item_magnet_radius+body.item_magnet_radius)
 		
-class HasKeyErrand:
+class HasKeyErrand extends Errand:
 	var actor: Actor
 	func is_done() -> bool:
 		for item in actor.items:
 			if item is Key:
 				return true
 		return false
-		
-class UseItemErrand:
+
+class PressActionErrand extends Errand:
+	var action: String
+	func is_done() -> bool:
+		return Input.is_action_just_pressed(action)
+	func complete():
+		playwright.play()
+
+class PlayAnimationErrand extends Errand: 
+	var animation: String
+	var last_animation = ""
+	var last_seek = 0
+	func complete():	
+		playwright.play(last_animation)
+		playwright.seek(last_seek)
+		playwright.advance(0.066)
+
+class UseItemErrand extends Errand:
 	var actor: Actor
 	var item: Key
 	func is_done() -> bool:
 		return item.is_done_using()
 		
+func is_allowing_switching_during_play():
+	for errand in errand_list:
+		if errand is PlayAnimationErrand:
+			if errand.animation == &"hints/switch-player":
+				return true
+	return false
+	
+func is_allowing_moving_during_play():
+	for errand in errand_list:
+		if errand is PlayAnimationErrand:
+			if errand.animation.contains("hints"):
+				return false
+	return true
+		
+func push_errand(errand: Errand) -> Errand:
+	errand_list.append(errand)
+	errand.playwright = self
+	return errand
+
+		
+func play_animation_errand(animation: String):
+	var errand = push_errand(PlayAnimationErrand.new())
+	errand.last_seek = current_animation_position
+	errand.last_animation = current_animation
+	errand.animation = animation
+	play(animation)
+	animation_finished.connect(func(anim: StringName):
+		if anim == errand.animation:
+			errand.force_complete()
+		, CONNECT_ONE_SHOT)
+		
+		
+func press_action_errand(action: String):
+	var errand = push_errand(PressActionErrand.new())
+	errand.action = action
+	pause()
+		
 func approach_errand(actor: NodePath, body: NodePath):
-	errand = ApproachErrand.new()
+	var errand = push_errand(ApproachErrand.new())
 	errand.actor = get_node(actor)
 	errand.body = get_node(body)
 	pause()
 	
 func use_item_errand(actor: NodePath, item_name: String):
-	errand = UseItemErrand.new()
+	var errand = push_errand(UseItemErrand.new())
 	errand.actor = get_node(actor)
 	if item_name == "Key":
 		for item in errand.actor.items:
@@ -63,7 +125,7 @@ func use_item_errand(actor: NodePath, item_name: String):
 	pause()
 	
 func has_key_errand(actor: NodePath):
-	errand = HasKeyErrand.new()
+	var errand = push_errand(HasKeyErrand.new())
 	errand.actor = get_node(actor)
 	pause()
 
@@ -132,18 +194,20 @@ func play_dialogue(dialogue_idx: String, paused: bool = true):
 	next_dialogue()
 		
 func _process(delta: float) -> void:
-	if errand is not NoErrand and errand.is_done():
-		errand = NoErrand.new()
-		play()
+	var inactive_errand = []
+	for errand in errand_list:
+		if errand.is_done():
+			errand.complete()
+			inactive_errand.append(errand)
+	for errand in inactive_errand:
+		errand_list.erase(errand)
 	
 	if current_dialogue != "" and not dialogue_auto and Input.is_action_just_released("continue_dialogue"): 
 		if dialogue_allow_interrupt:
 			_dialogue_tween.custom_step(char_speed); 
 		if not _dialogue_tween.is_valid():
 			if current_line < get_dialogue_lines().size()-1:
-				print("next")
 				current_line += 1
 				next_dialogue()
 			else: 
-				print("ended")
 				dialogue_ended.emit()

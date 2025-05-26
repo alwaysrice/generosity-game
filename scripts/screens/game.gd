@@ -41,7 +41,6 @@ func switch_player(who: Actor = null) -> Actor:
 	return who
 		
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_fullscreen"):
 		var mode := DisplayServer.window_get_mode()
