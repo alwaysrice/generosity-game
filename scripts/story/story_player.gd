@@ -2,7 +2,7 @@ class_name Playwright extends AnimationPlayer
 
 @export var dialogue_auto = true
 @export var dialogue_allow_interrupt = false
-@export var char_speed = 20
+@export var char_speed = 20.0
 @export var dialogue_label: Label  
 @export_file("*.txt") var dialogues_file: String
 var dialogues = {}
@@ -16,39 +16,12 @@ signal dialogue_ended
 var _dialogue_tween: Tween
 
 
-class Errand:
-	var _is_done = false
-	var playwright: Playwright
-	
-	func force_complete():
-		_is_done = true
-		
-	func is_done() -> bool:
-		return _is_done
-		
-	func complete():
-		assert(playwright)
-		playwright.play()
-		
-class NoErrand extends Errand:
-	func is_done() -> bool:
-		assert(false)
-		return false
-	
 class ApproachErrand extends Errand:
 	var actor: Actor
 	var body: Actor
 	func is_done() -> bool:
 		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, actor.item_magnet_radius+body.item_magnet_radius)
 		
-class HasKeyErrand extends Errand:
-	var actor: Actor
-	func is_done() -> bool:
-		for item in actor.items:
-			if item is Key:
-				return true
-		return false
-
 class PressActionErrand extends Errand:
 	var action: String
 	func is_done() -> bool:
@@ -62,14 +35,9 @@ class PlayAnimationErrand extends Errand:
 	var last_seek = 0
 	func complete():	
 		playwright.play(last_animation)
-		playwright.seek(last_seek)
-		playwright.advance(0.066)
+		playwright.seek(last_seek, true, true)
 
-class UseItemErrand extends Errand:
-	var actor: Actor
-	var item: Key
-	func is_done() -> bool:
-		return item.is_done_using()
+
 		
 func is_allowing_switching_during_play():
 	for errand in errand_list:
@@ -107,6 +75,14 @@ func press_action_errand(action: String):
 	var errand = push_errand(PressActionErrand.new())
 	errand.action = action
 	pause()
+	
+func cage_unlock_errand(cage: NodePath):
+	var errand = push_errand(Cage.UnlockedErrand.new())
+	errand.cage = get_node(cage)
+	errand.cage.key_detect.connect(func():
+		errand.has_unlocked = true
+		)
+	pause()
 		
 func approach_errand(actor: NodePath, body: NodePath):
 	var errand = push_errand(ApproachErrand.new())
@@ -115,7 +91,7 @@ func approach_errand(actor: NodePath, body: NodePath):
 	pause()
 	
 func use_item_errand(actor: NodePath, item_name: String):
-	var errand = push_errand(UseItemErrand.new())
+	var errand = push_errand(Key.UseErrand.new())
 	errand.actor = get_node(actor)
 	if item_name == "Key":
 		for item in errand.actor.items:
@@ -125,7 +101,7 @@ func use_item_errand(actor: NodePath, item_name: String):
 	pause()
 	
 func has_key_errand(actor: NodePath):
-	var errand = push_errand(HasKeyErrand.new())
+	var errand = push_errand(Key.HasKeyErrand.new())
 	errand.actor = get_node(actor)
 	pause()
 
@@ -188,12 +164,13 @@ func pause_until_approach(actor: Actor, body: Area2D):
 	body.overlaps_body(actor)
 		
 func play_dialogue(dialogue_idx: String, paused: bool = true):
-	pause()
+	if paused:
+		pause()
 	current_dialogue = dialogue_idx
 	current_line = 0
 	next_dialogue()
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var inactive_errand = []
 	for errand in errand_list:
 		if errand.is_done():

@@ -164,30 +164,29 @@ position = Vector2(0, 74.375)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"jump"
-frame_progress = 0.32842
+animation = &"fly"
 flip_h = true
 
-[node name="CliffDetector" parent="." index="1"]
-position = Vector2(6.25, 78.75)
-target_position = Vector2(8.75, 7.5)
+[node name="CliffDetector" parent="Graphics" index="1"]
+position = Vector2(9, 6.625)
+target_position = Vector2(10, 7)
 
-[node name="PlatformDetector" parent="." index="2"]
+[node name="PlatformDetector" parent="." index="1"]
 position = Vector2(9.53674e-07, 79.375)
 
-[node name="FloorDetector" parent="." index="3"]
+[node name="FloorDetector" parent="." index="2"]
 position = Vector2(0, 67.5)
 
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(3.75, 71.25)
 rotation = -1.5703
 shape = SubResource("CapsuleShape2D_dmers")
 
-[node name="JumpSound" parent="." index="5"]
+[node name="JumpSound" parent="." index="4"]
 position = Vector2(0, 73.75)
 
-[node name="DeathEffect" parent="." index="7"]
+[node name="DeathEffect" parent="." index="6"]
 position = Vector2(0, 75)
 
-[node name="SwitchEffect" parent="." index="8"]
+[node name="SwitchEffect" parent="." index="7"]
 position = Vector2(0, 65)

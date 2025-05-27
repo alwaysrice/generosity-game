@@ -29,7 +29,7 @@ func switch_player(who: Actor = null) -> Actor:
 		assert(cat.is_player != witch.is_player)
 		cat.is_player = !cat.is_player
 		witch.is_player = !witch.is_player
-		who = witch if witch.is_player else cat
+		who = witch as Actor if witch.is_player else cat as Actor
 	else:
 		cat.is_player = false
 		witch.is_player = false
@@ -74,7 +74,7 @@ func _on_camera_changed_zoom(zoom: Vector2) -> void:
 
 func _on_deadzone_body_entered(body: Node2D) -> void:
 	var actor = body as Actor
-	actor.die(actor.following.position)
+	actor.die()
 
 
 func _on_death(actor: Actor) -> void:

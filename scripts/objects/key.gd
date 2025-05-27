@@ -1,5 +1,19 @@
 class_name Key extends Area2D
 
+class UseErrand extends Errand:
+	var actor: Actor
+	var item: Key
+	func is_done() -> bool:
+		return item.is_done_using()
+		
+class HasKeyErrand extends Errand:
+	var actor: Actor
+	func is_done() -> bool:
+		for item in actor.items:
+			if item is Key:
+				return true
+		return false
+
 @export var cage: Cage
 var holder: Actor
 var dead = false

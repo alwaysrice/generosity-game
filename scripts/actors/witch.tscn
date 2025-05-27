@@ -193,7 +193,6 @@ height = 136.0
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ks07l"]
 
 [node name="Witch" instance=ExtResource("1_mmq6v")]
-scale = Vector2(1, 1)
 script = ExtResource("2_f42kh")
 
 [node name="Graphics" parent="." index="0"]
@@ -203,36 +202,36 @@ position = Vector2(0, -69)
 position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"flight"
+animation = &"idle"
 offset = Vector2(-140, -660)
 flip_h = true
 
-[node name="CliffDetector" parent="." index="1"]
-position = Vector2(0, 1)
-target_position = Vector2(11, 7)
+[node name="CliffDetector" parent="Graphics" index="1"]
+position = Vector2(0, 66)
+target_position = Vector2(10, 7)
 
-[node name="PlatformDetector" parent="." index="2"]
+[node name="PlatformDetector" parent="." index="1"]
 position = Vector2(0, -1)
 
-[node name="FloorDetector" parent="." index="3"]
+[node name="FloorDetector" parent="." index="2"]
 position = Vector2(0, -10)
 
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -68)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="JumpSound" parent="." index="5"]
+[node name="JumpSound" parent="." index="4"]
 position = Vector2(0, -69)
 
-[node name="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
 
-[node name="DeathEffect" parent="." index="7"]
+[node name="DeathEffect" parent="." index="6"]
 position = Vector2(0, -69)
 
-[node name="SwitchEffect" parent="." index="8"]
+[node name="SwitchEffect" parent="." index="7"]
 position = Vector2(0, -69)
 
 [node name="FlightTimer" type="Timer" parent="." index="9"]

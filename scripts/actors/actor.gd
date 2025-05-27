@@ -39,7 +39,7 @@ func revive():
 	assert(last_floor_stepped)
 	position = last_floor_stepped_pos
 
-func die(pos: Vector2):
+func die():
 	$DeathEffect.emitting = true
 	graphics.modulate = Color.TRANSPARENT
 	is_dead = true
@@ -59,7 +59,7 @@ func afk_behaviour(delta: float):
 		velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)
-	if $CliffDetector.is_colliding():
+	if %CliffDetector.is_colliding():
 		try_jump()
 	
 func turn_left():
@@ -120,9 +120,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	var animation := get_new_animation()
-	var graphics = $Graphics.get_child(0)
-	if graphics is AnimatedSprite2D and graphics.animation != animation and not is_flying:
-		graphics.play(animation)
+	var sprite = $Graphics.get_child(0)
+	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying:
+		sprite.play(animation)
 		
 
 func get_new_animation() -> String:
@@ -163,7 +163,7 @@ func try_jump() -> void:
 	velocity.y = jump_speed
 	$JumpSound.play()
 
-func _on_switch(from: Actor):
+func _on_switch(_from: Actor):
 	$SwitchEffect.emitting = true
 
 func _on_death_effect_finished() -> void:

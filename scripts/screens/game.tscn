@@ -56,6 +56,7 @@ following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(1481, 666)
+scale = Vector2(0.8, 0.8)
 jump_speed = -600.0
 following = NodePath("../Witch")
 
@@ -131,7 +132,6 @@ autoplay = "story/1-caged"
 script = ExtResource("7_okwes")
 dialogue_auto = false
 dialogue_allow_interrupt = true
-char_speed = 17
 dialogue_label = NodePath("../GuiLayer/DialogueLabel")
 dialogues_file = "res://scripts/story/dialogues.txt"
 
