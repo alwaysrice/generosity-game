@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=14 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_i7ys0"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
-[ext_resource type="SystemFont" uid="uid://dqkurysrsmyp" path="res://fonts/dialogue-label.tres" id="6_iof5d"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="7_6b25k"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="7_okwes"]
 [ext_resource type="AnimationLibrary" uid="uid://bli54sa8jlnr2" path="res://scripts/story/story.res" id="8_iof5d"]
@@ -15,7 +14,6 @@
 size = Vector2(5149, 428)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yd2g3"]
-font = ExtResource("6_iof5d")
 font_size = 18
 font_color = Color(0.962443, 1, 0.815104, 1)
 outline_size = 10
@@ -71,7 +69,7 @@ shape = SubResource("RectangleShape2D_tsiel")
 
 [node name="Camera" type="Camera2D" parent="."]
 process_mode = 1
-position = Vector2(485, 0)
+position = Vector2(485, 467)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_tsiel")
@@ -97,7 +95,7 @@ layer = 100
 visible = false
 offset_right = 1152.0
 offset_bottom = 651.0
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 0.144667)
 
 [node name="HintLabel" type="Label" parent="InterfaceLayer"]
 modulate = Color(1, 1, 1, 0)

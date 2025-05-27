@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b50x600r4japo"]
+
+[ext_resource type="Texture2D" uid="uid://cuxiaihrr8p6" path="res://images/background/Floor.PNG" id="1_nodvu"]
+[ext_resource type="Texture2D" uid="uid://c87bbrgtn5ajh" path="res://images/background/Room.PNG" id="2_mfc5f"]
+[ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="3_mfc5f"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(596, -144.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_mfc5f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(596, 545)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nodvu")
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("3_mfc5f")
+metadata/_custom_type_script = "uid://c8w74orqtuwe7"
