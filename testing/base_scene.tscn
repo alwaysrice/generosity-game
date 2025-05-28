@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv533ad15457x"]
+
+[ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="1_em440"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k50ye"]
+size = Vector2(1055, 88)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Witch" parent="." instance=ExtResource("1_em440")]
+position = Vector2(215, 315)
+collision_mask = 30
+platform_floor_layers = 4294967042
+platform_wall_layers = 0
+is_player = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-3, 604)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(517.5, 34)
+shape = SubResource("RectangleShape2D_k50ye")

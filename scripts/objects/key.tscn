@@ -52,6 +52,7 @@ _data = {
 }
 
 [node name="Key" type="Area2D"]
+collision_layer = 64
 script = ExtResource("1_on6km")
 
 [node name="Graphics" type="Node2D" parent="."]

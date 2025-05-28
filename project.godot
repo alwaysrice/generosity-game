@@ -109,11 +109,14 @@ fly={
 
 [layer_names]
 
-2d_physics/layer_1="player"
+2d_physics/layer_1="players"
 2d_physics/layer_2="enemies"
 2d_physics/layer_3="gaps"
-2d_physics/layer_4="platforms"
-2d_physics/layer_5="ground"
+2d_physics/layer_4="walls"
+2d_physics/layer_5="floors"
+2d_physics/layer_6="platforms"
+2d_physics/layer_7="items"
+2d_physics/layer_8="interact_structures"
 
 [physics]
 

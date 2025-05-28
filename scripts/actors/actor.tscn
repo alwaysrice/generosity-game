@@ -7,10 +7,11 @@ _data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0
 point_count = 3
 
 [node name="Actor" type="CharacterBody2D"]
-collision_mask = 30
+collision_mask = 250
 floor_constant_speed = true
 platform_on_leave = 2
-platform_floor_layers = 4294967042
+platform_floor_layers = 4294967056
+platform_wall_layers = 8
 script = ExtResource("1_gr3rb")
 jump_speed = -550.0
 
@@ -19,17 +20,17 @@ jump_speed = -550.0
 [node name="CliffDetector" type="RayCast2D" parent="Graphics"]
 unique_name_in_owner = true
 target_position = Vector2(2.5, 1.25)
-collision_mask = 2
+collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
 target_position = Vector2(0, 6)
-collision_mask = 8
+collision_mask = 32
 
 [node name="FloorDetector" type="RayCast2D" parent="."]
 target_position = Vector2(0, 17.5)
-collision_mask = 2
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.25, -1.25001)

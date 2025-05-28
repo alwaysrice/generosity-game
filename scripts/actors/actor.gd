@@ -13,6 +13,7 @@ class_name Actor extends CharacterBody2D
 
 @export var following: Actor
 @export var should_follow = false
+@export var is_player := false
 
 @onready var platform_detector := $PlatformDetector as RayCast2D
 @onready var graphics := $Graphics as Node2D
@@ -23,7 +24,7 @@ var should_jump := false
 var is_jumping := false
 var is_flying := false
 var is_dead := false
-var is_player := false
+
 var last_floor_stepped: StaticBody2D
 var last_floor_stepped_pos := Vector2.ZERO
 var last_direction := 0

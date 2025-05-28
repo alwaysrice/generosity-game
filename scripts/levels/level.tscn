@@ -55,7 +55,7 @@ cage = NodePath("../Cage")
 position = Vector2(-1504, 748)
 rotation = -1.57079
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D3"]
 offset_right = 1032.0
@@ -69,7 +69,8 @@ shape = SubResource("RectangleShape2D_qqc35")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2(776, 651)
-collision_layer = 8
+collision_layer = 48
+collision_mask = 0
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D5"]
 offset_right = 1032.0
@@ -84,7 +85,8 @@ one_way_collision = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(208, 710)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
@@ -99,7 +101,8 @@ shape = SubResource("RectangleShape2D_7lnir")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 position = Vector2(-471, 710)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D6"]
@@ -114,7 +117,8 @@ shape = SubResource("RectangleShape2D_7lnir")
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="."]
 position = Vector2(-1989, 710)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D7"]
@@ -129,7 +133,8 @@ shape = SubResource("RectangleShape2D_7lnir")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(1275, 710)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_yy828")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
@@ -145,7 +150,7 @@ shape = SubResource("RectangleShape2D_w0h25")
 position = Vector2(2085, 762)
 rotation = -0.261799
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D4"]
 offset_right = 1032.0
@@ -164,8 +169,8 @@ autoplay = true
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1240, 710)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(17.5, 19)

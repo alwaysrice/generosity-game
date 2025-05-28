@@ -51,12 +51,18 @@ camera = NodePath("../Camera")
 
 [node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
 position = Vector2(460, 627)
+collision_mask = 30
+platform_floor_layers = 4294967042
+platform_wall_layers = 0
 jump_speed = -600.0
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
 position = Vector2(1481, 666)
 scale = Vector2(0.8, 0.8)
+collision_mask = 30
+platform_floor_layers = 4294967042
+platform_wall_layers = 0
 jump_speed = -600.0
 following = NodePath("../Witch")
 
@@ -123,6 +129,7 @@ vertical_alignment = 1
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_iof5d"),
 &"hints": ExtResource("7_6b25k"),
