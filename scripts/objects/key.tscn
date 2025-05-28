@@ -1,10 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://css62kxa6gkyy"]
 
 [ext_resource type="Script" uid="uid://d0sduu65suhp7" path="res://scripts/objects/key.gd" id="1_on6km"]
-[ext_resource type="Texture2D" uid="uid://dkdajhhna3dxv" path="res://images/key.png" id="2_oghng"]
+[ext_resource type="Texture2D" uid="uid://b7jbwkokdtbc2" path="res://images/Cage Room/Key.PNG" id="2_oghng"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uaefy"]
-size = Vector2(45, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28np4"]
+radius = 29.0
+height = 96.0
 
 [sub_resource type="Curve" id="Curve_oghng"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -55,16 +56,15 @@ _data = {
 collision_layer = 64
 script = ExtResource("1_on6km")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_28np4")
+
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Key" type="Sprite2D" parent="Graphics"]
-self_modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.0761719, 0.0761719)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_oghng")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0)
-shape = SubResource("RectangleShape2D_uaefy")
 
 [node name="CollectEffect" type="CPUParticles2D" parent="."]
 emitting = false

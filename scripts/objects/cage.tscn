@@ -1,15 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://gaynr37xej1j"]
 
 [ext_resource type="Script" uid="uid://dcuiqnrpfmmhs" path="res://scripts/objects/cage.gd" id="1_nlme1"]
+[ext_resource type="Texture2D" uid="uid://dfgcm3aa5kiud" path="res://images/Cage Room/Cage.PNG" id="2_uplu0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnomr"]
-size = Vector2(24, 266)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlme1"]
-size = Vector2(24, 208)
+size = Vector2(18, 590)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uplu0"]
-size = Vector2(446.75, 318)
+size = Vector2(555, 770)
 
 [sub_resource type="Animation" id="Animation_uplu0"]
 length = 0.001
@@ -94,44 +92,26 @@ collision_layer = 136
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(12, 133)
+position = Vector2(-181, -295)
 shape = SubResource("RectangleShape2D_qnomr")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(197, 133)
+position = Vector2(231, -293)
 shape = SubResource("RectangleShape2D_qnomr")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(104, 13)
-rotation = -1.5708
-shape = SubResource("RectangleShape2D_nlme1")
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(25, -497)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_uplu0")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
-offset_right = 26.0
-offset_bottom = 267.0
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="StaticBody2D/ColorRect"]
-layout_mode = 0
-offset_top = 26.0
-offset_right = 26.0
-offset_bottom = 233.0
-rotation = -1.5708
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D/ColorRect"]
-layout_mode = 0
-offset_left = 184.0
-offset_right = 210.0
-offset_bottom = 267.0
-color = Color(0, 0, 0, 1)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-188, -590, -168, -650, -113, -708, -20, -756, 80, -755, 172, -708, 222, -648, 237, -585, 222, -588, 216, -619, 175, -680, 129, -720, 83, -745, -21, -747, -52, -736, -108, -697, -144, -658, -165, -620, -172, -599, -172, -585)
 
 [node name="KeyDetectArea" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KeyDetectArea"]
-position = Vector2(110, 133)
+position = Vector2(6.5, -386)
 shape = SubResource("RectangleShape2D_uplu0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

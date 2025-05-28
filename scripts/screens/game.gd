@@ -61,6 +61,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().root.set_input_as_handled()
 		
 	elif event.is_action_pressed(&"switch_character") && not $StoryPlayer.is_in_cutscene():
+		if not $StoryPlayer.can_switch_with_hint():
+			$StoryPlayer.play_animation_errand(&"hints/cannot-switch")
+			return
 		var new_player = switch_player()
 		new_player.following.velocity = Vector2.ZERO
 		new_player._on_switch(new_player.following)

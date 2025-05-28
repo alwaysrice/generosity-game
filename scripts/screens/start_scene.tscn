@@ -2,38 +2,18 @@
 
 [ext_resource type="Script" uid="uid://die1jykpmkjor" path="res://scripts/screens/start_scene.gd" id="1_vs8n3"]
 [ext_resource type="Texture2D" uid="uid://c1rfist2qygio" path="res://images/IMG_5295.webp" id="2_rbidj"]
-
-[sub_resource type="SystemFont" id="SystemFont_rbidj"]
-font_names = PackedStringArray("Cursive")
-font_weight = 999
-
-[sub_resource type="LabelSettings" id="LabelSettings_b2gxe"]
-font = SubResource("SystemFont_rbidj")
-font_size = 20
-outline_size = 2
-outline_color = Color(0.690104, 0.946737, 1, 1)
+[ext_resource type="Texture2D" uid="uid://cregrgnxpyg2y" path="res://images/Cage Room/Title.PNG" id="3_b2gxe"]
+[ext_resource type="Texture2D" uid="uid://c415htv8fujdk" path="res://images/Cage Room/Room - Cage.PNG" id="4_06nut"]
 
 [sub_resource type="Animation" id="Animation_06nut"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Title:modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -75,41 +55,17 @@ tracks/1/keys = {
 resource_name = "title_animate"
 length = 2.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.462745), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_rbidj"]
 resource_name = "title_ready"
 length = 3.0
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Title:modulate")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.13333, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(3),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -117,13 +73,13 @@ tracks/1/keys = {
 "method": &"allow_proceed"
 }]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(3),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -131,13 +87,13 @@ tracks/2/keys = {
 "method": &"play"
 }]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.633333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -154,7 +110,7 @@ _data = {
 
 [node name="StartScene" type="Node2D" node_paths=PackedStringArray("title")]
 script = ExtResource("1_vs8n3")
-title = NodePath("Title")
+title = NodePath("")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -167,16 +123,25 @@ position = Vector2(576, 323.999)
 scale = Vector2(1.40146, 1.27559)
 texture = ExtResource("2_rbidj")
 
-[node name="Title" type="Label" parent="."]
-offset_left = 443.0
-offset_top = 310.0
-offset_right = 709.0
-offset_bottom = 338.0
-text = "Nyota and the Moon Palace"
-label_settings = SubResource("LabelSettings_b2gxe")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_b2gxe")
 }
 autoplay = "title_ready"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(597, 338)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_b2gxe")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(573, 302)
+texture = ExtResource("4_06nut")
+region_enabled = true
+region_rect = Rect2(660, 535, 864, 478)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(573, 302)
+texture = ExtResource("4_06nut")
+region_enabled = true
+region_rect = Rect2(660, 535, 864, 478)

@@ -16,6 +16,13 @@ signal dialogue_ended
 var _dialogue_tween: Tween
 
 
+class NoSwitchErrand extends Errand:
+	func is_done() -> bool:
+		return false
+	func complete():
+		pass
+		
+
 class ApproachErrand extends Errand:
 	var actor: Actor
 	var body: Actor
@@ -36,7 +43,6 @@ class PlayAnimationErrand extends Errand:
 	func complete():	
 		playwright.play(last_animation)
 		playwright.seek(last_seek, true, true)
-
 
 		
 func is_allowing_switching_during_play():
@@ -70,6 +76,23 @@ func play_animation_errand(animation: String):
 			errand.force_complete()
 		, CONNECT_ONE_SHOT)
 		
+		
+func can_switch_with_hint():
+	for errand in errand_list:
+		if errand is NoSwitchErrand:
+			return false
+	return true
+
+func toggle_no_switch():
+	var remove = null
+	for errand in errand_list:
+		if errand is NoSwitchErrand:
+			remove = errand
+	if remove:
+		errand_list.erase(remove)
+	else:
+		push_errand(NoSwitchErrand.new())
+
 		
 func press_action_errand(action: String):
 	var errand = push_errand(PressActionErrand.new())
@@ -169,6 +192,15 @@ func play_dialogue(dialogue_idx: String, paused: bool = true):
 	current_dialogue = dialogue_idx
 	current_line = 0
 	next_dialogue()
+	
+func play_auto_dialogue(dialogue_idx: String, paused: bool = true):
+	var last_option = dialogue_auto
+	dialogue_auto = true
+	dialogue_ended.connect(func():
+		dialogue_auto = last_option
+		, CONNECT_ONE_SHOT)
+	play_dialogue(dialogue_idx, paused)
+
 		
 func _process(_delta: float) -> void:
 	var inactive_errand = []

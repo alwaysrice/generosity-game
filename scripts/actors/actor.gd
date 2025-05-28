@@ -94,6 +94,7 @@ func _physics_process(delta: float) -> void:
 		try_jump()
 	if not is_flying:
 		velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
+
 	
 	if is_player:
 		var speed = walk_speed

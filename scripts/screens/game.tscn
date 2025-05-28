@@ -14,10 +14,10 @@
 size = Vector2(5149, 428)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yd2g3"]
-font_size = 18
-font_color = Color(0.962443, 1, 0.815104, 1)
-outline_size = 10
-outline_color = Color(0.346022, 0.515383, 0.674479, 1)
+font_size = 20
+outline_size = 20
+outline_color = Color(0.194, 0.361, 0.659, 1)
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_6b25k"]
 length = 0.001
@@ -32,6 +32,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(582, -476)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iof5d"]
@@ -50,7 +62,7 @@ witch = NodePath("Level/Witch")
 camera = NodePath("../Camera")
 
 [node name="Witch" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("3_i7ys0")]
-position = Vector2(460, 627)
+position = Vector2(692, 538)
 collision_mask = 30
 platform_floor_layers = 4294967042
 platform_wall_layers = 0
@@ -58,12 +70,12 @@ jump_speed = -600.0
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Level" node_paths=PackedStringArray("following") instance=ExtResource("4_tsiel")]
-position = Vector2(1481, 666)
+position = Vector2(1270, 469)
 scale = Vector2(0.8, 0.8)
 collision_mask = 30
 platform_floor_layers = 4294967042
 platform_wall_layers = 0
-jump_speed = -600.0
+jump_speed = -650.0
 following = NodePath("../Witch")
 
 [node name="Deadzone" type="Area2D" parent="Level"]
@@ -76,7 +88,7 @@ shape = SubResource("RectangleShape2D_tsiel")
 
 [node name="Camera" type="Camera2D" parent="."]
 process_mode = 1
-position = Vector2(485, 467)
+position = Vector2(582, -476)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_tsiel")
@@ -99,7 +111,6 @@ autowrap_mode = 3
 layer = 100
 
 [node name="BlackOverlay" type="ColorRect" parent="InterfaceLayer"]
-visible = false
 offset_right = 1152.0
 offset_bottom = 651.0
 color = Color(0, 0, 0, 0)
@@ -129,7 +140,6 @@ vertical_alignment = 1
 
 [node name="StoryPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 process_mode = 1
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_iof5d"),
 &"hints": ExtResource("7_6b25k"),
@@ -139,6 +149,7 @@ autoplay = "story/1-caged"
 script = ExtResource("7_okwes")
 dialogue_auto = false
 dialogue_allow_interrupt = true
+char_speed = 17.715
 dialogue_label = NodePath("../GuiLayer/DialogueLabel")
 dialogues_file = "res://scripts/story/dialogues.txt"
 

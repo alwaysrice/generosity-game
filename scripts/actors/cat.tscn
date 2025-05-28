@@ -164,7 +164,7 @@ position = Vector2(0, 74.375)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"fly"
+animation = &"walk"
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]
@@ -178,7 +178,7 @@ position = Vector2(9.53674e-07, 79.375)
 position = Vector2(0, 67.5)
 
 [node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(3.75, 71.25)
+position = Vector2(3.75, 70)
 rotation = -1.5703
 shape = SubResource("CapsuleShape2D_dmers")
 

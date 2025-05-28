@@ -2,6 +2,11 @@ extends Node2D
 
 @export var camera: Camera2D
 
+func open_eye():
+	for child in get_children():
+		if child is Door:
+			child.open_eye()
+
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)
 	for child in get_children():
@@ -23,6 +28,9 @@ func _ready():
 	camera.limit_top = int(bounds.position.y) 
 	camera.limit_right = int(bounds.size.x)
 	camera.limit_bottom = int(bounds.size.y) 
+	
+	if has_node("Witch"):
+		$Door.target = get_node("Witch")
 
 
 func _on_key_body_entered(_body: Node2D) -> void:
