@@ -156,6 +156,7 @@ height = 32.499
 
 [node name="Cat" instance=ExtResource("1_yiwue")]
 script = ExtResource("2_gsgih")
+jump_speed = -650.0
 
 [node name="Graphics" parent="." index="0"]
 position = Vector2(0, 74.375)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://b50x600r4japo"]
+[gd_scene load_steps=5 format=3 uid="uid://b50x600r4japo"]
 
 [ext_resource type="Texture2D" uid="uid://cuxiaihrr8p6" path="res://images/background/Floor.PNG" id="1_nodvu"]
+[ext_resource type="Script" uid="uid://bd1itojmdojr" path="res://testing/level_scaling.gd" id="1_ptw1a"]
 [ext_resource type="Texture2D" uid="uid://c87bbrgtn5ajh" path="res://images/background/Room.PNG" id="2_mfc5f"]
 [ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="3_mfc5f"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_ptw1a")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(596, -144.5)
@@ -20,3 +22,12 @@ texture = ExtResource("1_nodvu")
 anchor_mode = 0
 script = ExtResource("3_mfc5f")
 metadata/_custom_type_script = "uid://c8w74orqtuwe7"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 220.0
+offset_top = 102.0
+offset_right = 291.0
+offset_bottom = 133.0
+text = "click me"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -3,7 +3,7 @@ class_name DraggableCamera
 
 signal changed_zoom(zoom: Vector2)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= Vector2(0.05, 0.05)

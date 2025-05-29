@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, direction, vertical_accel * vertical_speed * delta)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not is_player:
 		return
 		

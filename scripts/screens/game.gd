@@ -1,47 +1,5 @@
-class_name Game extends Node
+class_name Game extends Node2D
 
-
-@onready var _pause_menu := $InterfaceLayer/PauseMenu as PauseMenu
-@export var camera: Camera
-@export var cat: Cat
-@export var witch: Witch
-
-
-func _ready() -> void:
-	if not $StoryPlayer.active:
-		$Level/Witch.should_follow = true
-		$Level/Cat.should_follow = true
-		switch_witch()
-		$Level.modulate = Color.WHITE
-		$Camera.zoom = Vector2.ONE
-
-	
-func switch_witch():
-	switch_player(witch)
-	
-func no_player():
-	witch.is_player = false
-	cat.is_player = false
-	witch.velocity = Vector2.ZERO
-	cat.velocity = Vector2.ZERO
-	
-	
-func switch_player(who: Actor = null) -> Actor:
-	if !who:
-		assert(cat.is_player != witch.is_player)
-		cat.is_player = !cat.is_player
-		witch.is_player = !witch.is_player
-		who = witch as Actor if witch.is_player else cat as Actor
-	else:
-		cat.is_player = false
-		witch.is_player = false
-		
-	camera.enabled = true
-	who.is_player = true
-	camera.target = who
-	
-	return who
-		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_fullscreen"):
@@ -57,30 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var tree := get_tree()
 		tree.paused = not tree.paused
 		if tree.paused:
-			_pause_menu.open()
+			%PauseMenu.open()
 		else:
-			_pause_menu.close()
+			%PauseMenu.close()
 		get_tree().root.set_input_as_handled()
-		
-	elif event.is_action_pressed(&"switch_character") && not $StoryPlayer.is_in_cutscene():
-		if not $StoryPlayer.can_switch_with_hint():
-			$StoryPlayer.play_animation_errand(&"hints/cannot-switch")
-			return
-		var new_player = switch_player()
-		new_player.following.velocity = Vector2.ZERO
-		new_player._on_switch(new_player.following)
-		
-
-
-func _on_camera_changed_zoom(zoom: Vector2) -> void:
-	print(zoom)
-	$InterfaceLayer/Label.text = str(zoom)
-
-
-func _on_deadzone_body_entered(body: Node2D) -> void:
-	var actor = body as Actor
-	actor.die()
-
-
-func _on_death(actor: Actor) -> void:
-	actor.revive()

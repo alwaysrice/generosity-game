@@ -1,56 +1,155 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh71g61cm8k44"]
+[gd_scene load_steps=11 format=3 uid="uid://dh71g61cm8k44"]
 
-[ext_resource type="Theme" uid="uid://da4noqsij73it" path="res://config/theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://damj0g2vvtawx" path="res://scripts/ui/pause_menu.gd" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj522"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7hgd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dj522"]
+
+[sub_resource type="Theme" id="Theme_dj522"]
+Button/styles/focus = SubResource("StyleBoxFlat_dj522")
+Button/styles/hover = SubResource("StyleBoxFlat_s7hgd")
+Button/styles/normal = SubResource("StyleBoxEmpty_dj522")
+
+[sub_resource type="LabelSettings" id="LabelSettings_kxcwv"]
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_dj522"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kxcwv"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_s7hgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7hgd"]
+_data = {
+&"RESET": SubResource("Animation_s7hgd"),
+&"close": SubResource("Animation_kxcwv"),
+&"open": SubResource("Animation_dj522")
+}
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1")
+theme = SubResource("Theme_dj522")
 script = ExtResource("2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Overlay" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.294118)
+color = Color(0, 0, 0, 0.492)
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
+[node name="Label" type="Label" parent="."]
 layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
+offset_left = 508.0
+offset_top = 255.0
+offset_right = 641.0
+offset_bottom = 283.0
 text = "Game Paused"
+label_settings = SubResource("LabelSettings_kxcwv")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ResumeButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="ResumeButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 508.0
+offset_top = 295.0
+offset_right = 641.0
+offset_bottom = 330.0
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="QuitButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 508.0
+offset_top = 338.0
+offset_right = 641.0
+offset_bottom = 373.0
 text = "Quit"
 
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s7hgd")
+}
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

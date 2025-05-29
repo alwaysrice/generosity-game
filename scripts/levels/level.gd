@@ -1,16 +1,29 @@
-extends Node2D
+class_name Level extends Node2D
 
-@export var camera: Camera2D
-
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_released("debug_1"):
-		$WorldEnvironment.environment.glow_enabled = not $WorldEnvironment.environment.glow_enabled
-		if not $WorldEnvironment.environment.glow_enabled:
-			$Background.modulate = Color.WHITE
-		else:
-			$Background.modulate = Color.hex(0xb8b8b8ff)
-
+func switch_witch(): switch_player(%Witch)
+	
+func no_player():
+	%Witch.is_player = false
+	%Cat.is_player = false
+	%Witch.velocity = Vector2.ZERO
+	%Cat.velocity = Vector2.ZERO
+	
+func switch_player(who: Actor = null) -> Actor:
+	if !who:
+		assert(%Cat.is_player != %Witch.is_player)
+		%Cat.is_player = !%Cat.is_player
+		%Witch.is_player = !%Witch.is_player
+		who = %Witch as Actor if %Witch.is_player else %Cat as Actor
+	else:
+		%Cat.is_player = false
+		%Witch.is_player = false
+		
+	%Camera.enabled = true
+	who.is_player = true
+	%Camera.target = who
+	
+	return who
+	
 func open_eye():
 	for child in get_children():
 		if child is Door:
@@ -18,7 +31,7 @@ func open_eye():
 
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)
-	for child in get_children():
+	for child in $Graphics/Background.get_children():
 		if child is Sprite2D:
 			rect.position.x = min(child.global_position.x, rect.position.x)
 			rect.position.y = min(child.global_position.y, rect.position.y)
@@ -26,21 +39,52 @@ func get_bounds() -> Rect2:
 			rect.size.y = max(child.global_position.y + child.texture.get_size().y * child.scale.y, rect.size.y)
 	return rect
 
-func _ready():	
+	
+func _ready() -> void:
+	if not $Cutscenes.active:
+		%Witch.should_follow = true
+		%Cat.should_follow = true
+		$Graphics.modulate = Color.WHITE
+		$%Camera.zoom = Vector2.ONE
+		switch_witch()
+		
 	var bounds := get_bounds()
 	for child in get_children():
 		if child is Key:
 			child.body_entered.connect(_on_key_body_entered)
 	print(bounds)
-	assert(camera)
-	camera.limit_left = int(bounds.position.x)
-	camera.limit_top = int(bounds.position.y) 
-	camera.limit_right = int(bounds.size.x)
-	camera.limit_bottom = int(bounds.size.y) 
-	
-	if has_node("Witch"):
-		$Door.target = get_node("Witch")
+	assert(%Camera)
+	%Camera.limit_left = int(bounds.position.x)
+	%Camera.limit_top = int(bounds.position.y) 
+	%Camera.limit_right = int(bounds.size.x)
+	%Camera.limit_bottom = int(bounds.size.y) 
+
+func _unhandled_input(event: InputEvent) -> void:		
+	if event.is_action_pressed(&"switch_character") && not $Cutscenes.is_in_cutscene() :
+		if not $Cutscenes.can_switch_with_hint():
+			$Cutscenes.play_animation_errand(&"hints/cannot-switch")
+			return
+		var new_player = switch_player()
+		new_player.following.velocity = Vector2.ZERO
+		new_player._on_switch(new_player.following)
+		
+		
+func _process(_delta: float) -> void:
+	if Input.is_action_just_released("debug_1"):
+		$Env.environment.glow_enabled = not $Env.environment.glow_enabled
+		if not $Env.environment.glow_enabled:
+			$Graphics/Background.modulate = Color.WHITE
+		else:
+			$Graphics/Background.modulate = Color.hex(0xb8b8b8ff)
 
 
 func _on_key_body_entered(_body: Node2D) -> void:
 	pass # Replace with function body.
+	
+
+func _on_deadzone_body_entered(body: Node2D) -> void:
+	var actor = body as Actor
+	actor.die()
+
+func _on_death(actor: Actor) -> void:
+	actor.revive()

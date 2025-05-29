@@ -30,6 +30,8 @@ var last_floor_stepped_pos := Vector2.ZERO
 var last_direction := 0
 var items = []
 var action_history = []
+var follow_object = null
+var follow_object_minimum = 20
 
 signal on_death(actor: Actor)
 
@@ -46,8 +48,13 @@ func die():
 	is_dead = true
 
 func afk_behaviour(delta: float):
-	if not following or not should_follow: return
-	var dist = following.global_position - global_position
+	if follow_object: pass
+	elif not following or not should_follow: return
+	var follow: Node2D = follow_object
+	if not follow_object:
+		follow = following
+	
+	var dist = follow.global_position - global_position
 	var speed = walk_speed
 	var accel = walk_accel
 	if dist.x > follow_distance_run || dist.x < -follow_distance_run:

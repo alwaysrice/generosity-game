@@ -10,7 +10,7 @@ func allow_proceed():
 func enter_game():
 	get_tree().change_scene_to_packed(next_scene)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not can_proceed: return
 	if event is InputEventMouseButton or (event is InputEventKey and event.is_released()):
 		$AnimationPlayer.play("enter_game")
