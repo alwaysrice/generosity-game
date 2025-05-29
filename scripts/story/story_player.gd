@@ -31,9 +31,12 @@ class ApproachErrand extends Errand:
 		
 class PressActionErrand extends Errand:
 	var action: String
+	var commercial_animation = ""
+	var commercial_player: AnimationPlayer
 	func is_done() -> bool:
 		return Input.is_action_just_pressed(action)
 	func complete():
+		commercial_player.stop()
 		playwright.play()
 
 class PlayAnimationErrand extends Errand: 
@@ -75,8 +78,8 @@ func play_animation_errand(animation: String):
 		if anim == errand.animation:
 			errand.force_complete()
 		, CONNECT_ONE_SHOT)
-		
-		
+
+
 func can_switch_with_hint():
 	for errand in errand_list:
 		if errand is NoSwitchErrand:
@@ -99,6 +102,16 @@ func press_action_errand(action: String):
 	errand.action = action
 	pause()
 	
+func press_action_while_animating_errand(action: String, player: NodePath, animation: String):
+	pause()
+	var errand = push_errand(PressActionErrand.new())
+	errand.action = action
+	errand.commercial_animation = animation
+	errand.commercial_player = get_node(player)
+	errand.commercial_player.play(errand.commercial_animation)
+
+	
+
 func cage_unlock_errand(cage: NodePath):
 	var errand = push_errand(Cage.UnlockedErrand.new())
 	errand.cage = get_node(cage)

@@ -12,6 +12,8 @@ func _ready() -> void:
 		$Level/Witch.should_follow = true
 		$Level/Cat.should_follow = true
 		switch_witch()
+		$Level.modulate = Color.WHITE
+		$Camera.zoom = Vector2.ONE
 
 	
 func switch_witch():

@@ -2,6 +2,15 @@ extends Node2D
 
 @export var camera: Camera2D
 
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_released("debug_1"):
+		$WorldEnvironment.environment.glow_enabled = not $WorldEnvironment.environment.glow_enabled
+		if not $WorldEnvironment.environment.glow_enabled:
+			$Background.modulate = Color.WHITE
+		else:
+			$Background.modulate = Color.hex(0xb8b8b8ff)
+
 func open_eye():
 	for child in get_children():
 		if child is Door:

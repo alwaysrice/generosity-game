@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bf3wnwihk7ymg"]
+[gd_scene load_steps=18 format=3 uid="uid://bf3wnwihk7ymg"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://ctgumjaytuoch" path="res://scripts/levels/level.tscn" id="2_7jktm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="4_tsiel"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="7_6b25k"]
+[ext_resource type="Texture2D" uid="uid://cregrgnxpyg2y" path="res://images/Cage Room/Title.PNG" id="7_iof5d"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="7_okwes"]
 [ext_resource type="AnimationLibrary" uid="uid://bli54sa8jlnr2" path="res://scripts/story/story.res" id="8_iof5d"]
 
@@ -43,12 +44,98 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(582, -476)]
+"values": [Vector2(550, -476)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StoryEntities/Title:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Level:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StoryEntities/Title:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(550, -530)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iof5d"]
 _data = {
 &"RESET": SubResource("Animation_6b25k")
+}
+
+[sub_resource type="Animation" id="Animation_u05x2"]
+resource_name = "title"
+loop_mode = 2
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryEntities/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 2,
+"values": [Vector2(550, -530), Vector2(550, -535)]
+}
+
+[sub_resource type="Animation" id="Animation_wvo3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryEntities/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(550, -530)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqkjf"]
+_data = {
+&"RESET": SubResource("Animation_wvo3x"),
+&"title": SubResource("Animation_u05x2")
 }
 
 [node name="Game" type="Node" node_paths=PackedStringArray("camera", "cat", "witch")]
@@ -88,13 +175,20 @@ shape = SubResource("RectangleShape2D_tsiel")
 
 [node name="Camera" type="Camera2D" parent="."]
 process_mode = 1
-position = Vector2(582, -476)
+position = Vector2(550, -476)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("2_tsiel")
 offset_target = Vector2(0, -100)
 metadata/_custom_type_script = "uid://ne82d4pl36ow"
 metadata/_edit_group_ = true
+
+[node name="StoryEntities" type="Node2D" parent="."]
+
+[node name="Title" type="Sprite2D" parent="StoryEntities"]
+position = Vector2(550, -530)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_iof5d")
 
 [node name="GuiLayer" type="CanvasLayer" parent="."]
 
@@ -145,13 +239,18 @@ libraries = {
 &"hints": ExtResource("7_6b25k"),
 &"story": ExtResource("8_iof5d")
 }
-autoplay = "story/1-caged"
+autoplay = "story/opening"
 script = ExtResource("7_okwes")
 dialogue_auto = false
 dialogue_allow_interrupt = true
 char_speed = 17.715
 dialogue_label = NodePath("../GuiLayer/DialogueLabel")
 dialogues_file = "res://scripts/story/dialogues.txt"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lqkjf")
+}
 
 [connection signal="on_death" from="Level/Witch" to="." method="_on_death"]
 [connection signal="on_death" from="Level/Cat" to="." method="_on_death"]
