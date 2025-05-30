@@ -17,6 +17,8 @@ func destruct():
 func unlock():
 	$AnimationPlayer.play(&"unlock")
 
+#func toggle_collisions():
+	#$StaticBody2D.check
 
 func _on_key_detect_area_body_entered(body: Node2D) -> void:
 	if body is Actor:
