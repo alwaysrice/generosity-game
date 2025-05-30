@@ -202,6 +202,7 @@ jump_speed = -600.0
 position = Vector2(0, -69)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
+use_parent_material = true
 position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")

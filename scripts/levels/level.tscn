@@ -11,7 +11,7 @@
 background_mode = 3
 glow_intensity = 1.41
 glow_bloom = 0.66
-glow_hdr_threshold = 0.89
+glow_hdr_threshold = 0.1
 glow_hdr_scale = 2.97
 glow_hdr_luminance_cap = 0.2
 
@@ -116,7 +116,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Background" type="Node2D" parent="Graphics"]
 
 [node name="Characters" type="Node2D" parent="Graphics"]
-modulate = Color(0, 0, 0, 1)
 
 [node name="Witch" parent="Graphics/Characters" node_paths=PackedStringArray("following") instance=ExtResource("2_jol3n")]
 unique_name_in_owner = true

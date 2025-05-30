@@ -78,7 +78,7 @@ func turn_right():
 	velocity.x = 0
 	graphics.scale.x = 1
 	
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("move_right"):
 		last_direction = 1
 	elif event.is_action_pressed("move_left"):

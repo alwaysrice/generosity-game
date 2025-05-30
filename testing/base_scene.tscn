@@ -1,29 +1,160 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv533ad15457x"]
+[gd_scene load_steps=12 format=3 uid="uid://cv533ad15457x"]
 
-[ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="1_em440"]
-[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_k50ye"]
+[ext_resource type="Texture2D" uid="uid://b8hob3a0rxcum" path="res://images/IMG_5436.webp" id="1_em440"]
+[ext_resource type="Texture2D" uid="uid://c415htv8fujdk" path="res://images/Cage Room/Room - Cage.PNG" id="1_pgqia"]
+[ext_resource type="Texture2D" uid="uid://52ni4y4up3xd" path="res://images/IMG_5434.webp" id="3_pbtue"]
+[ext_resource type="Texture2D" uid="uid://cyk84marjk5lh" path="res://images/actors/Fly Cycle/FC-02.PNG" id="4_evrty"]
+[ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="5_pbtue"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k50ye"]
-size = Vector2(1055, 88)
+[sub_resource type="Gradient" id="Gradient_pbtue"]
+offsets = PackedFloat32Array(0.183007, 0.418301, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.398693, 0.398693, 0.398693, 0.398693, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_llm44"]
+gradient = SubResource("Gradient_pbtue")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.786325, 0.230769)
+
+[sub_resource type="Gradient" id="Gradient_evrty"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.679739)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eyhxl"]
+gradient = SubResource("Gradient_evrty")
+width = 200
+height = 200
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_o7c75"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.228758, 0.679739)
+colors = PackedColorArray(1, 1, 1, 1, 0.487982, 0.487982, 0.487982, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ebo6y"]
+gradient = SubResource("Gradient_o7c75")
+width = 200
+height = 200
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(3638, 3142)
 
-[node name="Witch" parent="." instance=ExtResource("1_em440")]
-position = Vector2(215, 315)
-collision_mask = 30
-platform_floor_layers = 4294967042
-platform_wall_layers = 0
-is_player = true
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-1506, -317)
+texture = ExtResource("1_pgqia")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-3, 604)
-collision_layer = 16
-collision_mask = 0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3671.06, 1352.95)
+scale = Vector2(3.43979, 3.43979)
+texture = ExtResource("1_em440")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(517.5, 34)
-shape = SubResource("RectangleShape2D_k50ye")
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(-753.26, 55.8315)
+texture = ExtResource("3_pbtue")
 
-[node name="Door" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_k50ye")]
-position = Vector2(858, 454)
-target = NodePath("../Witch")
+[node name="Fc-03" type="Sprite2D" parent="."]
+position = Vector2(3653, 967)
+scale = Vector2(0.215571, 0.215571)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Fc-03"]
+modulate = Color(1, 0.970502, 0.372396, 0.539)
+show_behind_parent = true
+position = Vector2(41.7502, -9.27718)
+scale = Vector2(42.2745, 42.2745)
+texture = SubResource("GradientTexture2D_llm44")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Fc-03"]
+position = Vector2(106.694, 41.7496)
+scale = Vector2(21.8939, 21.8939)
+color = Color(0.674479, 0.674479, 0.674479, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_eyhxl")
+
+[node name="Fc-04" type="Sprite2D" parent="."]
+position = Vector2(1147, 1328)
+scale = Vector2(0.0825737, 0.0825737)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Fc-04"]
+modulate = Color(1, 0.970502, 0.372396, 0.539)
+show_behind_parent = true
+position = Vector2(41.7502, -9.27718)
+scale = Vector2(42.2745, 42.2745)
+texture = SubResource("GradientTexture2D_llm44")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Fc-04"]
+position = Vector2(106.694, 41.7496)
+scale = Vector2(21.8939, 21.8939)
+color = Color(1, 0.96521, 0.257812, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_eyhxl")
+
+[node name="Fc-05" type="Sprite2D" parent="."]
+position = Vector2(1676, 1618)
+scale = Vector2(0.0825737, 0.0825737)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Fc-05"]
+modulate = Color(0.981771, 0.967711, 0.682638, 0.539)
+show_behind_parent = true
+position = Vector2(41.7502, -9.27718)
+scale = Vector2(42.2745, 42.2745)
+texture = SubResource("GradientTexture2D_llm44")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Fc-05"]
+position = Vector2(-60.5498, 60.5551)
+scale = Vector2(13.4353, 13.4353)
+color = Color(0.684692, 1, 0.507812, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_ebo6y")
+texture_scale = 2.0
+
+[node name="Fc-06" type="Sprite2D" parent="."]
+position = Vector2(1351, 983)
+scale = Vector2(0.0825737, 0.0825737)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Fc-06"]
+modulate = Color(0.981771, 0.967711, 0.682638, 0.539)
+show_behind_parent = true
+position = Vector2(41.7502, -9.27718)
+scale = Vector2(42.2745, 42.2745)
+texture = SubResource("GradientTexture2D_llm44")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Fc-06"]
+position = Vector2(106.694, 41.7496)
+scale = Vector2(21.8939, 21.8939)
+color = Color(0.684692, 1, 0.507812, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_ebo6y")
+texture_scale = 2.0
+
+[node name="Fc-07" type="Sprite2D" parent="."]
+position = Vector2(1511, 1735)
+scale = Vector2(0.0825737, 0.0825737)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Fc-08" type="Sprite2D" parent="."]
+position = Vector2(3189, 1286)
+scale = Vector2(0.221113, 0.221113)
+texture = ExtResource("4_evrty")
+flip_h = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(2167, 1433)
+zoom = Vector2(0.2, 0.2)
+script = ExtResource("5_pbtue")
+metadata/_custom_type_script = "uid://c8w74orqtuwe7"

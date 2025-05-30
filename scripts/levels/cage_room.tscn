@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dirhpaeoq4yqm"]
+[gd_scene load_steps=20 format=3 uid="uid://dirhpaeoq4yqm"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_6qos5"]
 [ext_resource type="AudioStream" uid="uid://bfq22i3t3gvnq" path="res://audio/room 1 opening.mp3" id="3_jrjqo"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cregrgnxpyg2y" path="res://images/Cage Room/Title.PNG" id="9_1plbr"]
 [ext_resource type="AnimationLibrary" uid="uid://bt7ecrqgfjfhf" path="res://scripts/story/cage.res" id="10_w06w3"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="11_nwlfr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrjqo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mj1ib"]
 size = Vector2(1494, 79)
@@ -25,38 +27,38 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera:zoom")
+tracks/0/path = NodePath("Graphics:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Graphics:modulate")
+tracks/1/path = NodePath("Camera:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1167, 173)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Camera:position")
+tracks/2/path = NodePath("Graphics/Objects/Cage:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(550, -476)]
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
@@ -64,9 +66,26 @@ _data = {
 &"RESET": SubResource("Animation_w203f")
 }
 
+[sub_resource type="Animation" id="Animation_6qos5"]
+length = 0.5
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Objects/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.466667),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Vector2(550, -530)]
+}
+
 [sub_resource type="Animation" id="Animation_8rgrk"]
 resource_name = "title"
 loop_mode = 2
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,23 +95,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.0333333, 1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(550, -530), Vector2(550, -536)]
-}
-
-[sub_resource type="Animation" id="Animation_6qos5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphics/Objects/Title:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(550, -530)]
+"update": 2,
+"values": [Vector2(550, -530), Vector2(550, -531)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vupn1"]
@@ -120,7 +124,9 @@ texture = ExtResource("5_l5txh")
 z_index = 1
 
 [node name="Witch" parent="Graphics/Characters" index="0"]
-position = Vector2(712, 542)
+texture_filter = 4
+material = SubResource("ShaderMaterial_jrjqo")
+position = Vector2(707, 516)
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(1292, 477)
@@ -172,6 +178,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_1plbr")
 
 [node name="Camera" parent="." index="4"]
+position = Vector2(1167, 173)
+zoom = Vector2(1.3, 1.3)
 limit_smoothed = true
 position_smoothing_enabled = true
 

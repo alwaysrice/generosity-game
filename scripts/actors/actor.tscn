@@ -16,6 +16,7 @@ script = ExtResource("1_gr3rb")
 jump_speed = -550.0
 
 [node name="Graphics" type="Node2D" parent="."]
+use_parent_material = true
 
 [node name="CliffDetector" type="RayCast2D" parent="Graphics"]
 unique_name_in_owner = true
