@@ -5,7 +5,12 @@ class_name Door extends Node2D
 ## How far the eyeball can move from center
 @export var max_offset: float = 10.0 
 @export var follow_strength: float = 1.0 
+@export var open_eyes_on_first_target = false
 signal within_range
+
+func _ready() -> void:
+	if open_eyes_on_first_target:
+		open_eye()
 
 func open_eye():
 	%"Eye(closed)".visible = false

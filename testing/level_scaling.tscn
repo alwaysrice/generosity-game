@@ -1,33 +1,28 @@
 [gd_scene load_steps=5 format=3 uid="uid://b50x600r4japo"]
 
-[ext_resource type="Texture2D" uid="uid://cuxiaihrr8p6" path="res://images/background/Floor.PNG" id="1_nodvu"]
 [ext_resource type="Script" uid="uid://bd1itojmdojr" path="res://testing/level_scaling.gd" id="1_ptw1a"]
-[ext_resource type="Texture2D" uid="uid://c87bbrgtn5ajh" path="res://images/background/Room.PNG" id="2_mfc5f"]
-[ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="3_mfc5f"]
+[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_mfc5f"]
+[ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="3_ptw1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h53bp"]
+size = Vector2(1009, 122)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ptw1a")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(596, -144.5)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_mfc5f")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(596, 545)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_nodvu")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(597, 606)
+shape = SubResource("RectangleShape2D_h53bp")
 
-[node name="Camera" type="Camera2D" parent="."]
-anchor_mode = 0
-script = ExtResource("3_mfc5f")
-metadata/_custom_type_script = "uid://c8w74orqtuwe7"
+[node name="Door" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_mfc5f")]
+position = Vector2(983, 419)
+target = NodePath("../Witch")
+open_eyes_on_first_target = true
 
-[node name="Button" type="Button" parent="."]
-offset_left = 220.0
-offset_top = 102.0
-offset_right = 291.0
-offset_bottom = 133.0
-text = "click me"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Witch" parent="." instance=ExtResource("3_ptw1a")]
+position = Vector2(478, 462)
+is_player = true

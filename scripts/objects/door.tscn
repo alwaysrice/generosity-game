@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgo8p4utgucyq"]
+[gd_scene load_steps=14 format=3 uid="uid://dgo8p4utgucyq"]
 
 [ext_resource type="Texture2D" uid="uid://g7eo6rk0hg0b" path="res://images/Cage Room/Door.PNG" id="1_648hi"]
 [ext_resource type="Script" uid="uid://c8nv1dqhw8ngm" path="res://scripts/objects/door.gd" id="1_i1d51"]
 [ext_resource type="Texture2D" uid="uid://di25hpacsap0r" path="res://images/Cage Room/Eyeball.PNG" id="2_i1d51"]
 [ext_resource type="Texture2D" uid="uid://205kuxets0ai" path="res://images/Cage Room/Eye (Open).PNG" id="3_dberi"]
 [ext_resource type="Texture2D" uid="uid://c2uh82odf1wdg" path="res://images/Cage Room/Eye (Closed).PNG" id="4_drsjl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1d51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1d51"]
 size = Vector2(186, 244)
@@ -120,16 +122,17 @@ position = Vector2(6, -246)
 
 [node name="Eyeball" type="Sprite2D" parent="Sprite2D/Eye"]
 unique_name_in_owner = true
-position = Vector2(-2, -4)
+material = SubResource("ShaderMaterial_i1d51")
+position = Vector2(-4, -2)
 texture = ExtResource("2_i1d51")
 
 [node name="Eye(open)" type="Sprite2D" parent="Sprite2D/Eye"]
 unique_name_in_owner = true
-visible = false
 texture = ExtResource("3_dberi")
 
 [node name="Eye(closed)" type="Sprite2D" parent="Sprite2D/Eye"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(3, 8)
 texture = ExtResource("4_drsjl")
 

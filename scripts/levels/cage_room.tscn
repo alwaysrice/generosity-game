@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dirhpaeoq4yqm"]
+[gd_scene load_steps=21 format=3 uid="uid://dirhpaeoq4yqm"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_6qos5"]
 [ext_resource type="AudioStream" uid="uid://bfq22i3t3gvnq" path="res://audio/room 1 opening.mp3" id="3_jrjqo"]
@@ -16,11 +16,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mj1ib"]
 size = Vector2(1494, 79)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0ba6"]
-size = Vector2(430, 47)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8rgrk"]
+radius = 12.0
+height = 426.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3abwp"]
 size = Vector2(77, 1456)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rgrk"]
+size = Vector2(30, 26)
 
 [sub_resource type="Animation" id="Animation_w203f"]
 length = 0.001
@@ -130,6 +134,7 @@ position = Vector2(708, 519)
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(1292, 477)
+follow_distance = 120
 
 [node name="Objects" parent="Graphics" index="2"]
 z_index = 2
@@ -143,8 +148,9 @@ position = Vector2(747, 614.5)
 shape = SubResource("RectangleShape2D_mj1ib")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
-position = Vector2(550, 573.5)
-shape = SubResource("RectangleShape2D_k0ba6")
+position = Vector2(548, 562)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_8rgrk")
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
 collision_layer = 8
@@ -158,20 +164,31 @@ shape = SubResource("RectangleShape2D_3abwp")
 position = Vector2(1533, -74)
 shape = SubResource("RectangleShape2D_3abwp")
 
-[node name="Key" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("cage") instance=ExtResource("6_w0ro3")]
+[node name="Gaps" type="Area2D" parent="Graphics/Objects" index="2"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="0"]
+position = Vector2(762, 588)
+shape = SubResource("RectangleShape2D_8rgrk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="1"]
+position = Vector2(335, 585)
+shape = SubResource("RectangleShape2D_8rgrk")
+
+[node name="Key" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("cage") instance=ExtResource("6_w0ro3")]
 position = Vector2(1206, 421)
 cage = NodePath("../Cage")
 
-[node name="Cage" parent="Graphics/Objects" index="3" instance=ExtResource("7_ocxtg")]
+[node name="Cage" parent="Graphics/Objects" index="4" instance=ExtResource("7_ocxtg")]
 z_index = 1
 position = Vector2(525, 551)
 
-[node name="Door" parent="Graphics/Objects" index="4" node_paths=PackedStringArray("target") instance=ExtResource("8_dr48j")]
+[node name="Door" parent="Graphics/Objects" index="5" node_paths=PackedStringArray("target") instance=ExtResource("8_dr48j")]
 z_as_relative = false
 position = Vector2(1419, 433)
 target = NodePath("../../Characters/Witch")
 
-[node name="Title" type="Sprite2D" parent="Graphics/Objects" index="5"]
+[node name="Title" type="Sprite2D" parent="Graphics/Objects" index="6"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(550, -530)
 scale = Vector2(0.5, 0.5)
@@ -179,6 +196,7 @@ texture = ExtResource("9_1plbr")
 
 [node name="Camera" parent="." index="4"]
 position = Vector2(1167, 173)
+zoom = Vector2(1.8, 1.8)
 limit_smoothed = true
 position_smoothing_enabled = true
 
