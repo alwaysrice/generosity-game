@@ -10,7 +10,7 @@
 [sub_resource type="Environment" id="Environment_w203f"]
 background_mode = 3
 glow_intensity = 1.41
-glow_bloom = 0.66
+glow_bloom = 0.3
 glow_hdr_threshold = 0.1
 glow_hdr_scale = 2.97
 glow_hdr_luminance_cap = 0.2

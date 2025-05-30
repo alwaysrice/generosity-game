@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgo8p4utgucyq"]
+[gd_scene load_steps=16 format=3 uid="uid://dgo8p4utgucyq"]
 
-[ext_resource type="Texture2D" uid="uid://g7eo6rk0hg0b" path="res://images/Cage Room/Door.PNG" id="1_648hi"]
 [ext_resource type="Script" uid="uid://c8nv1dqhw8ngm" path="res://scripts/objects/door.gd" id="1_i1d51"]
+[ext_resource type="Texture2D" uid="uid://b4f3vuf0l2ohy" path="res://images/Cage Room/Door_bottom.png" id="2_drsjl"]
 [ext_resource type="Texture2D" uid="uid://di25hpacsap0r" path="res://images/Cage Room/Eyeball.PNG" id="2_i1d51"]
 [ext_resource type="Texture2D" uid="uid://205kuxets0ai" path="res://images/Cage Room/Eye (Open).PNG" id="3_dberi"]
+[ext_resource type="Texture2D" uid="uid://bw3d2k4cuwav6" path="res://images/Cage Room/Door_top.png" id="3_i22wd"]
 [ext_resource type="Texture2D" uid="uid://c2uh82odf1wdg" path="res://images/Cage Room/Eye (Closed).PNG" id="4_drsjl"]
+[ext_resource type="Texture2D" uid="uid://cfey3oe7g6nve" path="res://images/Cage Room/Door Handle.PNG" id="6_dberi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i1d51"]
 
@@ -21,6 +23,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.0698039, 0.0932652, 0.570312, 1)
 
 [sub_resource type="Animation" id="Animation_dberi"]
 length = 0.001
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,13 +39,13 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/Eye:modulate")
+tracks/1/path = NodePath("Handle:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 2,
 "values": [Color(1, 1, 1, 1)]
 }
 
@@ -64,7 +67,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/Eye:modulate")
+tracks/1/path = NodePath("Handle:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +80,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_i1d51"]
 resource_name = "within_range"
 loop_mode = 2
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,14 +95,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/Eye:modulate")
+tracks/1/path = NodePath("Handle:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 0.966667),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 2,
-"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1)]
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3, 3, 3, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_drsjl"]
@@ -112,29 +114,48 @@ _data = {
 
 [node name="Door" type="Node2D"]
 script = ExtResource("1_i1d51")
+max_offset = 7.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Top" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_648hi")
+texture = ExtResource("3_i22wd")
 
-[node name="Eye" type="Node2D" parent="Sprite2D"]
-position = Vector2(6, -246)
+[node name="EyeHolder" type="Node2D" parent="."]
+position = Vector2(2, -122)
 
-[node name="Eyeball" type="Sprite2D" parent="Sprite2D/Eye"]
+[node name="Eyeball" type="Sprite2D" parent="EyeHolder"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_i1d51")
-position = Vector2(-4, -2)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_i1d51")
+region_enabled = true
+region_rect = Rect2(0, 0, 117, 70)
 
-[node name="Eye(open)" type="Sprite2D" parent="Sprite2D/Eye"]
-unique_name_in_owner = true
-texture = ExtResource("3_dberi")
+[node name="Bottom" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_drsjl")
 
-[node name="Eye(closed)" type="Sprite2D" parent="Sprite2D/Eye"]
+[node name="Eye(open)" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
-position = Vector2(3, 8)
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_dberi")
+
+[node name="Eye(closed)" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(4.5, -119)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_drsjl")
+
+[node name="Eye" type="Node2D" parent="."]
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+
+[node name="Handle" type="Sprite2D" parent="."]
+position = Vector2(-29, 43)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_dberi")
 
 [node name="EnterArea" type="Area2D" parent="."]
 collision_layer = 0
