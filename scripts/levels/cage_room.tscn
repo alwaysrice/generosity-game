@@ -126,7 +126,7 @@ z_index = 1
 [node name="Witch" parent="Graphics/Characters" index="0"]
 texture_filter = 4
 material = SubResource("ShaderMaterial_jrjqo")
-position = Vector2(686, 519)
+position = Vector2(708, 519)
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(1292, 477)
@@ -189,7 +189,7 @@ libraries = {
 &"cage": ExtResource("10_w06w3"),
 &"hints": ExtResource("11_nwlfr")
 }
-autoplay = "cage/scene"
+autoplay = "cage/opening"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
