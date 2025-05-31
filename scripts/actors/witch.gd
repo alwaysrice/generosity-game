@@ -5,6 +5,9 @@ var is_on_flight = false
 @export var vertical_speed = 300.0
 @export var vertical_accel = 6
 
+func upgrade_fly_duration():
+	%FlightTimer.wait_time += 1.0
+
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	if is_on_floor():

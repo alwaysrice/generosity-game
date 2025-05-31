@@ -79,22 +79,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Graphics/Characters/Witch:follow_object")
+tracks/4/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Graphics/Characters/Witch:is_player")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -114,14 +102,17 @@ tracks/0/path = NodePath("Cutscenes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.0333333, 0.2, 0.233333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": [NodePath("../Graphics/Characters/Witch"), NodePath(""), 30],
+"args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Objects/Markers/Marker2D"), 30],
 "method": &"approach_errand"
 }, {
 "args": ["26", true],
 "method": &"play_dialogue"
+}, {
+"args": [NodePath("../Graphics/Characters/Cat"), NodePath("../Graphics/Objects/DoorLeft"), ""],
+"method": &"leave_level_alone_errand"
 }, {
 "args": ["27", true],
 "method": &"play_dialogue"
@@ -134,22 +125,44 @@ tracks/1/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.0333333, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Graphics/Characters/Cat:follow_object")
+tracks/2/path = NodePath("Graphics/Characters/Witch")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
+"times": PackedFloat32Array(0.0333333, 0.166667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [NodePath("../../Objects/Markers/Marker2D")],
+"method": &"follow"
+}, {
+"args": [NodePath("")],
+"method": &"follow"
+}, {
+"args": [],
+"method": &"turn_left"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Graphics/Characters/Cat")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("../../Objects/Markers/Marker2D2")],
+"method": &"follow"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ds0mx"]
@@ -167,7 +180,6 @@ centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0"]
 position = Vector2(108, 575)
-should_follow = true
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(54, 492)
@@ -226,8 +238,14 @@ open_eyes_on_first_target = true
 
 [node name="Markers" type="Node2D" parent="Graphics/Objects" index="4"]
 
-[node name="Node2D" type="Node2D" parent="Graphics/Objects/Markers" index="0"]
-position = Vector2(406, 531)
+[node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
+position = Vector2(405, 557)
+
+[node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+position = Vector2(-107, 507)
+
+[node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
+target = NodePath("../Graphics/Characters/Witch")
 
 [node name="Cutscenes" parent="." index="5"]
 libraries = {

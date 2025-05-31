@@ -239,7 +239,7 @@ position = Vector2(0, -69)
 position = Vector2(0, -69)
 
 [node name="FlightTimer" type="Timer" parent="." index="9"]
-wait_time = 2.0
+unique_name_in_owner = true
 one_shot = true
 
 [node name="FlyTimer" type="Timer" parent="." index="10"]

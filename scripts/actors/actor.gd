@@ -11,7 +11,7 @@ class_name Actor extends CharacterBody2D
 @export var item_magnet_radius = 100
 @export var allow_double_jump = false
 
-@export var following: Actor
+@export var following: Node2D
 @export var should_follow = false
 @export var is_player := false
 
@@ -31,10 +31,14 @@ var last_direction := 0
 var items = []
 var action_history = []
 @export var follow_object: Node2D 
-@export var follow_object_minimum = 20
+@export var follow_object_minimum = 5
 @export var is_follow_object_walk_only = true
+@export var is_follow_object_run = false
 
 signal on_death(actor: Actor)
+
+func follow(who: NodePath):
+	following = get_node_or_null(who)
 
 func revive():
 	is_dead = false
@@ -49,24 +53,28 @@ func die():
 	is_dead = true
 
 func afk_behaviour(delta: float):
-	if follow_object: 
-		pass
-	elif not following or not should_follow: return
-	var follow: Node2D = follow_object
-	if not follow_object:
-		follow = following
-	
-	var dist = follow.global_position - global_position
+	if not following or not should_follow: return
+
+	var dist = following.global_position - global_position
 	var speed = walk_speed
 	var accel = walk_accel
-	if dist.x > follow_distance_run || dist.x < -follow_distance_run:
-		if not (follow_object and is_follow_object_walk_only):
+	var is_follow_object = following is not Actor or following.process_mode == ProcessMode.PROCESS_MODE_DISABLED
+	var is_far = dist.x > follow_distance_run || dist.x < -follow_distance_run
+	if is_follow_object:
+		if (not is_follow_object_walk_only and is_far) or is_follow_object_run:
 			speed = run_speed	
 			accel = run_accel
+	elif is_far:
+		speed = run_speed	
+		accel = run_accel
+		
+	var follow_dist = follow_distance 
+	if is_follow_object:
+		follow_dist = follow_object_minimum
 	
 	if is_jumping:
 		velocity.x = move_toward(velocity.x, sign(velocity.x) * speed, accel * speed * delta)
-	elif dist.x > follow_distance || dist.x < -follow_distance:
+	elif dist.x > follow_dist || dist.x < -follow_dist:
 		velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)

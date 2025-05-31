@@ -7,6 +7,7 @@ class_name Door extends Node2D
 @export var max_offset: float = 10.0 
 @export var follow_strength: float = 1.0 
 @export var open_eyes_on_first_target = false
+signal within_range_solo
 signal within_range
 signal wants_to_enter
 
@@ -52,6 +53,9 @@ func _on_enter_area_body_entered(body: Node2D) -> void:
 		$AnimationPlayer.play("within_range")
 		within_range.emit()
 		is_within_range = true
+		
+	elif not body.following or body.following is not Actor or body.following.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
+		within_range_solo.emit()
 
 
 func _on_enter_area_body_exited(_body: Node2D) -> void:

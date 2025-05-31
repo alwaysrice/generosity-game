@@ -50,7 +50,13 @@ class PressActionErrand extends Errand:
 		commercial_player.stop()
 		playwright.play()
 	
+class LeaveLevelAloneErrand extends Errand: 
+	var door: Door
+	var actor: Actor
+	func complete():
+		pass
 
+		
 class PlayAnimationErrand extends Errand: 
 	var animation: String
 	var last_animation = ""
@@ -134,6 +140,17 @@ func toggle_no_switch():
 	else:
 		push_errand(NoSwitchErrand.new())
 
+func leave_level_alone_errand(actor: NodePath, door: NodePath, command = ""):
+	var errand = push_errand(LeaveLevelAloneErrand.new())
+	errand.actor = get_node(actor)
+	errand.door = get_node(door)
+	print("Trying to leave")
+
+	errand.door.within_range_solo.connect(func(): 
+		errand.actor.visible = false
+		errand.actor.process_mode = ProcessMode.PROCESS_MODE_DISABLED
+		errand.force_complete()
+		, CONNECT_ONE_SHOT)
 		
 func press_action_errand(action: String):
 	var errand = push_errand(PressActionErrand.new())

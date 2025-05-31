@@ -13,6 +13,8 @@ func no_player():
 	%Cat.velocity = Vector2.ZERO
 	
 func switch_player(who: Actor = null) -> Actor:
+	if %Witch.process_mode == ProcessMode.PROCESS_MODE_DISABLED or %Cat.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
+		return null
 	if !who:
 		assert(%Cat.is_player != %Witch.is_player)
 		%Cat.is_player = !%Cat.is_player
@@ -84,8 +86,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			$Cutscenes.play_animation_errand(&"hints/cannot-switch")
 			return
 		var new_player = switch_player()
-		new_player.following.velocity = Vector2.ZERO
-		new_player._on_switch(new_player.following)
+		if not new_player:
+			return
+		if new_player.following is Actor:
+			new_player.following.velocity = Vector2.ZERO
+			new_player._on_switch(new_player.following)
+		else:
+			new_player._on_switch(null)
 		
 		
 func _process(_delta: float) -> void:
@@ -125,3 +132,5 @@ func _on_enter_door(door: Door):
 			parent.level.add_child(new_level)
 		, CONNECT_ONE_SHOT)
 		
+func _on_lone_chara_enter_door():
+	pass
