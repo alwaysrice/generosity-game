@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmu22ofvmxccq"]
+
+[ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_jj2ks"]
+[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_xk2na"]
+
+[sub_resource type="Gradient" id="Gradient_5ed0x"]
+offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
+colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ieu3r"]
+gradient = SubResource("Gradient_5ed0x")
+fill_from = Vector2(0, 0.236467)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj6vk"]
+size = Vector2(2693, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58x37"]
+size = Vector2(81.5, 1702.5)
+
+[node name="Corridor" instance=ExtResource("1_jj2ks")]
+
+[node name="Graphics" parent="." index="3"]
+modulate = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
+position = Vector2(1, -1074)
+scale = Vector2(34.3437, 26.9219)
+texture = SubResource("GradientTexture2D_ieu3r")
+centered = false
+
+[node name="Witch" parent="Graphics/Characters" index="0"]
+position = Vector2(107, 575)
+should_follow = true
+is_player = true
+
+[node name="Cat" parent="Graphics/Characters" index="1"]
+position = Vector2(56, 493)
+should_follow = true
+
+[node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="0"]
+position = Vector2(1152, 614.5)
+shape = SubResource("RectangleShape2D_cj6vk")
+
+[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors/CollisionShape2D" index="0"]
+offset_left = -1346.0
+offset_top = -39.0
+offset_right = 1346.0
+offset_bottom = 41.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
+position = Vector2(2941, 143)
+shape = SubResource("RectangleShape2D_cj6vk")
+
+[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors/CollisionShape2D2" index="0"]
+offset_left = -1346.0
+offset_top = -39.0
+offset_right = 1346.0
+offset_bottom = 41.0
+
+[node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="0"]
+position = Vector2(-39, -195)
+shape = SubResource("RectangleShape2D_58x37")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
+position = Vector2(2199, -195)
+shape = SubResource("RectangleShape2D_58x37")
+
+[node name="DoorRight" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
+z_as_relative = false
+position = Vector2(2127, 433)
+destination = "uid://b0004maoqvjhj"
+target = NodePath("../../Characters/Witch")
+open_eyes_on_first_target = true
+
+[node name="DoorRight2" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
+z_as_relative = false
+position = Vector2(2127, -36)
+destination = "uid://d2mkct7qra8ke"
+target = NodePath("../../Characters/Witch")
+open_eyes_on_first_target = true
+
+[node name="DoorLeft" parent="Graphics/Objects" index="4" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
+z_as_relative = false
+position = Vector2(76, 433)
+scale = Vector2(-1, 1)
+destination = "uid://crqnw7r70ikhe"
+target = NodePath("../../Characters/Witch")
+open_eyes_on_first_target = true

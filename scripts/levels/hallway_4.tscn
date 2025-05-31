@@ -1,30 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://crqnw7r70ikhe"]
+[gd_scene load_steps=9 format=3 uid="uid://b0004maoqvjhj"]
 
-[ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_mscvx"]
-[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_uq5ip"]
+[ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
+[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_up58g"]
 
-[sub_resource type="Gradient" id="Gradient_mscvx"]
+[sub_resource type="Gradient" id="Gradient_ivuxg"]
 offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
 colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr3cq"]
-gradient = SubResource("Gradient_mscvx")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7kdxl"]
+gradient = SubResource("Gradient_ivuxg")
 fill_from = Vector2(0, 0.236467)
 fill_to = Vector2(0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xc6j"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oghp1"]
 size = Vector2(485, 79)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mscvx"]
-size = Vector2(1809, 79)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxa"]
+size = Vector2(1573, 79)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v0w1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ds0mx"]
 size = Vector2(81.5, 1702.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq5ip"]
-size = Vector2(326, 94)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3padw"]
+size = Vector2(562, 94)
 
-[node name="Hallway3" instance=ExtResource("1_mscvx")]
+[node name="Hallway4" instance=ExtResource("1_ivuxg")]
 
 [node name="Graphics" parent="." index="3"]
 modulate = Color(0, 0, 0, 1)
@@ -32,7 +32,7 @@ modulate = Color(0, 0, 0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
 scale = Vector2(34.3437, 26.9219)
-texture = SubResource("GradientTexture2D_tr3cq")
+texture = SubResource("GradientTexture2D_7kdxl")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0"]
@@ -41,7 +41,7 @@ should_follow = true
 is_player = true
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(52, 493)
+position = Vector2(54, 492)
 should_follow = true
 
 [node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -56,17 +56,17 @@ offset_bottom = 655.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
 position = Vector2(208.5, 614.5)
-shape = SubResource("RectangleShape2D_8xc6j")
+shape = SubResource("RectangleShape2D_oghp1")
 
 [node name="ColorRect3" type="ColorRect" parent="Graphics/Objects/Floors" index="2"]
-offset_left = 773.0
+offset_left = 1012.0
 offset_top = 575.0
 offset_right = 2583.0
 offset_bottom = 655.0
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="3"]
-position = Vector2(1678.5, 614.5)
-shape = SubResource("RectangleShape2D_mscvx")
+position = Vector2(1796.5, 614.5)
+shape = SubResource("RectangleShape2D_euhxa")
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
 collision_layer = 8
@@ -74,30 +74,23 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="0"]
 position = Vector2(-39, -195)
-shape = SubResource("RectangleShape2D_5v0w1")
+shape = SubResource("RectangleShape2D_ds0mx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
 position = Vector2(2199, -195)
-shape = SubResource("RectangleShape2D_5v0w1")
+shape = SubResource("RectangleShape2D_ds0mx")
 
 [node name="Gaps" type="Area2D" parent="Graphics/Objects" index="2"]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="0"]
-position = Vector2(613, 621)
-shape = SubResource("RectangleShape2D_uq5ip")
+position = Vector2(731, 621)
+shape = SubResource("RectangleShape2D_3padw")
 
-[node name="DoorRight" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_uq5ip")]
-z_as_relative = false
-position = Vector2(2127, 433)
-destination = "uid://cmu22ofvmxccq"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
-
-[node name="DoorLeft" parent="Graphics/Objects" index="4" node_paths=PackedStringArray("target") instance=ExtResource("2_uq5ip")]
+[node name="DoorLeft" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_up58g")]
 z_as_relative = false
 position = Vector2(76, 433)
 scale = Vector2(-1, 1)
-destination = "uid://d2mkct7qra8ke"
+destination = "uid://cmu22ofvmxccq"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
