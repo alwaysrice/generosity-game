@@ -69,38 +69,38 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Interface/BlackOverlay:color")
+tracks/3/path = NodePath("Interface/Hint:text")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
+"update": 1,
+"values": ["Press “X” to switch characters"]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Interface/BlackOverlay:visible")
+tracks/4/path = NodePath("Graphics/Characters/Witch:follow_object")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [null]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Interface/Hint:text")
+tracks/5/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Press “X” to switch characters"]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
@@ -124,7 +124,7 @@ layer = 100
 [node name="BlackOverlay" type="ColorRect" parent="Interface"]
 offset_right = 1152.0
 offset_bottom = 651.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="Dialogue" type="Label" parent="Interface"]
@@ -159,6 +159,7 @@ z_index = 1
 unique_name_in_owner = true
 position = Vector2(474, 371)
 following = NodePath("../Cat")
+is_player = true
 
 [node name="Cat" parent="Graphics/Characters" node_paths=PackedStringArray("following") instance=ExtResource("3_jol3n")]
 unique_name_in_owner = true

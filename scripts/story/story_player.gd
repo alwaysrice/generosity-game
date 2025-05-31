@@ -170,7 +170,7 @@ func cage_unlock_errand(cage: NodePath):
 		)
 	pause()
 		
-func approach_errand(actor: NodePath, point: NodePath, radius = 10):
+func approach_errand(actor: NodePath, point: NodePath, radius = 30):
 	var errand = push_errand(ApproachErrand.new())
 	errand.actor = get_node(actor)
 	errand.body = get_node(point)

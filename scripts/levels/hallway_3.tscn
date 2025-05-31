@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://crqnw7r70ikhe"]
+[gd_scene load_steps=15 format=3 uid="uid://crqnw7r70ikhe"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_mscvx"]
 [ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_uq5ip"]
+[ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_tr3cq"]
+[ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_8xc6j"]
 
 [sub_resource type="Gradient" id="Gradient_mscvx"]
 offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
@@ -24,10 +26,142 @@ size = Vector2(81.5, 1702.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq5ip"]
 size = Vector2(326, 94)
 
-[node name="Hallway3" instance=ExtResource("1_mscvx")]
+[sub_resource type="Animation" id="Animation_w203f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(591, 236)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera:position_smoothing_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Interface/Hint:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Press “X” to switch characters"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphics/Characters/Witch:follow_object")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Graphics/Characters/Witch:is_player")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
+_data = {
+&"RESET": SubResource("Animation_w203f")
+}
+
+[sub_resource type="Animation" id="Animation_g8vyo"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Characters/Witch:is_player")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Characters/Witch:follow_object")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1209, 532),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":null)
+, null]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cutscenes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.166667, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["24", true],
+"method": &"play_dialogue"
+}, {
+"args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Objects/Markers/Marker2D"), 30],
+"method": &"approach_errand"
+}, {
+"args": ["25", true],
+"method": &"play_dialogue"
+}, {
+"args": ["fly", NodePath("../HintsAnimator"), "hints/fly"],
+"method": &"press_action_while_animating_errand"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cio35"]
+_data = {
+&"scene": SubResource("Animation_g8vyo")
+}
+
+[node name="Hallway3" instance=ExtResource("1_mscvx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
@@ -38,7 +172,6 @@ centered = false
 [node name="Witch" parent="Graphics/Characters" index="0"]
 position = Vector2(108, 575)
 should_follow = true
-is_player = true
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(52, 493)
@@ -101,3 +234,23 @@ scale = Vector2(-1, 1)
 destination = "uid://d2mkct7qra8ke"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
+
+[node name="Markers" type="Node2D" parent="Graphics/Objects" index="5"]
+
+[node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
+position = Vector2(418, 565)
+
+[node name="Node2D" type="Node2D" parent="Graphics/Objects/Markers" index="1"]
+position = Vector2(1209, 532)
+
+[node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
+target = NodePath("../Graphics/Characters/Witch")
+
+[node name="Cutscenes" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_w203f"),
+&"hints": ExtResource("3_tr3cq"),
+&"story": SubResource("AnimationLibrary_cio35"),
+&"trans": ExtResource("4_8xc6j")
+}
+autoplay = "story/scene"

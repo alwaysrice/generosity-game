@@ -122,19 +122,15 @@ _data = {
 
 [node name="Hallway" instance=ExtResource("1_317sn")]
 
-[node name="BlackOverlay" parent="Interface" index="0"]
-color = Color(0, 0, 0, 0)
-
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
 scale = Vector2(34.3437, 26.9219)
 texture = SubResource("GradientTexture2D_c8mji")
 centered = false
 
-[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("follow_object")]
+[node name="Witch" parent="Graphics/Characters" index="0"]
 position = Vector2(93, 575)
 should_follow = true
-follow_object = NodePath("")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(52, 493)
