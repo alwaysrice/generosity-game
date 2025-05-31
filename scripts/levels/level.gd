@@ -68,8 +68,16 @@ func _ready() -> void:
 	%Camera.limit_right = int(bounds.size.x)
 	%Camera.limit_bottom = int(bounds.size.y) 
 	
+	cutscenes.animation_finished.connect(func(anim: String): 
+		if anim == "trans/enter_level":
+			if cutscenes.has_animation("story/scene"):
+				cutscenes.play("story/scene")
+		, CONNECT_ONE_SHOT)
+	
 	is_once = true
-
+	
+	
+	
 func _unhandled_input(event: InputEvent) -> void:		
 	if event.is_action_pressed(&"switch_character") && not $Cutscenes.is_in_cutscene() :
 		if not $Cutscenes.can_switch_with_hint():

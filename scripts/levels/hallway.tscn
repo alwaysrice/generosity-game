@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi25syp4pbcfj"]
+[gd_scene load_steps=13 format=3 uid="uid://bi25syp4pbcfj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_317sn"]
 [ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_5ed0x"]
+[ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_fo831"]
+[ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_a7ttg"]
 
 [sub_resource type="Gradient" id="Gradient_5ed0x"]
 offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
@@ -18,10 +20,110 @@ size = Vector2(2693, 79)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8mji"]
 size = Vector2(81.5, 1702.5)
 
-[node name="Level" instance=ExtResource("1_317sn")]
+[sub_resource type="Animation" id="Animation_w203f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(591, 236)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera:position_smoothing_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
+_data = {
+&"RESET": SubResource("Animation_w203f")
+}
+
+[sub_resource type="Animation" id="Animation_d1j2a"]
+length = 0.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cutscenes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.0666667, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Markers/Marker2D"), 100],
+"method": &"approach_errand"
+}, {
+"args": [],
+"method": &"toggle_no_switch"
+}, {
+"args": ["21", true],
+"method": &"play_dialogue"
+}, {
+"args": ["run", NodePath("../HintsAnimator"), "hints/run"],
+"method": &"press_action_while_animating_errand"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Characters/Witch:follow_object")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1209, 532),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":null)
+, null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Characters/Witch:is_player")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4t1rw"]
+_data = {
+&"scene": SubResource("Animation_d1j2a")
+}
+
+[node name="Hallway" instance=ExtResource("1_317sn")]
+
+[node name="BlackOverlay" parent="Interface" index="0"]
+color = Color(0, 0, 0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
@@ -29,10 +131,10 @@ scale = Vector2(34.3437, 26.9219)
 texture = SubResource("GradientTexture2D_c8mji")
 centered = false
 
-[node name="Witch" parent="Graphics/Characters" index="0"]
+[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("follow_object")]
 position = Vector2(93, 575)
 should_follow = true
-is_player = true
+follow_object = NodePath("")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(52, 493)
@@ -79,5 +181,22 @@ destination = "uid://dirhpaeoq4yqm"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
 
+[node name="Markers" type="Node2D" parent="Graphics" index="3"]
+
+[node name="Marker2D" type="Marker2D" parent="Graphics/Markers" index="0"]
+position = Vector2(349, 565)
+
+[node name="Node2D" type="Node2D" parent="Graphics/Markers" index="1"]
+position = Vector2(1209, 532)
+
 [node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")
+
+[node name="Cutscenes" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_w203f"),
+&"hints": ExtResource("3_fo831"),
+&"story": SubResource("AnimationLibrary_4t1rw"),
+&"trans": ExtResource("4_a7ttg")
+}
+autoplay = "story/scene"

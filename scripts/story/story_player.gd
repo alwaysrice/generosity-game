@@ -25,16 +25,27 @@ class NoSwitchErrand extends Errand:
 
 class ApproachErrand extends Errand:
 	var actor: Actor
-	var body: Actor
+	var body: Node2D
+	var radius = 10
 	func is_done() -> bool:
-		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, actor.item_magnet_radius+body.item_magnet_radius)
+		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, radius)
+	func complete():
+		playwright.play()
 		
 class PressActionErrand extends Errand:
 	var action: String
+	var repeat =0
 	var commercial_animation = ""
 	var commercial_player: AnimationPlayer
+	var input = false
 	func is_done() -> bool:
-		return Input.is_action_just_pressed(action)
+		input = input or Input.is_action_just_pressed(action)
+		var animation = commercial_player.get_animation(commercial_animation)
+		if animation.loop_mode == Animation.LoopMode.LOOP_NONE:
+			if input and repeat >= 1:
+				return true
+			return false
+		return input
 	func complete():
 		commercial_player.stop()
 		playwright.play()
@@ -129,13 +140,25 @@ func press_action_errand(action: String):
 	errand.action = action
 	pause()
 	
-func press_action_while_animating_errand(action: String, player: NodePath, animation: String):
+func press_action_while_animating_errand(action: String, player: NodePath, anim: String):
 	pause()
 	var errand = push_errand(PressActionErrand.new())
 	errand.action = action
-	errand.commercial_animation = animation
+	errand.commercial_animation = anim
 	errand.commercial_player = get_node(player)
 	errand.commercial_player.play(errand.commercial_animation)
+	var animation: Animation = errand.commercial_player.get_animation(anim)
+	if animation.loop_mode == Animation.LoopMode.LOOP_NONE:
+		var repeat = func(a: String, callback: Callable):
+			if a == anim:
+				errand.repeat+=1
+				errand.commercial_player.play(errand.commercial_animation)
+				errand.commercial_player.animation_finished.connect(func(a: String): 
+					callback.call(a, callback)
+				, CONNECT_ONE_SHOT)
+		errand.commercial_player.animation_finished.connect(func(a: String): 
+			repeat.call(a, repeat)
+			, CONNECT_ONE_SHOT)
 
 	
 
@@ -147,10 +170,11 @@ func cage_unlock_errand(cage: NodePath):
 		)
 	pause()
 		
-func approach_errand(actor: NodePath, body: NodePath):
+func approach_errand(actor: NodePath, point: NodePath, radius = 10):
 	var errand = push_errand(ApproachErrand.new())
 	errand.actor = get_node(actor)
-	errand.body = get_node(body)
+	errand.body = get_node(point)
+	errand.radius = radius
 	pause()
 	
 func use_item_errand(actor: NodePath, item_name: String):
@@ -169,7 +193,11 @@ func has_key_errand(actor: NodePath):
 	pause()
 
 func is_in_cutscene() -> bool:
-	return (active and is_playing()) or not has_dialogue_ended
+	var value = false
+	for errand in errand_list:
+		if errand is ApproachErrand:
+			value = true
+	return value or (active and is_playing()) or not has_dialogue_ended
 	
 
 func _ready() -> void:
@@ -191,6 +219,8 @@ func _ready() -> void:
 		play())
 	dialogue_line_ended.connect(func():
 		)
+		
+	
 
 func _animate_dialogue(on_finished_line: Callable):
 	dialogue_label.visible_characters = 0
@@ -227,6 +257,7 @@ func pause_until_approach(actor: Actor, body: Area2D):
 	body.overlaps_body(actor)
 		
 func play_dialogue(dialogue_idx: String, paused: bool = true):
+	print("dialogue starasdfasdf")
 	if paused:
 		pause()
 	current_dialogue = dialogue_idx

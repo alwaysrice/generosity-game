@@ -66,6 +66,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Interface/BlackOverlay:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Interface/BlackOverlay:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Interface/Hint:text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Press “X” to switch characters"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
 _data = {
@@ -88,7 +124,7 @@ layer = 100
 [node name="BlackOverlay" type="ColorRect" parent="Interface"]
 offset_right = 1152.0
 offset_bottom = 651.0
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Dialogue" type="Label" parent="Interface"]
@@ -154,3 +190,8 @@ char_speed = 17.715
 dialogue_label = NodePath("../Interface/Dialogue")
 dialogues_file = "res://scripts/story/dialogues.txt"
 metadata/_custom_type_script = "uid://bh53gm8u73bnh"
+
+[node name="HintsAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"hints": ExtResource("6_4dbv1")
+}
