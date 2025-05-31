@@ -1,5 +1,7 @@
 class_name Level extends Node2D
 
+var has_entered_through_door = false
+
 func switch_witch(): switch_player(%Witch)
 	
 func no_player():
@@ -38,7 +40,6 @@ func get_bounds() -> Rect2:
 			rect.size.x = max(child.global_position.x + child.texture.get_size().x * child.scale.x, rect.size.x)
 			rect.size.y = max(child.global_position.y + child.texture.get_size().y * child.scale.y, rect.size.y)
 	return rect
-
 	
 func _ready() -> void:
 	if not $Cutscenes.active:
@@ -52,6 +53,11 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Key:
 			child.body_entered.connect(_on_key_body_entered)
+			
+	for child in $Graphics/Objects.get_children():
+		if child is Door:
+			child.wants_to_enter.connect(func(): _on_enter_door(child))
+			
 	print(bounds)
 	assert(%Camera)
 	%Camera.limit_left = int(bounds.position.x)
@@ -88,3 +94,13 @@ func _on_deadzone_body_entered(body: Node2D) -> void:
 
 func _on_death(actor: Actor) -> void:
 	actor.revive()
+
+func _on_enter_door(door: Door):
+	var new_level = GameManager.load_level(door.destination)
+	var parent = get_parent()
+	if parent and parent.get_parent() is Game:
+		parent = parent.get_parent()
+		if parent.level.get_child(0):
+			parent.level.remove_child(parent.level.get_child(0))
+		parent.level.add_child(new_level)
+	

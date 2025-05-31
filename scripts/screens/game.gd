@@ -1,5 +1,11 @@
 class_name Game extends Node2D
 
+@onready var level = %Level
+@export_file("*.tscn") var initial_level
+
+func _ready() -> void:
+	if initial_level:
+		level.add_child(GameManager.load_level(initial_level))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_fullscreen"):
@@ -19,3 +25,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			%PauseMenu.close()
 		get_tree().root.set_input_as_handled()
+		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxnm6d7dnxepy"]
+[gd_scene load_steps=13 format=3 uid="uid://dxnm6d7dnxepy"]
 
 [ext_resource type="Script" uid="uid://ce2iffhf148sw" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="2_jol3n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="4_4dbv1"]
 [ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="4_w203f"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="6_4dbv1"]
+[ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="6_m4kgq"]
 
 [sub_resource type="Environment" id="Environment_w203f"]
 background_mode = 3
@@ -116,6 +117,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Background" type="Node2D" parent="Graphics"]
 
 [node name="Characters" type="Node2D" parent="Graphics"]
+z_index = 1
 
 [node name="Witch" parent="Graphics/Characters" node_paths=PackedStringArray("following") instance=ExtResource("2_jol3n")]
 unique_name_in_owner = true
@@ -128,10 +130,13 @@ position = Vector2(619, 329)
 following = NodePath("../Witch")
 
 [node name="Objects" type="Node2D" parent="Graphics"]
+z_index = 2
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(550, -476)
+limit_smoothed = true
+position_smoothing_enabled = true
 script = ExtResource("4_w203f")
 offset_target = Vector2(0, -100)
 metadata/_custom_type_script = "uid://c8w74orqtuwe7"
@@ -139,7 +144,8 @@ metadata/_custom_type_script = "uid://c8w74orqtuwe7"
 [node name="Cutscenes" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
-&"hints": ExtResource("6_4dbv1")
+&"hints": ExtResource("6_4dbv1"),
+&"trans": ExtResource("6_m4kgq")
 }
 script = ExtResource("4_4dbv1")
 dialogue_auto = false

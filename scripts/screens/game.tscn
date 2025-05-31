@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwo4k6ylianwv"]
+[gd_scene load_steps=3 format=3 uid="uid://bwo4k6ylianwv"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://dirhpaeoq4yqm" path="res://scripts/levels/cage_room.tscn" id="2_841p7"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
 
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_fc0e3")
+initial_level = "uid://dirhpaeoq4yqm"
 metadata/_custom_type_script = "uid://wrr21c6qeca4"
 
-[node name="CageRoom" parent="." instance=ExtResource("2_841p7")]
-process_mode = 1
+[node name="Level" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
