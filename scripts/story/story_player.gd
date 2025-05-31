@@ -38,6 +38,7 @@ class PressActionErrand extends Errand:
 	func complete():
 		commercial_player.stop()
 		playwright.play()
+	
 
 class PlayAnimationErrand extends Errand: 
 	var animation: String
@@ -47,6 +48,8 @@ class PlayAnimationErrand extends Errand:
 		playwright.play(last_animation)
 		playwright.seek(last_seek, true, true)
 
+class PlayMusicErrand extends Errand: 
+	var music: AudioStreamPlayer		
 		
 func is_allowing_switching_during_play():
 	for errand in errand_list:
@@ -79,6 +82,30 @@ func play_animation_errand(animation: String):
 			errand.force_complete()
 		, CONNECT_ONE_SHOT)
 
+var music_tween: Tween
+func toggle_music_errand(music: NodePath, is_singleton: bool = true, last_music_fade = 1.0):
+	var music_node: AudioStreamPlayer = get_node(music)
+	var remove = null
+	for errand in errand_list:
+		if errand is PlayMusicErrand and (errand.music == music_node or is_singleton):
+			remove = errand
+	if remove:
+		errand_list.erase(remove)
+		music_tween = create_tween()
+		var last_volume = remove.music.volume_db
+		music_tween.tween_property(remove.music, "volume_db", 0, last_music_fade)
+		music_tween.tween_callback(func():
+			remove.music.stop()
+			remove.music.volume_db = last_volume
+			if remove.music != music_node or is_singleton:
+				var errand = push_errand(PlayMusicErrand.new())
+				errand.music = music_node
+				errand.music.play()
+			)
+	else:
+		var errand = push_errand(PlayMusicErrand.new())
+		errand.music = music_node
+		errand.music.play()
 
 func can_switch_with_hint():
 	for errand in errand_list:
