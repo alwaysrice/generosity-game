@@ -67,7 +67,7 @@ func afk_behaviour(delta: float):
 		velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)
-	if %CliffDetector.is_colliding():
+	if %CliffDetector.is_colliding() and velocity.x != 0.0:
 		try_jump()
 	
 func turn_left():

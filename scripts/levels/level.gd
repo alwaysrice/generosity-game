@@ -2,6 +2,7 @@ class_name Level extends Node2D
 
 var has_entered_through_door = false
 @onready var cutscenes = $Cutscenes
+@onready var camera = $Camera
 
 func switch_witch(): switch_player(%Witch)
 	
@@ -45,10 +46,9 @@ func get_bounds() -> Rect2:
 var is_once = true
 func _ready() -> void:
 	if not is_once: return
-	if not $Cutscenes.active:
+	if not cutscenes.active or not cutscenes.autoplay:
 		%Witch.should_follow = true
 		%Cat.should_follow = true
-		$Graphics.modulate = Color.WHITE
 		$%Camera.zoom = Vector2.ONE
 		switch_witch()
 		
