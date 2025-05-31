@@ -67,6 +67,7 @@ shape = SubResource("RectangleShape2D_c8mji")
 [node name="DoorRight" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_5ed0x")]
 z_as_relative = false
 position = Vector2(2127, 433)
+destination = "uid://d2mkct7qra8ke"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
 
