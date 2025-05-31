@@ -1,6 +1,7 @@
 class_name Level extends Node2D
 
 var has_entered_through_door = false
+@onready var cutscenes = $Cutscenes
 
 func switch_witch(): switch_player(%Witch)
 	
@@ -41,7 +42,9 @@ func get_bounds() -> Rect2:
 			rect.size.y = max(child.global_position.y + child.texture.get_size().y * child.scale.y, rect.size.y)
 	return rect
 	
+var is_once = true
 func _ready() -> void:
+	if not is_once: return
 	if not $Cutscenes.active:
 		%Witch.should_follow = true
 		%Cat.should_follow = true
@@ -64,6 +67,8 @@ func _ready() -> void:
 	%Camera.limit_top = int(bounds.position.y) 
 	%Camera.limit_right = int(bounds.size.x)
 	%Camera.limit_bottom = int(bounds.size.y) 
+	
+	is_once = true
 
 func _unhandled_input(event: InputEvent) -> void:		
 	if event.is_action_pressed(&"switch_character") && not $Cutscenes.is_in_cutscene() :
@@ -98,9 +103,17 @@ func _on_death(actor: Actor) -> void:
 func _on_enter_door(door: Door):
 	var new_level = GameManager.load_level(door.destination)
 	var parent = get_parent()
-	if parent and parent.get_parent() is Game:
-		parent = parent.get_parent()
-		if parent.level.get_child(0):
-			parent.level.remove_child(parent.level.get_child(0))
-		parent.level.add_child(new_level)
 	
+	if parent and parent.get_parent() is Game:
+		new_level.ready.connect(func():
+			new_level.cutscenes.play("trans/enter_level")
+		, CONNECT_ONE_SHOT)
+		cutscenes.play("trans/leave_level")
+		cutscenes.animation_finished.connect(func(anim: StringName):
+			parent = parent.get_parent()
+			if parent.level.get_child(0):
+				parent.level.remove_child(parent.level.get_child(0))
+			new_level.request_ready()
+			parent.level.add_child(new_level)
+		, CONNECT_ONE_SHOT)
+		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dirhpaeoq4yqm"]
+[gd_scene load_steps=23 format=3 uid="uid://dirhpaeoq4yqm"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_6qos5"]
 [ext_resource type="AudioStream" uid="uid://dfg3lnmn5wi3q" path="res://audio/music 1-1.mp3" id="2_6qos5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cregrgnxpyg2y" path="res://images/Cage Room/Title.PNG" id="9_1plbr"]
 [ext_resource type="AnimationLibrary" uid="uid://bt7ecrqgfjfhf" path="res://scripts/story/cage.res" id="10_w06w3"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="11_nwlfr"]
+[ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="12_vupn1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jrjqo"]
 
@@ -201,11 +202,11 @@ zoom = Vector2(1.8, 1.8)
 
 [node name="Cutscenes" parent="." index="6"]
 unique_name_in_owner = true
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"cage": ExtResource("10_w06w3"),
-&"hints": ExtResource("11_nwlfr")
+&"hints": ExtResource("11_nwlfr"),
+&"trans": ExtResource("12_vupn1")
 }
 autoplay = "cage/opening"
 
