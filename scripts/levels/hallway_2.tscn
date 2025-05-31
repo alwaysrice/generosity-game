@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_j8t4y"]
 [ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_i7yjk"]
 
-[sub_resource type="Gradient" id="Gradient_5ed0x"]
+[sub_resource type="Gradient" id="Gradient_j8t4y"]
 offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
 colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jd5nn"]
-gradient = SubResource("Gradient_5ed0x")
+gradient = SubResource("Gradient_j8t4y")
 fill_from = Vector2(0, 0.236467)
 fill_to = Vector2(0, 1)
 
@@ -121,6 +121,7 @@ shape = SubResource("RectangleShape2D_c8afb")
 [node name="DoorRight" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_i7yjk")]
 z_as_relative = false
 position = Vector2(2127, 433)
+destination = "uid://crqnw7r70ikhe"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
 

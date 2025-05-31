@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://crqnw7r70ikhe"]
+
+[ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_mscvx"]
+[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_uq5ip"]
+
+[sub_resource type="Gradient" id="Gradient_5ed0x"]
+offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
+colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr3cq"]
+gradient = SubResource("Gradient_5ed0x")
+fill_from = Vector2(0, 0.236467)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xc6j"]
+size = Vector2(485, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mscvx"]
+size = Vector2(1573, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v0w1"]
+size = Vector2(81.5, 1702.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq5ip"]
+size = Vector2(562, 94)
+
+[node name="Hallway3" instance=ExtResource("1_mscvx")]
+
+[node name="Graphics" parent="." index="3"]
+modulate = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
+position = Vector2(1, -1074)
+scale = Vector2(34.3437, 26.9219)
+texture = SubResource("GradientTexture2D_tr3cq")
+centered = false
+
+[node name="Witch" parent="Graphics/Characters" index="0"]
+position = Vector2(108, 575)
+
+[node name="Cat" parent="Graphics/Characters" index="1"]
+position = Vector2(52, 493)
+
+[node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors" index="0"]
+offset_left = -32.0
+offset_top = 575.0
+offset_right = 449.0
+offset_bottom = 655.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
+position = Vector2(208.5, 614.5)
+shape = SubResource("RectangleShape2D_8xc6j")
+
+[node name="ColorRect3" type="ColorRect" parent="Graphics/Objects/Floors" index="2"]
+offset_left = 1012.0
+offset_top = 575.0
+offset_right = 2583.0
+offset_bottom = 655.0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="3"]
+position = Vector2(1796.5, 614.5)
+shape = SubResource("RectangleShape2D_mscvx")
+
+[node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="0"]
+position = Vector2(-39, -195)
+shape = SubResource("RectangleShape2D_5v0w1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
+position = Vector2(2199, -195)
+shape = SubResource("RectangleShape2D_5v0w1")
+
+[node name="Gaps" type="Area2D" parent="Graphics/Objects" index="2"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="0"]
+position = Vector2(731, 621)
+shape = SubResource("RectangleShape2D_uq5ip")
+
+[node name="DoorRight" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_uq5ip")]
+z_as_relative = false
+position = Vector2(2127, 433)
+target = NodePath("../../Characters/Witch")
+open_eyes_on_first_target = true
+
+[node name="DoorLeft" parent="Graphics/Objects" index="4" node_paths=PackedStringArray("target") instance=ExtResource("2_uq5ip")]
+z_as_relative = false
+position = Vector2(76, 433)
+scale = Vector2(-1, 1)
+destination = "uid://d2mkct7qra8ke"
+target = NodePath("../../Characters/Witch")
+open_eyes_on_first_target = true
