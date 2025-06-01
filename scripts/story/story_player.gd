@@ -289,6 +289,19 @@ func play_auto_dialogue(dialogue_idx: String, paused: bool = true):
 		, CONNECT_ONE_SHOT)
 	play_dialogue(dialogue_idx, paused)
 
+
+func _input(event: InputEvent) -> void:
+	if current_dialogue != "" and not dialogue_auto and event.is_action_released("continue_dialogue"): 
+		if dialogue_allow_interrupt:
+			_dialogue_tween.custom_step(char_speed); 
+		if not _dialogue_tween.is_valid():
+			if current_line < get_dialogue_lines().size()-1:
+				current_line += 1
+				next_dialogue()
+			else: 
+				dialogue_ended.emit()
+		get_viewport().set_input_as_handled()
+		
 		
 func _process(_delta: float) -> void:
 	var inactive_errand = []
@@ -299,12 +312,4 @@ func _process(_delta: float) -> void:
 	for errand in inactive_errand:
 		errand_list.erase(errand)
 	
-	if current_dialogue != "" and not dialogue_auto and Input.is_action_just_released("continue_dialogue"): 
-		if dialogue_allow_interrupt:
-			_dialogue_tween.custom_step(char_speed); 
-		if not _dialogue_tween.is_valid():
-			if current_line < get_dialogue_lines().size()-1:
-				current_line += 1
-				next_dialogue()
-			else: 
-				dialogue_ended.emit()
+	

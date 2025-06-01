@@ -45,7 +45,6 @@ next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
 
 [node name="MouseLine" parent="." index="2"]
 visible = false
-default_color = Color(0.470588, 0.839216, 0.964706, 1)
 
 [node name="AnimationPlayer" parent="." index="3"]
 autoplay = "constellation/enter"

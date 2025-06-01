@@ -30,7 +30,6 @@ var last_floor_stepped_pos := Vector2.ZERO
 var last_direction := 0
 var items = []
 var action_history = []
-@export var follow_object: Node2D 
 @export var follow_object_minimum = 5
 @export var is_follow_object_walk_only = true
 @export var is_follow_object_run = false
@@ -39,6 +38,8 @@ signal on_death(actor: Actor)
 
 func follow(who: NodePath):
 	following = get_node_or_null(who)
+	if not following:
+		velocity = Vector2.ZERO
 
 func revive():
 	is_dead = false
@@ -110,6 +111,7 @@ func _physics_process(delta: float) -> void:
 		
 	if is_player and (Input.is_action_just_pressed("jump") or should_jump):
 		try_jump()
+		get_viewport().set_input_as_handled()
 	if not is_flying:
 		velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
 
@@ -165,7 +167,7 @@ func get_new_animation() -> String:
 		else:
 			animation_new = "jump"
 			
-	if Input.is_action_pressed("run") and animation_new == "walk":
+	if is_player and Input.is_action_pressed("run") and animation_new == "walk":
 		animation_new = "run"
 	return animation_new
 

@@ -22,6 +22,8 @@ func get_connected_points_pos():
 		connected_points_pos.append(point.global_position)
 	return connected_points
 	
+func can_start():
+	return $MouseLine.visible
 	
 func enter():
 	$MouseLine.visible = true
@@ -40,7 +42,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if has_connected_all: return
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and can_start():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			queue_redraw()
 			if event.pressed:

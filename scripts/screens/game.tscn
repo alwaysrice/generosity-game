@@ -11,9 +11,10 @@ metadata/_custom_type_script = "uid://wrr21c6qeca4"
 
 [node name="Level" type="Node2D" parent="."]
 unique_name_in_owner = true
+process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 8
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_eow3j")]
 unique_name_in_owner = true

@@ -7,7 +7,7 @@ func _ready() -> void:
 	if initial_level:
 		level.add_child(GameManager.load_level(initial_level))
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"toggle_fullscreen"):
 		var mode := DisplayServer.window_get_mode()
 		if mode == DisplayServer.WINDOW_MODE_FULLSCREEN or \
@@ -25,4 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			%PauseMenu.close()
 		get_tree().root.set_input_as_handled()
+		
+	elif event.is_action_pressed("debug_2"):
+		get_tree().change_scene_to_file("res://scripts/puzzle/big_dipper.tscn")
 		

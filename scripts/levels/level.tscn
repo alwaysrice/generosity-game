@@ -143,7 +143,7 @@ volume_db = 21.649
 autoplay = true
 
 [node name="Interface" type="CanvasLayer" parent="."]
-layer = 100
+layer = 2
 
 [node name="BlackOverlay" type="ColorRect" parent="Interface"]
 offset_right = 1152.0

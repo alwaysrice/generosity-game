@@ -1,21 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://dh71g61cm8k44"]
+[gd_scene load_steps=12 format=3 uid="uid://dh71g61cm8k44"]
 
 [ext_resource type="Script" uid="uid://damj0g2vvtawx" path="res://scripts/ui/pause_menu.gd" id="2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj522"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 3
-border_width_right = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kxcwv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7hgd"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7hgd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dj522"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj522"]
+bg_color = Color(0, 0, 0, 0.066)
+
 [sub_resource type="Theme" id="Theme_dj522"]
-Button/styles/focus = SubResource("StyleBoxFlat_dj522")
-Button/styles/hover = SubResource("StyleBoxFlat_s7hgd")
+Button/styles/focus = SubResource("StyleBoxEmpty_kxcwv")
+Button/styles/hover = SubResource("StyleBoxEmpty_s7hgd")
 Button/styles/normal = SubResource("StyleBoxEmpty_dj522")
+Button/styles/pressed = SubResource("StyleBoxFlat_dj522")
 
 [sub_resource type="LabelSettings" id="LabelSettings_kxcwv"]
 font_size = 20

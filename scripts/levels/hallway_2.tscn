@@ -105,11 +105,14 @@ tracks/0/path = NodePath("Cutscenes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.1, 0.233333, 0.433333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.0333333, 0.133333, 0.2, 0.266667, 0.466667, 0.533334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"toggle_no_switch"
+}, {
+"args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Objects/Markers/Marker2D2"), 30],
+"method": &"approach_errand"
 }, {
 "args": ["22", true],
 "method": &"play_dialogue"
@@ -131,7 +134,7 @@ tracks/1/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667, 0.366667),
+"times": PackedFloat32Array(0.0333333, 0.533334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -143,9 +146,12 @@ tracks/2/path = NodePath("Graphics/Characters/Witch")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.233333, 0.366667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.133333, 0.266667, 0.400001),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [NodePath("../../Objects/Markers/Marker2D2")],
+"method": &"follow"
+}, {
 "args": [NodePath("../../Objects/Markers/Marker2D")],
 "method": &"follow"
 }, {
@@ -160,6 +166,9 @@ _data = {
 }
 
 [node name="Hallway2" instance=ExtResource("1_j8t4y")]
+
+[node name="Graphics" parent="." index="3"]
+modulate = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
@@ -264,6 +273,9 @@ open_eyes_on_first_target = true
 
 [node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
 position = Vector2(734, 558)
+
+[node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+position = Vector2(302, 558)
 
 [node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
+[ext_resource type="Texture2D" uid="uid://cfk7vuqfandbj" path="res://images/Constellation Mini-Game/Star-Light.PNG" id="2_gr3rb"]
 
 [sub_resource type="Curve" id="Curve_gr3rb"]
 _data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0, 0.0, 0, 0, Vector2(1, 0.0200803), 0.0, 0.0, 0, 0]
@@ -44,6 +45,7 @@ volume_db = -9.857
 [node name="DeathEffect" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 30
+texture = ExtResource("2_gr3rb")
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.96
@@ -54,9 +56,8 @@ initial_velocity_min = 150.0
 initial_velocity_max = 150.0
 orbit_velocity_min = 1.0
 orbit_velocity_max = 1.0
-scale_amount_min = 10.0
-scale_amount_max = 10.0
-color = Color(0, 0, 0, 1)
+scale_amount_min = 0.5
+scale_amount_max = 0.5
 
 [node name="SwitchEffect" type="CPUParticles2D" parent="."]
 emitting = false

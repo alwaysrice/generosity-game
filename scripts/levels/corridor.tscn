@@ -31,8 +31,6 @@ centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0"]
 position = Vector2(107, 575)
-should_follow = true
-is_player = true
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(56, 493)
