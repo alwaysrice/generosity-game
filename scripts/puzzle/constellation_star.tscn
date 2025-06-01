@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7oxlno1hultj"]
+
+[ext_resource type="Texture2D" uid="uid://cmuiqygusngsj" path="res://images/Constellation Mini-Game/Shadow-Glow.PNG" id="1_8abvl"]
+[ext_resource type="Script" uid="uid://sut62ua5a58j" path="res://scripts/puzzle/constellation_star.gd" id="1_otciw"]
+[ext_resource type="Texture2D" uid="uid://cfk7vuqfandbj" path="res://images/Constellation Mini-Game/Star-Light.PNG" id="2_otciw"]
+
+[node name="ConstellationStar" type="Node2D"]
+script = ExtResource("1_otciw")
+
+[node name="Unactivated" type="Sprite2D" parent="."]
+texture = ExtResource("1_8abvl")
+
+[node name="Activated" type="Sprite2D" parent="."]
+texture = ExtResource("2_otciw")

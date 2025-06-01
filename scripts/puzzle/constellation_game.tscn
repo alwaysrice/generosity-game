@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://crthfjmprjleu"]
+
+[ext_resource type="Script" uid="uid://c8rt54m0kr016" path="res://scripts/puzzle/constellation.gd" id="1_wckjp"]
+[ext_resource type="Texture2D" uid="uid://kev8eaxyqptr" path="res://images/Constellation Mini-Game/C1-Background.PNG" id="2_645h7"]
+[ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_645h7"]
+
+[sub_resource type="Gradient" id="Gradient_645h7"]
+offsets = PackedFloat32Array(0.132075, 0.232704, 0.396226, 0.528302, 0.622642, 0.735849, 0.90566, 1)
+colors = PackedColorArray(0.470588, 0.839216, 0.964706, 1, 0.305882, 0.690196, 0.870588, 1, 0.181647, 0.560314, 0.780235, 1, 0.0470588, 0.419608, 0.682353, 1, 0.027451, 0.362567, 0.64492, 1, 0.00392157, 0.294118, 0.6, 1, 0.00784314, 0.196078, 0.505882, 1, 0.0588235, 0.0941176, 0.407843, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hny7o"]
+
+[node name="ConstellationGame" type="Node2D" node_paths=PackedStringArray("start")]
+script = ExtResource("1_wckjp")
+start = NodePath("Sprites/Stars/ConstellationStar")
+line_color = Color(0.745098, 0.898039, 1, 1)
+glow_gradient = SubResource("Gradient_645h7")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Background" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+z_index = 1
+texture = ExtResource("2_645h7")
+centered = false
+
+[node name="Stars" type="Node2D" parent="Sprites"]
+unique_name_in_owner = true
+z_index = 2
+
+[node name="ConstellationStar" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(600, 240)
+next = [NodePath("../ConstellationStar2")]
+
+[node name="ConstellationStar2" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(924, 324)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar3")]
+
+[node name="ConstellationStar3" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(1058, 486)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar4")]
+
+[node name="ConstellationStar4" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(1238, 682)
+next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
+ender = true
+
+[node name="ConstellationStar5" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(1196, 896)
+next = [NodePath("../ConstellationStar7"), NodePath("../ConstellationStar4")]
+
+[node name="ConstellationStar6" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(1706, 846)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar7"), NodePath("../ConstellationStar4")]
+
+[node name="ConstellationStar7" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
+position = Vector2(1548, 1052)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar6"), NodePath("../ConstellationStar5")]
+
+[node name="Lines" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="MouseLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_hny7o")
+points = PackedVector2Array(0, 0, 0, 0)
+width = 4.0
+default_color = Color(0.470588, 0.839216, 0.964706, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[connection signal="connected_all" from="." to="." method="_on_connected_all"]

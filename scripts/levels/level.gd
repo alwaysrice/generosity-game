@@ -72,7 +72,7 @@ func _ready() -> void:
 	
 	cutscenes.animation_finished.connect(func(anim: String): 
 		if anim == "trans/enter_level":
-			if cutscenes.has_animation("story/scene"):
+			if cutscenes.autoplay == "story/scene":
 				cutscenes.play("story/scene")
 		, CONNECT_ONE_SHOT)
 	
