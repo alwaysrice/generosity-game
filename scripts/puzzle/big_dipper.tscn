@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6ia5qlgqaaga"]
+
+[ext_resource type="PackedScene" uid="uid://crthfjmprjleu" path="res://scripts/puzzle/constellation_game.tscn" id="1_4vwo1"]
+[ext_resource type="Texture2D" uid="uid://kev8eaxyqptr" path="res://images/Constellation Mini-Game/C1-Background.PNG" id="2_30otc"]
+[ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_e0dh6"]
+
+[node name="BigDipper" node_paths=PackedStringArray("start") instance=ExtResource("1_4vwo1")]
+start = NodePath("Sprites/Stars/ConstellationStar")
+
+[node name="Background" parent="Sprites" index="0"]
+texture = ExtResource("2_30otc")
+
+[node name="ConstellationStar" parent="Sprites/Stars" index="0" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(600, 240)
+next = [NodePath("../ConstellationStar2")]
+
+[node name="ConstellationStar2" parent="Sprites/Stars" index="1" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(924, 324)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar3")]
+
+[node name="ConstellationStar3" parent="Sprites/Stars" index="2" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1058, 486)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar4")]
+
+[node name="ConstellationStar4" parent="Sprites/Stars" index="3" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1238, 682)
+next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
+ender = true
+
+[node name="ConstellationStar5" parent="Sprites/Stars" index="4" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1196, 896)
+next = [NodePath("../ConstellationStar4"), NodePath("../ConstellationStar7")]
+
+[node name="ConstellationStar6" parent="Sprites/Stars" index="5" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1706, 846)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar4"), NodePath("../ConstellationStar7")]
+
+[node name="ConstellationStar7" parent="Sprites/Stars" index="6" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1548, 1052)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
+
+[node name="MouseLine" parent="." index="2"]
+visible = false
+default_color = Color(0.470588, 0.839216, 0.964706, 1)
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "constellation/enter"

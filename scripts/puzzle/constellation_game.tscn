@@ -1,46 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://crthfjmprjleu"]
+[gd_scene load_steps=7 format=3 uid="uid://crthfjmprjleu"]
 
 [ext_resource type="Script" uid="uid://c8rt54m0kr016" path="res://scripts/puzzle/constellation.gd" id="1_wckjp"]
-[ext_resource type="Texture2D" uid="uid://kev8eaxyqptr" path="res://images/Constellation Mini-Game/C1-Background.PNG" id="2_645h7"]
-[ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_645h7"]
+[ext_resource type="AnimationLibrary" uid="uid://cq2l26cystw3n" path="res://scripts/puzzle/constellation.res" id="2_wckjp"]
 
 [sub_resource type="Gradient" id="Gradient_645h7"]
 offsets = PackedFloat32Array(0.132075, 0.232704, 0.396226, 0.528302, 0.622642, 0.735849, 0.90566, 1)
 colors = PackedColorArray(0.470588, 0.839216, 0.964706, 1, 0.305882, 0.690196, 0.870588, 1, 0.181647, 0.560314, 0.780235, 1, 0.0470588, 0.419608, 0.682353, 1, 0.027451, 0.362567, 0.64492, 1, 0.00392157, 0.294118, 0.6, 1, 0.00784314, 0.196078, 0.505882, 1, 0.0588235, 0.0941176, 0.407843, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hny7o"]
-
-[sub_resource type="Animation" id="Animation_645h7"]
-resource_name = "success"
-
-[sub_resource type="Animation" id="Animation_qequc"]
-resource_name = "enter"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.733333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.833333),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"enter"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_hny7o"]
 length = 0.001
@@ -56,17 +23,38 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Stars:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Stars:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hny7o"]
 _data = {
-&"RESET": SubResource("Animation_hny7o"),
-&"enter": SubResource("Animation_qequc"),
-&"success": SubResource("Animation_645h7")
+&"RESET": SubResource("Animation_hny7o")
 }
 
-[node name="ConstellationGame" type="Node2D" node_paths=PackedStringArray("start")]
+[node name="ConstellationGame" type="Node2D"]
 script = ExtResource("1_wckjp")
-start = NodePath("Sprites/Stars/ConstellationStar")
 line_color = Color(0.745098, 0.898039, 1, 1)
 glow_gradient = SubResource("Gradient_645h7")
 
@@ -76,45 +64,11 @@ scale = Vector2(0.5, 0.5)
 [node name="Background" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
 z_index = 1
-texture = ExtResource("2_645h7")
 centered = false
 
 [node name="Stars" type="Node2D" parent="Sprites"]
 unique_name_in_owner = true
 z_index = 2
-
-[node name="ConstellationStar" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(600, 240)
-next = [NodePath("../ConstellationStar2")]
-
-[node name="ConstellationStar2" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(924, 324)
-scale = Vector2(-1, 1)
-next = [NodePath("../ConstellationStar3")]
-
-[node name="ConstellationStar3" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(1058, 486)
-scale = Vector2(-1, 1)
-next = [NodePath("../ConstellationStar4")]
-
-[node name="ConstellationStar4" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(1238, 682)
-next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
-ender = true
-
-[node name="ConstellationStar5" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(1196, 896)
-next = [NodePath("../ConstellationStar7"), NodePath("../ConstellationStar4")]
-
-[node name="ConstellationStar6" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(1706, 846)
-scale = Vector2(-1, 1)
-next = [NodePath("../ConstellationStar7"), NodePath("../ConstellationStar4")]
-
-[node name="ConstellationStar7" parent="Sprites/Stars" node_paths=PackedStringArray("next") instance=ExtResource("3_645h7")]
-position = Vector2(1548, 1052)
-scale = Vector2(-1, 1)
-next = [NodePath("../ConstellationStar6"), NodePath("../ConstellationStar5")]
 
 [node name="Lines" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -133,7 +87,8 @@ end_cap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_hny7o")
+&"": SubResource("AnimationLibrary_hny7o"),
+&"constellation": ExtResource("2_wckjp")
 }
 autoplay = "enter"
 

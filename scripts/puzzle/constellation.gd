@@ -24,6 +24,8 @@ func get_connected_points_pos():
 	
 	
 func enter():
+	$MouseLine.visible = true
+	has_connected_all = false
 	for star: ConstellationStar in %Stars.get_children():
 		star.unactivate()
 	connected_points.append(start)
@@ -37,6 +39,7 @@ func _ready() -> void:
 		star.unactivate()
 
 func _input(event: InputEvent) -> void:
+	if has_connected_all: return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			queue_redraw()
@@ -56,6 +59,7 @@ func _input(event: InputEvent) -> void:
 				for i in removal_list:
 					%Lines.remove_child(i)
 					i.queue_free()
+
 
 
 func get_gapped_line(start: Vector2, end: Vector2, gap: float) -> PackedVector2Array:
@@ -100,8 +104,10 @@ func check_for_point() -> bool:
 				%MouseLine.set_point_position(0, point.global_position)
 			
 			connect_point.emit(point)
-			if connected_points.size() == points.size() and not point.can_end_in_next():
+			if (connected_points.size() == points.size() and not point.can_end_in_next()) \
+			or (point.ender and connected_points.size() >= points.size()):
 				connected_all.emit()
+				print("COMPLETE")
 				has_connected_all = true
 			return true
 	return false
@@ -114,6 +120,15 @@ func _process(delta: float) -> void:
 		#queue_redraw()
 	if has_connected_all:
 		queue_redraw()
-
+		
+func end():
+	$MouseLine.visible = false
+	connected_points.clear()
+	var removal_list = %Lines.get_children()
+	for i in removal_list:
+		%Lines.remove_child(i)
+		i.queue_free()
+		
 func _on_connected_all() -> void:
 	is_dragging = false
+	$AnimationPlayer.play("constellation/success")

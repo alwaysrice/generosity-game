@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgvnh3e4i8bnk"]
+
+[ext_resource type="PackedScene" uid="uid://crthfjmprjleu" path="res://scripts/puzzle/constellation_game.tscn" id="1_3ffvg"]
+[ext_resource type="Texture2D" uid="uid://jpp831n32bm7" path="res://images/Constellation Mini-Game/C2-Background.PNG" id="2_vpjgw"]
+[ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_6jhhr"]
+
+[node name="Cassiopeia" node_paths=PackedStringArray("start") instance=ExtResource("1_3ffvg")]
+start = NodePath("Sprites/Stars/ConstellationStar")
+
+[node name="Background" parent="Sprites" index="0"]
+texture = ExtResource("2_vpjgw")
+
+[node name="ConstellationStar" parent="Sprites/Stars" index="0" node_paths=PackedStringArray("next") instance=ExtResource("3_6jhhr")]
+position = Vector2(572, 376)
+next = [NodePath("../ConstellationStar2")]
+
+[node name="ConstellationStar2" parent="Sprites/Stars" index="1" node_paths=PackedStringArray("next") instance=ExtResource("3_6jhhr")]
+position = Vector2(874, 678)
+next = [NodePath("../ConstellationStar3")]
+
+[node name="ConstellationStar3" parent="Sprites/Stars" index="2" node_paths=PackedStringArray("next") instance=ExtResource("3_6jhhr")]
+position = Vector2(1190, 596)
+scale = Vector2(-1, 1)
+next = [NodePath("../ConstellationStar4")]
+
+[node name="ConstellationStar4" parent="Sprites/Stars" index="3" node_paths=PackedStringArray("next") instance=ExtResource("3_6jhhr")]
+position = Vector2(1448, 920)
+next = [NodePath("../ConstellationStar5")]
+
+[node name="ConstellationStar5" parent="Sprites/Stars" index="4" instance=ExtResource("3_6jhhr")]
+position = Vector2(1734, 594)
+scale = Vector2(-1, 1)
+ender = true
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "constellation/enter"
