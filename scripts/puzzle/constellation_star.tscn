@@ -1,14 +1,110 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7oxlno1hultj"]
+[gd_scene load_steps=8 format=3 uid="uid://c7oxlno1hultj"]
 
 [ext_resource type="Texture2D" uid="uid://cmuiqygusngsj" path="res://images/Constellation Mini-Game/Shadow-Glow.PNG" id="1_8abvl"]
 [ext_resource type="Script" uid="uid://sut62ua5a58j" path="res://scripts/puzzle/constellation_star.gd" id="1_otciw"]
 [ext_resource type="Texture2D" uid="uid://cfk7vuqfandbj" path="res://images/Constellation Mini-Game/Star-Light.PNG" id="2_otciw"]
 
+[sub_resource type="Animation" id="Animation_otciw"]
+resource_name = "activate"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Activated:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Activated:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.533333),
+"transitions": PackedFloat32Array(1, 0.0769465, 1),
+"update": 2,
+"values": [Vector2(0.4, 0.4), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tvyiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Activated:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Activated:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8xdyb"]
+resource_name = "hint"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Unactivated:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Unactivated:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.533333),
+"transitions": PackedFloat32Array(1, 0.0769465, 1),
+"update": 2,
+"values": [Vector2(0.4, 0.4), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xdyb"]
+_data = {
+&"RESET": SubResource("Animation_tvyiv"),
+&"activate": SubResource("Animation_otciw"),
+&"hint": SubResource("Animation_8xdyb")
+}
+
 [node name="ConstellationStar" type="Node2D"]
 script = ExtResource("1_otciw")
 
 [node name="Unactivated" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_8abvl")
 
 [node name="Activated" type="Sprite2D" parent="."]
 texture = ExtResource("2_otciw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8xdyb")
+}

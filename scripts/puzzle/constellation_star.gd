@@ -19,12 +19,14 @@ func unactivate():
 func activate():
 	$Unactivated.visible = false
 	$Activated.visible = true
+	$AnimationPlayer.play("activate")
 	hint_next()
 	
 func hint_next():
 	for i in next:
 		if i.get_node("Activated").visible:
 			continue
+		i.get_node("AnimationPlayer").play("hint")
 		i.get_node("Unactivated").visible = true
 		i.get_node("Activated").visible = false
 

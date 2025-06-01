@@ -22,14 +22,19 @@ func get_connected_points_pos():
 		connected_points_pos.append(point.global_position)
 	return connected_points
 	
-func _ready() -> void:
-	assert(%Stars.get_children().size() > 1)
+	
+func enter():
 	for star: ConstellationStar in %Stars.get_children():
 		star.unactivate()
 	connected_points.append(start)
 	start.activate()
 	%MouseLine.set_point_position(0, Vector2.ZERO)
 	%MouseLine.set_point_position(1, Vector2.ZERO)
+	
+func _ready() -> void:
+	assert(%Stars.get_children().size() > 1)
+	for star: ConstellationStar in %Stars.get_children():
+		star.unactivate()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -46,7 +51,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				is_dragging = false 
 				connected_points.clear()
-				_ready()
+				enter()
 				var removal_list = %Lines.get_children()
 				for i in removal_list:
 					%Lines.remove_child(i)
