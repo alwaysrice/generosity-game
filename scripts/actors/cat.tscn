@@ -63,7 +63,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"flight",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -195,36 +195,40 @@ height = 32.499
 script = ExtResource("2_gsgih")
 jump_speed = -650.0
 
-[node name="Graphics" parent="." index="0"]
-position = Vector2(0, 74.375)
+[node name="Offset" type="Marker2D" parent="." index="0"]
+unique_name_in_owner = true
+position = Vector2(2, -18)
+
+[node name="Graphics" parent="." index="1"]
+position = Vector2(-4, -8.625)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"fall"
+animation = &"flight"
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]
 position = Vector2(9, 6.625)
 target_position = Vector2(10, 7)
 
-[node name="PlatformDetector" parent="." index="1"]
-position = Vector2(9.53674e-07, 79.375)
+[node name="PlatformDetector" parent="." index="2"]
+position = Vector2(-4, -3.625)
 
-[node name="FloorDetector" parent="." index="2"]
-position = Vector2(0, 67.5)
+[node name="FloorDetector" parent="." index="3"]
+position = Vector2(-4, -15.5)
 
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(3.75, 70)
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(-0.25, -13)
 rotation = -1.5703
 shape = SubResource("CapsuleShape2D_dmers")
 
-[node name="JumpSound" parent="." index="4"]
-position = Vector2(0, 73.75)
+[node name="JumpSound" parent="." index="5"]
+position = Vector2(-4, -9.25)
 
-[node name="DeathEffect" parent="." index="6"]
-position = Vector2(0, 75)
+[node name="DeathEffect" parent="." index="7"]
+position = Vector2(-4, -8)
 
-[node name="SwitchEffect" parent="." index="7"]
-position = Vector2(0, 65)
+[node name="SwitchEffect" parent="." index="8"]
+position = Vector2(-4, -18)

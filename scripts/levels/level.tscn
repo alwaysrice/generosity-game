@@ -182,6 +182,8 @@ z_index = 1
 [node name="Witch" parent="Graphics/Characters" instance=ExtResource("2_jol3n")]
 unique_name_in_owner = true
 position = Vector2(474, 371)
+fly_jump_speed = -80.0
+fly_collision_offset = 26
 should_follow = true
 is_player = true
 

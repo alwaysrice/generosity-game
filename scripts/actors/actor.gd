@@ -62,6 +62,9 @@ func die():
 	graphics.modulate = Color.TRANSPARENT
 	is_dead = true
 
+func is_follow_object():
+	return following is not Actor or following.process_mode == ProcessMode.PROCESS_MODE_DISABLED
+
 func afk_behaviour(delta: float):
 	if not following or not should_follow or has_joined_other: return
 
@@ -94,11 +97,9 @@ func afk_behaviour(delta: float):
 		try_jump()
 	
 func turn_left():
-	velocity.x = 0
 	graphics.scale.x = -1
 	
 func turn_right():
-	velocity.x = 0
 	graphics.scale.x = 1
 	
 func _input(event):
@@ -136,9 +137,11 @@ func _physics_process(delta: float) -> void:
 	# Turn around based on movement
 	if not is_zero_approx(velocity.x):
 		if velocity.x > 0.0:
-			turn_left()
-		else:
+			graphics.scale.x = 1
 			turn_right()
+		else:
+			graphics.scale.x = -1
+			turn_left()
 	
 	if is_player:
 		var speed = walk_speed
@@ -165,7 +168,7 @@ func _physics_process(delta: float) -> void:
 	
 	var animation := get_new_animation()
 	var sprite = $Graphics.get_child(0)
-	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying:
+	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other:
 		sprite.play(animation)
 		
 
