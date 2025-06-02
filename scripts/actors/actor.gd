@@ -24,6 +24,7 @@ var should_jump := false
 var is_jumping := false
 var is_flying := false
 var is_dead := false
+var prevent_movement := false
 
 var last_floor_stepped: StaticBody2D
 var last_floor_stepped_pos := Vector2.ZERO
@@ -33,13 +34,21 @@ var action_history = []
 @export var follow_object_minimum = 5
 @export var is_follow_object_walk_only = true
 @export var is_follow_object_run = false
+var is_joining = false
+var has_joined_other = false
 
+signal on_follow
+signal on_follow_close
 signal on_death(actor: Actor)
 
 func follow(who: NodePath):
 	following = get_node_or_null(who)
 	if not following:
 		velocity = Vector2.ZERO
+		
+func stop():
+	velocity = Vector2.ZERO
+	is_jumping = false
 
 func revive():
 	is_dead = false
@@ -54,7 +63,7 @@ func die():
 	is_dead = true
 
 func afk_behaviour(delta: float):
-	if not following or not should_follow: return
+	if not following or not should_follow or has_joined_other: return
 
 	var dist = following.global_position - global_position
 	var speed = walk_speed
@@ -77,8 +86,10 @@ func afk_behaviour(delta: float):
 		velocity.x = move_toward(velocity.x, sign(velocity.x) * speed, accel * speed * delta)
 	elif dist.x > follow_dist || dist.x < -follow_dist:
 		velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
+		on_follow.emit()
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)
+		on_follow_close.emit()
 	if %CliffDetector.is_colliding() and velocity.x != 0.0:
 		try_jump()
 	
@@ -91,12 +102,17 @@ func turn_right():
 	graphics.scale.x = 1
 	
 func _input(event):
+	if prevent_movement: return
 	if event.is_action_pressed("move_right"):
 		last_direction = 1
 	elif event.is_action_pressed("move_left"):
 		last_direction = -1
 		
+func get_sprite() -> AnimatedSprite2D: 
+	return graphics.get_child(0)
+		
 func get_input_direction():
+	if prevent_movement: return 0
 	var right = Input.is_action_pressed("move_right")
 	var left = Input.is_action_pressed("move_left")
 	if right and left:	return last_direction
@@ -112,9 +128,17 @@ func _physics_process(delta: float) -> void:
 	if is_player and (Input.is_action_just_pressed("jump") or should_jump):
 		try_jump()
 		get_viewport().set_input_as_handled()
-	if not is_flying:
+		
+	# Continously fall due to gravity 
+	if not is_flying and not has_joined_other:
 		velocity.y = minf(fall_speed_max, velocity.y + gravity * delta)
-
+	
+	# Turn around based on movement
+	if not is_zero_approx(velocity.x):
+		if velocity.x > 0.0:
+			turn_left()
+		else:
+			turn_right()
 	
 	if is_player:
 		var speed = walk_speed
@@ -125,14 +149,12 @@ func _physics_process(delta: float) -> void:
 	
 		var direction: float = get_input_direction() * speed * int(is_player)
 		velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
+	elif has_joined_other:
+		velocity = following.velocity
 	else:
 		afk_behaviour(delta)
 
-	if not is_zero_approx(velocity.x):
-		if velocity.x > 0.0:
-			graphics.scale.x = 1.0
-		else:
-			graphics.scale.x = -1.0
+
 
 	if $FloorDetector.is_colliding():
 		last_floor_stepped = $FloorDetector.get_collider()

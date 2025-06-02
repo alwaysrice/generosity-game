@@ -1,16 +1,24 @@
-[gd_scene load_steps=20 format=3 uid="uid://cyscyuyb1sryd"]
+[gd_scene load_steps=28 format=3 uid="uid://cyscyuyb1sryd"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_yiwue"]
 [ext_resource type="Script" uid="uid://ddp2oix5xwt5a" path="res://scripts/actors/cat.gd" id="2_gsgih"]
 [ext_resource type="Texture2D" uid="uid://vavhrd0j2ail" path="res://images/actors/Idle Cycle - Cat/ICC-01.PNG" id="3_n8whl"]
+[ext_resource type="Texture2D" uid="uid://bcihlgndphtlt" path="res://images/actors/Fly Cycle - Cat/FCC-01.PNG" id="4_c351w"]
 [ext_resource type="Texture2D" uid="uid://yawl6mpaehr7" path="res://images/actors/Idle Cycle - Cat/ICC-02.PNG" id="4_n8whl"]
 [ext_resource type="Texture2D" uid="uid://u3blqdrovn1f" path="res://images/actors/Idle Cycle - Cat/ICC-03.PNG" id="5_ecv7l"]
+[ext_resource type="Texture2D" uid="uid://jx3jr4ur84l2" path="res://images/actors/Fly Cycle - Cat/FCC-02.PNG" id="5_y14h5"]
 [ext_resource type="Texture2D" uid="uid://sapa03qsdg3k" path="res://images/actors/Idle Cycle - Cat/ICC-04.PNG" id="6_juu8p"]
+[ext_resource type="Texture2D" uid="uid://ci2e0mtqny6f8" path="res://images/actors/Fly Cycle - Cat/FCC-03.PNG" id="6_svhu7"]
 [ext_resource type="Texture2D" uid="uid://cc7r608l2q3ba" path="res://images/actors/Idle Cycle - Cat/ICC-05.PNG" id="7_dd5wx"]
+[ext_resource type="Texture2D" uid="uid://hlh2xdm6art0" path="res://images/actors/Fly Cycle - Cat/FCC-04.PNG" id="7_fncxu"]
 [ext_resource type="Texture2D" uid="uid://dv8lqbhh14fk3" path="res://images/actors/Walk Cycle - Cat/WCC-01.png" id="8_dmers"]
+[ext_resource type="Texture2D" uid="uid://dt6qjmsdi3w20" path="res://images/actors/Fly Cycle - Cat/FCC-05.PNG" id="8_naisk"]
 [ext_resource type="Texture2D" uid="uid://ct6acg447vjew" path="res://images/actors/Walk Cycle - Cat/WCC-02.png" id="9_3ly87"]
+[ext_resource type="Texture2D" uid="uid://duel4mcvxr3d6" path="res://images/actors/Fly Cycle - Cat/FCC-06.PNG" id="9_ly8ii"]
 [ext_resource type="Texture2D" uid="uid://c28xrhowyumxc" path="res://images/actors/Walk Cycle - Cat/WCC-03.png" id="10_huwjw"]
+[ext_resource type="Texture2D" uid="uid://ml24cealy0uj" path="res://images/actors/Fly Cycle - Cat/FCC-07.PNG" id="10_om2wv"]
 [ext_resource type="Texture2D" uid="uid://c0e3m6hoknyyq" path="res://images/actors/Walk Cycle - Cat/WCC-04.png" id="11_4eg78"]
+[ext_resource type="Texture2D" uid="uid://clg6hlrhot6u" path="res://images/actors/Fly Cycle - Cat/FCC-08.PNG" id="11_u24n1"]
 [ext_resource type="Texture2D" uid="uid://dlrdgutu0my01" path="res://images/actors/Walk Cycle - Cat/WCC-05.png" id="12_gq7vp"]
 [ext_resource type="Texture2D" uid="uid://nvfm0ghl7cfj" path="res://images/actors/Walk Cycle - Cat/WCC-06.png" id="13_pcc80"]
 [ext_resource type="Texture2D" uid="uid://cf8e8kv2aybd3" path="res://images/actors/Walk Cycle - Cat/WCC-07.png" id="14_x7v0s"]
@@ -26,6 +34,35 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c351w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y14h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_svhu7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fncxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_naisk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ly8ii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_om2wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_u24n1")
+}],
+"loop": true,
+"name": &"flight",
 "speed": 5.0
 }, {
 "frames": [{
@@ -165,7 +202,7 @@ position = Vector2(0, 74.375)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"walk"
+animation = &"fall"
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]

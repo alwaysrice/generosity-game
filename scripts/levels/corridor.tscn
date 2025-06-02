@@ -20,17 +20,15 @@ size = Vector2(81.5, 1702.5)
 
 [node name="Corridor" instance=ExtResource("1_jj2ks")]
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
-
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
 position = Vector2(1, -1074)
 scale = Vector2(34.3437, 26.9219)
 texture = SubResource("GradientTexture2D_ieu3r")
 centered = false
 
-[node name="Witch" parent="Graphics/Characters" index="0"]
+[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(107, 575)
+following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(56, 493)

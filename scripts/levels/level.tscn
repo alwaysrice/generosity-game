@@ -179,10 +179,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Characters" type="Node2D" parent="Graphics"]
 z_index = 1
 
-[node name="Witch" parent="Graphics/Characters" node_paths=PackedStringArray("following") instance=ExtResource("2_jol3n")]
+[node name="Witch" parent="Graphics/Characters" instance=ExtResource("2_jol3n")]
 unique_name_in_owner = true
 position = Vector2(474, 371)
-following = NodePath("../Cat")
 should_follow = true
 is_player = true
 

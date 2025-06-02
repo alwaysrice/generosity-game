@@ -1,24 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://b68iki5mx8dwx"]
+[gd_scene load_steps=30 format=3 uid="uid://b68iki5mx8dwx"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
-[ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_f42kh"]
+[ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_2mx4y"]
 [ext_resource type="Texture2D" uid="uid://c47hqbnnuwte7" path="res://images/actors/Idle Cycle - Witch/ICW-01.PNG" id="3_gs3nu"]
-[ext_resource type="Texture2D" uid="uid://cl250b5pccn62" path="res://images/actors/Fly Cycle/FC-01.PNG" id="4_2mx4y"]
+[ext_resource type="Texture2D" uid="uid://ndgcx2m6r40x" path="res://images/actors/Fly Cycle - Witch/FCW-01.PNG" id="4_2mx4y"]
 [ext_resource type="Texture2D" uid="uid://cqsqwpx10cv5e" path="res://images/actors/Idle Cycle - Witch/ICW-02,10.PNG" id="4_jhf12"]
 [ext_resource type="Texture2D" uid="uid://cfbqqeckwm62n" path="res://images/actors/Idle Cycle - Witch/ICW-03,09.PNG" id="5_eeuds"]
-[ext_resource type="Texture2D" uid="uid://cyk84marjk5lh" path="res://images/actors/Fly Cycle/FC-02.PNG" id="5_s2nyq"]
+[ext_resource type="Texture2D" uid="uid://dpj6f5lqiy7fc" path="res://images/actors/Fly Cycle - Witch/FCW-02.PNG" id="5_s2nyq"]
 [ext_resource type="Texture2D" uid="uid://qt8qj2wvcwsd" path="res://images/actors/Idle Cycle - Witch/ICW-04,08.PNG" id="6_n1bwh"]
-[ext_resource type="Texture2D" uid="uid://cb8q853o320tn" path="res://images/actors/Fly Cycle/FC-03.PNG" id="6_wdllp"]
-[ext_resource type="Texture2D" uid="uid://by0kdglbc3tjs" path="res://images/actors/Fly Cycle/FC-04.PNG" id="7_f1g6m"]
+[ext_resource type="Texture2D" uid="uid://c34nmnfq2i3vg" path="res://images/actors/Fly Cycle - Witch/FCW-03.PNG" id="6_wdllp"]
+[ext_resource type="Texture2D" uid="uid://de48qatdk3ti7" path="res://images/actors/Fly Cycle - Witch/FCW-04.PNG" id="7_f1g6m"]
 [ext_resource type="Texture2D" uid="uid://dirv8sumaap87" path="res://images/actors/Idle Cycle - Witch/ICW-05-07.PNG" id="7_fw45v"]
-[ext_resource type="Texture2D" uid="uid://bgku2ydqxp5or" path="res://images/actors/Fly Cycle/FC-05.PNG" id="8_f6mda"]
+[ext_resource type="Texture2D" uid="uid://31qeygwmamxs" path="res://images/actors/Fly Cycle - Witch/FCW-05.PNG" id="8_f6mda"]
 [ext_resource type="Texture2D" uid="uid://cxscl4qu3n6ht" path="res://images/actors/Walk Cycle - Witch/WCW-01.png" id="8_uubtp"]
-[ext_resource type="Texture2D" uid="uid://djco2tvrei7ap" path="res://images/actors/Fly Cycle/FC-06.PNG" id="9_crrdt"]
+[ext_resource type="Texture2D" uid="uid://bvr8i7iniq3cj" path="res://images/actors/Fly Cycle - Witch/FCW-06.PNG" id="9_crrdt"]
 [ext_resource type="Texture2D" uid="uid://clyfehw62dl8q" path="res://images/actors/Walk Cycle - Witch/WCW-02.png" id="9_lexhh"]
 [ext_resource type="Texture2D" uid="uid://c847pgf7nsduw" path="res://images/actors/Walk Cycle - Witch/WCW-03.png" id="10_7yddc"]
-[ext_resource type="Texture2D" uid="uid://6xc56os4qwgw" path="res://images/actors/Fly Cycle/FC-07.PNG" id="10_n7a2s"]
+[ext_resource type="Texture2D" uid="uid://6qw52c7rvcoq" path="res://images/actors/Fly Cycle - Witch/FCW-07.PNG" id="10_n7a2s"]
 [ext_resource type="Texture2D" uid="uid://bdiskbe02sp6o" path="res://images/actors/Walk Cycle - Witch/WCW-04.png" id="11_2mx4y"]
-[ext_resource type="Texture2D" uid="uid://cnajtkt8xdhhy" path="res://images/actors/Fly Cycle/FC-08.PNG" id="11_wyi6x"]
+[ext_resource type="Texture2D" uid="uid://byq0yg8dkp5xp" path="res://images/actors/Fly Cycle - Witch/FCW-08.PNG" id="11_wyi6x"]
 [ext_resource type="Texture2D" uid="uid://dp06jbbepx042" path="res://images/actors/Walk Cycle - Witch/WCW-05.png" id="12_s2nyq"]
 [ext_resource type="Texture2D" uid="uid://caria6dlnu6cn" path="res://images/actors/Walk Cycle - Witch/WCW-06.png" id="13_wdllp"]
 [ext_resource type="Texture2D" uid="uid://dl1xe36giyvd3" path="res://images/actors/Walk Cycle - Witch/WCW-07.png" id="14_f1g6m"]
@@ -192,11 +192,14 @@ height = 136.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ks07l"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mx4y"]
+size = Vector2(40.1993, 3.49072)
+
 [node name="Witch" instance=ExtResource("1_mmq6v")]
-script = ExtResource("2_f42kh")
+script = ExtResource("2_2mx4y")
+fly_jump_speed = 30
 vertical_speed = 300.0
 vertical_accel = 6
-jump_speed = -600.0
 
 [node name="Graphics" parent="." index="0"]
 position = Vector2(0, -69)
@@ -206,7 +209,9 @@ use_parent_material = true
 position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"idle"
+animation = &"flight"
+frame = 6
+frame_progress = 0.0615947
 offset = Vector2(-140, -660)
 flip_h = true
 
@@ -243,8 +248,17 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="FlyTimer" type="Timer" parent="." index="10"]
-wait_time = 0.2
+wait_time = 0.8
 one_shot = true
+
+[node name="Broom" type="Area2D" parent="." index="11"]
+position = Vector2(-3.8147e-06, -50)
+rotation = -0.0964071
+collision_layer = 4
+
+[node name="BroomCollider" type="CollisionShape2D" parent="Broom" index="0"]
+position = Vector2(38.1123, 0.671729)
+shape = SubResource("RectangleShape2D_2mx4y")
 
 [connection signal="timeout" from="FlightTimer" to="." method="_on_flight_timer_timeout"]
 [connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]
