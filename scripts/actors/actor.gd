@@ -93,6 +93,7 @@ func afk_behaviour(delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * speed * delta)
 		on_follow_close.emit()
+		
 	if %CliffDetector.is_colliding() and velocity.x != 0.0:
 		try_jump()
 	
@@ -152,11 +153,17 @@ func _physics_process(delta: float) -> void:
 	
 		var direction: float = get_input_direction() * speed * int(is_player)
 		velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
+	
+	# If flying with other chara
 	elif has_joined_other:
 		velocity = following.velocity
+		if self is Cat:
+			global_position = following.graphics.get_node("Broom/Dest").global_position
+			global_position -= %Offset.position
+
+	# Other chara is the player
 	else:
 		afk_behaviour(delta)
-
 
 
 	if $FloorDetector.is_colliding():

@@ -218,7 +218,7 @@ height = 136.0
 
 [node name="Witch" instance=ExtResource("1_mmq6v")]
 script = ExtResource("2_2mx4y")
-fly_jump_speed = -80.0
+fly_jump_speed = -30.0
 vertical_speed = 300.0
 vertical_accel = 6
 fly_collision_offset = 26
@@ -247,7 +247,7 @@ target_position = Vector2(10, 7)
 unique_name_in_owner = true
 position = Vector2(-1, 19)
 rotation = -0.0964071
-collision_layer = 4
+collision_layer = 32
 
 [node name="Dest" type="Marker2D" parent="Graphics/Broom" index="0"]
 position = Vector2(43.2816, -0.837696)

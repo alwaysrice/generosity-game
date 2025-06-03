@@ -214,7 +214,8 @@ position = Vector2(9, 6.625)
 target_position = Vector2(10, 7)
 
 [node name="PlatformDetector" parent="." index="2"]
-position = Vector2(-4, -3.625)
+position = Vector2(0, -5)
+collide_with_areas = true
 
 [node name="FloorDetector" parent="." index="3"]
 position = Vector2(-4, -15.5)
