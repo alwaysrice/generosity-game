@@ -1,21 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0004maoqvjhj"]
+[gd_scene load_steps=17 format=3 uid="uid://b0004maoqvjhj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
+[ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_ds0mx"]
 [ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_up58g"]
+[ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_3padw"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_7kdxl"]
+[ext_resource type="Texture2D" uid="uid://cwh1xv2lsfp6y" path="res://images/Hallway Rooms/Hallway_Floor4.PNG" id="4_kedrn"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_oghp1"]
 
-[sub_resource type="Gradient" id="Gradient_ivuxg"]
-offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
-colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7kdxl"]
-gradient = SubResource("Gradient_ivuxg")
-fill_from = Vector2(0, 0.236467)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oghp1"]
-size = Vector2(485, 79)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0y2p"]
+size = Vector2(1085, 79)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euhxa"]
 size = Vector2(1573, 79)
@@ -24,7 +18,10 @@ size = Vector2(1573, 79)
 size = Vector2(81.5, 1702.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3padw"]
-size = Vector2(562, 94)
+size = Vector2(2692, 458)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4uvku"]
+size = Vector2(599, 94)
 
 [sub_resource type="Animation" id="Animation_w203f"]
 length = 0.001
@@ -172,17 +169,43 @@ _data = {
 
 [node name="Hallway4" instance=ExtResource("1_ivuxg")]
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
+[node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
+offset_left = 3.0
+offset_top = -301.0
+offset_right = 2697.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
-position = Vector2(1, -1074)
-scale = Vector2(34.3437, 26.9219)
-texture = SubResource("GradientTexture2D_7kdxl")
+[node name="Parallax2D" type="Parallax2D" parent="Graphics/Background" index="0"]
+scroll_scale = Vector2(0.09, 0.3)
+limit_begin = Vector2(0, -1e+07)
+limit_end = Vector2(1160, 1e+07)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D" index="0"]
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ds0mx")
 centered = false
 
-[node name="Witch" parent="Graphics/Characters" index="0"]
+[node name="Parallax2D2" type="Parallax2D" parent="Graphics/Background" index="1"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D2" index="0"]
+position = Vector2(0, -301)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_3padw")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="Graphics/Background" index="2"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D3" index="0"]
+position = Vector2(0, 575)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_kedrn")
+centered = false
+
+[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(108, 575)
+following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(54, 492)
@@ -192,24 +215,12 @@ should_follow = true
 collision_layer = 16
 collision_mask = 0
 
-[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors" index="0"]
-offset_left = -32.0
-offset_top = 575.0
-offset_right = 449.0
-offset_bottom = 655.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="0"]
+position = Vector2(508.5, 614.5)
+shape = SubResource("RectangleShape2D_d0y2p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
-position = Vector2(208.5, 614.5)
-shape = SubResource("RectangleShape2D_oghp1")
-
-[node name="ColorRect3" type="ColorRect" parent="Graphics/Objects/Floors" index="2"]
-offset_left = 1012.0
-offset_top = 575.0
-offset_right = 2583.0
-offset_bottom = 655.0
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="3"]
-position = Vector2(1796.5, 614.5)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
+position = Vector2(2436, 614.5)
 shape = SubResource("RectangleShape2D_euhxa")
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
@@ -221,15 +232,19 @@ position = Vector2(-39, -195)
 shape = SubResource("RectangleShape2D_ds0mx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
-position = Vector2(2199, -195)
+position = Vector2(2740, -195)
 shape = SubResource("RectangleShape2D_ds0mx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
+position = Vector2(1349, -522)
+shape = SubResource("RectangleShape2D_3padw")
 
 [node name="Gaps" type="Area2D" parent="Graphics/Objects" index="2"]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="0"]
-position = Vector2(731, 621)
-shape = SubResource("RectangleShape2D_3padw")
+position = Vector2(1350.5, 622)
+shape = SubResource("RectangleShape2D_4uvku")
 
 [node name="DoorLeft" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_up58g")]
 z_as_relative = false
@@ -251,6 +266,7 @@ position = Vector2(-107, 507)
 target = NodePath("../Graphics/Characters/Witch")
 
 [node name="Cutscenes" parent="." index="5"]
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_7kdxl"),

@@ -119,16 +119,16 @@ offset = Vector2(1494, 1454)
 position = Vector2(1494, 2810)
 texture = ExtResource("5_l5txh")
 
-[node name="Witch" parent="Graphics/Characters" index="0"]
+[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 texture_filter = 4
 material = SubResource("ShaderMaterial_jrjqo")
 position = Vector2(708, 519)
-fly_jump_speed = -30.0
-fly_collision_offset = 26
+following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(1292, 477)
 follow_distance = 120
+should_follow = true
 
 [node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
 collision_layer = 16

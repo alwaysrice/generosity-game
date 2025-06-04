@@ -1,24 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://bi25syp4pbcfj"]
+[gd_scene load_steps=15 format=3 uid="uid://bi25syp4pbcfj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_317sn"]
+[ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_4t1rw"]
 [ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_5ed0x"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_fo831"]
+[ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_h56n8"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_a7ttg"]
-
-[sub_resource type="Gradient" id="Gradient_5ed0x"]
-offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
-colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_c8mji"]
-gradient = SubResource("Gradient_5ed0x")
-fill_from = Vector2(0, 0.236467)
-fill_to = Vector2(0, 1)
+[ext_resource type="Texture2D" uid="uid://cmugpwc2ac6bh" path="res://images/Hallway Rooms/Hallway_Floor1.PNG" id="4_mnim6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ed0x"]
-size = Vector2(2693, 79)
+size = Vector2(2852, 79)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8mji"]
-size = Vector2(81.5, 1702.5)
+size = Vector2(81.5, 1408.13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5fu"]
+size = Vector2(2692, 458)
 
 [sub_resource type="Animation" id="Animation_w203f"]
 length = 0.001
@@ -129,17 +126,43 @@ _data = {
 [node name="Hint" parent="Interface" index="2"]
 text = "Hold \"Shift\" whole moving to run"
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
+[node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
+offset_left = 3.0
+offset_top = -301.0
+offset_right = 2697.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
-position = Vector2(1, -1074)
-scale = Vector2(34.3437, 26.9219)
-texture = SubResource("GradientTexture2D_c8mji")
+[node name="Parallax2D" type="Parallax2D" parent="Graphics/Background" index="0"]
+scroll_scale = Vector2(0.09, 0.3)
+limit_begin = Vector2(0, -1e+07)
+limit_end = Vector2(1160, 1e+07)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D" index="0"]
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4t1rw")
 centered = false
 
-[node name="Witch" parent="Graphics/Characters" index="0"]
+[node name="Parallax2D2" type="Parallax2D" parent="Graphics/Background" index="1"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D2" index="0"]
+position = Vector2(0, -301)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_h56n8")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="Graphics/Background" index="2"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D3" index="0"]
+position = Vector2(0, 575)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_mnim6")
+centered = false
+
+[node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(93, 575)
+following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(52, 493)
@@ -150,30 +173,28 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="0"]
-position = Vector2(1152, 614.5)
+position = Vector2(1346, 614.5)
 shape = SubResource("RectangleShape2D_5ed0x")
-
-[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors/CollisionShape2D" index="0"]
-offset_left = -1346.0
-offset_top = -39.0
-offset_right = 1346.0
-offset_bottom = 41.0
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="0"]
-position = Vector2(-39, -195)
+position = Vector2(-39, -82.875)
 shape = SubResource("RectangleShape2D_c8mji")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
-position = Vector2(2199, -195)
+position = Vector2(2740, -122.938)
 shape = SubResource("RectangleShape2D_c8mji")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
+position = Vector2(1349, -522)
+shape = SubResource("RectangleShape2D_7p5fu")
 
 [node name="DoorRight" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_5ed0x")]
 z_as_relative = false
-position = Vector2(2127, 433)
+position = Vector2(2626, 433)
 destination = "uid://d2mkct7qra8ke"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
@@ -186,7 +207,7 @@ destination = "uid://dirhpaeoq4yqm"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
 
-[node name="Markers" type="Node2D" parent="Graphics" index="3"]
+[node name="Markers" type="Node2D" parent="Graphics" index="4"]
 
 [node name="Marker2D" type="Marker2D" parent="Graphics/Markers" index="0"]
 position = Vector2(424, 558)
@@ -195,6 +216,7 @@ position = Vector2(424, 558)
 target = NodePath("../Graphics/Characters/Witch")
 
 [node name="Cutscenes" parent="." index="5"]
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_fo831"),

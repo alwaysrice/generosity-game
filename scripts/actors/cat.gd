@@ -63,7 +63,7 @@ func afk_behaviour(delta: float):
 			try_jump()
 	else:
 		if is_jumping:
-			velocity.x = move_toward(velocity.x, sign(velocity.x) * speed, accel * speed * delta)
+			velocity.x = move_toward(velocity.x, sign(velocity.x) * run_speed, run_accel * run_speed * delta)
 		elif dist.x > follow_dist || dist.x < -follow_dist:
 			velocity.x = move_toward(velocity.x, sign(dist.x) * speed, accel * speed * delta)
 			on_follow.emit()

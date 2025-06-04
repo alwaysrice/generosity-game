@@ -37,12 +37,18 @@ func open_eye():
 
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)
-	for child in $Graphics/Background.get_children():
+	var limits =  $Graphics.get_node("ScreenLimits")
+	if limits is ColorRect:
+		rect.position = limits.get_rect().position
+		rect.size = limits.get_rect().position + limits.get_rect().size
+	for child in $Graphics/Background.get_children(true):
 		if child is Sprite2D:
 			rect.position.x = min(child.global_position.x, rect.position.x)
 			rect.position.y = min(child.global_position.y, rect.position.y)
 			rect.size.x = max(child.global_position.x + child.texture.get_size().x * child.scale.x, rect.size.x)
 			rect.size.y = max(child.global_position.y + child.texture.get_size().y * child.scale.y, rect.size.y)
+
+		
 	return rect
 	
 var is_once = true
