@@ -28,8 +28,6 @@ centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(107, 575)
-fly_jump_speed = -30.0
-fly_collision_offset = 26
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
