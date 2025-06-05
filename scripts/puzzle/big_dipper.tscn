@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6ia5qlgqaaga"]
+[gd_scene load_steps=11 format=3 uid="uid://b6ia5qlgqaaga"]
 
 [ext_resource type="PackedScene" uid="uid://crthfjmprjleu" path="res://scripts/puzzle/constellation_game.tscn" id="1_4vwo1"]
 [ext_resource type="Texture2D" uid="uid://kev8eaxyqptr" path="res://images/Constellation Mini-Game/C1-Background.PNG" id="2_30otc"]
 [ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_e0dh6"]
+[ext_resource type="AudioStream" uid="uid://drl5sc84lki7k" path="res://audio/placeholders set 1/minigame_chime1_v1.mp3" id="4_khgpm"]
+[ext_resource type="AudioStream" uid="uid://bkeqat34n8isj" path="res://audio/placeholders set 1/minigame_chime2_v1.mp3" id="5_fneps"]
+[ext_resource type="AudioStream" uid="uid://b3e1hjfdvu1ob" path="res://audio/placeholders set 1/minigame_chime3_v1.mp3" id="6_pq462"]
+[ext_resource type="AudioStream" uid="uid://b5gh6xmp1lumi" path="res://audio/placeholders set 1/minigame_chime4_v1.mp3" id="7_g3jij"]
+[ext_resource type="AudioStream" uid="uid://ciajbckao5mo0" path="res://audio/placeholders set 1/minigame_chime5_v1.mp3" id="8_uk132"]
+[ext_resource type="AudioStream" uid="uid://eqyfqo4ef8wl" path="res://audio/placeholders set 1/minigame_chime6_v1.mp3" id="9_ujste"]
+[ext_resource type="AudioStream" uid="uid://rcxjggoe8h5g" path="res://audio/placeholders set 1/minigame_chime7_v1.mp3" id="10_5jwxf"]
 
 [node name="BigDipper" node_paths=PackedStringArray("start") instance=ExtResource("1_4vwo1")]
 start = NodePath("Sprites/Stars/ConstellationStar")
+chimes = Array[AudioStream]([ExtResource("4_khgpm"), ExtResource("5_fneps"), ExtResource("6_pq462"), ExtResource("7_g3jij"), ExtResource("8_uk132"), ExtResource("9_ujste"), ExtResource("10_5jwxf")])
 
 [node name="Background" parent="Sprites" index="0"]
 texture = ExtResource("2_30otc")
@@ -48,3 +56,6 @@ visible = false
 
 [node name="AnimationPlayer" parent="." index="3"]
 autoplay = "constellation/enter"
+
+[node name="Melody" parent="." index="5"]
+playlist = Array[AudioStream]([ExtResource("4_khgpm"), ExtResource("5_fneps"), ExtResource("6_pq462"), ExtResource("7_g3jij"), ExtResource("8_uk132"), ExtResource("9_ujste"), ExtResource("10_5jwxf")])

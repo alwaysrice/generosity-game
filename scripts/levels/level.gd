@@ -37,7 +37,7 @@ func open_eye():
 
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)
-	var limits =  $Graphics.get_node("ScreenLimits")
+	var limits =  $Graphics.get_node_or_null("ScreenLimits")
 	if limits is ColorRect:
 		rect.position = limits.get_rect().position
 		rect.size = limits.get_rect().position + limits.get_rect().size

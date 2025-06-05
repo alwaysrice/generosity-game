@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxnm6d7dnxepy"]
+[gd_scene load_steps=14 format=3 uid="uid://dxnm6d7dnxepy"]
 
 [ext_resource type="Script" uid="uid://ce2iffhf148sw" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="2_jol3n"]
+[ext_resource type="AudioStream" uid="uid://c0fp87gey2fo6" path="res://audio/music 2-1.mp3" id="2_m4kgq"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="3_jol3n"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="4_4dbv1"]
 [ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="4_w203f"]
@@ -139,8 +140,10 @@ script = ExtResource("1_w0h25")
 environment = SubResource("Environment_w203f")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_m4kgq")
 volume_db = 21.649
 autoplay = true
+parameters/looping = true
 
 [node name="Interface" type="CanvasLayer" parent="."]
 layer = 2
@@ -182,8 +185,6 @@ z_index = 1
 [node name="Witch" parent="Graphics/Characters" instance=ExtResource("2_jol3n")]
 unique_name_in_owner = true
 position = Vector2(474, 371)
-fly_jump_speed = -30.0
-fly_collision_offset = 26
 should_follow = true
 is_player = true
 

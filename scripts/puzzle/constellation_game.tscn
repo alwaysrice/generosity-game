@@ -1,7 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://crthfjmprjleu"]
+[gd_scene load_steps=14 format=3 uid="uid://crthfjmprjleu"]
 
 [ext_resource type="Script" uid="uid://c8rt54m0kr016" path="res://scripts/puzzle/constellation.gd" id="1_wckjp"]
+[ext_resource type="AudioStream" uid="uid://drl5sc84lki7k" path="res://audio/placeholders set 1/minigame_chime1_v1.mp3" id="2_v47gq"]
 [ext_resource type="AnimationLibrary" uid="uid://cq2l26cystw3n" path="res://scripts/puzzle/constellation.res" id="2_wckjp"]
+[ext_resource type="AudioStream" uid="uid://dp7sgavlouj2g" path="res://audio/placeholders set 1/minigame_loop_v1.mp3" id="3_645h7"]
+[ext_resource type="AudioStream" uid="uid://bkeqat34n8isj" path="res://audio/placeholders set 1/minigame_chime2_v1.mp3" id="3_ltsop"]
+[ext_resource type="AudioStream" uid="uid://b3e1hjfdvu1ob" path="res://audio/placeholders set 1/minigame_chime3_v1.mp3" id="4_bx3vj"]
+[ext_resource type="AudioStream" uid="uid://b5gh6xmp1lumi" path="res://audio/placeholders set 1/minigame_chime4_v1.mp3" id="5_m75ut"]
+[ext_resource type="AudioStream" uid="uid://ciajbckao5mo0" path="res://audio/placeholders set 1/minigame_chime5_v1.mp3" id="6_d4swh"]
+[ext_resource type="Script" uid="uid://cemvkwfanduka" path="res://scripts/utils/audio_playlist_player.gd" id="9_ltsop"]
 
 [sub_resource type="Gradient" id="Gradient_645h7"]
 offsets = PackedFloat32Array(0.132075, 0.232704, 0.396226, 0.528302, 0.622642, 0.735849, 0.90566, 1)
@@ -57,6 +64,7 @@ _data = {
 script = ExtResource("1_wckjp")
 line_color = Color(0.745098, 0.898039, 1, 1)
 glow_gradient = SubResource("Gradient_645h7")
+chimes = Array[AudioStream]([ExtResource("2_v47gq"), ExtResource("3_ltsop"), ExtResource("4_bx3vj"), ExtResource("5_m75ut"), ExtResource("6_d4swh")])
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -91,5 +99,16 @@ libraries = {
 &"constellation": ExtResource("2_wckjp")
 }
 autoplay = "enter"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_645h7")
+volume_db = 21.649
+autoplay = true
+parameters/looping = true
+
+[node name="Melody" type="AudioStreamPlayer" parent="."]
+volume_db = 21.649
+script = ExtResource("9_ltsop")
+metadata/_custom_type_script = "uid://cemvkwfanduka"
 
 [connection signal="connected_all" from="." to="." method="_on_connected_all"]

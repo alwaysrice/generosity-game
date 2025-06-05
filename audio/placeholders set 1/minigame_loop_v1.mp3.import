@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dp7sgavlouj2g"
+path="res://.godot/imported/minigame_loop_v1.mp3-67420016c3fa1f444155eb80a9c0a2e1.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 1/minigame_loop_v1.mp3"
+dest_files=["res://.godot/imported/minigame_loop_v1.mp3-67420016c3fa1f444155eb80a9c0a2e1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

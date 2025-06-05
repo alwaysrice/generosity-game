@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://8f64t5v74mdr"
+path="res://.godot/imported/room4_exploration_layer1_v1.mp3-9e64c57f001e49dd53080e0a5cdad93a.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 1/room4_exploration_layer1_v1.mp3"
+dest_files=["res://.godot/imported/room4_exploration_layer1_v1.mp3-9e64c57f001e49dd53080e0a5cdad93a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

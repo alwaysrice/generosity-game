@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://drl5sc84lki7k"
+path="res://.godot/imported/minigame_chime1_v1.mp3-3168e8778bafea952ee2917c4c3acd8d.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 1/minigame_chime1_v1.mp3"
+dest_files=["res://.godot/imported/minigame_chime1_v1.mp3-3168e8778bafea952ee2917c4c3acd8d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
