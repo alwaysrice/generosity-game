@@ -12,9 +12,17 @@ class_name Constellation extends Node2D
 var has_connected_all = false
 var is_dragging := false
 var connected_points: Array[ConstellationStar] = []
+signal starts_fading
 signal connected_all
 signal connect_point(point: Node2D)
 signal released_connection
+signal finished_success
+
+#func emit_starts_fading():
+	#starts_fading.emit()
+	#
+#func emit_finished_success():
+	#finished_success.emit()
 
 func get_connected_points_pos():
 	var connected_points_pos = []
@@ -144,4 +152,11 @@ func replay_melody():
 		tween.tween_interval(0.6)
 	tween.tween_callback(func(): 
 		$AnimationPlayer.play("constellation/success")
+	)
+	
+func fade_out_music(time: float = 1.0):
+	var tween = create_tween()
+	tween.tween_property($Music, "volume_db", 0, time)
+	tween.tween_callback(func():
+		$Music.stop()
 	)

@@ -27,5 +27,20 @@ func _input(event: InputEvent) -> void:
 		get_tree().root.set_input_as_handled()
 		
 	elif event.is_action_pressed("debug_2"):
-		get_tree().change_scene_to_file("res://scripts/puzzle/big_dipper.tscn")
-		
+		if $CanvasLayer.get_child_count() <= 1:
+			var level = $Level.get_child(0) as Level
+			level.fade_music_to_stop(1.0, func():
+				get_tree().paused = true
+				)
+			var contellation: Constellation = load("res://scripts/puzzle/big_dipper.tscn").instantiate()
+			$CanvasLayer.add_child(contellation)
+			contellation.starts_fading.connect(func():
+				get_tree().paused = false
+				level.face_music_resume(1.0)
+				, CONNECT_ONE_SHOT)
+		else:
+			var constel = $CanvasLayer.get_child(1)
+			$CanvasLayer.remove_child(constel)
+			constel.queue_free()
+			get_tree().paused = false
+			

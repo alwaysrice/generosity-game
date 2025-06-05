@@ -34,6 +34,29 @@ func open_eye():
 	for child in get_children():
 		if child is Door:
 			child.open_eye()
+			
+var _last_music_position = 0.0
+var _last_volume = 0.0
+func fade_music_to_stop(time: float, callable: Callable = func(): pass):
+	var tween = create_tween()
+	var music = $Music as AudioStreamPlayer
+	_last_music_position = music.get_playback_position()
+	_last_volume = music.volume_db
+	tween.tween_property(music, "volume_db", 0, time)
+	tween.tween_callback(func():
+		music.stop()
+		callable.call()
+		)
+	
+func face_music_resume(time: float, callable: Callable = func(): pass):
+	print("RESUME")
+	var tween = create_tween()
+	var music = $Music as AudioStreamPlayer
+	music.volume_db = 0
+	music.play(_last_music_position)
+	tween.tween_property(music, "volume_db", _last_volume, time)
+	tween.tween_callback(callable)
+	
 
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)

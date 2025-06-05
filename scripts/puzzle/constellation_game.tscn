@@ -55,6 +55,7 @@ _data = {
 }
 
 [node name="ConstellationGame" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_wckjp")
 line_color = Color(0.745098, 0.898039, 1, 1)
 glow_gradient = SubResource("Gradient_645h7")
