@@ -8,6 +8,7 @@ var is_on_flight = false
 @export var vertical_accel = 6
 @export var fly_collision_offset = 26
 var finished_fly = false
+signal hint_fly_interruped
 
 signal done_flying
 
@@ -29,6 +30,7 @@ func turn_left():
 
 func start_flight():
 	$FlightTimer.start()
+	$MaxWaitTimer.stop()
 	prevent_movement = false
 	is_on_flight = true
 	var sprite = $Graphics.get_child(0)
@@ -66,9 +68,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if following is Cat:
 			following.join_fly()
 			following.has_joined.connect(start_flight, CONNECT_ONE_SHOT)
+
 		
 			
 func _on_flight_timer_timeout() -> void:
+	$MaxWaitTimer.stop()
 	is_flying = false
 	is_on_flight = false
 	($CollisionShape2D.shape as CapsuleShape2D).height += fly_collision_offset
@@ -78,7 +82,14 @@ func _on_flight_timer_timeout() -> void:
 func _on_fly_timer_timeout() -> void:
 	velocity.y = 0
 	finished_fly = true
+	$MaxWaitTimer.start()
 	# If there is NO cat following, then go on your own
 	if following is not Cat:
 		start_flight()
 	
+
+func _on_max_wait_timer_timeout() -> void:
+	if following is Cat:
+		prevent_movement = false
+		_on_flight_timer_timeout()
+		hint_fly_interruped.emit()

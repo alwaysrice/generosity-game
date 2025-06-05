@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2mkct7qra8ke"]
+[gd_scene load_steps=18 format=3 uid="uid://d2mkct7qra8ke"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_j8t4y"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_h2pyh"]
@@ -22,6 +22,9 @@ size = Vector2(2692, 458)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd5nn"]
 size = Vector2(83, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcxxk"]
+size = Vector2(2784, 405)
 
 [sub_resource type="Animation" id="Animation_w203f"]
 length = 0.001
@@ -260,6 +263,10 @@ position = Vector2(734, 558)
 
 [node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
 position = Vector2(302, 558)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Deadzone" index="0"]
+position = Vector2(1385, 854.5)
+shape = SubResource("RectangleShape2D_xcxxk")
 
 [node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")

@@ -92,6 +92,10 @@ func _ready() -> void:
 		if child is Door:
 			child.wants_to_enter.connect(func(): _on_enter_door(child))
 			
+	for child in $Graphics/Characters.get_children():
+		if child is Actor:
+			child.on_death.connect(_on_death)
+			
 	print(bounds)
 	assert(%Camera)
 	%Camera.limit_left = int(bounds.position.x)
@@ -110,7 +114,7 @@ func _ready() -> void:
 	
 	
 func _unhandled_input(event: InputEvent) -> void:		
-	if event.is_action_pressed(&"switch_character") && not $Cutscenes.is_in_cutscene() :
+	if event.is_action_pressed(&"switch_character") && not $Cutscenes.is_in_cutscene():
 		if not $Cutscenes.can_switch_with_hint():
 			$Cutscenes.play_animation_errand(&"hints/cannot-switch")
 			return
@@ -162,4 +166,8 @@ func _on_enter_door(door: Door):
 		, CONNECT_ONE_SHOT)
 		
 func _on_lone_chara_enter_door():
+	pass
+
+
+func _on_deadzone_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	pass

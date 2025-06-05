@@ -196,6 +196,9 @@ following = NodePath("../Witch")
 [node name="Objects" type="Node2D" parent="Graphics"]
 z_index = 2
 
+[node name="Deadzone" type="Area2D" parent="Graphics"]
+collision_layer = 0
+
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(591, 236)
@@ -223,3 +226,5 @@ metadata/_custom_type_script = "uid://bh53gm8u73bnh"
 libraries = {
 &"hints": ExtResource("6_4dbv1")
 }
+
+[connection signal="body_entered" from="Graphics/Deadzone" to="." method="_on_deadzone_body_entered"]
