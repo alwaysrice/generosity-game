@@ -1,7 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=8 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
 [ext_resource type="Texture2D" uid="uid://cfk7vuqfandbj" path="res://images/Constellation Mini-Game/Star-Light.PNG" id="2_gr3rb"]
+
+[sub_resource type="Gradient" id="Gradient_pbtue"]
+offsets = PackedFloat32Array(0.183007, 0.418301, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.398693, 0.398693, 0.398693, 0.398693, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gr3rb"]
+gradient = SubResource("Gradient_pbtue")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.786325, 0.230769)
+
+[sub_resource type="Gradient" id="Gradient_2mx4y"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.679739)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7h0px"]
+gradient = SubResource("Gradient_2mx4y")
+width = 200
+height = 200
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Curve" id="Curve_gr3rb"]
 _data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0, 0.0, 0, 0, Vector2(1, 0.0200803), 0.0, 0.0, 0, 0]
@@ -25,6 +48,22 @@ target_position = Vector2(2.5, 1.25)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="OverlayLight" type="Sprite2D" parent="Graphics"]
+unique_name_in_owner = true
+modulate = Color(1, 0.970502, 0.372396, 0.539)
+show_behind_parent = true
+position = Vector2(-1, 10)
+scale = Vector2(4.08984, 4.08984)
+texture = SubResource("GradientTexture2D_gr3rb")
+
+[node name="SpreadLight" type="PointLight2D" parent="Graphics"]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+scale = Vector2(2.35, 2.35)
+color = Color(0.674479, 0.674479, 0.674479, 1)
+energy = 4.0
+texture = SubResource("GradientTexture2D_7h0px")
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
 target_position = Vector2(0, 6)

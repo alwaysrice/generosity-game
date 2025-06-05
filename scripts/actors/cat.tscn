@@ -206,12 +206,20 @@ position = Vector2(-4, -8.625)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"flight"
+animation = &"run"
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]
 position = Vector2(9, 6.625)
 target_position = Vector2(10, 7)
+
+[node name="OverlayLight" parent="Graphics" index="2"]
+position = Vector2(3.00002, -11.375)
+scale = Vector2(1.42315, 1.42315)
+
+[node name="SpreadLight" parent="Graphics" index="3"]
+position = Vector2(4.00002, -20.375)
+scale = Vector2(0.957123, 0.957123)
 
 [node name="PlatformDetector" parent="." index="2"]
 position = Vector2(0, -5)

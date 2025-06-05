@@ -137,6 +137,10 @@ func _process(_delta: float) -> void:
 			$Graphics/Background.modulate = Color.WHITE
 		else:
 			$Graphics/Background.modulate = Color.hex(0xb8b8b8ff)
+	var max_top = camera.limit_top + camera.limit_bottom
+	%Witch.set_light_ratio(%Witch.global_position.y / max_top)
+	%Cat.set_light_ratio(%Cat.global_position.y / max_top)
+
 
 
 func _on_key_body_entered(_body: Node2D) -> void:

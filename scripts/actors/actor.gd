@@ -36,10 +36,22 @@ var action_history = []
 @export var is_follow_object_run = false
 var is_joining = false
 var has_joined_other = false
+var light_overlay_modulate = 0
+var light_spread_energy = 0
 
 signal on_follow
 signal on_follow_close
 signal on_death(actor: Actor)
+
+
+func _ready() -> void:
+	light_overlay_modulate = %OverlayLight.modulate
+	light_spread_energy = %SpreadLight.energy
+
+func set_light_ratio(value: float):
+	value = clampf(value, 0.0, 1.0)
+	%OverlayLight.modulate.a = value
+	%SpreadLight.energy = value * light_spread_energy
 
 func follow(who: NodePath):
 	following = get_node_or_null(who)
@@ -121,6 +133,7 @@ func get_input_direction():
 	elif right: return 1
 	elif left: return -1
 	return 0
+
 		
 func _physics_process(delta: float) -> void:
 	if is_dead: return
