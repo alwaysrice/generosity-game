@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4evh3wrmnoou"]
+[gd_scene load_steps=23 format=3 uid="uid://b4evh3wrmnoou"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_xqi78"]
 [ext_resource type="Texture2D" uid="uid://dmjq3ydysvhgg" path="res://images/Platform Room/Platform_BG.PNG" id="2_pn6hk"]
@@ -6,6 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://xtslxu3rvxf5" path="res://images/Platform Room/Platform_Pillars.PNG" id="4_ro8b2"]
 [ext_resource type="Texture2D" uid="uid://tuaab81k8qja" path="res://images/Platform Room/Platform_Platforms.PNG" id="5_8uvn1"]
 [ext_resource type="Texture2D" uid="uid://ct0i11x2dbvty" path="res://images/Platform Room/Platform_Floor.PNG" id="6_8uvn1"]
+[ext_resource type="Texture2D" uid="uid://ce2xdflg5bp7l" path="res://images/Platform Room/Platform_Gold.PNG" id="7_u6vv3"]
+[ext_resource type="Texture2D" uid="uid://eb8r0gy0nlr1" path="res://images/Platform Room/Platform_Gold_Glow.PNG" id="8_f3wc7"]
+[ext_resource type="PackedScene" uid="uid://dpvbr5sx6ik2s" path="res://scripts/objects/lantern.tscn" id="10_cdfrw"]
+[ext_resource type="Texture2D" uid="uid://7qiybbylkamm" path="res://images/Platform Room/Platform_Star.PNG" id="11_hk7ny"]
+[ext_resource type="PackedScene" uid="uid://hlogfsnd3jat" path="res://scripts/objects/barrier.tscn" id="11_km7ie"]
+[ext_resource type="Texture2D" uid="uid://bbqsypam1ar1u" path="res://images/Platform Room/Platform_StarPiece1.PNG" id="17_hk7ny"]
+[ext_resource type="Texture2D" uid="uid://bocsk1107whfd" path="res://images/Platform Room/Platform_StarPiece2.PNG" id="18_tpeu5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qkyr"]
 size = Vector2(3024.5, 73)
@@ -17,7 +24,7 @@ size = Vector2(1025.25, 73)
 size = Vector2(388, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6vv3"]
-size = Vector2(316.089, 74.3135)
+size = Vector2(314.824, 74.3135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egdkk"]
 size = Vector2(193, 73)
@@ -129,7 +136,7 @@ position = Vector2(515, -159)
 shape = SubResource("RectangleShape2D_3ru3j")
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="10"]
-position = Vector2(1533.32, -568.351)
+position = Vector2(1549.55, -567.684)
 rotation = 0.523599
 shape = SubResource("RectangleShape2D_u6vv3")
 
@@ -190,6 +197,36 @@ shape = SubResource("RectangleShape2D_egdkk")
 position = Vector2(982, -773)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_egdkk")
+
+[node name="PlatformGold" type="Sprite2D" parent="Graphics/Objects" index="2"]
+position = Vector2(1435, -869)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_u6vv3")
+
+[node name="PlatformGoldGlow" type="Sprite2D" parent="Graphics/Objects/PlatformGold" index="0"]
+show_behind_parent = true
+texture = ExtResource("8_f3wc7")
+
+[node name="PlatformStarPiece2" type="Sprite2D" parent="Graphics/Objects" index="3"]
+position = Vector2(597, -969)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("18_tpeu5")
+
+[node name="Lantern" parent="Graphics/Objects" index="4" instance=ExtResource("10_cdfrw")]
+position = Vector2(1435, -1522)
+
+[node name="Barrier" parent="Graphics/Objects" index="5" instance=ExtResource("11_km7ie")]
+position = Vector2(2424, -1095)
+
+[node name="PlatformStar" type="Sprite2D" parent="Graphics/Objects" index="6"]
+position = Vector2(1087, 546)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_hk7ny")
+
+[node name="PlatformStarPiece1" type="Sprite2D" parent="Graphics/Objects" index="7"]
+position = Vector2(2424, -1046)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_hk7ny")
 
 [node name="Cutscenes" parent="." index="5"]
 active = false

@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpvbr5sx6ik2s"]
+
+[ext_resource type="Texture2D" uid="uid://bea7c10vbglbg" path="res://images/Platform Room/Platform_Lantern.PNG" id="1_mpfvv"]
+[ext_resource type="Texture2D" uid="uid://d0sxtwmgatbhe" path="res://images/Platform Room/Platform_Lantern_Glow.PNG" id="2_jv6u5"]
+
+[sub_resource type="Animation" id="Animation_mpfvv"]
+resource_name = "animate"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667, 0.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.309804), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jv6u5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fvty5"]
+_data = {
+&"RESET": SubResource("Animation_jv6u5"),
+&"animate": SubResource("Animation_mpfvv")
+}
+
+[node name="Lantern" type="Node2D"]
+
+[node name="PlatformLantern" type="Sprite2D" parent="."]
+position = Vector2(0, 236)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mpfvv")
+
+[node name="PlatformLanternGlow" type="Sprite2D" parent="PlatformLantern"]
+show_behind_parent = true
+position = Vector2(4, 162)
+texture = ExtResource("2_jv6u5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fvty5")
+}
+autoplay = "animate"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bi25syp4pbcfj"]
+[gd_scene load_steps=16 format=3 uid="uid://bi25syp4pbcfj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_317sn"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_4t1rw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_h56n8"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_a7ttg"]
 [ext_resource type="Texture2D" uid="uid://cmugpwc2ac6bh" path="res://images/Hallway Rooms/Hallway_Floor1.PNG" id="4_mnim6"]
+[ext_resource type="Script" uid="uid://cry5eumdnko7i" path="res://scripts/levels/level_connect_boundary.gd" id="6_h56n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ed0x"]
 size = Vector2(2852, 79)
@@ -184,28 +185,27 @@ collision_mask = 0
 position = Vector2(-39, -82.875)
 shape = SubResource("RectangleShape2D_c8mji")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
-position = Vector2(2740, -122.938)
-shape = SubResource("RectangleShape2D_c8mji")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
 position = Vector2(1349, -522)
 shape = SubResource("RectangleShape2D_7p5fu")
 
-[node name="DoorRight" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_5ed0x")]
-z_as_relative = false
-position = Vector2(2626, 433)
-destination = "uid://d2mkct7qra8ke"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
-
-[node name="DoorLeft" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_5ed0x")]
+[node name="DoorLeft" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_5ed0x")]
 z_as_relative = false
 position = Vector2(76, 433)
 scale = Vector2(-1, 1)
 destination = "uid://dirhpaeoq4yqm"
 target = NodePath("../../Characters/Witch")
 open_eyes_on_first_target = true
+
+[node name="LevelRight" type="Area2D" parent="Graphics/Objects" index="3"]
+collision_layer = 0
+script = ExtResource("6_h56n8")
+connected_level = "uid://d2mkct7qra8ke"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/LevelRight" index="0"]
+position = Vector2(2740, -122.938)
+shape = SubResource("RectangleShape2D_c8mji")
 
 [node name="Markers" type="Node2D" parent="Graphics" index="4"]
 

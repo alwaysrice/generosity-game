@@ -49,7 +49,6 @@ func fade_music_to_stop(time: float, callable: Callable = func(): pass):
 		)
 	
 func face_music_resume(time: float, callable: Callable = func(): pass):
-	print("RESUME")
 	var tween = create_tween()
 	var music = $Music as AudioStreamPlayer
 	music.volume_db = 0
@@ -91,10 +90,13 @@ func _ready() -> void:
 	for child in $Graphics/Objects.get_children():
 		if child is Door:
 			child.wants_to_enter.connect(func(): _on_enter_door(child))
+		elif child is LevelConnectBoundary:
+			child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child))
 			
 	for child in $Graphics/Characters.get_children():
 		if child is Actor:
 			child.on_death.connect(_on_death)
+			
 			
 	print(bounds)
 	assert(%Camera)
@@ -147,13 +149,21 @@ func _on_deadzone_body_entered(body: Node2D) -> void:
 
 func _on_death(actor: Actor) -> void:
 	actor.revive()
+	
+func _on_enter_level_boundary(boundary: LevelConnectBoundary):
+	enter_new_level(boundary.connected_level)
 
 func _on_enter_door(door: Door):
-	var new_level = GameManager.load_level(door.destination)
+	enter_new_level(door.destination)
+		
+func enter_new_level(level_path: String):
+	var new_level = GameManager.load_level(level_path)
 	var parent = get_parent()
 	
 	if parent and parent.get_parent() is Game:
+		cutscenes.active = true
 		new_level.ready.connect(func():
+			new_level.cutscenes.active = true
 			new_level.cutscenes.play("trans/enter_level")
 		, CONNECT_ONE_SHOT)
 		cutscenes.play("trans/leave_level")
