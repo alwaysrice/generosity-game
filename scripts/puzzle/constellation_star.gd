@@ -2,6 +2,7 @@ class_name ConstellationStar extends Node2D
 
 @export var next: Array[Node] = []
 @export var ender = false
+@export var sfx: AudioStream
 
 func can_end_in_next():
 	for i in next:
@@ -14,13 +15,12 @@ func unactivate():
 	$Activated.visible = false
 	unhint_next()
 	
-
-
 func activate():
 	$Unactivated.visible = false
 	$Activated.visible = true
 	$AnimationPlayer.play("activate")
 	hint_next()
+	$SFX.play()
 	
 func hint_next():
 	for i in next:
@@ -33,3 +33,7 @@ func hint_next():
 func unhint_next():
 	for i in next:
 		i.get_node("Unactivated").visible = false
+
+
+func _ready() -> void:
+	$SFX.stream = sfx

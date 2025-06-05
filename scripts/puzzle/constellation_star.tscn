@@ -107,3 +107,6 @@ texture = ExtResource("2_otciw")
 libraries = {
 &"": SubResource("AnimationLibrary_8xdyb")
 }
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = 21.649

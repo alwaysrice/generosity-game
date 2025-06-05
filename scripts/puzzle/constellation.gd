@@ -9,7 +9,6 @@ class_name Constellation extends Node2D
 @export var line_color = Color.WHITE
 @export var glow_gradient: Gradient
 @export var glow_color_width = 1
-@export var chimes: Array[AudioStream] = []
 var has_connected_all = false
 var is_dragging := false
 var connected_points: Array[ConstellationStar] = []
@@ -33,9 +32,6 @@ func enter():
 		star.unactivate()
 	connected_points.append(start)
 	start.activate()
-	$Melody.clear_playlist()
-	$Melody.add_music(chimes[connected_points.size()-1])
-	$Melody.play_next()
 	%MouseLine.set_point_position(0, Vector2.ZERO)
 	%MouseLine.set_point_position(1, Vector2.ZERO)
 	
@@ -115,8 +111,6 @@ func check_for_point() -> bool:
 			or (point.ender and connected_points.size() >= points.size()):
 				connected_all.emit()
 				has_connected_all = true
-			else:
-				$Melody.add_music(chimes[connected_points.size()-1])
 
 			return true
 	return false
@@ -132,7 +126,6 @@ func _process(delta: float) -> void:
 		
 func end():
 	$MouseLine.visible = false
-	$Melody.clear_playlist()
 	connected_points.clear()
 	var removal_list = %Lines.get_children()
 	for i in removal_list:
@@ -140,5 +133,15 @@ func end():
 		i.queue_free()
 		
 func _on_connected_all() -> void:
+	$MouseLine.visible = false
 	is_dragging = false
-	$AnimationPlayer.play("constellation/success")
+	replay_melody()
+
+func replay_melody():
+	var tween = create_tween()
+	for point in connected_points:
+		tween.tween_callback(point.activate)
+		tween.tween_interval(0.6)
+	tween.tween_callback(func(): 
+		$AnimationPlayer.play("constellation/success")
+	)
