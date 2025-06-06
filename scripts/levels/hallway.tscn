@@ -143,20 +143,29 @@ offset_bottom = 651.0
 color = Color(0, 0, 0, 1)
 
 [node name="Parallax2D" type="Parallax2D" parent="Graphics/Background" index="0"]
-scroll_scale = Vector2(0.09, 0.3)
+scroll_scale = Vector2(0.2, 0.3)
+scroll_offset = Vector2(109, 0)
 limit_begin = Vector2(0, -1e+07)
-limit_end = Vector2(1160, 1e+07)
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D" index="0"]
-position = Vector2(3, -123)
+position = Vector2(-110.733, -83.2457)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4t1rw")
 centered = false
 
+[node name="Sprite2D2" type="Sprite2D" parent="Graphics/Background/Parallax2D" index="1"]
+position = Vector2(995.807, -83.2457)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4t1rw")
+centered = false
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 1996.37, 1538)
+
 [node name="Parallax2D2" type="Parallax2D" parent="Graphics/Background" index="1"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D2" index="0"]
-position = Vector2(0, -301)
+position = Vector2(0, -262)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_h56n8")
 centered = false
@@ -216,7 +225,7 @@ position = Vector2(2740, -122.938)
 shape = SubResource("RectangleShape2D_c8mji")
 
 [node name="LanternViolet" parent="Graphics/Objects" index="4" instance=ExtResource("7_mnim6")]
-position = Vector2(370, -301)
+position = Vector2(196, -262)
 
 [node name="Markers" type="Node2D" parent="Graphics" index="4"]
 
