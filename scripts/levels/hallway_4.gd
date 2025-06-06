@@ -7,6 +7,3 @@ func trigger_corridor_event():
 	corridor.can_play_scene = true
 	print("TRIGGERED EVENT")
 	
-func _ready() -> void:
-	if not $Cutscenes.autoplay:
-		trigger_corridor_event()

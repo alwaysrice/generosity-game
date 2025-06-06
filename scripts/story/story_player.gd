@@ -49,6 +49,7 @@ class PressActionErrand extends Errand:
 	func complete():
 		commercial_player.stop()
 		playwright.play()
+		print("DONE WITH THE press errand: " + str(playwright.current_animation_position))
 	
 class LeaveLevelAloneErrand extends Errand: 
 	var door: Door
@@ -59,7 +60,10 @@ class LeaveLevelAloneErrand extends Errand:
 
 class JumpActorErrand extends Errand: 
 	var actor: Actor
-	
+	func complete():
+		assert(playwright)
+		playwright.play()
+		print("FINISHED JUmping")
 		
 class PlayAnimationErrand extends Errand: 
 	var animation: String
@@ -95,7 +99,7 @@ func push_errand(errand: Errand) -> Errand:
 func jump_actor_errand(actor: NodePath):
 	var errand = push_errand(JumpActorErrand.new())
 	errand.actor = get_node(actor)
-	errand.actor.jump_landed.connect(func():
+	errand.actor.jumped.connect(func():
 		errand.force_complete()
 		, CONNECT_ONE_SHOT)
 	pause()
@@ -289,6 +293,7 @@ func pause_until_approach(actor: Actor, body: Area2D):
 func play_dialogue(dialogue_idx: String, paused: bool = true):
 	if paused:
 		pause()
+	print("attempt to play dialogue: " + dialogue_idx)
 	current_dialogue = dialogue_idx
 	current_line = 0
 	next_dialogue()

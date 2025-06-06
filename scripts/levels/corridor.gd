@@ -1,7 +1,7 @@
 class_name Corridor extends Level
 
 var is_switched = true
-var can_play_scene = false
+@export var can_play_scene = false
 
 func toggle_process_mode(node: Node, value: bool):
 	if value:
@@ -10,11 +10,11 @@ func toggle_process_mode(node: Node, value: bool):
 		node.process_mode = Node.PROCESS_MODE_DISABLED
 
 func toggle_switch():
-	$Cutscenes.play("corridor/switch")
+	$AnimationPlayer.play("corridor/switch")
 	
 func apply_switch():
 	is_switched = not is_switched
-
+ 
 	toggle_process_mode(%Variant1, not is_switched)
 	toggle_process_mode(%Variant2, is_switched)
 		
@@ -22,12 +22,16 @@ func apply_switch():
 	%Variant2.visible = is_switched
 	
 	_spawn_closest_boundary(true)
+	print("Switched")
 
 func _ready() -> void:
 	if can_play_scene:
 		can_play_scene = false
 		$Cutscenes.animation_finished.connect(func(anim: StringName):
 			$Cutscenes.play("story/scene")
+			$Cutscenes.animation_finished.connect(func(anim):
+				print("----------------finished all animation")
+				, CONNECT_ONE_SHOT)
 			, CONNECT_ONE_SHOT)
 
 	if not is_once: return
@@ -39,7 +43,7 @@ func _ready() -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
-	if event.is_action_pressed("spellcast") and not $Cutscenes.is_in_cutscene():
+	if event.is_action_pressed("spellcast"):
 		if %LanternBottom.can_activate:
 			%LanternBottom.toggle_activation()
 		if %LanternTop.can_activate:
@@ -50,6 +54,9 @@ func _on_entered_level():
 	if can_play_scene:
 		can_play_scene = false
 		$Cutscenes.play("story/scene")
+		$Cutscenes.animation_finished.connect(func(anim):
+			print("finished all animation")
+			, CONNECT_ONE_SHOT)
 	
 	
 func _connect_boundaries():
@@ -85,7 +92,7 @@ func _spawn_closest_boundary(y_only = false):
 	
 	var left_dist = absf(%Witch.global_position.x - left.global_position.x)
 	var right_dist = absf(%Witch.global_position.x - right.global_position.x)
-	if left_dist < right_dist:
+	if left_dist < right_dist: 
 		spawn = left
 		spawn2 = left2
 		%Witch.turn_right()

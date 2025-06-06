@@ -44,6 +44,7 @@ signal on_follow
 signal on_follow_close
 signal on_death(actor: Actor)
 signal jump_landed
+signal jumped 
 
 
 func _ready() -> void:
@@ -224,6 +225,7 @@ func get_new_animation() -> String:
 	else:
 		if velocity.y > 0.0:
 			animation_new = "fall"
+			jumped.emit()
 		else:
 			animation_new = "jump"
 			

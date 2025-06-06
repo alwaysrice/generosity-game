@@ -128,11 +128,11 @@ texture_filter = 4
 material = SubResource("ShaderMaterial_jrjqo")
 position = Vector2(708, 519)
 following = NodePath("../Cat")
+should_follow = false
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(1292, 477)
 follow_distance = 120
-should_follow = true
 
 [node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
 collision_layer = 16
