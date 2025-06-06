@@ -13,6 +13,7 @@
 
 [node name="BigDipper" node_paths=PackedStringArray("start") instance=ExtResource("1_4vwo1")]
 start = NodePath("Sprites/Stars/ConstellationStar")
+chimes = Array[AudioStream]([ExtResource("4_khgpm"), ExtResource("5_fneps"), ExtResource("6_pq462"), ExtResource("7_g3jij"), ExtResource("8_uk132"), ExtResource("9_ujste"), ExtResource("10_5jwxf"), ExtResource("10_5jwxf")])
 
 [node name="Background" parent="Sprites" index="0"]
 texture = ExtResource("2_30otc")
@@ -34,24 +35,28 @@ scale = Vector2(-1, 1)
 next = [NodePath("../ConstellationStar4")]
 sfx = ExtResource("6_pq462")
 
-[node name="ConstellationStar4" parent="Sprites/Stars" index="3" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
-position = Vector2(1238, 682)
-next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
+[node name="ConstellationStar8" parent="Sprites/Stars" index="3" instance=ExtResource("3_e0dh6")]
+position = Vector2(1238, 686)
 ender = true
+sfx = ExtResource("10_5jwxf")
+
+[node name="ConstellationStar4" parent="Sprites/Stars" index="4" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+position = Vector2(1238, 686)
+next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]
 sfx = ExtResource("7_g3jij")
 
-[node name="ConstellationStar5" parent="Sprites/Stars" index="4" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+[node name="ConstellationStar5" parent="Sprites/Stars" index="5" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
 position = Vector2(1196, 896)
-next = [NodePath("../ConstellationStar4"), NodePath("../ConstellationStar7")]
+next = [NodePath("../ConstellationStar8"), NodePath("../ConstellationStar7")]
 sfx = ExtResource("8_uk132")
 
-[node name="ConstellationStar6" parent="Sprites/Stars" index="5" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+[node name="ConstellationStar6" parent="Sprites/Stars" index="6" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
 position = Vector2(1706, 846)
 scale = Vector2(-1, 1)
-next = [NodePath("../ConstellationStar4"), NodePath("../ConstellationStar7")]
+next = [NodePath("../ConstellationStar8"), NodePath("../ConstellationStar7")]
 sfx = ExtResource("9_ujste")
 
-[node name="ConstellationStar7" parent="Sprites/Stars" index="6" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
+[node name="ConstellationStar7" parent="Sprites/Stars" index="7" node_paths=PackedStringArray("next") instance=ExtResource("3_e0dh6")]
 position = Vector2(1548, 1052)
 scale = Vector2(-1, 1)
 next = [NodePath("../ConstellationStar5"), NodePath("../ConstellationStar6")]

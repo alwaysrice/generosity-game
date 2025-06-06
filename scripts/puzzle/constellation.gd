@@ -9,6 +9,7 @@ class_name Constellation extends Node2D
 @export var line_color = Color.WHITE
 @export var glow_gradient: Gradient
 @export var glow_color_width = 1
+@export var chimes: Array[AudioStream] = []
 var has_connected_all = false
 var is_dragging := false
 var connected_points: Array[ConstellationStar] = []
@@ -88,9 +89,9 @@ func check_for_point() -> bool:
 		var last_point: ConstellationStar = connected_points.back()
 		assert(last_point)
 		var ender = connected_points.size() == points.size() and point.ender 
-		if ender:
-			pass
-		elif point in connected_points or point not in last_point.next: 
+		if point in connected_points or point not in last_point.next: 
+			continue
+		if point in last_point.next and point.ender and connected_points.size() < points.size() - 1:
 			continue
 		var radius = point_radius
 		if allow_magnet:
@@ -98,6 +99,8 @@ func check_for_point() -> bool:
 		if Geometry2D.is_point_in_circle(mouse_pos, point.global_position, radius):
 			connected_points.append(point)		
 			last_point.unhint_next()
+			if connected_points.size() == chimes.size():
+				point.sfx = chimes[connected_points.size()-1]
 			point.activate()
 			
 			for i in range(glow_gradient.colors.size()-1, -1, -1):

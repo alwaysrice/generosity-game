@@ -98,6 +98,7 @@ _data = {
 script = ExtResource("1_otciw")
 
 [node name="Unactivated" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_8abvl")
 
 [node name="Activated" type="Sprite2D" parent="."]
