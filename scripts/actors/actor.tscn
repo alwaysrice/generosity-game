@@ -65,6 +65,14 @@ color = Color(0.674479, 0.674479, 0.674479, 1)
 energy = 4.0
 texture = SubResource("GradientTexture2D_7h0px")
 
+[node name="NextLevelDetector" type="RayCast2D" parent="Graphics"]
+unique_name_in_owner = true
+target_position = Vector2(23, 0)
+collision_mask = 256
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="PlatformDetector" type="RayCast2D" parent="."]
 target_position = Vector2(0, 6)
 collision_mask = 32

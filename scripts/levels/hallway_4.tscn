@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b0004maoqvjhj"]
+[gd_scene load_steps=19 format=3 uid="uid://b0004maoqvjhj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_ds0mx"]
@@ -7,6 +7,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_7kdxl"]
 [ext_resource type="Texture2D" uid="uid://cwh1xv2lsfp6y" path="res://images/Hallway Rooms/Hallway_Floor4.PNG" id="4_kedrn"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_oghp1"]
+[ext_resource type="PackedScene" uid="uid://bunpq6uekm6c6" path="res://scripts/objects/lantern_violet.tscn" id="6_3padw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0y2p"]
 size = Vector2(1085, 79)
@@ -137,8 +138,8 @@ tracks/2/path = NodePath("Graphics/Characters/Witch")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0333333, 0.166667, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.0333333, 0.166667, 0.4, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [NodePath("../../Objects/Markers/Marker2D")],
 "method": &"follow"
@@ -148,6 +149,9 @@ tracks/2/keys = {
 }, {
 "args": [],
 "method": &"turn_left"
+}, {
+"args": [NodePath("../Cat")],
+"method": &"follow"
 }]
 }
 tracks/3/type = "method"
@@ -273,6 +277,9 @@ position = Vector2(405, 557)
 
 [node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
 position = Vector2(-107, 507)
+
+[node name="LanternViolet" parent="Graphics/Objects" index="5" instance=ExtResource("6_3padw")]
+position = Vector2(196, -262)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Deadzone" index="0"]
 position = Vector2(1385, 854.5)

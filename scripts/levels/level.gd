@@ -75,14 +75,14 @@ func get_bounds() -> Rect2:
 	return rect
 	
 var is_once = true
-func _ready() -> void:
+func _ready() -> void:	
 	if not is_once: return
 	if not cutscenes.active or not cutscenes.autoplay:
 		%Witch.should_follow = true
 		%Cat.should_follow = true
 		$%Camera.zoom = Vector2.ONE
 		switch_witch()
-		
+	
 	var bounds := get_bounds()
 	for child in get_children():
 		if child is Key:
@@ -92,12 +92,11 @@ func _ready() -> void:
 		if child is Door:
 			child.wants_to_enter.connect(func(): _on_enter_door(child))
 		elif child is LevelConnectBoundary:
-			child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child))
-			
+			child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child), CONNECT_ONE_SHOT)
+
 	for child in $Graphics/Characters.get_children():
 		if child is Actor:
-			child.on_death.connect(_on_death)
-			
+			child.on_death.connect(_on_death)	
 			
 	print(bounds)
 	assert(%Camera)
@@ -112,7 +111,7 @@ func _ready() -> void:
 				cutscenes.play("story/scene")
 		, CONNECT_ONE_SHOT)
 	
-	is_once = true
+	is_once = false
 	
 	
 	
@@ -174,15 +173,43 @@ func enter_new_level(level_path: String):
 		new_level.ready.connect(func():
 			new_level.cutscenes.active = true
 			new_level.cutscenes.play("trans/enter_level")
+			new_level.cutscenes.animation_finished.connect(func(anim: StringName):
+				var tween = create_tween()
+				tween.tween_interval(0.5)
+				tween.tween_callback(func():
+					for child in $Graphics/Objects.get_children():
+						if child is LevelConnectBoundary:
+							child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child), CONNECT_ONE_SHOT)
+					)
+
+				, CONNECT_ONE_SHOT)
 		, CONNECT_ONE_SHOT)
 		cutscenes.play("trans/leave_level")
 		cutscenes.animation_finished.connect(func(anim: StringName):
+			spawn_closest_boundary()
 			parent = parent.get_parent()
 			if parent.level.get_child(0):
 				parent.level.remove_child(parent.level.get_child(0))
 			new_level.request_ready()
 			parent.level.add_child(new_level)
 		, CONNECT_ONE_SHOT)
+
+func spawn_closest_boundary():
+	var left_dist = absf(%Witch.global_position.x - %SpawnLeft.global_position.x)
+	var right_dist = absf(%Witch.global_position.x - %SpawnRight.global_position.x)
+	if left_dist < right_dist:
+		%Witch.global_position = %SpawnLeft.global_position
+		%Cat.global_position = %SpawnLeft2.global_position
+		%Witch.turn_right()
+		%Cat.turn_right()
+	else:
+		%Witch.global_position = %SpawnRight.global_position
+		%Cat.global_position = %SpawnRight2.global_position
+		%Witch.turn_left()
+		%Cat.turn_left()
+	%Witch.stop()
+	%Cat.stop()
+
 		
 func _on_lone_chara_enter_door():
 	pass

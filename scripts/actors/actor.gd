@@ -39,6 +39,7 @@ var has_joined_other = false
 var light_overlay_modulate = 0
 var light_spread_energy = 0
 
+signal towards_next_level(boundary: LevelConnectBoundary)
 signal on_follow
 signal on_follow_close
 signal on_death(actor: Actor)
@@ -182,6 +183,11 @@ func _physics_process(delta: float) -> void:
 	if $FloorDetector.is_colliding():
 		last_floor_stepped = $FloorDetector.get_collider()
 		last_floor_stepped_pos = position
+		
+	if $%NextLevelDetector.is_colliding():
+		var boundary = $Graphics/NextLevelDetector.get_collider()
+		if boundary is LevelConnectBoundary:
+			towards_next_level.emit(boundary)
 		
 	floor_stop_on_slope = not platform_detector.is_colliding()
 	move_and_slide()

@@ -1,0 +1,187 @@
+[gd_scene load_steps=16 format=3 uid="uid://dj845u67o5alw"]
+
+[ext_resource type="Script" uid="uid://c8nv1dqhw8ngm" path="res://scripts/objects/door.gd" id="1_b7hu6"]
+[ext_resource type="Texture2D" uid="uid://bnqlipxw6c6v5" path="res://images/Hallway Rooms/door_top.png" id="2_b4ji2"]
+[ext_resource type="Texture2D" uid="uid://di25hpacsap0r" path="res://images/Cage Room/Eyeball.PNG" id="2_b7hu6"]
+[ext_resource type="Texture2D" uid="uid://cn6jm25pjesv0" path="res://images/Hallway Rooms/Hallway_Door.PNG" id="3_b4ji2"]
+[ext_resource type="Texture2D" uid="uid://bxqa7h4j1hwvr" path="res://images/Hallway Rooms/Hallway_Eye (Open).PNG" id="4_b6mkg"]
+[ext_resource type="Texture2D" uid="uid://c2uh82odf1wdg" path="res://images/Cage Room/Eye (Closed).PNG" id="5_bi7ys"]
+[ext_resource type="Texture2D" uid="uid://b0n640weyvpyd" path="res://images/Hallway Rooms/Hallway_DoorHandle.PNG" id="6_ogknn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u60n3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbfvo"]
+size = Vector2(186, 244)
+
+[sub_resource type="Curve" id="Curve_5rwsp"]
+_data = [Vector2(0.0686274, 1), 0.0, 0.0, 0, 0, Vector2(0.617647, 0.614458), 0.0, 0.0, 0, 0, Vector2(1, 0.0200803), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_icmo0"]
+offsets = PackedFloat32Array(0, 0.633333)
+colors = PackedColorArray(1, 1, 1, 1, 0.0698039, 0.0932652, 0.570312, 1)
+
+[sub_resource type="Animation" id="Animation_dberi"]
+length = 0.001
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Handle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_drsjl"]
+resource_name = "not_within_range"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Handle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i1d51"]
+resource_name = "within_range"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Handle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3, 3, 3, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drsjl"]
+_data = {
+&"RESET": SubResource("Animation_dberi"),
+&"not_within_range": SubResource("Animation_drsjl"),
+&"within_range": SubResource("Animation_i1d51")
+}
+
+[node name="DoorHallway" type="Node2D"]
+script = ExtResource("1_b7hu6")
+
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(0, -57)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_b4ji2")
+
+[node name="EyeHolder" type="Node2D" parent="."]
+position = Vector2(2, -122)
+
+[node name="Eyeball" type="Sprite2D" parent="EyeHolder"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u60n3")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_b7hu6")
+region_enabled = true
+region_rect = Rect2(0, 0, 117, 70)
+
+[node name="Bottom" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_b4ji2")
+
+[node name="Eye(open)" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_b6mkg")
+
+[node name="Eye(closed)" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(4.5, -119)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_bi7ys")
+
+[node name="Eye" type="Node2D" parent="."]
+position = Vector2(3, -123)
+scale = Vector2(0.5, 0.5)
+
+[node name="Handle" type="Sprite2D" parent="."]
+position = Vector2(-29, 43)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_ogknn")
+
+[node name="EnterArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterArea"]
+position = Vector2(2, 23)
+shape = SubResource("RectangleShape2D_pbfvo")
+
+[node name="life" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, -122)
+amount = 20
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -100)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_5rwsp")
+color_ramp = SubResource("Gradient_icmo0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_drsjl")
+}
+autoplay = "not_within_range"

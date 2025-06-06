@@ -164,6 +164,7 @@ spellcast={
 2d_physics/layer_6="platforms"
 2d_physics/layer_7="items"
 2d_physics/layer_8="interact_structures"
+2d_physics/layer_9="next_level"
 
 [physics]
 
