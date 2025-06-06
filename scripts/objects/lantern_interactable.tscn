@@ -1,0 +1,141 @@
+[gd_scene load_steps=11 format=3 uid="uid://b88ffxomp5yo8"]
+
+[ext_resource type="PackedScene" uid="uid://dpvbr5sx6ik2s" path="res://scripts/objects/lantern.tscn" id="1_lpvxk"]
+[ext_resource type="Script" uid="uid://bn48cp7o0vwk8" path="res://scripts/objects/lantern_interactable.gd" id="2_xk1i5"]
+
+[sub_resource type="Animation" id="Animation_xk1i5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlatformLantern:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h5sn1"]
+resource_name = "animate"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667, 0.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.309804), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y1x1i"]
+resource_name = "within_range"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g3blt"]
+resource_name = "not_within_range"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 2,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u2vpp"]
+resource_name = "turn_on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kfb4i"]
+resource_name = "turn_off"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g3blt"]
+_data = {
+&"RESET": SubResource("Animation_xk1i5"),
+&"animate": SubResource("Animation_h5sn1"),
+&"not_within_range": SubResource("Animation_g3blt"),
+&"turn_off": SubResource("Animation_kfb4i"),
+&"turn_on": SubResource("Animation_u2vpp"),
+&"within_range": SubResource("Animation_y1x1i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk1i5"]
+size = Vector2(893, 991)
+
+[node name="LanternInteractable" instance=ExtResource("1_lpvxk")]
+script = ExtResource("2_xk1i5")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_g3blt")
+}
+autoplay = "turn_off"
+
+[node name="SpellcastRange" type="Area2D" parent="." index="2"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpellcastRange" index="0"]
+position = Vector2(3.5, 610.5)
+shape = SubResource("RectangleShape2D_xk1i5")
+
+[connection signal="body_entered" from="SpellcastRange" to="." method="_on_spellcast_range_body_entered"]
+[connection signal="body_exited" from="SpellcastRange" to="." method="_on_spellcast_range_body_exited"]

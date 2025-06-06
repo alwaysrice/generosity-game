@@ -1,64 +1,220 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmu22ofvmxccq"]
+[gd_scene load_steps=25 format=3 uid="uid://cmu22ofvmxccq"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_jj2ks"]
-[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_xk2na"]
-
-[sub_resource type="Gradient" id="Gradient_5ed0x"]
-offsets = PackedFloat32Array(0.00653595, 0.575163, 1)
-colors = PackedColorArray(0.0490112, 0.0732616, 0.190104, 1, 0.390767, 0.480422, 0.588542, 1, 0.732524, 0.887582, 0.986979, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ieu3r"]
-gradient = SubResource("Gradient_5ed0x")
-fill_from = Vector2(0, 0.236467)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj6vk"]
-size = Vector2(2693, 79)
+[ext_resource type="Script" uid="uid://dtcyj2jevh20u" path="res://scripts/levels/corridor.gd" id="2_4dqv5"]
+[ext_resource type="Texture2D" uid="uid://0s1oqrxs3qyx" path="res://images/In-Between Room/InBetween_BG.PNG" id="2_cj6vk"]
+[ext_resource type="Texture2D" uid="uid://djitv5lmiiyjn" path="res://images/In-Between Room/InBetween_Center_Arches.PNG" id="3_58x37"]
+[ext_resource type="Texture2D" uid="uid://c55e1pgqxw3gs" path="res://images/In-Between Room/InBetween_Silver_Floor.PNG" id="3_xrtro"]
+[ext_resource type="Texture2D" uid="uid://d43gxeqdvb6n" path="res://images/In-Between Room/InBetween_Center_Floor.PNG" id="4_xrtro"]
+[ext_resource type="Script" uid="uid://cry5eumdnko7i" path="res://scripts/levels/level_connect_boundary.gd" id="5_jg7pu"]
+[ext_resource type="Texture2D" uid="uid://hlsw7v0pmf1j" path="res://images/In-Between Room/InBetween_Silver_Arches.PNG" id="6_jg7pu"]
+[ext_resource type="Texture2D" uid="uid://i6rve68lmiij" path="res://images/In-Between Room/InBetween_Gold_Arches.PNG" id="8_8t54m"]
+[ext_resource type="Texture2D" uid="uid://byjdo85pg3u7c" path="res://images/In-Between Room/InBetween_Gold_Floor.PNG" id="9_ppyb5"]
+[ext_resource type="PackedScene" uid="uid://b88ffxomp5yo8" path="res://scripts/objects/lantern_interactable.tscn" id="11_8t54m"]
+[ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="12_j5rwm"]
+[ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="13_3wasf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58x37"]
 size = Vector2(81.5, 1702.5)
 
-[node name="Corridor" instance=ExtResource("1_jj2ks")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg7pu"]
+size = Vector2(81.5, 1975.25)
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background" index="0"]
-position = Vector2(1, -1074)
-scale = Vector2(34.3437, 26.9219)
-texture = SubResource("GradientTexture2D_ieu3r")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dqv5"]
+size = Vector2(2692, 458)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj6vk"]
+size = Vector2(2693, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrtro"]
+size = Vector2(1796.22, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo5q8"]
+size = Vector2(81.5, 1408.13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t54m"]
+size = Vector2(81.5, 1842.13)
+
+[sub_resource type="Animation" id="Animation_w203f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(591, 236)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera:position_smoothing_enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Interface/Hint:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Press “X” to switch characters"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphics/Characters/Witch:follow_object")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Graphics/Characters/Witch:is_player")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Graphics/Characters/Cat:follow_object")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Graphics/Characters/Witch:should_follow")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Graphics:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
+_data = {
+&"RESET": SubResource("Animation_w203f")
+}
+
+[sub_resource type="Animation" id="Animation_hg7ur"]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667, 1.43333, 2.43333),
+"transitions": PackedFloat32Array(1, 0.183011, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_switch"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bwhm"]
+_data = {
+&"switch": SubResource("Animation_hg7ur")
+}
+
+[node name="Corridor" instance=ExtResource("1_jj2ks")]
+script = ExtResource("2_4dqv5")
+
+[node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
+offset_left = 3.0
+offset_top = -1266.0
+offset_right = 2619.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+
+[node name="Parallax2D" type="Parallax2D" parent="Graphics/Background" index="0"]
+scroll_scale = Vector2(0.1, 0.1)
+limit_begin = Vector2(0, -1e+07)
+limit_end = Vector2(1160, 1e+07)
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D" index="0"]
+position = Vector2(3, -953)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_cj6vk")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(107, 575)
+position = Vector2(1992, 506)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(56, 493)
+position = Vector2(1941, 424)
 should_follow = true
 
-[node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="0"]
-position = Vector2(1152, 614.5)
-shape = SubResource("RectangleShape2D_cj6vk")
-
-[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors/CollisionShape2D" index="0"]
-offset_left = -1346.0
-offset_top = -39.0
-offset_right = 1346.0
-offset_bottom = 41.0
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="1"]
-position = Vector2(2941, 143)
-shape = SubResource("RectangleShape2D_cj6vk")
-
-[node name="ColorRect" type="ColorRect" parent="Graphics/Objects/Floors/CollisionShape2D2" index="0"]
-offset_left = -1346.0
-offset_top = -39.0
-offset_right = 1346.0
-offset_bottom = 41.0
-
-[node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
+[node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]
 collision_layer = 8
 collision_mask = 0
 
@@ -67,27 +223,160 @@ position = Vector2(-39, -195)
 shape = SubResource("RectangleShape2D_58x37")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="1"]
-position = Vector2(2199, -195)
-shape = SubResource("RectangleShape2D_58x37")
+position = Vector2(2662, -331.375)
+shape = SubResource("RectangleShape2D_jg7pu")
 
-[node name="DoorRight" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
-z_as_relative = false
-position = Vector2(2127, 433)
-destination = "uid://b0004maoqvjhj"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
+position = Vector2(1349, -1484)
+shape = SubResource("RectangleShape2D_4dqv5")
 
-[node name="DoorRight2" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
-z_as_relative = false
-position = Vector2(2127, -36)
-destination = "uid://d2mkct7qra8ke"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
+[node name="Variant1" type="Node2D" parent="Graphics" index="5"]
+unique_name_in_owner = true
 
-[node name="DoorLeft" parent="Graphics/Objects" index="4" node_paths=PackedStringArray("target") instance=ExtResource("2_xk2na")]
-z_as_relative = false
-position = Vector2(76, 433)
-scale = Vector2(-1, 1)
-destination = "uid://crqnw7r70ikhe"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
+[node name="Staircase1" type="Node2D" parent="Graphics/Variant1" index="0"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+
+[node name="InBetweenCenterArches" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="0"]
+position = Vector2(4298, 378)
+texture = ExtResource("3_58x37")
+
+[node name="InBetweenCenterFloor" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="1"]
+position = Vector2(4334, 1230)
+texture = ExtResource("4_xrtro")
+
+[node name="InBetweenSilverArches" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="2"]
+position = Vector2(2042.5, -630.5)
+texture = ExtResource("6_jg7pu")
+
+[node name="InBetweenSilverFloor" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="3"]
+position = Vector2(1742, -8)
+texture = ExtResource("3_xrtro")
+
+[node name="Floors1" type="StaticBody2D" parent="Graphics/Variant1" index="1"]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Variant1/Floors1" index="0"]
+position = Vector2(1333, 616)
+shape = SubResource("RectangleShape2D_cj6vk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant1/Floors1" index="1"]
+position = Vector2(1040, -1.00002)
+rotation = -2.35619
+shape = SubResource("RectangleShape2D_xrtro")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Variant1/Floors1" index="2"]
+position = Vector2(-466, -625)
+shape = SubResource("RectangleShape2D_xrtro")
+
+[node name="LanternBottom" parent="Graphics/Variant1" index="2" instance=ExtResource("11_8t54m")]
+unique_name_in_owner = true
+position = Vector2(1852, -229)
+
+[node name="SpawnTop" type="Marker2D" parent="Graphics/Variant1" index="3"]
+unique_name_in_owner = true
+position = Vector2(1961, -996)
+
+[node name="LevelRight" type="Area2D" parent="Graphics/Variant1" index="4"]
+position = Vector2(-84, 0)
+collision_layer = 0
+script = ExtResource("5_jg7pu")
+connected_level = "uid://b0004maoqvjhj"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant1/LevelRight" index="0"]
+position = Vector2(2740, -122.938)
+shape = SubResource("RectangleShape2D_oo5q8")
+
+[node name="LevelLeft" type="Area2D" parent="Graphics/Variant1" index="5"]
+position = Vector2(4, 0)
+collision_layer = 0
+script = ExtResource("5_jg7pu")
+connected_level = "uid://crqnw7r70ikhe"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant1/LevelLeft" index="0"]
+position = Vector2(-39, -339.937)
+shape = SubResource("RectangleShape2D_8t54m")
+
+[node name="Variant2" type="Node2D" parent="Graphics" index="6"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Staircase2" type="Node2D" parent="Graphics/Variant2" index="0"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+
+[node name="InBetweenCenterArches" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="0"]
+position = Vector2(4298, -2113.5)
+texture = ExtResource("3_58x37")
+
+[node name="InBetweenCenterFloor" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="1"]
+position = Vector2(4320, -1261.5)
+texture = ExtResource("4_xrtro")
+
+[node name="InBetweenSilverArches" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="2"]
+position = Vector2(1754, -836)
+texture = ExtResource("8_8t54m")
+
+[node name="InBetweenSilverFloor" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="3"]
+position = Vector2(1726, -8)
+texture = ExtResource("9_ppyb5")
+
+[node name="Floors2" type="StaticBody2D" parent="Graphics/Variant2" index="1"]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Variant2/Floors2" index="0"]
+position = Vector2(1333, 633)
+shape = SubResource("RectangleShape2D_cj6vk")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant2/Floors2" index="1"]
+position = Vector2(1026, -6.99999)
+rotation = -0.785397
+shape = SubResource("RectangleShape2D_xrtro")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Variant2/Floors2" index="2"]
+position = Vector2(2532, -631)
+shape = SubResource("RectangleShape2D_xrtro")
+
+[node name="LanternTop" parent="Graphics/Variant2" index="2" instance=ExtResource("11_8t54m")]
+unique_name_in_owner = true
+position = Vector2(1758, -1484)
+
+[node name="SpawnBottom" type="Marker2D" parent="Graphics/Variant2" index="3"]
+unique_name_in_owner = true
+position = Vector2(1961, 438)
+
+[node name="LevelRight" type="Area2D" parent="Graphics/Variant2" index="4"]
+position = Vector2(-84, 0)
+collision_layer = 0
+script = ExtResource("5_jg7pu")
+connected_level = "uid://b0004maoqvjhj"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant2/LevelRight" index="0"]
+position = Vector2(2740, -122.938)
+shape = SubResource("RectangleShape2D_oo5q8")
+
+[node name="LevelLeft" type="Area2D" parent="Graphics/Variant2" index="5"]
+position = Vector2(4, 0)
+collision_layer = 0
+script = ExtResource("5_jg7pu")
+connected_level = "uid://b4evh3wrmnoou"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant2/LevelLeft" index="0"]
+position = Vector2(-39, -339.937)
+shape = SubResource("RectangleShape2D_8t54m")
+
+[node name="Cutscenes" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_w203f"),
+&"corridor": SubResource("AnimationLibrary_3bwhm"),
+&"hints": ExtResource("12_j5rwm"),
+&"trans": ExtResource("13_3wasf")
+}

@@ -42,6 +42,7 @@ size = Vector2(81.5, 2185.25)
 size = Vector2(81.5, 2194.25)
 
 [node name="PlatformRoom" instance=ExtResource("1_xqi78")]
+enable_player_lights = true
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
