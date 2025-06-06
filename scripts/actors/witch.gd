@@ -90,7 +90,4 @@ func _on_fly_timer_timeout() -> void:
 
 func _on_max_wait_timer_timeout() -> void:
 	if following is Cat:
-		prevent_movement = false
-		following.is_joining = false
-		_on_flight_timer_timeout()
 		hint_fly_interruped.emit()

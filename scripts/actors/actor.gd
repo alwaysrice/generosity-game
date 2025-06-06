@@ -64,6 +64,7 @@ func stop():
 	is_jumping = false
 
 func revive():
+	#if following and absf(following.global_position.x - global_position.x) >= run_speed:
 	is_dead = false
 	graphics.modulate = Color.WHITE
 	

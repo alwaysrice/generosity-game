@@ -226,7 +226,8 @@ func _ready() -> void:
 		var idx = lines[0]
 		dialogues[idx] = []
 		for line in lines.slice(1, lines.size()):
-			dialogues[idx].append(line)
+			if line:
+				dialogues[idx].append(line)
 
 	print(dialogues)
 	dialogue_ended.connect(func():
@@ -274,21 +275,24 @@ func pause_until_approach(actor: Actor, body: Area2D):
 	body.overlaps_body(actor)
 		
 func play_dialogue(dialogue_idx: String, paused: bool = true):
-	print("dialogue starasdfasdf")
 	if paused:
 		pause()
 	current_dialogue = dialogue_idx
 	current_line = 0
 	next_dialogue()
 	
-func play_auto_dialogue(dialogue_idx: String, paused: bool = true):
-	var last_option = dialogue_auto
+	
+func play_dialogue_auto(dialogue_idx: String, callable: Callable):
+	if current_dialogue != "":
+		return
+	var last_auto = dialogue_auto
 	dialogue_auto = true
+	play_dialogue(dialogue_idx, true)
 	dialogue_ended.connect(func():
-		dialogue_auto = last_option
+		dialogue_auto = last_auto
+		callable.call()
 		, CONNECT_ONE_SHOT)
-	play_dialogue(dialogue_idx, paused)
-
+	
 
 func _input(event: InputEvent) -> void:
 	if current_dialogue != "" and not dialogue_auto and event.is_action_released("continue_dialogue"): 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4evh3wrmnoou"]
+[gd_scene load_steps=26 format=3 uid="uid://b4evh3wrmnoou"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_xqi78"]
 [ext_resource type="Texture2D" uid="uid://dmjq3ydysvhgg" path="res://images/Platform Room/Platform_BG.PNG" id="2_pn6hk"]
+[ext_resource type="Script" uid="uid://bfpda65cani4s" path="res://scripts/levels/platform_room.gd" id="2_u6vv3"]
 [ext_resource type="Texture2D" uid="uid://co7h22bt01sde" path="res://images/Platform Room/Platform_Pillars_BG.PNG" id="3_ro8b2"]
 [ext_resource type="Texture2D" uid="uid://xtslxu3rvxf5" path="res://images/Platform Room/Platform_Pillars.PNG" id="4_ro8b2"]
 [ext_resource type="Texture2D" uid="uid://tuaab81k8qja" path="res://images/Platform Room/Platform_Platforms.PNG" id="5_8uvn1"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dpvbr5sx6ik2s" path="res://scripts/objects/lantern.tscn" id="10_cdfrw"]
 [ext_resource type="Texture2D" uid="uid://7qiybbylkamm" path="res://images/Platform Room/Platform_Star.PNG" id="11_hk7ny"]
 [ext_resource type="PackedScene" uid="uid://hlogfsnd3jat" path="res://scripts/objects/barrier.tscn" id="11_km7ie"]
+[ext_resource type="Script" uid="uid://cry5eumdnko7i" path="res://scripts/levels/level_connect_boundary.gd" id="14_km7ie"]
 [ext_resource type="Texture2D" uid="uid://bbqsypam1ar1u" path="res://images/Platform Room/Platform_StarPiece1.PNG" id="17_hk7ny"]
 [ext_resource type="Texture2D" uid="uid://bocsk1107whfd" path="res://images/Platform Room/Platform_StarPiece2.PNG" id="18_tpeu5"]
 
@@ -41,7 +43,11 @@ size = Vector2(81.5, 2185.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf7av"]
 size = Vector2(81.5, 2194.25)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3wc7"]
+size = Vector2(81.5, 2123.06)
+
 [node name="PlatformRoom" instance=ExtResource("1_xqi78")]
+script = ExtResource("2_u6vv3")
 enable_player_lights = true
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
@@ -74,11 +80,11 @@ centered = false
 z_index = 3
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(533, -978)
+position = Vector2(2578, -978)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(233, -960)
+position = Vector2(2278, -960)
 should_follow = true
 
 [node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -199,7 +205,31 @@ position = Vector2(982, -773)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_egdkk")
 
-[node name="PlatformGold" type="Sprite2D" parent="Graphics/Objects" index="2"]
+[node name="Markers" type="Node2D" parent="Graphics/Objects" index="2"]
+
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
+unique_name_in_owner = true
+position = Vector2(2607, -910)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+unique_name_in_owner = true
+position = Vector2(2668, -910)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
+unique_name_in_owner = true
+position = Vector2(121, -909)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
+unique_name_in_owner = true
+position = Vector2(55, -909)
+
+[node name="Lantern" parent="Graphics/Objects" index="3" instance=ExtResource("10_cdfrw")]
+position = Vector2(1435, -1522)
+
+[node name="Barrier" parent="Graphics/Objects" index="4" instance=ExtResource("11_km7ie")]
+position = Vector2(425, -1095)
+
+[node name="PlatformGold" type="Sprite2D" parent="Graphics/Objects" index="5"]
 position = Vector2(1435, -869)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_u6vv3")
@@ -208,26 +238,30 @@ texture = ExtResource("7_u6vv3")
 show_behind_parent = true
 texture = ExtResource("8_f3wc7")
 
-[node name="PlatformStarPiece2" type="Sprite2D" parent="Graphics/Objects" index="3"]
-position = Vector2(597, -969)
+[node name="PlatformStarPiece2" type="Sprite2D" parent="Graphics/Objects" index="6"]
+position = Vector2(2034, -969)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("18_tpeu5")
 
-[node name="Lantern" parent="Graphics/Objects" index="4" instance=ExtResource("10_cdfrw")]
-position = Vector2(1435, -1522)
+[node name="PlatformStarPiece1" type="Sprite2D" parent="Graphics/Objects" index="7"]
+position = Vector2(425, -1046)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_hk7ny")
 
-[node name="Barrier" parent="Graphics/Objects" index="5" instance=ExtResource("11_km7ie")]
-position = Vector2(2424, -1095)
-
-[node name="PlatformStar" type="Sprite2D" parent="Graphics/Objects" index="6"]
+[node name="PlatformStar" type="Sprite2D" parent="Graphics/Objects" index="8"]
 position = Vector2(1087, 546)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_hk7ny")
 
-[node name="PlatformStarPiece1" type="Sprite2D" parent="Graphics/Objects" index="7"]
-position = Vector2(2424, -1046)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("17_hk7ny")
+[node name="LevelRight" type="Area2D" parent="Graphics/Objects" index="9"]
+collision_layer = 256
+script = ExtResource("14_km7ie")
+connected_level = "uid://cmu22ofvmxccq"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/LevelRight" index="0"]
+position = Vector2(2859, -479.467)
+shape = SubResource("RectangleShape2D_f3wc7")
 
 [node name="Cutscenes" parent="." index="5"]
 active = false

@@ -278,6 +278,22 @@ position = Vector2(405, 557)
 [node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
 position = Vector2(-107, 507)
 
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
+unique_name_in_owner = true
+position = Vector2(2572, 575)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
+unique_name_in_owner = true
+position = Vector2(2633, 575)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="4"]
+unique_name_in_owner = true
+position = Vector2(130, 574)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="5"]
+unique_name_in_owner = true
+position = Vector2(64, 574)
+
 [node name="LanternViolet" parent="Graphics/Objects" index="5" instance=ExtResource("6_3padw")]
 position = Vector2(196, -262)
 

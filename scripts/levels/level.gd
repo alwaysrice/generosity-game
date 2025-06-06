@@ -91,12 +91,24 @@ func _ready() -> void:
 	for child in $Graphics/Objects.get_children():
 		if child is Door:
 			child.wants_to_enter.connect(func(): _on_enter_door(child))
-		elif child is LevelConnectBoundary:
-			child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child), CONNECT_ONE_SHOT)
-
+			
 	for child in $Graphics/Characters.get_children():
 		if child is Actor:
 			child.on_death.connect(_on_death)	
+			
+	%Witch.hint_fly_interruped.connect(func():
+		%Witch.start_flight()
+		%Cat.should_follow = false
+		%Witch.following.is_joining = false
+		#$Cutscenes.play_dialogue_auto("91", func():
+			#%Cat.should_follow = true 
+			#)
+		#prevent_movement = false
+		#following.is_joining = false
+		#_on_flight_timer_timeout()
+		)
+			
+	_connect_boundaries()
 			
 	print(bounds)
 	assert(%Camera)
@@ -162,7 +174,8 @@ func _on_enter_level_boundary(boundary: LevelConnectBoundary):
 	enter_new_level(boundary.connected_level)
 
 func _on_enter_door(door: Door):
-	enter_new_level(door.destination)
+	if not $Cutscenes.is_in_cutscene(): 
+		enter_new_level(door.destination)
 		
 func enter_new_level(level_path: String):
 	var new_level = GameManager.load_level(level_path)
@@ -176,11 +189,7 @@ func enter_new_level(level_path: String):
 			new_level.cutscenes.animation_finished.connect(func(anim: StringName):
 				var tween = create_tween()
 				tween.tween_interval(0.5)
-				tween.tween_callback(func():
-					for child in $Graphics/Objects.get_children():
-						if child is LevelConnectBoundary:
-							child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child), CONNECT_ONE_SHOT)
-					)
+				tween.tween_callback(_connect_boundaries)
 
 				, CONNECT_ONE_SHOT)
 		, CONNECT_ONE_SHOT)
@@ -193,6 +202,12 @@ func enter_new_level(level_path: String):
 			new_level.request_ready()
 			parent.level.add_child(new_level)
 		, CONNECT_ONE_SHOT)
+		
+func _connect_boundaries():
+	for child in $Graphics/Objects.get_children():
+		if child is LevelConnectBoundary:
+			child.body_entered.connect(func(body: Node2D): _on_enter_level_boundary(child), CONNECT_ONE_SHOT)
+
 
 func spawn_closest_boundary():
 	var left_dist = absf(%Witch.global_position.x - %SpawnLeft.global_position.x)

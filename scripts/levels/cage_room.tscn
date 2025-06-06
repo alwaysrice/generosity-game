@@ -190,6 +190,24 @@ position = Vector2(550, -530)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_1plbr")
 
+[node name="Markers" type="Node2D" parent="Graphics/Objects" index="7"]
+
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
+unique_name_in_owner = true
+position = Vector2(1340, 577)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+unique_name_in_owner = true
+position = Vector2(1401, 577)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
+unique_name_in_owner = true
+position = Vector2(130, 574)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
+unique_name_in_owner = true
+position = Vector2(64, 574)
+
 [node name="Camera" parent="." index="5"]
 position = Vector2(1167, 173)
 zoom = Vector2(1.8, 1.8)

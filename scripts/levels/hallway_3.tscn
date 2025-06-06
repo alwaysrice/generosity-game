@@ -112,7 +112,7 @@ tracks/0/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0.0333327, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -124,7 +124,7 @@ tracks/1/path = NodePath("Cutscenes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133334, 0.233334, 0.3),
+"times": PackedFloat32Array(0.0333327, 0.0999994, 0.166667, 0.266667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Objects/Markers/Marker2D2"), 30],
@@ -150,7 +150,7 @@ tracks/2/path = NodePath("Graphics/Characters/Witch")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.133334, 0.233334, 0.333333),
+"times": PackedFloat32Array(0.0333327, 0.166667, 0.266667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [NodePath("../../Objects/Markers/Marker2D2")],
@@ -271,10 +271,26 @@ shape = SubResource("RectangleShape2D_76gtd")
 [node name="Markers" type="Node2D" parent="Graphics/Objects" index="3"]
 
 [node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
-position = Vector2(405, 558)
+position = Vector2(405, 571)
 
 [node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
-position = Vector2(209, 558)
+position = Vector2(209, 571)
+
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
+unique_name_in_owner = true
+position = Vector2(2572, 575)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
+unique_name_in_owner = true
+position = Vector2(2633, 575)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="4"]
+unique_name_in_owner = true
+position = Vector2(130, 574)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="5"]
+unique_name_in_owner = true
+position = Vector2(64, 574)
 
 [node name="LevelRight" type="Area2D" parent="Graphics/Objects" index="4"]
 collision_layer = 256
@@ -308,7 +324,6 @@ shape = SubResource("RectangleShape2D_cio35")
 target = NodePath("../Graphics/Characters/Witch")
 
 [node name="Cutscenes" parent="." index="5"]
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_tr3cq"),

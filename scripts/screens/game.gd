@@ -2,8 +2,11 @@ class_name Game extends Node2D
 
 @onready var level = %Level
 @export_file("*.tscn") var initial_level
+@export_file("*.tscn") var preloaded_levels: PackedStringArray = []
 
 func _ready() -> void:
+	for level in preloaded_levels:
+		GameManager.load_level(level)
 	if initial_level:
 		level.add_child(GameManager.load_level(initial_level))
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cmu22ofvmxccq"]
+[gd_scene load_steps=26 format=3 uid="uid://cmu22ofvmxccq"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_jj2ks"]
 [ext_resource type="Script" uid="uid://dtcyj2jevh20u" path="res://scripts/levels/corridor.gd" id="2_4dqv5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://hlsw7v0pmf1j" path="res://images/In-Between Room/InBetween_Silver_Arches.PNG" id="6_jg7pu"]
 [ext_resource type="Texture2D" uid="uid://i6rve68lmiij" path="res://images/In-Between Room/InBetween_Gold_Arches.PNG" id="8_8t54m"]
 [ext_resource type="Texture2D" uid="uid://byjdo85pg3u7c" path="res://images/In-Between Room/InBetween_Gold_Floor.PNG" id="9_ppyb5"]
+[ext_resource type="Texture2D" uid="uid://bnus8tdc8af7d" path="res://images/In-Between Room/InBetween_Gold_Glow.PNG" id="11_3wasf"]
 [ext_resource type="PackedScene" uid="uid://b88ffxomp5yo8" path="res://scripts/objects/lantern_interactable.tscn" id="11_8t54m"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="12_j5rwm"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="13_3wasf"]
@@ -189,8 +190,8 @@ _data = {
 script = ExtResource("2_4dqv5")
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
-offset_left = 3.0
-offset_top = -1266.0
+offset_left = 5.0
+offset_top = -1261.0
 offset_right = 2619.0
 offset_bottom = 670.0
 color = Color(0, 0, 0, 1)
@@ -207,11 +208,11 @@ texture = ExtResource("2_cj6vk")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(1992, 506)
+position = Vector2(238, -697)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(1941, 424)
+position = Vector2(187, -779)
 should_follow = true
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -246,7 +247,7 @@ position = Vector2(4334, 1230)
 texture = ExtResource("4_xrtro")
 
 [node name="InBetweenSilverArches" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="2"]
-position = Vector2(2042.5, -630.5)
+position = Vector2(2042.5, -646)
 texture = ExtResource("6_jg7pu")
 
 [node name="InBetweenSilverFloor" type="Sprite2D" parent="Graphics/Variant1/Staircase1" index="3"]
@@ -264,7 +265,7 @@ shape = SubResource("RectangleShape2D_cj6vk")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant1/Floors1" index="1"]
 position = Vector2(1040, -1.00002)
-rotation = -2.35619
+rotation = 0.785398
 shape = SubResource("RectangleShape2D_xrtro")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Variant1/Floors1" index="2"]
@@ -275,11 +276,7 @@ shape = SubResource("RectangleShape2D_xrtro")
 unique_name_in_owner = true
 position = Vector2(1852, -229)
 
-[node name="SpawnTop" type="Marker2D" parent="Graphics/Variant1" index="3"]
-unique_name_in_owner = true
-position = Vector2(1961, -996)
-
-[node name="LevelRight" type="Area2D" parent="Graphics/Variant1" index="4"]
+[node name="LevelRight" type="Area2D" parent="Graphics/Variant1" index="3"]
 position = Vector2(-84, 0)
 collision_layer = 0
 script = ExtResource("5_jg7pu")
@@ -290,7 +287,7 @@ metadata/_custom_type_script = "uid://cry5eumdnko7i"
 position = Vector2(2740, -122.938)
 shape = SubResource("RectangleShape2D_oo5q8")
 
-[node name="LevelLeft" type="Area2D" parent="Graphics/Variant1" index="5"]
+[node name="LevelLeft" type="Area2D" parent="Graphics/Variant1" index="4"]
 position = Vector2(4, 0)
 collision_layer = 0
 script = ExtResource("5_jg7pu")
@@ -300,6 +297,18 @@ metadata/_custom_type_script = "uid://cry5eumdnko7i"
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant1/LevelLeft" index="0"]
 position = Vector2(-39, -339.937)
 shape = SubResource("RectangleShape2D_8t54m")
+
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Variant1" index="5"]
+position = Vector2(2464, 575)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Variant1" index="6"]
+position = Vector2(2525, 575)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Variant1" index="7"]
+position = Vector2(174, -668)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Variant1" index="8"]
+position = Vector2(108, -668)
 
 [node name="Variant2" type="Node2D" parent="Graphics" index="6"]
 unique_name_in_owner = true
@@ -320,6 +329,10 @@ texture = ExtResource("4_xrtro")
 [node name="InBetweenSilverArches" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="2"]
 position = Vector2(1754, -836)
 texture = ExtResource("8_8t54m")
+
+[node name="InBetweenGoldGlow" type="Sprite2D" parent="Graphics/Variant2/Staircase2/InBetweenSilverArches" index="0"]
+show_behind_parent = true
+texture = ExtResource("11_3wasf")
 
 [node name="InBetweenSilverFloor" type="Sprite2D" parent="Graphics/Variant2/Staircase2" index="3"]
 position = Vector2(1726, -8)
@@ -347,11 +360,7 @@ shape = SubResource("RectangleShape2D_xrtro")
 unique_name_in_owner = true
 position = Vector2(1758, -1484)
 
-[node name="SpawnBottom" type="Marker2D" parent="Graphics/Variant2" index="3"]
-unique_name_in_owner = true
-position = Vector2(1961, 438)
-
-[node name="LevelRight" type="Area2D" parent="Graphics/Variant2" index="4"]
+[node name="LevelRight" type="Area2D" parent="Graphics/Variant2" index="3"]
 position = Vector2(-84, 0)
 collision_layer = 0
 script = ExtResource("5_jg7pu")
@@ -362,7 +371,7 @@ metadata/_custom_type_script = "uid://cry5eumdnko7i"
 position = Vector2(2740, -122.938)
 shape = SubResource("RectangleShape2D_oo5q8")
 
-[node name="LevelLeft" type="Area2D" parent="Graphics/Variant2" index="5"]
+[node name="LevelLeft" type="Area2D" parent="Graphics/Variant2" index="4"]
 position = Vector2(4, 0)
 collision_layer = 0
 script = ExtResource("5_jg7pu")
@@ -372,6 +381,18 @@ metadata/_custom_type_script = "uid://cry5eumdnko7i"
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Variant2/LevelLeft" index="0"]
 position = Vector2(-39, -339.937)
 shape = SubResource("RectangleShape2D_8t54m")
+
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Variant2" index="5"]
+position = Vector2(2464, -671)
+
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Variant2" index="6"]
+position = Vector2(2525, -671)
+
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Variant2" index="7"]
+position = Vector2(174, 592)
+
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Variant2" index="8"]
+position = Vector2(108, 592)
 
 [node name="Cutscenes" parent="." index="5"]
 libraries = {

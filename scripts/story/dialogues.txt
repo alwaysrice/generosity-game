@@ -60,4 +60,7 @@ Nyota: “What has gotten into you?”
 “Hm… let me try.”
 
 33
-Nyota: “Looks like that did something. Come on!”
+“Looks like that did something. Come on!”
+
+91
+"Paka can't come right now..."
