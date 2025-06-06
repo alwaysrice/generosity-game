@@ -56,6 +56,10 @@ class LeaveLevelAloneErrand extends Errand:
 	func complete():
 		pass
 
+
+class JumpActorErrand extends Errand: 
+	var actor: Actor
+	
 		
 class PlayAnimationErrand extends Errand: 
 	var animation: String
@@ -87,6 +91,14 @@ func push_errand(errand: Errand) -> Errand:
 	errand.playwright = self
 	return errand
 
+		
+func jump_actor_errand(actor: NodePath):
+	var errand = push_errand(JumpActorErrand.new())
+	errand.actor = get_node(actor)
+	errand.actor.jump_landed.connect(func():
+		errand.force_complete()
+		, CONNECT_ONE_SHOT)
+	pause()
 		
 func play_animation_errand(animation: String):
 	var errand = push_errand(PlayAnimationErrand.new())
@@ -212,7 +224,7 @@ func has_key_errand(actor: NodePath):
 func is_in_cutscene() -> bool:
 	var value = false
 	for errand in errand_list:
-		if errand is ApproachErrand:
+		if errand is ApproachErrand or errand is JumpActorErrand:
 			value = true
 	return value or (active and is_playing()) or not has_dialogue_ended
 	

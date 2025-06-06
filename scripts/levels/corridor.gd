@@ -1,6 +1,7 @@
-extends Level
+class_name Corridor extends Level
 
 var is_switched = true
+var can_play_scene = false
 
 func toggle_process_mode(node: Node, value: bool):
 	if value:
@@ -23,11 +24,32 @@ func apply_switch():
 	_spawn_closest_boundary(true)
 
 func _ready() -> void:
+	if can_play_scene:
+		can_play_scene = false
+		$Cutscenes.animation_finished.connect(func(anim: StringName):
+			$Cutscenes.play("story/scene")
+			, CONNECT_ONE_SHOT)
+
 	if not is_once: return
 	apply_switch()
 	super._ready()
 	%LanternBottom.has_lighted.connect(toggle_switch)
 	%LanternTop.has_lighted.connect(toggle_switch)
+
+	
+func _unhandled_input(event: InputEvent) -> void:
+	super._unhandled_input(event)
+	if event.is_action_pressed("spellcast") and not $Cutscenes.is_in_cutscene():
+		if %LanternBottom.can_activate:
+			%LanternBottom.toggle_activation()
+		if %LanternTop.can_activate:
+			%LanternTop.toggle_activation()
+
+func _on_entered_level():
+	print("ENTEREd: can play: " + str(can_play_scene))
+	if can_play_scene:
+		can_play_scene = false
+		$Cutscenes.play("story/scene")
 	
 	
 func _connect_boundaries():

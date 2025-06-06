@@ -188,9 +188,15 @@ func enter_new_level(level_path: String):
 			new_level.cutscenes.play("trans/enter_level")
 			new_level.cutscenes.animation_finished.connect(func(anim: StringName):
 				var tween = create_tween()
-				tween.tween_interval(0.5)
-				tween.tween_callback(_connect_boundaries)
-
+				tween.tween_callback(func():_connect_boundaries()).set_delay(0.5)
+				#tween.tween_callback(func():
+					#print("ENTER")
+					#if new_level is Corridor:
+						#print("IS CORRIDor")
+						#if new_level.can_play_scene:
+							#new_level.can_play_scene = false
+							#new_level.get_node("Cutscenes").play("story/scene")
+					#)
 				, CONNECT_ONE_SHOT)
 		, CONNECT_ONE_SHOT)
 		cutscenes.play("trans/leave_level")
@@ -202,6 +208,8 @@ func enter_new_level(level_path: String):
 			new_level.request_ready()
 			parent.level.add_child(new_level)
 		, CONNECT_ONE_SHOT)
+		
+		
 		
 func _connect_boundaries():
 	for child in $Graphics/Objects.get_children():
@@ -225,7 +233,10 @@ func spawn_closest_boundary():
 	%Witch.stop()
 	%Cat.stop()
 
-		
+var on_entered_level = _on_entered_level
+func _on_entered_level():
+	print("DEFAULT")
+			
 func _on_lone_chara_enter_door():
 	pass
 

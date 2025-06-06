@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmu22ofvmxccq"]
+[gd_scene load_steps=28 format=3 uid="uid://cmu22ofvmxccq"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_jj2ks"]
 [ext_resource type="Script" uid="uid://dtcyj2jevh20u" path="res://scripts/levels/corridor.gd" id="2_4dqv5"]
@@ -186,14 +186,109 @@ _data = {
 &"switch": SubResource("Animation_hg7ur")
 }
 
+[sub_resource type="Animation" id="Animation_3wasf"]
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Characters/Cat")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.366666),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [NodePath("")],
+"method": &"follow"
+}, {
+"args": [NodePath("../Witch")],
+"method": &"follow"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cutscenes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.133333, 0.166666, 0.2, 0.266667, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["31", true],
+"method": &"play_dialogue"
+}, {
+"args": [NodePath("../Graphics/Characters/Cat")],
+"method": &"jump_actor_errand"
+}, {
+"args": [NodePath("../Graphics/Characters/Cat")],
+"method": &"jump_actor_errand"
+}, {
+"args": ["32", true],
+"method": &"play_dialogue"
+}, {
+"args": ["spellcast", NodePath("../HintsAnimator"), "hints/spellcast"],
+"method": &"press_action_while_animating_errand"
+}, {
+"args": ["corridor/switch"],
+"method": &"play_animation_errand"
+}, {
+"args": ["33", true],
+"method": &"play_dialogue"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphics/Characters/Cat:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1866, 570)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg7ur"]
+_data = {
+&"scene": SubResource("Animation_3wasf")
+}
+
 [node name="Corridor" instance=ExtResource("1_jj2ks")]
 script = ExtResource("2_4dqv5")
+
+[node name="BlackOverlay" parent="Interface" index="0"]
+visible = false
+color = Color(0, 0, 0, 0.0628158)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 5.0
 offset_top = -1261.0
 offset_right = 2619.0
-offset_bottom = 670.0
+offset_bottom = 651.0
 color = Color(0, 0, 0, 1)
 
 [node name="Parallax2D" type="Parallax2D" parent="Graphics/Background" index="0"]
@@ -208,11 +303,11 @@ texture = ExtResource("2_cj6vk")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(238, -697)
+position = Vector2(2177, 561)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(187, -779)
+position = Vector2(1866, 570)
 should_follow = true
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -399,5 +494,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"corridor": SubResource("AnimationLibrary_3bwhm"),
 &"hints": ExtResource("12_j5rwm"),
+&"story": SubResource("AnimationLibrary_hg7ur"),
 &"trans": ExtResource("13_3wasf")
 }

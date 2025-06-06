@@ -43,6 +43,7 @@ signal towards_next_level(boundary: LevelConnectBoundary)
 signal on_follow
 signal on_follow_close
 signal on_death(actor: Actor)
+signal jump_landed
 
 
 func _ready() -> void:
@@ -196,9 +197,10 @@ func _physics_process(delta: float) -> void:
 	var animation := get_new_animation()
 	var sprite = $Graphics.get_child(0)
 	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other:
+		animation_history.append(animation)
 		sprite.play(animation)
 		
-
+var animation_history = []
 func get_new_animation() -> String:
 	var animation_new: String
 	if is_on_floor():
@@ -212,6 +214,12 @@ func get_new_animation() -> String:
 				animation_new = "walk"
 			else:
 				animation_new = "idle"
+		if is_jumping and (animation_history.back() == "fall" or animation_history.back() == "idle"):
+			print("LANDED")
+			jump_landed.emit()
+			if animation_history.size() > 10:
+				animation_history.clear()
+				animation_history.append("idle")
 		is_jumping = false
 	else:
 		if velocity.y > 0.0:
@@ -229,6 +237,7 @@ func try_jump() -> void:
 	if is_on_floor():
 		$JumpSound.pitch_scale = 1.0
 		is_jumping = true
+		animation_history.append("idle")
 	elif can_double_jump and allow_double_jump:
 		can_double_jump = false
 		$JumpSound.pitch_scale = 1.5
