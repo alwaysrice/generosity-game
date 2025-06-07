@@ -46,7 +46,6 @@ func enter():
 	start.activate()
 	%MouseLine.set_point_position(0, Vector2.ZERO)
 	%MouseLine.set_point_position(1, Vector2.ZERO)
-	$Music.play()
 	
 func _ready() -> void:
 	assert(%Stars.get_children().size() > 1)

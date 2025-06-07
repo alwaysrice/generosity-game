@@ -22,7 +22,7 @@ func cast_barrier(constellation: Constellation):
 		constellation.finished_success.connect(func():
 			contel_finished += 1
 			, CONNECT_ONE_SHOT)
-		fade_music_to_stop(1.0, func():
+		fade_music_to_stop(1.6, func():
 			get_tree().paused = true
 			)
 		constellation.show() 
@@ -30,5 +30,14 @@ func cast_barrier(constellation: Constellation):
 		constellation.animator.play("constellation/enter")
 		constellation.starts_fading.connect(func():
 			get_tree().paused = false
-			face_music_resume(1.0)
+			face_music_resume(2.0)
 			, CONNECT_ONE_SHOT)
+
+
+
+func revert_music():
+	%Music.fade_to_stop(2.0)
+	%Music2.fade_to_stop(2.0)
+	%Music3.fade_to_stop(2.0, func():
+		%NormalMusic.fade_to_play(2.0)
+		)

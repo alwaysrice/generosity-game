@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://dxnm6d7dnxepy"]
+[gd_scene load_steps=15 format=4 uid="uid://dxnm6d7dnxepy"]
 
 [ext_resource type="Script" uid="uid://ce2iffhf148sw" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="2_jol3n"]
+[ext_resource type="Script" uid="uid://bp3hlaxnp3te4" path="res://scripts/utils/audio_player.gd" id="2_m4kgq"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="3_jol3n"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="4_4dbv1"]
 [ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="4_w203f"]
@@ -147,6 +148,7 @@ stream = SubResource("AudioStreamMP3_4dbv1")
 volume_db = 21.649
 autoplay = true
 parameters/looping = true
+script = ExtResource("2_m4kgq")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 layer = 2

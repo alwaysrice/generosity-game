@@ -1,16 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgvnh3e4i8bnk"]
+[gd_scene load_steps=14 format=3 uid="uid://bgvnh3e4i8bnk"]
 
 [ext_resource type="PackedScene" uid="uid://crthfjmprjleu" path="res://scripts/puzzle/constellation_game.tscn" id="1_3ffvg"]
+[ext_resource type="AudioStream" uid="uid://dl53386fk85cf" path="res://audio/placeholders set 2/sfx_minigame_chime1_v2.mp3" id="2_og7uo"]
 [ext_resource type="Texture2D" uid="uid://jpp831n32bm7" path="res://images/Constellation Mini-Game/C2-Background.PNG" id="2_vpjgw"]
+[ext_resource type="AudioStream" uid="uid://rqdrtqvnvvvv" path="res://audio/placeholders set 2/sfx_minigame_chime2_v2.mp3" id="3_0f51k"]
 [ext_resource type="PackedScene" uid="uid://c7oxlno1hultj" path="res://scripts/puzzle/constellation_star.tscn" id="3_6jhhr"]
 [ext_resource type="AudioStream" uid="uid://drl5sc84lki7k" path="res://audio/placeholders set 1/minigame_chime1_v1.mp3" id="4_nn4ex"]
+[ext_resource type="AudioStream" uid="uid://cn23lykvmv216" path="res://audio/placeholders set 2/sfx_minigame_chime3_v2.mp3" id="4_u8wa0"]
+[ext_resource type="AudioStream" uid="uid://1vuxo3n0uqma" path="res://audio/placeholders set 2/sfx_minigame_chime4_v2.mp3" id="5_rm18g"]
 [ext_resource type="AudioStream" uid="uid://bkeqat34n8isj" path="res://audio/placeholders set 1/minigame_chime2_v1.mp3" id="5_s0rbl"]
+[ext_resource type="AudioStream" uid="uid://cibjdu2mcqn6d" path="res://audio/placeholders set 2/sfx_minigame_chime5-end_v2.mp3" id="6_2p37y"]
 [ext_resource type="AudioStream" uid="uid://b5gh6xmp1lumi" path="res://audio/placeholders set 1/minigame_chime4_v1.mp3" id="6_hpubg"]
 [ext_resource type="AudioStream" uid="uid://ciajbckao5mo0" path="res://audio/placeholders set 1/minigame_chime5_v1.mp3" id="7_6p3fq"]
 [ext_resource type="AudioStream" uid="uid://rcxjggoe8h5g" path="res://audio/placeholders set 1/minigame_chime7_v1.mp3" id="8_0b723"]
 
 [node name="Cassiopeia" node_paths=PackedStringArray("start") instance=ExtResource("1_3ffvg")]
+process_mode = 3
 start = NodePath("Sprites/Stars/ConstellationStar")
+chimes = Array[AudioStream]([ExtResource("2_og7uo"), ExtResource("3_0f51k"), ExtResource("4_u8wa0"), ExtResource("5_rm18g"), ExtResource("6_2p37y")])
 
 [node name="Background" parent="Sprites" index="0"]
 texture = ExtResource("2_vpjgw")

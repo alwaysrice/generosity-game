@@ -43,7 +43,7 @@ func fade_music_to_stop(time: float, callable: Callable = func(): pass):
 	var music = $Music as AudioStreamPlayer
 	_last_music_position = music.get_playback_position()
 	_last_volume = music.volume_db
-	tween.tween_property(music, "volume_db", 0, time)
+	tween.tween_property(music, "volume_db", -60, time)
 	tween.tween_callback(func():
 		music.stop()
 		callable.call()
@@ -52,7 +52,7 @@ func fade_music_to_stop(time: float, callable: Callable = func(): pass):
 func face_music_resume(time: float, callable: Callable = func(): pass):
 	var tween = create_tween()
 	var music = $Music as AudioStreamPlayer
-	music.volume_db = 0
+	music.volume_db = -60
 	music.play(_last_music_position)
 	tween.tween_property(music, "volume_db", _last_volume, time)
 	tween.tween_callback(callable)
