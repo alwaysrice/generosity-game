@@ -85,8 +85,12 @@ class JumpActorErrand extends Errand:
 	func complete():
 		assert(playwright)
 		playwright.play()
-		print("FINISHED JUmping")
+		print("Completed jump errand")
 		
+class EnteredAreaErrand extends Errand: 
+	var actor: Actor
+	var area
+
 class PlayAnimationErrand extends Errand: 
 	var animation: String
 	var last_animation = ""
@@ -142,6 +146,14 @@ func play_animation_errand(animation: String):
 			errand.force_complete()
 		, CONNECT_ONE_SHOT)
 
+func enter_area_errand(pactor: NodePath, parea: NodePath):
+	var errand = push_errand(EnteredAreaErrand.new())
+	var actor: Actor = get_node(pactor)
+	var area: Area2D = get_node(parea)
+	pause()
+	area.body_entered.connect(func(body: Node2D):
+		errand.force_complete()
+		, CONNECT_ONE_SHOT)
 
 		
 func play_commercial_animation_errand(animation: String, animator: NodePath):

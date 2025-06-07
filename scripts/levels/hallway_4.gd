@@ -23,3 +23,7 @@ func _ready() -> void:
 
 	if not is_once: return
 	super._ready()
+
+
+func _on_ending_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
