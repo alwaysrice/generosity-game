@@ -184,6 +184,8 @@ func enter_new_level(level_path: String):
 	if parent and parent.get_parent() is Game:
 		cutscenes.active = true
 		new_level.ready.connect(func():
+			%Cat.visible = true
+			%Cat.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 			new_level.cutscenes.active = true
 			new_level.cutscenes.play("trans/enter_level")
 			new_level.cutscenes.animation_finished.connect(func(anim: StringName):

@@ -32,6 +32,18 @@ class ApproachErrand extends Errand:
 	func complete():
 		playwright.play()
 		
+class LeaveErrand extends Errand:
+	var actor: Actor
+	var body: Node2D
+	var radius = 10
+	func is_done() -> bool:
+		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, radius)
+	func complete():
+		actor.process_mode = Node.PROCESS_MODE_DISABLED
+		actor.visible = false
+		playwright.play()
+		print("finished")
+		
 class PressActionErrand extends Errand:
 	var action: String
 	var repeat =0
@@ -52,7 +64,7 @@ class PressActionErrand extends Errand:
 		print("DONE WITH THE press errand: " + str(playwright.current_animation_position))
 	
 class LeaveLevelAloneErrand extends Errand: 
-	var door: Door
+	var boundary: LevelConnectBoundary
 	var actor: Actor
 	func complete():
 		pass
@@ -99,10 +111,11 @@ func push_errand(errand: Errand) -> Errand:
 func jump_actor_errand(actor: NodePath):
 	var errand = push_errand(JumpActorErrand.new())
 	errand.actor = get_node(actor)
-	errand.actor.jumped.connect(func():
-		errand.force_complete()
-		, CONNECT_ONE_SHOT)
-	pause()
+	errand.force_complete()
+	#errand.actor.jumped.connect(func():
+		#errand.force_complete()
+		#, CONNECT_ONE_SHOT)
+	#pause()
 		
 func play_animation_errand(animation: String):
 	var errand = push_errand(PlayAnimationErrand.new())
@@ -156,17 +169,39 @@ func toggle_no_switch():
 	else:
 		push_errand(NoSwitchErrand.new())
 
-func leave_level_alone_errand(actor: NodePath, door: NodePath, command = ""):
+func leave_level_alone_errand(actor: NodePath, boundary: NodePath, command = ""):
 	var errand = push_errand(LeaveLevelAloneErrand.new())
 	errand.actor = get_node(actor)
-	errand.door = get_node(door)
+	errand.boundary = get_node(boundary)
 	print("Trying to leave")
 
-	errand.door.within_range_solo.connect(func(): 
-		errand.actor.visible = false
-		errand.actor.process_mode = ProcessMode.PROCESS_MODE_DISABLED
-		errand.force_complete()
+	var connections = errand.boundary.body_entered.get_connections()
+	for i in connections:
+		errand.boundary.body_entered.disconnect(i["callable"])
+
+	errand.boundary.body_entered.connect(func(body: Node2D):
+		if not body.following or body.following is not Actor or body.following.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
+			errand.actor.visible = false
+			errand.actor.position.x += 200
+			errand.actor.process_mode = ProcessMode.PROCESS_MODE_DISABLED
+			errand.force_complete()
+			for i in connections:
+				errand.boundary.body_entered.connect(i["callable"], i["flags"])
 		, CONNECT_ONE_SHOT)
+	#errand.door.within_range_solo.connect(func(): 
+		#errand.actor.visible = false
+		#errand.actor.process_mode = ProcessMode.PROCESS_MODE_DISABLED
+		#errand.force_complete()
+		#, CONNECT_ONE_SHOT)
+		
+		
+func leave_level_alone_in_spot_errand(actor: NodePath, marker: NodePath, command = ""):
+	var errand = push_errand(LeaveErrand.new())
+	errand.actor = get_node(actor)
+	errand.body = get_node(marker)
+	errand.radius = 30
+	pause()
+
 		
 func press_action_errand(action: String):
 	var errand = push_errand(PressActionErrand.new())

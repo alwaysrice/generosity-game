@@ -65,7 +65,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			sprite.play(&"fly")
 			
 		# If there is a cat following, wait for him
-		if following is Cat:
+		if following is Cat and following.following is Witch:
 			following.join_fly()
 			following.has_joined.connect(start_flight, CONNECT_ONE_SHOT)
 

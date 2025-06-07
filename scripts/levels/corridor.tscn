@@ -207,7 +207,7 @@ tracks/0/path = NodePath("Graphics/Characters/Cat")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 1),
+"times": PackedFloat32Array(0, 0.966667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [NodePath("")],
@@ -236,7 +236,7 @@ tracks/2/path = NodePath("Cutscenes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.133333, 0.166666, 0.2, 0.266667, 0.933333),
+"times": PackedFloat32Array(0.0666667, 0.0999997, 0.133333, 0.166667, 0.233334, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": ["31", true],
@@ -276,7 +276,7 @@ tracks/4/path = NodePath("Graphics/Characters/Cat:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.0333333),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2(1866, 570)]
@@ -288,7 +288,7 @@ tracks/5/path = NodePath("Cutscenes:active")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.0333333, 1),
+"times": PackedFloat32Array(0, 0.966667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]

@@ -107,7 +107,7 @@ tracks/0/path = NodePath("Cutscenes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.2, 0.233333, 0.4),
+"times": PackedFloat32Array(0.0333333, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [NodePath("../Graphics/Characters/Witch"), NodePath("../Graphics/Objects/Markers/Marker2D"), 30],
@@ -116,8 +116,8 @@ tracks/0/keys = {
 "args": ["26", true],
 "method": &"play_dialogue"
 }, {
-"args": [NodePath("../Graphics/Characters/Cat"), NodePath("../Graphics/Objects/DoorLeft"), ""],
-"method": &"leave_level_alone_errand"
+"args": [NodePath("../Graphics/Characters/Cat"), NodePath("../Graphics/Objects/Markers/Marker2D2"), ""],
+"method": &"leave_level_alone_in_spot_errand"
 }, {
 "args": ["27", true],
 "method": &"play_dialogue"
@@ -165,10 +165,13 @@ tracks/3/path = NodePath("Graphics/Characters/Cat")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [NodePath("../../Objects/Markers/Marker2D2")],
+"method": &"follow"
+}, {
+"args": [NodePath("../Witch")],
 "method": &"follow"
 }]
 }
@@ -288,7 +291,7 @@ shape = SubResource("RectangleShape2D_4uvku")
 position = Vector2(405, 557)
 
 [node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
-position = Vector2(-107, 507)
+position = Vector2(64, 572)
 
 [node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
 unique_name_in_owner = true
