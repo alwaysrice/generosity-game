@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bstvwaatibjku"
+path="res://.godot/imported/music_minigame_v2.mp3-e28534d9757545ae23358c30419990cb.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 2/music_minigame_v2.mp3"
+dest_files=["res://.godot/imported/music_minigame_v2.mp3-e28534d9757545ae23358c30419990cb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

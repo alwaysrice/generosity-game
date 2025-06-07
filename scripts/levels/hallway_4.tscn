@@ -1,14 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0004maoqvjhj"]
+[gd_scene load_steps=21 format=3 uid="uid://b0004maoqvjhj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_ds0mx"]
 [ext_resource type="Script" uid="uid://ccjnabwgw8ke4" path="res://scripts/levels/hallway_4.gd" id="2_kedrn"]
-[ext_resource type="PackedScene" uid="uid://dgo8p4utgucyq" path="res://scripts/objects/door.tscn" id="2_up58g"]
 [ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_3padw"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_7kdxl"]
 [ext_resource type="Texture2D" uid="uid://cwh1xv2lsfp6y" path="res://images/Hallway Rooms/Hallway_Floor4.PNG" id="4_kedrn"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_oghp1"]
 [ext_resource type="PackedScene" uid="uid://bunpq6uekm6c6" path="res://scripts/objects/lantern_violet.tscn" id="6_3padw"]
+[ext_resource type="Script" uid="uid://cry5eumdnko7i" path="res://scripts/levels/level_connect_boundary.gd" id="7_kedrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0y2p"]
 size = Vector2(1085, 79)
@@ -24,6 +24,9 @@ size = Vector2(2692, 458)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4uvku"]
 size = Vector2(599, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7hmb"]
+size = Vector2(81.5, 1842.13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kedrn"]
 size = Vector2(2784, 405)
@@ -237,11 +240,11 @@ texture = ExtResource("4_kedrn")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(108, 575)
+position = Vector2(171, 575)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(54, 492)
+position = Vector2(84, 575)
 should_follow = true
 
 [node name="Floors" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -279,15 +282,7 @@ collision_layer = 4
 position = Vector2(1350.5, 622)
 shape = SubResource("RectangleShape2D_4uvku")
 
-[node name="DoorLeft" parent="Graphics/Objects" index="3" node_paths=PackedStringArray("target") instance=ExtResource("2_up58g")]
-z_as_relative = false
-position = Vector2(76, 433)
-scale = Vector2(-1, 1)
-destination = "uid://cmu22ofvmxccq"
-target = NodePath("../../Characters/Witch")
-open_eyes_on_first_target = true
-
-[node name="Markers" type="Node2D" parent="Graphics/Objects" index="4"]
+[node name="Markers" type="Node2D" parent="Graphics/Objects" index="3"]
 
 [node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
 position = Vector2(405, 557)
@@ -311,8 +306,19 @@ position = Vector2(130, 574)
 unique_name_in_owner = true
 position = Vector2(64, 574)
 
-[node name="LanternViolet" parent="Graphics/Objects" index="5" instance=ExtResource("6_3padw")]
+[node name="LanternViolet" parent="Graphics/Objects" index="4" instance=ExtResource("6_3padw")]
 position = Vector2(196, -262)
+
+[node name="LevelLeft" type="Area2D" parent="Graphics/Objects" index="5"]
+position = Vector2(4, 0)
+collision_layer = 0
+script = ExtResource("7_kedrn")
+connected_level = "uid://cmu22ofvmxccq"
+metadata/_custom_type_script = "uid://cry5eumdnko7i"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/LevelLeft" index="0"]
+position = Vector2(-39, -339.937)
+shape = SubResource("RectangleShape2D_w7hmb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Deadzone" index="0"]
 position = Vector2(1385, 854.5)

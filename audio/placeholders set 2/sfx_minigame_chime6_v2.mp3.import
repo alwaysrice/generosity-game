@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://m3cgqmdh7ab2"
+path="res://.godot/imported/sfx_minigame_chime6_v2.mp3-7726a3b0fefde71a1509363129139d69.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 2/sfx_minigame_chime6_v2.mp3"
+dest_files=["res://.godot/imported/sfx_minigame_chime6_v2.mp3-7726a3b0fefde71a1509363129139d69.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

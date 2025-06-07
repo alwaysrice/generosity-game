@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blhl8e5bqk6qu"
+path="res://.godot/imported/music_room2-3_v1.mp3-5b6c2cd0ec888e3cd9978bd79ec87866.mp3str"
+
+[deps]
+
+source_file="res://audio/placeholders set 2/music_room2-3_v1.mp3"
+dest_files=["res://.godot/imported/music_room2-3_v1.mp3-5b6c2cd0ec888e3cd9978bd79ec87866.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

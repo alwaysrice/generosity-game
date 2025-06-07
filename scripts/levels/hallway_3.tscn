@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://crqnw7r70ikhe"]
+[gd_scene load_steps=23 format=3 uid="uid://crqnw7r70ikhe"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_mscvx"]
+[ext_resource type="AudioStream" uid="uid://blhl8e5bqk6qu" path="res://audio/placeholders set 2/music_room2-3_v1.mp3" id="2_02v6v"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_cio35"]
 [ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_5v0w1"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_tr3cq"]
@@ -173,6 +174,9 @@ _data = {
 }
 
 [node name="Hallway3" instance=ExtResource("1_mscvx")]
+
+[node name="Music" parent="." index="1"]
+stream = ExtResource("2_02v6v")
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0

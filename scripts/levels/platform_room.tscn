@@ -1,11 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://b4evh3wrmnoou"]
+[gd_scene load_steps=29 format=3 uid="uid://b4evh3wrmnoou"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_xqi78"]
 [ext_resource type="Texture2D" uid="uid://dmjq3ydysvhgg" path="res://images/Platform Room/Platform_BG.PNG" id="2_pn6hk"]
 [ext_resource type="Script" uid="uid://bfpda65cani4s" path="res://scripts/levels/platform_room.gd" id="2_u6vv3"]
+[ext_resource type="AudioStream" uid="uid://creolu3qo34c3" path="res://audio/placeholders set 2/music_room4_exploration_layer1_v2.mp3" id="3_fnucg"]
 [ext_resource type="Texture2D" uid="uid://co7h22bt01sde" path="res://images/Platform Room/Platform_Pillars_BG.PNG" id="3_ro8b2"]
+[ext_resource type="AudioStream" uid="uid://c8pk6ucsub03k" path="res://audio/placeholders set 2/music_room4_exploration_layer2_v2.mp3" id="4_hk7ny"]
 [ext_resource type="Texture2D" uid="uid://xtslxu3rvxf5" path="res://images/Platform Room/Platform_Pillars.PNG" id="4_ro8b2"]
 [ext_resource type="Texture2D" uid="uid://tuaab81k8qja" path="res://images/Platform Room/Platform_Platforms.PNG" id="5_8uvn1"]
+[ext_resource type="AudioStream" uid="uid://cgxqh1kbxw1g4" path="res://audio/placeholders set 2/music_room4_exploration_layer3_v2.mp3" id="5_tpeu5"]
 [ext_resource type="Texture2D" uid="uid://ct0i11x2dbvty" path="res://images/Platform Room/Platform_Floor.PNG" id="6_8uvn1"]
 [ext_resource type="Texture2D" uid="uid://ce2xdflg5bp7l" path="res://images/Platform Room/Platform_Gold.PNG" id="7_u6vv3"]
 [ext_resource type="Texture2D" uid="uid://eb8r0gy0nlr1" path="res://images/Platform Room/Platform_Gold_Glow.PNG" id="8_f3wc7"]
@@ -49,6 +52,23 @@ size = Vector2(81.5, 2123.06)
 [node name="PlatformRoom" instance=ExtResource("1_xqi78")]
 script = ExtResource("2_u6vv3")
 enable_player_lights = true
+
+[node name="Music" parent="." index="1"]
+unique_name_in_owner = true
+stream = ExtResource("3_fnucg")
+autoplay = false
+
+[node name="Music2" type="AudioStreamPlayer" parent="." index="2"]
+unique_name_in_owner = true
+stream = ExtResource("4_hk7ny")
+volume_db = 21.649
+parameters/looping = true
+
+[node name="Music3" type="AudioStreamPlayer" parent="." index="3"]
+unique_name_in_owner = true
+stream = ExtResource("5_tpeu5")
+volume_db = 21.649
+parameters/looping = true
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
@@ -263,5 +283,5 @@ metadata/_custom_type_script = "uid://cry5eumdnko7i"
 position = Vector2(2859, -479.467)
 shape = SubResource("RectangleShape2D_f3wc7")
 
-[node name="Cutscenes" parent="." index="5"]
+[node name="Cutscenes" parent="." index="7"]
 active = false
