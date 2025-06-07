@@ -15,7 +15,7 @@ signal successful_fly_with_other
 signal done_flying
 
 func upgrade_fly_duration():
-	%FlightTimer.wait_time += 1.0
+	%FlightTimer.wait_time += 2.0
 
 func turn_right():
 	super.turn_right()

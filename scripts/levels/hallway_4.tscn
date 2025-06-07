@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0004maoqvjhj"]
+[gd_scene load_steps=22 format=3 uid="uid://b0004maoqvjhj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_ds0mx"]
@@ -190,8 +190,58 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_kedrn"]
+resource_name = "last"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cutscenes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [NodePath("../Graphics/Objects/Markers/Marker2D3"), NodePath("../Graphics/Objects/Markers/Marker2D3"), 30],
+"method": &"approach_errand"
+}, {
+"args": ["51", true],
+"method": &"play_dialogue"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Characters/Witch:is_player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Characters/Witch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [NodePath("../../Objects/Markers/Marker2D")],
+"method": &"follow"
+}, {
+"args": [NodePath("")],
+"method": &"follow"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ds0mx"]
 _data = {
+&"last": SubResource("Animation_kedrn"),
 &"scene": SubResource("Animation_euhxa")
 }
 
@@ -290,22 +340,25 @@ shape = SubResource("RectangleShape2D_4uvku")
 [node name="Marker2D" type="Marker2D" parent="Graphics/Objects/Markers" index="0"]
 position = Vector2(405, 557)
 
-[node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+[node name="Marker2D3" type="Marker2D" parent="Graphics/Objects/Markers" index="1"]
+position = Vector2(941, 567)
+
+[node name="Marker2D2" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
 position = Vector2(64, 572)
 
-[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="2"]
+[node name="SpawnRight" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
 unique_name_in_owner = true
 position = Vector2(2572, 575)
 
-[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="3"]
+[node name="SpawnRight2" type="Marker2D" parent="Graphics/Objects/Markers" index="4"]
 unique_name_in_owner = true
 position = Vector2(2633, 575)
 
-[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="4"]
+[node name="SpawnLeft" type="Marker2D" parent="Graphics/Objects/Markers" index="5"]
 unique_name_in_owner = true
 position = Vector2(130, 574)
 
-[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="5"]
+[node name="SpawnLeft2" type="Marker2D" parent="Graphics/Objects/Markers" index="6"]
 unique_name_in_owner = true
 position = Vector2(64, 574)
 

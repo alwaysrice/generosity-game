@@ -1,5 +1,8 @@
 extends Level
 
+@export_file("*.tscn") var hallway_path: String
+
+
 
 func _ready() -> void:
 	%Witch.turn_left()
@@ -41,3 +44,12 @@ func revert_music():
 	%Music3.fade_to_stop(2.0, func():
 		%NormalMusic.fade_to_play(2.0)
 		)
+		
+
+
+func trigger_hallway_event():
+	%Witch.upgrade_fly_duration()
+	var hallway = GameManager.level_history[hallway_path] as Hallway4
+	hallway.can_play_last_scene = true
+	print("Triggered hallway event")
+	

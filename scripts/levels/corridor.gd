@@ -26,11 +26,12 @@ func apply_switch():
 
 func _ready() -> void:
 	if can_play_scene:
+		print("Starting corridor scene")
 		can_play_scene = false
 		$Cutscenes.animation_finished.connect(func(anim: StringName):
 			$Cutscenes.play("story/scene")
 			$Cutscenes.animation_finished.connect(func(anim):
-				print("----------------finished all animation")
+				print("Finished corridor scene")
 				, CONNECT_ONE_SHOT)
 			, CONNECT_ONE_SHOT)
 

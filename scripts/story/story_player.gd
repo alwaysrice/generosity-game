@@ -69,7 +69,8 @@ class LeaveLevelAloneErrand extends Errand:
 	func complete():
 		pass
 	
-
+class CollectStarErrand extends Errand: 
+	var star: StarPiece
 
 class NumberEqualErrand extends Errand: 
 	var counter = 0
@@ -280,7 +281,15 @@ func constellation_finished_errand(barrier: NodePath):
 		errand.force_complete()
 		, CONNECT_ONE_SHOT)
 	pause()
-
+	
+func collect_star_errand(star: NodePath):
+	var errand = push_errand(CollectStarErrand.new())
+	errand.star = get_node(star)
+	errand.star.collect(func():
+		errand.force_complete()
+	)
+	pause()
+	
 
 func is_in_cutscene() -> bool:
 	var value = false
