@@ -208,7 +208,7 @@ region_rect = Rect2(0, 0, 1996.37, 1538)
 [node name="Parallax2D2" type="Parallax2D" parent="Graphics/Background" index="1"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D2" index="0"]
-position = Vector2(0, -301)
+position = Vector2(0, -262)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_5v0w1")
 centered = false
@@ -244,6 +244,9 @@ shape = SubResource("RectangleShape2D_y84g5")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Graphics/Objects/Floors" index="2"]
 position = Vector2(2597, 614.5)
 shape = SubResource("RectangleShape2D_iduid")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Graphics/Objects/Floors" index="3"]
+polygon = PackedVector2Array(1450, 574, 1467, 559, 1512, 551, 1549, 439, 1572, 430, 1620, 446, 1710, 381, 1799, 431, 1843, 536, 1873, 532, 1973, 575)
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
 collision_layer = 8

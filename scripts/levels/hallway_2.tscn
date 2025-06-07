@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2mkct7qra8ke"]
+[gd_scene load_steps=22 format=3 uid="uid://d2mkct7qra8ke"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_j8t4y"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_h2pyh"]
@@ -24,6 +24,9 @@ size = Vector2(2692, 458)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jd5nn"]
 size = Vector2(83, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wejdc"]
+size = Vector2(43.5, 15.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ysml"]
 size = Vector2(81.5, 1408.13)
@@ -205,7 +208,7 @@ region_rect = Rect2(0, 0, 1996.37, 1538)
 [node name="Parallax2D2" type="Parallax2D" parent="Graphics/Background" index="1"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics/Background/Parallax2D2" index="0"]
-position = Vector2(0, -301)
+position = Vector2(0, -262)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_hd1i5")
 centered = false
@@ -238,6 +241,9 @@ shape = SubResource("RectangleShape2D_j8t4y")
 position = Vector2(1869.75, 615)
 shape = SubResource("RectangleShape2D_hd1i5")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Graphics/Objects/Floors" index="2"]
+polygon = PackedVector2Array(1588, 575, 1610, 546, 1678, 548, 1694, 530, 1752, 531, 1776, 574)
+
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="1"]
 collision_layer = 8
 collision_mask = 0
@@ -260,6 +266,18 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="0"]
 position = Vector2(974.5, 614.5)
 shape = SubResource("RectangleShape2D_jd5nn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="1"]
+position = Vector2(1693, 555)
+shape = SubResource("RectangleShape2D_wejdc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="2"]
+position = Vector2(1760, 583)
+shape = SubResource("RectangleShape2D_wejdc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Graphics/Objects/Gaps" index="3"]
+position = Vector2(1603, 583)
+shape = SubResource("RectangleShape2D_wejdc")
 
 [node name="Markers" type="Node2D" parent="Graphics/Objects" index="3"]
 
