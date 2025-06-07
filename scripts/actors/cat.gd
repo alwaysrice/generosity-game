@@ -11,6 +11,8 @@ func join_fly():
 	is_joining = true
 	var witch = following as Witch
 	witch.done_flying.connect(func():
+		witch.is_success_fly_with_other = true
+		witch.successful_fly_with_other.emit()
 		has_joined_other = false
 		, CONNECT_ONE_SHOT)
 			

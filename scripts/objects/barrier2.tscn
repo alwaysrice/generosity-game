@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo7qbcwn5bs4f"]
+
+[ext_resource type="PackedScene" uid="uid://hlogfsnd3jat" path="res://scripts/objects/barrier.tscn" id="1_cmusk"]
+[ext_resource type="Texture2D" uid="uid://b0lgy4sa7rvvi" path="res://images/Platform Room/Platform_Barrier_Con2.PNG" id="2_i1rc8"]
+[ext_resource type="Texture2D" uid="uid://dngtqycjgyxa0" path="res://images/Platform Room/Platform_Barrier_Con3.PNG" id="3_8oy1j"]
+[ext_resource type="Texture2D" uid="uid://8ajksvep84hv" path="res://images/Platform Room/Platform_Barrier_Con1.PNG" id="4_a5gt5"]
+
+[node name="Barrier2" instance=ExtResource("1_cmusk")]
+
+[node name="PlatformBarrierCon1" parent="PlatformBarrier" index="0"]
+texture = ExtResource("2_i1rc8")
+
+[node name="PlatformBarrierCon2" parent="PlatformBarrier" index="1"]
+texture = ExtResource("3_8oy1j")
+
+[node name="PlatformBarrierCon3" parent="PlatformBarrier" index="2"]
+texture = ExtResource("4_a5gt5")

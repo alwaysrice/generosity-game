@@ -66,4 +66,4 @@ sfx = ExtResource("10_5jwxf")
 visible = false
 
 [node name="AnimationPlayer" parent="." index="3"]
-autoplay = "constellation/enter"
+autoplay = ""

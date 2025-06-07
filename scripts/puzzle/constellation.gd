@@ -10,6 +10,7 @@ class_name Constellation extends Node2D
 @export var glow_gradient: Gradient
 @export var glow_color_width = 1
 @export var chimes: Array[AudioStream] = []
+@onready var animator = $AnimationPlayer
 var has_connected_all = false
 var is_dragging := false
 var connected_points: Array[ConstellationStar] = []
@@ -18,12 +19,14 @@ signal connected_all
 signal connect_point(point: Node2D)
 signal released_connection
 signal finished_success
+var is_completely_done = false
 
 #func emit_starts_fading():
 	#starts_fading.emit()
 	#
 #func emit_finished_success():
 	#finished_success.emit()
+
 
 func get_connected_points_pos():
 	var connected_points_pos = []
@@ -43,14 +46,16 @@ func enter():
 	start.activate()
 	%MouseLine.set_point_position(0, Vector2.ZERO)
 	%MouseLine.set_point_position(1, Vector2.ZERO)
+	$Music.play()
 	
 func _ready() -> void:
 	assert(%Stars.get_children().size() > 1)
+	finished_success.connect(func(): is_completely_done = true)
 	for star: ConstellationStar in %Stars.get_children():
 		star.unactivate()
 
 func _input(event: InputEvent) -> void:
-	if has_connected_all: return
+	if has_connected_all or not $Music.playing: return
 	if event is InputEventMouseButton and can_start():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			queue_redraw()
@@ -127,6 +132,7 @@ func check_for_point() -> bool:
 	return false
 
 func _process(delta: float) -> void:
+	if not $Music.playing: return
 	if is_dragging:
 		var mouse_pos = get_global_mouse_position()
 		%MouseLine.set_point_position(1, mouse_pos)

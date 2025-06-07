@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyjn5o0jfjfsi"]
+
+[ext_resource type="PackedScene" uid="uid://dgo61je43nesu" path="res://scripts/objects/star_piece.tscn" id="1_lau21"]
+[ext_resource type="Texture2D" uid="uid://bocsk1107whfd" path="res://images/Platform Room/Platform_StarPiece2.PNG" id="2_5fmxk"]
+
+[node name="StarPiece2" instance=ExtResource("1_lau21")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5fmxk")

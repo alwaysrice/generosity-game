@@ -8,7 +8,9 @@ var is_on_flight = false
 @export var vertical_accel = 6
 @export var fly_collision_offset = 26
 var finished_fly = false
+var is_success_fly_with_other = false
 signal hint_fly_interruped
+signal successful_fly_with_other
 
 signal done_flying
 
@@ -90,4 +92,5 @@ func _on_fly_timer_timeout() -> void:
 
 func _on_max_wait_timer_timeout() -> void:
 	if following is Cat:
+		is_success_fly_with_other = false
 		hint_fly_interruped.emit()

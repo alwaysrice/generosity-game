@@ -1,10 +1,62 @@
-[gd_scene load_steps=9 format=3 uid="uid://hlogfsnd3jat"]
+[gd_scene load_steps=11 format=3 uid="uid://hlogfsnd3jat"]
 
 [ext_resource type="Texture2D" uid="uid://b4qf2g55a1r77" path="res://images/Platform Room/Platform_Barrier.PNG" id="1_5m0gh"]
+[ext_resource type="Script" uid="uid://dteexjsgb6xu6" path="res://scripts/objects/barrier.gd" id="1_fw84t"]
 [ext_resource type="Texture2D" uid="uid://8ajksvep84hv" path="res://images/Platform Room/Platform_Barrier_Con1.PNG" id="2_fw84t"]
 [ext_resource type="Texture2D" uid="uid://b0lgy4sa7rvvi" path="res://images/Platform Room/Platform_Barrier_Con2.PNG" id="3_oxb7h"]
 [ext_resource type="Texture2D" uid="uid://dngtqycjgyxa0" path="res://images/Platform Room/Platform_Barrier_Con3.PNG" id="4_b71ot"]
 [ext_resource type="Texture2D" uid="uid://sq2ynxyhmvnc" path="res://images/Platform Room/Platform_Barrier_Glow.PNG" id="5_iain2"]
+
+[sub_resource type="Animation" id="Animation_fw84t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformBarrier/PlatformBarrierCon1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-330, 98)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlatformBarrier/PlatformBarrierCon2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, -208)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlatformBarrier/PlatformBarrierCon3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(324, 57)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlatformBarrier/PlatformBarrierGlow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_5m0gh"]
 resource_name = "animate"
@@ -58,64 +110,18 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 0.270588), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_fw84t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlatformBarrier/PlatformBarrierCon1:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-330, 98)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlatformBarrier/PlatformBarrierCon2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-32, -208)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlatformBarrier/PlatformBarrierCon3:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(324, 57)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlatformBarrier/PlatformBarrierGlow:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxb7h"]
 _data = {
 &"RESET": SubResource("Animation_fw84t"),
 &"animate": SubResource("Animation_5m0gh")
 }
 
-[node name="Barrier" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m0gh"]
+size = Vector2(813, 463)
+
+[node name="Barrier" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_fw84t")
 
 [node name="PlatformBarrier" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -143,3 +149,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_oxb7h")
 }
 autoplay = "animate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_5m0gh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

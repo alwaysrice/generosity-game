@@ -43,4 +43,4 @@ ender = true
 sfx = ExtResource("8_0b723")
 
 [node name="AnimationPlayer" parent="." index="3"]
-autoplay = "constellation/enter"
+autoplay = ""

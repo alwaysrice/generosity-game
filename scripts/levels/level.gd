@@ -96,9 +96,10 @@ func _ready() -> void:
 		if child is Actor:
 			child.on_death.connect(_on_death)	
 			
+
 	%Witch.hint_fly_interruped.connect(func():
 		%Witch.start_flight()
-		%Cat.should_follow = false
+		#%Cat.should_follow = false
 		%Witch.following.is_joining = false
 		#$Cutscenes.play_dialogue_auto("91", func():
 			#%Cat.should_follow = true 

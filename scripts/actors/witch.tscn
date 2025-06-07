@@ -219,7 +219,7 @@ height = 136.0
 [node name="Witch" instance=ExtResource("1_mmq6v")]
 script = ExtResource("2_2mx4y")
 fly_jump_speed = -30.0
-vertical_speed = 300.0
+vertical_speed = 350.0
 vertical_accel = 6
 fly_collision_offset = 26
 

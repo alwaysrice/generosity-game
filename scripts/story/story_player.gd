@@ -68,7 +68,15 @@ class LeaveLevelAloneErrand extends Errand:
 	var actor: Actor
 	func complete():
 		pass
+	
 
+
+class NumberEqualErrand extends Errand: 
+	var counter = 0
+	var target = -1
+	func is_done() -> bool:
+		return counter == target
+		
 
 class JumpActorErrand extends Errand: 
 	var actor: Actor
@@ -263,6 +271,15 @@ func has_key_errand(actor: NodePath):
 	var errand = push_errand(Key.HasKeyErrand.new())
 	errand.actor = get_node(actor)
 	pause()
+	
+	
+func constellation_finished_errand(barrier: NodePath):
+	var errand = push_errand(Errand.new())
+	get_node(barrier).constellation.finished_success.connect(func():
+		errand.force_complete()
+		, CONNECT_ONE_SHOT)
+	pause()
+
 
 func is_in_cutscene() -> bool:
 	var value = false
