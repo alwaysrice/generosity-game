@@ -2,6 +2,10 @@ class_name Corridor extends Level
 
 var is_switched = true
 @export var can_play_scene = false
+var can_switch = false
+
+func allow_switching():
+	can_switch = true
 
 func toggle_process_mode(node: Node, value: bool):
 	if value:
@@ -10,7 +14,8 @@ func toggle_process_mode(node: Node, value: bool):
 		node.process_mode = Node.PROCESS_MODE_DISABLED
 
 func toggle_switch():
-	$AnimationPlayer.play("corridor/switch")
+	if can_switch:
+		$AnimationPlayer.play("corridor/switch")
 	
 func apply_switch():
 	is_switched = not is_switched
@@ -44,7 +49,7 @@ func _ready() -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
-	if event.is_action_pressed("spellcast"):
+	if event.is_action_pressed("spellcast") and can_switch:
 		if %LanternBottom.can_activate:
 			%Witch.spellcast()
 			%LanternBottom.toggle_activation()

@@ -46,22 +46,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0.309804), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_y1x1i"]
-resource_name = "within_range"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlatformLantern:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_g3blt"]
 resource_name = "not_within_range"
 capture_included = true
@@ -78,8 +62,9 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_u2vpp"]
-resource_name = "turn_on"
+[sub_resource type="Animation" id="Animation_kfb4i"]
+resource_name = "turn_off"
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,23 +74,40 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 2,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u2vpp"]
+resource_name = "turn_on"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 2,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_kfb4i"]
-resource_name = "turn_off"
+[sub_resource type="Animation" id="Animation_y1x1i"]
+resource_name = "within_range"
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlatformLantern/PlatformLanternGlow:modulate")
+tracks/0/path = NodePath("PlatformLantern:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(2, 2, 2, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g3blt"]

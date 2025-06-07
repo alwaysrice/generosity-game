@@ -152,6 +152,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_3wasf"]
+length = 3.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -159,11 +160,20 @@ tracks/0/path = NodePath("Graphics/Characters/Cat")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.966667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.867703, 1.06667, 2.86667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "values": [{
 "args": [NodePath("")],
 "method": &"follow"
+}, {
+"args": [],
+"method": &"try_jump"
+}, {
+"args": [],
+"method": &"try_jump"
+}, {
+"args": [],
+"method": &"try_jump"
 }, {
 "args": [NodePath("../Witch")],
 "method": &"follow"
@@ -188,17 +198,11 @@ tracks/2/path = NodePath("Cutscenes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0666667, 0.0999997, 0.133333, 0.166667, 0.233334, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.0666667, 2.06667, 2.13333, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": ["31", true],
 "method": &"play_dialogue"
-}, {
-"args": [NodePath("../Graphics/Characters/Cat")],
-"method": &"jump_actor_errand"
-}, {
-"args": [NodePath("../Graphics/Characters/Cat")],
-"method": &"jump_actor_errand"
 }, {
 "args": ["32", true],
 "method": &"play_dialogue"
@@ -217,9 +221,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
+"times": PackedFloat32Array(2.13333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"allow_switching"
+}]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -231,19 +238,19 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1866, 570)]
+"values": [Vector2(1866, 576)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Cutscenes:active")
+tracks/5/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.966667),
+"times": PackedFloat32Array(0, 2.86667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hg7ur"]
@@ -294,9 +301,6 @@ can_play_scene = false
 visible = false
 color = Color(0, 0, 0, 0.0628158)
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
-
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 5.0
 offset_top = -1261.0
@@ -316,11 +320,11 @@ texture = ExtResource("2_cj6vk")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(261, -665)
+position = Vector2(2400, 575)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(130, -678)
+position = Vector2(1866, 576)
 should_follow = true
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -513,6 +517,7 @@ libraries = {
 &"story": SubResource("AnimationLibrary_hg7ur"),
 &"trans": ExtResource("13_3wasf")
 }
+autoplay = "story/scene"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {

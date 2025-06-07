@@ -111,6 +111,36 @@ _data = {
 &"RESET": SubResource("Animation_w203f")
 }
 
+[sub_resource type="Animation" id="Animation_d0y2p"]
+resource_name = "ending"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/BlackOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2.46229, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Music")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [10.0, null, 0.0],
+"method": &"fade_to_stop"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_kedrn"]
 resource_name = "last"
 tracks/0/type = "method"
@@ -266,36 +296,6 @@ tracks/4/keys = {
 "values": [{
 "args": [],
 "method": &"trigger_corridor_event"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_d0y2p"]
-resource_name = "ending"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Interface/BlackOverlay:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(2.46229, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Music")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [10.0, null, 0.0],
-"method": &"fade_to_stop"
 }]
 }
 
