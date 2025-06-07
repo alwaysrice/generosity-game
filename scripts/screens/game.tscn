@@ -6,7 +6,7 @@
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_fc0e3")
-initial_level = "uid://b0004maoqvjhj"
+initial_level = "uid://dirhpaeoq4yqm"
 preloaded_levels = ["uid://b0004maoqvjhj", "uid://d2mkct7qra8ke", "uid://crqnw7r70ikhe", "uid://b0004maoqvjhj", "uid://b4evh3wrmnoou", "uid://cmu22ofvmxccq", "uid://dirhpaeoq4yqm"]
 metadata/_custom_type_script = "uid://wrr21c6qeca4"
 

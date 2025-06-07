@@ -110,7 +110,7 @@ tracks/0/path = NodePath("Cutscenes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0999997, 0.166667, 0.233334, 0.433334, 0.500001),
+"times": PackedFloat32Array(0.033333, 0.133333, 0.2, 0.266667, 0.466667, 0.533334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -139,7 +139,7 @@ tracks/1/path = NodePath("Graphics/Characters/Witch:is_player")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.500001),
+"times": PackedFloat32Array(0.033333, 0.533334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -151,7 +151,7 @@ tracks/2/path = NodePath("Graphics/Characters/Witch")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0999997, 0.233334, 0.366668, 0.533333),
+"times": PackedFloat32Array(0.133333, 0.266667, 0.400001, 0.566666),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [NodePath("../../Objects/Markers/Marker2D2")],
@@ -177,6 +177,9 @@ _data = {
 
 [node name="Music" parent="." index="1"]
 stream = ExtResource("2_xcxxk")
+
+[node name="Graphics" parent="." index="3"]
+modulate = Color(0, 0, 0, 1)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
@@ -340,12 +343,12 @@ shape = SubResource("RectangleShape2D_xcxxk")
 target = NodePath("../Graphics/Characters/Witch")
 
 [node name="Cutscenes" parent="." index="5"]
-active = false
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_jd5nn"),
 &"story": SubResource("AnimationLibrary_h2pyh"),
 &"trans": ExtResource("4_c8afb")
 }
+autoplay = "story/scene"
 
 [connection signal="timeout" from="Graphics/Objects/Markers/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

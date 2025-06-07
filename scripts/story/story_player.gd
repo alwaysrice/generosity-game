@@ -30,6 +30,7 @@ class ApproachErrand extends Errand:
 	func is_done() -> bool:
 		return Geometry2D.is_point_in_circle(actor.global_position, body.global_position, radius)
 	func complete():
+		print("Completed approach errand to " + body.name)
 		playwright.play()
 		
 class LeaveErrand extends Errand:
@@ -275,6 +276,7 @@ func approach_errand(actor: NodePath, point: NodePath, radius = 30):
 	errand.body = get_node(point)
 	errand.radius = radius
 	pause()
+	print("Approach errand to " + errand.body.name)
 	
 func use_item_errand(actor: NodePath, item_name: String):
 	var errand = push_errand(Key.UseErrand.new())
@@ -330,7 +332,7 @@ func _ready() -> void:
 			if line:
 				dialogues[idx].append(line)
 
-	print(dialogues)
+	#print(dialogues)
 	dialogue_ended.connect(func():
 		dialogue_label.visible_characters = 0
 		has_dialogue_ended = true
