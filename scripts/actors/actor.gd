@@ -50,6 +50,7 @@ signal jumped
 func _ready() -> void:
 	light_overlay_modulate = %OverlayLight.modulate
 	light_spread_energy = %SpreadLight.energy
+	
 
 func set_light_ratio(value: float):
 	value = clampf(value, 0.0, 1.0)
@@ -77,6 +78,13 @@ func die():
 	$DeathEffect.emitting = true
 	graphics.modulate = Color.TRANSPARENT
 	is_dead = true
+	
+func spellcast():
+	get_sprite().play("spellcast")
+	get_sprite().animation_finished.connect(func():
+		get_sprite().play("idle")
+		print("finished asdfasdf")
+		, CONNECT_ONE_SHOT)
 
 func is_follow_object():
 	return following is not Actor or following.process_mode == ProcessMode.PROCESS_MODE_DISABLED
@@ -197,10 +205,11 @@ func _physics_process(delta: float) -> void:
 	
 	var animation := get_new_animation()
 	var sprite = $Graphics.get_child(0)
-	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other:
+	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast":
 		animation_history.append(animation)
 		sprite.play(animation)
 		
+
 var animation_history = []
 func get_new_animation() -> String:
 	var animation_new: String

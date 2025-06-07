@@ -320,7 +320,7 @@ position = Vector2(261, -665)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(1866, 570)
+position = Vector2(130, -678)
 should_follow = true
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]

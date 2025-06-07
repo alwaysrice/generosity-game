@@ -46,9 +46,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
 	if event.is_action_pressed("spellcast"):
 		if %LanternBottom.can_activate:
+			%Witch.spellcast()
 			%LanternBottom.toggle_activation()
 		if %LanternTop.can_activate:
 			%LanternTop.toggle_activation()
+			%Witch.spellcast()
+
 
 func _on_entered_level():
 	print("ENTEREd: can play: " + str(can_play_scene))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b68iki5mx8dwx"]
+[gd_scene load_steps=37 format=3 uid="uid://b68iki5mx8dwx"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
 [ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_2mx4y"]
@@ -25,6 +25,13 @@
 [ext_resource type="Texture2D" uid="uid://bhsvi6kinmyp6" path="res://images/actors/Walk Cycle - Witch/WCW-08.png" id="15_f6mda"]
 [ext_resource type="Texture2D" uid="uid://bugj5givqk43p" path="res://images/actors/Walk Cycle - Witch/WCW-09.png" id="16_crrdt"]
 [ext_resource type="Texture2D" uid="uid://bgrr0l5x2i7bc" path="res://images/actors/Walk Cycle - Witch/WCW-10.png" id="17_n7a2s"]
+[ext_resource type="Texture2D" uid="uid://cjjyqtrjof2nq" path="res://images/actors/Spell Cycle/SC-01.PNG" id="26_wyi6x"]
+[ext_resource type="Texture2D" uid="uid://bl8qkywntyqhm" path="res://images/actors/Spell Cycle/SC-02.PNG" id="27_hbgsh"]
+[ext_resource type="Texture2D" uid="uid://b2pnt07tfw123" path="res://images/actors/Spell Cycle/SC-03.PNG" id="28_1rnka"]
+[ext_resource type="Texture2D" uid="uid://dy4y7hbhhw2l8" path="res://images/actors/Spell Cycle/SC-04.PNG" id="29_egn3w"]
+[ext_resource type="Texture2D" uid="uid://c3iq4gq5dstlb" path="res://images/actors/Spell Cycle/SC-05.PNG" id="30_1tcib"]
+[ext_resource type="Texture2D" uid="uid://nvqkqk0nq2a0" path="res://images/actors/Spell Cycle/SC-06-08.PNG" id="31_ipnnb"]
+[ext_resource type="Texture2D" uid="uid://bulmsmssx2ekn" path="res://images/actors/Spell Cycle/SC-09.PNG" id="32_3dcs2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uubtp"]
 animations = [{
@@ -174,6 +181,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("26_wyi6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_hbgsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_1rnka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_egn3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_1tcib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ipnnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_3dcs2")
+}],
+"loop": false,
+"name": &"spellcast",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("8_uubtp")
 }, {
 "duration": 1.0,
@@ -237,7 +270,7 @@ use_parent_material = true
 position = Vector2(-1.13687e-13, 66)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_uubtp")
-animation = &"jump"
+animation = &"idle"
 offset = Vector2(-140, -660)
 flip_h = true
 
