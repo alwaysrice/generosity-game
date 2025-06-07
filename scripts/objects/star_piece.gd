@@ -5,6 +5,7 @@ func collect(callback: Callable):
 	if collected:
 		return
 	collected = true
+	print("Collecting start")
 	$AnimationPlayer.play(&"collect")
 	$AnimationPlayer.animation_finished.connect(func(anim):
 		callback.call()

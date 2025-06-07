@@ -222,7 +222,7 @@ fly_jump_speed = -30.0
 vertical_speed = 350.0
 vertical_accel = 6
 fly_collision_offset = 26
-run_speed = 340.0
+run_speed = 330.0
 jump_speed = -600.0
 
 [node name="FlyOffset" type="Marker2D" parent="." index="0"]

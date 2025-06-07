@@ -93,6 +93,10 @@ class PlayAnimationErrand extends Errand:
 	func complete():	
 		playwright.play(last_animation)
 		playwright.seek(last_seek, true, true)
+		
+class PlayCommercialAnimationErrand extends Errand: 
+	var animation: String
+	var animator: AnimationPlayer
 
 class PlayMusicErrand extends Errand: 
 	var music: AudioStreamPlayer		
@@ -136,6 +140,20 @@ func play_animation_errand(animation: String):
 		if anim == errand.animation:
 			errand.force_complete()
 		, CONNECT_ONE_SHOT)
+
+
+		
+func play_commercial_animation_errand(animation: String, animator: NodePath):
+	var errand = push_errand(PlayCommercialAnimationErrand.new())
+	errand.animator = get_node(animator)
+	errand.animation = animation
+	errand.animator.play(animation)
+	pause()
+	errand.animator.animation_finished.connect(func(anim: StringName):
+		if anim == errand.animation:
+			errand.force_complete()
+		, CONNECT_ONE_SHOT)
+
 
 var music_tween: Tween
 func toggle_music_errand(music: NodePath, is_singleton: bool = true, last_music_fade = 1.0):
@@ -277,7 +295,7 @@ func has_key_errand(actor: NodePath):
 func constellation_finished_errand(barrier: NodePath):
 	var errand = push_errand(Errand.new())
 	get_node(barrier).constellation.finished_success.connect(func():
-		print("FINISHED ONE CONSTELLATION")
+		print("Finished constellation errand")
 		errand.force_complete()
 		, CONNECT_ONE_SHOT)
 	pause()
@@ -286,6 +304,7 @@ func collect_star_errand(star: NodePath):
 	var errand = push_errand(CollectStarErrand.new())
 	errand.star = get_node(star)
 	errand.star.collect(func():
+		print("Finished collecting errand")
 		errand.force_complete()
 	)
 	pause()
