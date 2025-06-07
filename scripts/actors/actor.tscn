@@ -103,8 +103,8 @@ initial_velocity_min = 150.0
 initial_velocity_max = 150.0
 orbit_velocity_min = 1.0
 orbit_velocity_max = 1.0
-scale_amount_min = 0.5
-scale_amount_max = 0.5
+scale_amount_min = 0.2
+scale_amount_max = 0.2
 
 [node name="SwitchEffect" type="CPUParticles2D" parent="."]
 emitting = false

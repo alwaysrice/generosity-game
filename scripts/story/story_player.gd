@@ -130,7 +130,7 @@ func play_animation_errand(animation: String):
 
 var music_tween: Tween
 func toggle_music_errand(music: NodePath, is_singleton: bool = true, last_music_fade = 1.0):
-	var music_node: AudioStreamPlayer = get_node(music)
+	var music_node: AudioStreamPlayer = get_node_or_null(music)
 	var remove = null
 	for errand in errand_list:
 		if errand is PlayMusicErrand and (errand.music == music_node or is_singleton):
@@ -144,11 +144,15 @@ func toggle_music_errand(music: NodePath, is_singleton: bool = true, last_music_
 			remove.music.stop()
 			remove.music.volume_db = last_volume
 			if remove.music != music_node or is_singleton:
+				if not music_node:
+					return
 				var errand = push_errand(PlayMusicErrand.new())
 				errand.music = music_node
 				errand.music.play()
 			)
 	else:
+		if not music_node:
+			return
 		var errand = push_errand(PlayMusicErrand.new())
 		errand.music = music_node
 		errand.music.play()

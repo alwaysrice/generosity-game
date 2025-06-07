@@ -62,5 +62,45 @@ Nyota: “…Where is everyone?”
 33
 “Looks like that did something. Come on!”
 
+41
+“Woah.”
+
+42
+“I know this is the Moon Palace, but wow.”
+“Wait, what’s that?”
+
+43
+“It’s… a star. Oh, and it’s broken, the poor thing…”
+“I can sense the missing pieces nearby. We should find them and quickly!”
+
+44
+“Hmm, they’re hidden behind these barriers. Who would do such a thing?”
+“Stand back, Paka. I’m going to try and decode it.”
+
+45
+“Thank you, oh wandering traveler.”
+
+46
+“…And her feline companion.”
+“I would have been lost if it weren’t for your help and I am eternally grateful.”
+“Please, tell me how I may help you.”
+
+47
+“I can sense that your magic is very weak.”
+“You will need your strength if you wish to go further into the palace.”
+“Here, allow me to share some of my stardust with you.”
+
+48
+“My magic. It feels a bit stronger now.”
+“Thank you, dear star!”
+“I wish you a safe journey across the cosmos.”
+
+49
+“Did you see that? We got to meet a real star!”
+“Anyways, I should have enough magic now to cross the large gap. Let’s go back there.”
+
+51
+“Here! I should have enough magic to fly across now.”
+
 91
 "Paka can't come right now..."
