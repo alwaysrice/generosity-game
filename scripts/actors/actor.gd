@@ -152,7 +152,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		can_double_jump = true
 		
-	if is_player and (Input.is_action_just_pressed("jump") or should_jump):
+	var can_move = get_sprite().animation != "pet"
+	if is_player and (Input.is_action_just_pressed("jump") or should_jump) and can_move:
 		try_jump()
 		get_viewport().set_input_as_handled()
 		
@@ -170,14 +171,15 @@ func _physics_process(delta: float) -> void:
 			turn_left()
 	
 	if is_player:
-		var speed = walk_speed
-		var accel = walk_accel
-		if Input.is_action_pressed("run"):
-			speed = run_speed
-			accel = run_accel
-	
-		var direction: float = get_input_direction() * speed * int(is_player)
-		velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
+		if can_move: 
+			var speed = walk_speed
+			var accel = walk_accel
+			if Input.is_action_pressed("run"):
+				speed = run_speed
+				accel = run_accel
+		
+			var direction: float = get_input_direction() * speed * int(is_player)
+			velocity.x = move_toward(velocity.x, direction, accel * speed * delta)
 	
 	# If flying with other chara
 	elif has_joined_other:
@@ -205,7 +207,7 @@ func _physics_process(delta: float) -> void:
 	
 	var animation := get_new_animation()
 	var sprite = $Graphics.get_child(0)
-	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast":
+	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast" and not sprite.animation == "pet":
 		animation_history.append(animation)
 		sprite.play(animation)
 		

@@ -147,9 +147,6 @@ stream = ExtResource("2_7p5fu")
 [node name="Hint" parent="Interface" index="2"]
 text = "Hold \"Shift\" whole moving to run"
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
-
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
 offset_top = -262.0

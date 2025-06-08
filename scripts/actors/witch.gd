@@ -70,8 +70,32 @@ func _unhandled_input(event: InputEvent) -> void:
 		if following is Cat and following.following is Witch:
 			following.join_fly()
 			following.has_joined.connect(start_flight, CONNECT_ONE_SHOT)
-
+	if event.is_action_pressed("pet") and following is Cat and following.following is Witch and get_sprite().animation == "idle" and not is_petting:
+		pet()
 		
+var is_petting = false
+func pet():
+	var cat = following as Cat
+	is_petting = true
+	var tween = create_tween()
+	tween.tween_property(cat, "modulate", Color.TRANSPARENT, 0.3)
+	tween.tween_callback(func():
+		velocity.x = 0
+		global_position -= %PetOffset.position
+		$CollisionShape2D.global_position += %PetOffset.position
+		get_sprite().play(&"pet")
+		get_sprite().animation_finished.connect(func():
+			global_position += %PetOffset.position
+			$CollisionShape2D.global_position -= %PetOffset.position
+			get_sprite().play(&"idle")
+			cat.global_position = global_position
+			var return_tween = create_tween()
+			return_tween.tween_property(cat, "modulate", Color.WHITE, 0.3)
+			return_tween.tween_callback(func():
+				is_petting = false
+				)
+			, CONNECT_ONE_SHOT)
+		)
 			
 func _on_flight_timer_timeout() -> void:
 	$MaxWaitTimer.stop()

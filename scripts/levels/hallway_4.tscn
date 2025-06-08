@@ -423,6 +423,7 @@ text = "SilverCS"
 
 [node name="Label" type="Label" parent="Interface/EndingCredits" index="1"]
 visible = false
+layout_mode = 0
 offset_left = 343.0
 offset_top = 201.0
 offset_right = 815.0
