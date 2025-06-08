@@ -320,11 +320,11 @@ texture = ExtResource("2_cj6vk")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-position = Vector2(2400, 575)
+position = Vector2(174, -665)
 following = NodePath("../Cat")
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
-position = Vector2(1866, 576)
+position = Vector2(108, -666)
 should_follow = true
 
 [node name="Walls" type="StaticBody2D" parent="Graphics/Objects" index="0"]
@@ -517,7 +517,6 @@ libraries = {
 &"story": SubResource("AnimationLibrary_hg7ur"),
 &"trans": ExtResource("13_3wasf")
 }
-autoplay = "story/scene"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {

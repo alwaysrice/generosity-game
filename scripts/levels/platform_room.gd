@@ -48,7 +48,7 @@ func revert_music():
 
 
 func trigger_hallway_event():
-	%Witch.upgrade_fly_duration()
+	GameManager.upgrade_witch()
 	var hallway = GameManager.level_history[hallway_path] as Hallway4
 	hallway.can_play_last_scene = true
 	print("Triggered hallway event")

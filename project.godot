@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Nyota"
+config/name="Nyota And The Moon Palace"
+config/version="1.0"
 run/main_scene="uid://bwo4k6ylianwv"
 config/features=PackedStringArray("4.4")
-boot_splash/bg_color=Color(0.140447, 0.140447, 0.140447, 1)
+boot_splash/bg_color=Color(0.0562916, 0.0562916, 0.0562916, 1)
 boot_splash/image="uid://dsyyqv1hjsnec"
 config/icon="uid://blk2xinet8sbf"
 boot_splash/icon="res://images/logo/icon.webp"

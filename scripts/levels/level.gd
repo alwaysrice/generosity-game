@@ -74,6 +74,9 @@ func get_bounds() -> Rect2:
 		
 	return rect
 	
+func get_nyota() -> Witch:
+	return %Witch
+	
 var is_once = true
 func _ready() -> void:	
 	if not is_once: return

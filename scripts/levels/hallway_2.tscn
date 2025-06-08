@@ -183,7 +183,7 @@ modulate = Color(0, 0, 0, 1)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
-offset_top = -301.0
+offset_top = -262.0
 offset_right = 2697.0
 offset_bottom = 651.0
 color = Color(0, 0, 0, 1)
@@ -260,7 +260,7 @@ position = Vector2(2741, -195)
 shape = SubResource("RectangleShape2D_11syx")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
-position = Vector2(1349, -522)
+position = Vector2(1349, -482)
 shape = SubResource("RectangleShape2D_h2pyh")
 
 [node name="Gaps" type="Area2D" parent="Graphics/Objects" index="2"]

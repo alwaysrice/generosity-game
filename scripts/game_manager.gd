@@ -12,4 +12,7 @@ func load_level(file: String) -> Level:
 	level_history[file] = new_level
 	return new_level
 	
+func upgrade_witch():
+	for level in level_history.values():
+		level.get_nyota().upgrade_fly_duration()
 	

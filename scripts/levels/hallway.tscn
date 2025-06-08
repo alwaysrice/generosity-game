@@ -18,7 +18,7 @@ size = Vector2(2852, 79)
 size = Vector2(81.5, 1408.13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7p5fu"]
-size = Vector2(2692, 458)
+size = Vector2(2692, 493)
 
 [sub_resource type="Animation" id="Animation_w203f"]
 length = 0.001
@@ -152,7 +152,7 @@ modulate = Color(0, 0, 0, 1)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
-offset_top = -301.0
+offset_top = -262.0
 offset_right = 2697.0
 offset_bottom = 651.0
 color = Color(0, 0, 0, 1)
@@ -223,7 +223,7 @@ position = Vector2(2740, -83)
 shape = SubResource("RectangleShape2D_c8mji")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/Objects/Walls" index="2"]
-position = Vector2(1349, -522)
+position = Vector2(1349, -504.5)
 shape = SubResource("RectangleShape2D_7p5fu")
 
 [node name="DoorHallway" parent="Graphics/Objects" index="2" node_paths=PackedStringArray("target") instance=ExtResource("8_7p5fu")]
