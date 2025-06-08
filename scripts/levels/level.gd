@@ -48,6 +48,18 @@ func fade_music_to_stop(time: float, callable: Callable = func(): pass):
 		music.stop()
 		callable.call()
 		)
+		
+func fade_music_to_none(time: float, callable: Callable = func(): pass):
+	var tween = create_tween()	
+	_last_volume = $Music.volume_db
+	tween.tween_property($Music, "volume_db", -60, time)
+	tween.set_parallel()
+	tween.tween_property($Music2, "volume_db", -60, time)
+	tween.set_parallel()
+	tween.tween_property($Music3, "volume_db", -60, time)
+	tween.tween_callback(func():
+		callable.call()
+		)
 	
 func face_music_resume(time: float, callable: Callable = func(): pass):
 	var tween = create_tween()
@@ -57,6 +69,19 @@ func face_music_resume(time: float, callable: Callable = func(): pass):
 	tween.tween_property(music, "volume_db", _last_volume, time)
 	tween.tween_callback(callable)
 	
+func fade_music_to_normal_volume(time: float, callable: Callable = func(): pass):
+	var tween = create_tween()
+	tween.tween_property($Music, "volume_db", $Music.normal_volume, time)
+
+	if $Music2.volume_db <= 0:
+		tween.set_parallel()
+		tween.tween_property($Music2, "volume_db", $Music2.normal_volume, time)
+
+	if $Music3.volume_db <= 0:
+		tween.set_parallel()
+		tween.tween_property($Music3, "volume_db", $Music3.normal_volume, time)
+
+	tween.tween_callback(callable)
 
 func get_bounds() -> Rect2:
 	var rect = Rect2(10000, 10000, 0, 0)

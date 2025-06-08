@@ -144,6 +144,9 @@ _data = {
 [node name="Music" parent="." index="1"]
 stream = ExtResource("2_7p5fu")
 
+[node name="DialogueSFX" parent="." index="2"]
+volume_db = 15.0
+
 [node name="Hint" parent="Interface" index="2"]
 text = "Hold \"Shift\" whole moving to run"
 
@@ -265,10 +268,10 @@ position = Vector2(130, 574)
 unique_name_in_owner = true
 position = Vector2(64, 574)
 
-[node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
+[node name="Camera" parent="." index="5" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")
 
-[node name="Cutscenes" parent="." index="5"]
+[node name="Cutscenes" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_fo831"),

@@ -178,7 +178,7 @@ _data = {
 [node name="Music" parent="." index="1"]
 stream = ExtResource("2_xcxxk")
 
-[node name="Graphics" parent="." index="3"]
+[node name="Graphics" parent="." index="4"]
 modulate = Color(0, 0, 0, 1)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
@@ -339,10 +339,10 @@ position = Vector2(196, -301)
 position = Vector2(1385, 854.5)
 shape = SubResource("RectangleShape2D_xcxxk")
 
-[node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
+[node name="Camera" parent="." index="5" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")
 
-[node name="Cutscenes" parent="." index="5"]
+[node name="Cutscenes" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_jd5nn"),

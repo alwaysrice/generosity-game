@@ -145,8 +145,15 @@ environment = SubResource("Environment_w203f")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_4dbv1")
-volume_db = 21.649
+volume_db = 15.0
 autoplay = true
+parameters/looping = true
+script = ExtResource("2_m4kgq")
+normal_volume = 15.0
+
+[node name="DialogueSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMP3_4dbv1")
+volume_db = 21.649
 parameters/looping = true
 script = ExtResource("2_m4kgq")
 

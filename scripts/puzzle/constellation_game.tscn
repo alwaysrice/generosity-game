@@ -101,6 +101,6 @@ autoplay = "enter"
 stream = SubResource("AudioStreamMP3_wckjp")
 parameters/looping = true
 script = ExtResource("3_645h7")
-normal_volume = 14.054
+normal_volume = 10.0
 
 [connection signal="connected_all" from="." to="." method="_on_connected_all"]

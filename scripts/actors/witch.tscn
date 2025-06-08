@@ -383,15 +383,19 @@ fly_collision_offset = 26
 run_speed = 330.0
 jump_speed = -600.0
 
-[node name="FlyOffset" type="Marker2D" parent="." index="0"]
+[node name="FlySFX" type="AudioStreamPlayer" parent="." index="0"]
+
+[node name="MoveSFX" type="AudioStreamPlayer" parent="." index="1"]
+
+[node name="FlyOffset" type="Marker2D" parent="." index="2"]
 unique_name_in_owner = true
 position = Vector2(0, -13)
 
-[node name="PetOffset" type="Marker2D" parent="." index="1"]
+[node name="PetOffset" type="Marker2D" parent="." index="3"]
 unique_name_in_owner = true
 position = Vector2(0, -28)
 
-[node name="Graphics" parent="." index="2"]
+[node name="Graphics" parent="." index="4"]
 position = Vector2(1, -69)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Graphics" index="0"]
@@ -420,39 +424,39 @@ position = Vector2(43.2816, -0.837696)
 position = Vector2(6.46982, 0.671738)
 shape = SubResource("RectangleShape2D_2mx4y")
 
-[node name="PlatformDetector" parent="." index="3"]
+[node name="PlatformDetector" parent="." index="5"]
 position = Vector2(0, -1)
 
-[node name="FloorDetector" parent="." index="4"]
+[node name="FloorDetector" parent="." index="6"]
 position = Vector2(0, -10)
 
-[node name="CollisionShape2D" parent="." index="5"]
+[node name="CollisionShape2D" parent="." index="7"]
 position = Vector2(0, -68)
 shape = SubResource("CapsuleShape2D_885mi")
 
-[node name="JumpSound" parent="." index="6"]
+[node name="JumpSound" parent="." index="8"]
 position = Vector2(0, -69)
 
-[node name="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" parent="." index="9"]
 libraries = {
 &"": SubResource("AnimationLibrary_ks07l")
 }
 
-[node name="DeathEffect" parent="." index="8"]
+[node name="DeathEffect" parent="." index="10"]
 position = Vector2(0, -69)
 
-[node name="SwitchEffect" parent="." index="9"]
+[node name="SwitchEffect" parent="." index="11"]
 position = Vector2(0, -69)
 
-[node name="FlightTimer" type="Timer" parent="." index="11"]
+[node name="FlightTimer" type="Timer" parent="." index="13"]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="FlyTimer" type="Timer" parent="." index="12"]
+[node name="FlyTimer" type="Timer" parent="." index="14"]
 wait_time = 0.8
 one_shot = true
 
-[node name="MaxWaitTimer" type="Timer" parent="." index="13"]
+[node name="MaxWaitTimer" type="Timer" parent="." index="15"]
 wait_time = 2.7
 
 [connection signal="timeout" from="FlightTimer" to="." method="_on_flight_timer_timeout"]

@@ -22,7 +22,20 @@ class NoSwitchErrand extends Errand:
 	func complete():
 		pass
 		
-
+class ApproachListErrand extends Errand:
+	var actor: Actor
+	var bodies: Array[Node2D] = []
+	var radius = 10
+	func is_done() -> bool:
+		var value = false
+		for body in bodies:
+			value = value or Geometry2D.is_point_in_circle(actor.global_position, body.global_position, radius)
+		return value
+	func complete():
+		print("Completed approach list errand")
+		playwright.play()
+		
+		
 class ApproachErrand extends Errand:
 	var actor: Actor
 	var body: Node2D
@@ -87,7 +100,20 @@ class JumpActorErrand extends Errand:
 		playwright.play()
 		print("Completed jump errand")
 		
+		
+class AnimateActorErrand extends Errand: 
+	var actor: Actor
+	var paused = true
+	func complete():
+		assert(playwright)
+		playwright.play()
+		print("Completed animate actor errand")
+		
 class EnteredAreaErrand extends Errand: 
+	var actor: Actor
+	var area
+	
+class EnteredAreaListErrand extends Errand: 
 	var actor: Actor
 	var area
 
@@ -155,7 +181,17 @@ func enter_area_errand(pactor: NodePath, parea: NodePath):
 		errand.force_complete()
 		, CONNECT_ONE_SHOT)
 
-		
+func enter_area_list_errand(pactor: NodePath, parea: Array[NodePath]):
+	var errand = push_errand(EnteredAreaListErrand.new())
+	var actor: Actor = get_node(pactor)
+	pause()
+	for i in parea:
+		var area = get_node(i)
+		area.body_entered.connect(func(body: Node2D):
+			if errand:
+				errand.force_complete()
+			, CONNECT_ONE_SHOT)
+			
 func play_commercial_animation_errand(animation: String, animator: NodePath):
 	var errand = push_errand(PlayCommercialAnimationErrand.new())
 	errand.animator = get_node(animator)
@@ -245,6 +281,19 @@ func leave_level_alone_in_spot_errand(actor: NodePath, marker: NodePath, command
 	errand.body = get_node(marker)
 	errand.radius = 30
 	pause()
+	
+
+func teleport_errand(actor: NodePath, marker: NodePath, radius=30):
+	var errand = push_errand(ApproachErrand.new())
+	errand.actor = get_node(actor)
+	errand.body = get_node(marker)
+	errand.radius = radius
+	var tween = create_tween()
+	tween.tween_property(errand.actor, "modulate", Color.TRANSPARENT, 0.3)
+	tween.tween_callback(func(): errand.actor.global_position = errand.body.global_position )
+	tween.tween_property(errand.actor, "modulate", Color.WHITE, 0.3)
+	tween.tween_callback(func(): errand.force_complete())
+	pause()
 
 		
 func press_action_errand(action: String):
@@ -290,6 +339,27 @@ func approach_errand(actor: NodePath, point: NodePath, radius = 30):
 	pause()
 	print("Approach errand to " + errand.body.name)
 	
+func approach_list_errand(actor: NodePath, any_points: Array, radius = 30):
+	var errand = push_errand(ApproachListErrand.new())
+	errand.actor = get_node(actor)
+	for point in any_points:
+		errand.bodies.append(get_parent().get_node(point))
+	errand.radius = radius
+	pause()
+	print("Approach list errand")
+	
+func animate_actor_errand(pactor: NodePath, animation: String):
+	var errand = push_errand(Errand.new())
+	var actor = get_node(pactor) as Actor
+	assert(actor)
+	actor.get_sprite().play(animation)
+	actor.get_sprite().animation_finished.connect(func():
+		actor.get_sprite().play("idle")
+		errand.force_complete()
+		, CONNECT_ONE_SHOT)
+	pause()
+	print("Approach list errand")
+	
 func use_item_errand(actor: NodePath, item_name: String):
 	var errand = push_errand(Key.UseErrand.new())
 	errand.actor = get_node(actor)
@@ -327,7 +397,7 @@ func collect_star_errand(star: NodePath):
 func is_in_cutscene() -> bool:
 	var value = false
 	for errand in errand_list:
-		if errand is ApproachErrand or errand is JumpActorErrand:
+		if errand is ApproachErrand or errand is JumpActorErrand or (errand is AnimateActorErrand and errand.paused):
 			value = true
 	return value or (active and is_playing()) or not has_dialogue_ended
 	

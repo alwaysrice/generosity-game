@@ -193,7 +193,7 @@ height = 32.499
 
 [node name="Cat" instance=ExtResource("1_yiwue")]
 script = ExtResource("2_gsgih")
-jump_speed = -615.0
+jump_speed = -630.0
 
 [node name="Offset" type="Marker2D" parent="." index="0"]
 unique_name_in_owner = true

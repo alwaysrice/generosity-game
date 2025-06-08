@@ -22,19 +22,23 @@ func _ready() -> void:
 var contel_finished = 0
 func cast_barrier(constellation: Constellation):
 	if not constellation.visible and not constellation.is_completely_done:
-		constellation.finished_success.connect(func():
-			contel_finished += 1
-			, CONNECT_ONE_SHOT)
-		fade_music_to_stop(1.6, func():
-			get_tree().paused = true
+		%Witch.spellcast(func():
+			
+			constellation.finished_success.connect(func():
+				contel_finished += 1
+				, CONNECT_ONE_SHOT)
+			fade_music_to_none(1.6, func():
+				get_tree().paused = true
+				)
+			constellation.show() 
+			constellation.process_mode = Node.PROCESS_MODE_ALWAYS
+			constellation.animator.play("constellation/enter")
+			constellation.starts_fading.connect(func():
+				get_tree().paused = false
+				fade_music_to_normal_volume(2.0)
+				, CONNECT_ONE_SHOT)
+			
 			)
-		constellation.show() 
-		constellation.process_mode = Node.PROCESS_MODE_ALWAYS
-		constellation.animator.play("constellation/enter")
-		constellation.starts_fading.connect(func():
-			get_tree().paused = false
-			face_music_resume(2.0)
-			, CONNECT_ONE_SHOT)
 
 
 

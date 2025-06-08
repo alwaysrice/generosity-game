@@ -575,10 +575,10 @@ shape = SubResource("RectangleShape2D_w7hmb")
 position = Vector2(1385, 854.5)
 shape = SubResource("RectangleShape2D_kedrn")
 
-[node name="Camera" parent="." index="4" node_paths=PackedStringArray("target")]
+[node name="Camera" parent="." index="5" node_paths=PackedStringArray("target")]
 target = NodePath("../Graphics/Characters/Witch")
 
-[node name="Cutscenes" parent="." index="5"]
+[node name="Cutscenes" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("3_7kdxl"),

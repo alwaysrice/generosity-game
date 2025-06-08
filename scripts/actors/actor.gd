@@ -79,11 +79,13 @@ func die():
 	graphics.modulate = Color.TRANSPARENT
 	is_dead = true
 	
-func spellcast():
+func spellcast(callable = func():pass):
 	get_sprite().play("spellcast")
 	get_sprite().animation_finished.connect(func():
 		get_sprite().play("idle")
-		print("finished asdfasdf")
+		if callable:
+			callable.call()
+		print("Finished spellcasting")
 		, CONNECT_ONE_SHOT)
 
 func is_follow_object():
