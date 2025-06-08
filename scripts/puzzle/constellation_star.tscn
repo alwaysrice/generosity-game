@@ -110,4 +110,4 @@ libraries = {
 }
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-volume_db = 21.649
+volume_db = 10.0

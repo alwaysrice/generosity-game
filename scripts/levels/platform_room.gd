@@ -44,9 +44,9 @@ func cast_barrier(constellation: Constellation):
 
 func revert_music():
 	%StarMusic.fade_to_stop(2.0, func():
-		%StarMusic.fade_to_play(2.0)
 		%Music.fade_to_play(2.0)
 		%Music2.fade_to_play(2.0)
+		%Music3.fade_to_play(2.0)
 		)
 		
 
