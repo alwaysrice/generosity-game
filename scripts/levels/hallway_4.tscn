@@ -1,14 +1,24 @@
-[gd_scene load_steps=23 format=3 uid="uid://b0004maoqvjhj"]
+[gd_scene load_steps=27 format=3 uid="uid://b0004maoqvjhj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_ivuxg"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_ds0mx"]
 [ext_resource type="Script" uid="uid://ccjnabwgw8ke4" path="res://scripts/levels/hallway_4.gd" id="2_kedrn"]
 [ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_3padw"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_7kdxl"]
+[ext_resource type="Theme" uid="uid://cq73cvcukwii8" path="res://config/theme.tres" id="3_d0y2p"]
 [ext_resource type="Texture2D" uid="uid://cwh1xv2lsfp6y" path="res://images/Hallway Rooms/Hallway_Floor4.PNG" id="4_kedrn"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_oghp1"]
 [ext_resource type="PackedScene" uid="uid://bunpq6uekm6c6" path="res://scripts/objects/lantern_violet.tscn" id="6_3padw"]
 [ext_resource type="Script" uid="uid://cry5eumdnko7i" path="res://scripts/levels/level_connect_boundary.gd" id="7_kedrn"]
+
+[sub_resource type="SystemFont" id="SystemFont_4uvku"]
+font_names = PackedStringArray("Calibri")
+
+[sub_resource type="SystemFont" id="SystemFont_w7hmb"]
+font_names = PackedStringArray("Cursive")
+
+[sub_resource type="SystemFont" id="SystemFont_d0y2p"]
+font_names = PackedStringArray("Elephant")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0y2p"]
 size = Vector2(1085, 79)
@@ -105,6 +115,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Interface/EndingCredits:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w203f"]
 _data = {
@@ -139,6 +161,18 @@ tracks/1/keys = {
 "args": [10.0, null, 0.0],
 "method": &"fade_to_stop"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Interface/EndingCredits:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_kedrn"]
@@ -313,8 +347,91 @@ _data = {
 script = ExtResource("2_kedrn")
 corridor_path = "uid://cmu22ofvmxccq"
 
-[node name="Graphics" parent="." index="3"]
-modulate = Color(0, 0, 0, 1)
+[node name="EndingCredits" type="Control" parent="Interface" index="3"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 653.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/EndingCredits" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.5
+offset_top = -38.5
+offset_right = 102.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/EndingCredits/HBoxContainer" index="0"]
+modulate = Color(1, 1, 1, 0.48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer" index="0"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_4uvku")
+theme_override_font_sizes/font_size = 21
+text = "Programmer"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer" index="1"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_4uvku")
+theme_override_font_sizes/font_size = 21
+text = "Artist"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer" index="2"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_4uvku")
+theme_override_font_sizes/font_size = 21
+text = "Composer"
+horizontal_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Interface/EndingCredits/HBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer2" index="0"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_w7hmb")
+theme_override_font_sizes/font_size = 15
+text = "AlwaysRice"
+
+[node name="Label2" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer2" index="1"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_w7hmb")
+theme_override_font_sizes/font_size = 15
+text = "HazGal"
+
+[node name="Label3" type="Label" parent="Interface/EndingCredits/HBoxContainer/VBoxContainer2" index="2"]
+layout_mode = 2
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_w7hmb")
+theme_override_font_sizes/font_size = 15
+text = "SilverCS"
+
+[node name="Label" type="Label" parent="Interface/EndingCredits" index="1"]
+visible = false
+offset_left = 343.0
+offset_top = 201.0
+offset_right = 815.0
+offset_bottom = 238.0
+theme = ExtResource("3_d0y2p")
+theme_override_fonts/font = SubResource("SystemFont_d0y2p")
+theme_override_font_sizes/font_size = 30
+text = "Thank you for playing the game."
+horizontal_alignment = 2
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
@@ -360,6 +477,7 @@ texture = ExtResource("4_kedrn")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
+process_mode = 4
 position = Vector2(171, 575)
 following = NodePath("../Cat")
 should_follow = false
