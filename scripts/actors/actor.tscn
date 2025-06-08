@@ -145,4 +145,7 @@ scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_gr3rb")
 color = Color(0, 0, 0, 1)
 
+[node name="SFXTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="finished" from="DeathEffect" to="." method="_on_death_effect_finished"]

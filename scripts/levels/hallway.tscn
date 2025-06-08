@@ -143,6 +143,7 @@ _data = {
 
 [node name="Music" parent="." index="1"]
 stream = ExtResource("2_7p5fu")
+autoplay = false
 
 [node name="DialogueSFX" parent="." index="2"]
 volume_db = 15.0

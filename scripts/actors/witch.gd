@@ -11,6 +11,8 @@ var finished_fly = false
 var is_success_fly_with_other = false
 signal hint_fly_interruped
 signal successful_fly_with_other
+var fly_sfx_dur = 1.0
+
 
 signal done_flying
 
@@ -52,6 +54,11 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_player:
 		return
+		
+	if is_flying and $SFXTimer.time_left == 0.0:
+		$SFXTimer.start(fly_sfx_dur)
+		print("Playing flying sfx")
+		$FlySFX.play()
 		
 	if event.is_action_pressed("fly") and can_fly and not is_flying and not is_jumping:
 		is_flying = true

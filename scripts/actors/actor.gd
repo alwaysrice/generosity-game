@@ -38,6 +38,9 @@ var is_joining = false
 var has_joined_other = false
 var light_overlay_modulate = 0
 var light_spread_energy = 0
+@export var run_sfx_dur = 0.4
+@export var walk_sfx_dur = 0.5
+
 
 signal towards_next_level(boundary: LevelConnectBoundary)
 signal on_follow
@@ -80,6 +83,7 @@ func die():
 	is_dead = true
 	
 func spellcast(callable = func():pass):
+	$SpellcastSFX.play()
 	get_sprite().play("spellcast")
 	get_sprite().animation_finished.connect(func():
 		get_sprite().play("idle")
@@ -212,6 +216,17 @@ func _physics_process(delta: float) -> void:
 	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast" and not sprite.animation == "pet":
 		animation_history.append(animation)
 		sprite.play(animation)
+		
+	var move_sfx = get_node_or_null("MoveSFX")
+	if move_sfx and $SFXTimer.time_left == 0.0 and not is_flying:
+		if get_sprite().animation == "walk":
+			print("Playing walk sfx")
+			$SFXTimer.start(walk_sfx_dur)
+			move_sfx.play()
+		elif get_sprite().animation == "run":
+			print("Playing run sfx")
+			$SFXTimer.start(run_sfx_dur)
+			move_sfx.play()
 		
 
 var animation_history = []

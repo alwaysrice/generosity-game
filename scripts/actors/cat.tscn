@@ -1,10 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyscyuyb1sryd"]
+[gd_scene load_steps=34 format=3 uid="uid://cyscyuyb1sryd"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_yiwue"]
 [ext_resource type="Script" uid="uid://ddp2oix5xwt5a" path="res://scripts/actors/cat.gd" id="2_gsgih"]
 [ext_resource type="Texture2D" uid="uid://vavhrd0j2ail" path="res://images/actors/Idle Cycle - Cat/ICC-01.PNG" id="3_n8whl"]
+[ext_resource type="Texture2D" uid="uid://uvq03n6h4rdh" path="res://images/actors/Jump Cycle - Cat/JCC-06.PNG" id="3_om2wv"]
 [ext_resource type="Texture2D" uid="uid://bcihlgndphtlt" path="res://images/actors/Fly Cycle - Cat/FCC-01.PNG" id="4_c351w"]
 [ext_resource type="Texture2D" uid="uid://yawl6mpaehr7" path="res://images/actors/Idle Cycle - Cat/ICC-02.PNG" id="4_n8whl"]
+[ext_resource type="Texture2D" uid="uid://ddmd8dcqxi3ee" path="res://images/actors/Jump Cycle - Cat/JCC-07.PNG" id="4_u24n1"]
 [ext_resource type="Texture2D" uid="uid://u3blqdrovn1f" path="res://images/actors/Idle Cycle - Cat/ICC-03.PNG" id="5_ecv7l"]
 [ext_resource type="Texture2D" uid="uid://jx3jr4ur84l2" path="res://images/actors/Fly Cycle - Cat/FCC-02.PNG" id="5_y14h5"]
 [ext_resource type="Texture2D" uid="uid://sapa03qsdg3k" path="res://images/actors/Idle Cycle - Cat/ICC-04.PNG" id="6_juu8p"]
@@ -25,16 +27,23 @@
 [ext_resource type="Texture2D" uid="uid://wksyqj5uogny" path="res://images/actors/Walk Cycle - Cat/WCC-08.png" id="15_k6e30"]
 [ext_resource type="Texture2D" uid="uid://c8hiilc6t6v0h" path="res://images/actors/Walk Cycle - Cat/WCC-09.png" id="16_c351w"]
 [ext_resource type="Texture2D" uid="uid://dn5m05lskpfio" path="res://images/actors/Walk Cycle - Cat/WCC-10.png" id="17_y14h5"]
+[ext_resource type="Texture2D" uid="uid://pci5abm7qx8q" path="res://images/actors/Jump Cycle - Cat/JCC-01.PNG" id="18_uynvh"]
+[ext_resource type="Texture2D" uid="uid://bdvb8t0rsjc3q" path="res://images/actors/Jump Cycle - Cat/JCC-02.PNG" id="19_ekjhc"]
+[ext_resource type="Texture2D" uid="uid://cctuxtg8ibmal" path="res://images/actors/Jump Cycle - Cat/JCC-03.PNG" id="20_jb1qh"]
+[ext_resource type="Texture2D" uid="uid://cmmmox2vb84ia" path="res://images/actors/Jump Cycle - Cat/JCC-04.PNG" id="21_te7j0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gsgih"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_n8whl")
+"texture": ExtResource("3_om2wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u24n1")
 }],
-"loop": true,
+"loop": false,
 "name": &"fall",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -110,11 +119,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_n8whl")
+"texture": ExtResource("18_uynvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ekjhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_jb1qh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_te7j0")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -206,7 +224,8 @@ position = Vector2(-4, -8.625)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"run"
+animation = &"fall"
+frame_progress = 0.344239
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]
