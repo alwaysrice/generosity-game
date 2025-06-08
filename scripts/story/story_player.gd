@@ -64,11 +64,14 @@ class PressActionErrand extends Errand:
 	var commercial_animation = ""
 	var commercial_player: AnimationPlayer
 	var input = false
+	var can_complete_in_first = false
 	func is_done() -> bool:
 		input = input or Input.is_action_just_pressed(action)
 		var animation = commercial_player.get_animation(commercial_animation)
 		if animation.loop_mode == Animation.LoopMode.LOOP_NONE:
 			if input and repeat >= 1:
+				return true
+			elif input and can_complete_in_first:
 				return true
 			return false
 		return input
@@ -301,6 +304,7 @@ func press_action_errand(action: String):
 	errand.action = action
 	pause()
 	
+	
 func press_action_while_animating_errand(action: String, player: NodePath, anim: String):
 	pause()
 	var errand = push_errand(PressActionErrand.new())
@@ -322,6 +326,26 @@ func press_action_while_animating_errand(action: String, player: NodePath, anim:
 			, CONNECT_ONE_SHOT)
 
 	
+func press_action_while_animating_errand2(action: String, player: NodePath, anim: String):
+	pause()
+	var errand = push_errand(PressActionErrand.new())
+	errand.can_complete_in_first = true
+	errand.action = action
+	errand.commercial_animation = anim
+	errand.commercial_player = get_node(player)
+	errand.commercial_player.play(errand.commercial_animation)
+	var animation: Animation = errand.commercial_player.get_animation(anim)
+	if animation.loop_mode == Animation.LoopMode.LOOP_NONE:
+		var repeat = func(a: String, callback: Callable):
+			if a == anim:
+				errand.repeat+=1
+				errand.commercial_player.play(errand.commercial_animation)
+				errand.commercial_player.animation_finished.connect(func(a: String): 
+					callback.call(a, callback)
+				, CONNECT_ONE_SHOT)
+		errand.commercial_player.animation_finished.connect(func(a: String): 
+			repeat.call(a, repeat)
+			, CONNECT_ONE_SHOT)
 
 func cage_unlock_errand(cage: NodePath):
 	var errand = push_errand(Cage.UnlockedErrand.new())
@@ -381,6 +405,22 @@ func constellation_finished_errand(barrier: NodePath):
 	get_node(barrier).constellation.finished_success.connect(func():
 		print("Finished constellation errand")
 		errand.force_complete()
+		, CONNECT_ONE_SHOT)
+	pause()
+	
+func constellation_either_finished_errand(barrier: NodePath, barrier2: NodePath, star: NodePath, star2: NodePath):
+	var errand = push_errand(Errand.new())
+	get_node(barrier).constellation.finished_success.connect(func():
+		if errand:
+			print("Finished constellation errand")
+			get_node(star).collect()
+			errand.force_complete()
+		, CONNECT_ONE_SHOT)
+	get_node(barrier2).constellation.finished_success.connect(func():
+		if errand:
+			print("Finished constellation errand")
+			get_node(star2).collect()
+			errand.force_complete()
 		, CONNECT_ONE_SHOT)
 	pause()
 	
