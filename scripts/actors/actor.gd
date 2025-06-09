@@ -95,8 +95,15 @@ func spellcast(callable = func():pass):
 func is_follow_object():
 	return following is not Actor or following.process_mode == ProcessMode.PROCESS_MODE_DISABLED
 
+
+func is_following():
+	return following and should_follow and not has_joined_other
+
+var should_run_following = false
 func afk_behaviour(delta: float):
 	if not following or not should_follow or has_joined_other: return
+	
+	should_run_following = false
 
 	var dist = following.global_position - global_position
 	var speed = walk_speed
@@ -107,9 +114,12 @@ func afk_behaviour(delta: float):
 		if (not is_follow_object_walk_only and is_far) or is_follow_object_run:
 			speed = run_speed	
 			accel = run_accel
+			should_run_following = true
 	elif is_far:
 		speed = run_speed	
 		accel = run_accel
+		should_run_following = true
+
 		
 	var follow_dist = follow_distance 
 	if is_follow_object:
@@ -220,11 +230,9 @@ func _physics_process(delta: float) -> void:
 	var move_sfx = get_node_or_null("MoveSFX")
 	if move_sfx and $SFXTimer.time_left == 0.0 and not is_flying:
 		if get_sprite().animation == "walk":
-			print("Playing walk sfx")
 			$SFXTimer.start(walk_sfx_dur)
 			move_sfx.play()
 		elif get_sprite().animation == "run":
-			print("Playing run sfx")
 			$SFXTimer.start(run_sfx_dur)
 			move_sfx.play()
 		
@@ -244,7 +252,6 @@ func get_new_animation() -> String:
 			else:
 				animation_new = "idle"
 		if is_jumping and (animation_history.back() == "fall" or animation_history.back() == "idle"):
-			print("LANDED")
 			jump_landed.emit()
 			if animation_history.size() > 10:
 				animation_history.clear()
@@ -259,6 +266,9 @@ func get_new_animation() -> String:
 			
 	if is_player and Input.is_action_pressed("run") and animation_new == "walk":
 		animation_new = "run"
+	if not is_player and should_run_following:
+		animation_new = "run"
+	should_run_following = false
 	return animation_new
 
 

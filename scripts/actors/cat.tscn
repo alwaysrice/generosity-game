@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cyscyuyb1sryd"]
+[gd_scene load_steps=42 format=3 uid="uid://cyscyuyb1sryd"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_yiwue"]
 [ext_resource type="Script" uid="uid://ddp2oix5xwt5a" path="res://scripts/actors/cat.gd" id="2_gsgih"]
@@ -31,6 +31,14 @@
 [ext_resource type="Texture2D" uid="uid://bdvb8t0rsjc3q" path="res://images/actors/Jump Cycle - Cat/JCC-02.PNG" id="19_ekjhc"]
 [ext_resource type="Texture2D" uid="uid://cctuxtg8ibmal" path="res://images/actors/Jump Cycle - Cat/JCC-03.PNG" id="20_jb1qh"]
 [ext_resource type="Texture2D" uid="uid://cmmmox2vb84ia" path="res://images/actors/Jump Cycle - Cat/JCC-04.PNG" id="21_te7j0"]
+[ext_resource type="Texture2D" uid="uid://d16yeqyht6vrm" path="res://images/actors/Run Cycle - Cat/RCC-01.png" id="22_18pk6"]
+[ext_resource type="Texture2D" uid="uid://wqil5luanb81" path="res://images/actors/Run Cycle - Cat/RCC-02.png" id="23_2d7ey"]
+[ext_resource type="Texture2D" uid="uid://bmvvc2fu2ukq6" path="res://images/actors/Run Cycle - Cat/RCC-03.png" id="24_c5fr1"]
+[ext_resource type="Texture2D" uid="uid://cb47lkkob8kap" path="res://images/actors/Run Cycle - Cat/RCC-04.png" id="25_1wqws"]
+[ext_resource type="Texture2D" uid="uid://cb8j7svesw2qt" path="res://images/actors/Run Cycle - Cat/RCC-05.png" id="26_83gey"]
+[ext_resource type="Texture2D" uid="uid://bju1ltxb2j34t" path="res://images/actors/Run Cycle - Cat/RCC-06.png" id="27_5khw4"]
+[ext_resource type="Texture2D" uid="uid://ddpockv6xj5sk" path="res://images/actors/Run Cycle - Cat/RCC-07.png" id="28_x5u7h"]
+[ext_resource type="Texture2D" uid="uid://db6eeo52fei1p" path="res://images/actors/Run Cycle - Cat/RCC-08.png" id="29_0x1kb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gsgih"]
 animations = [{
@@ -136,38 +144,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_dmers")
+"texture": ExtResource("22_18pk6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_3ly87")
+"texture": ExtResource("23_2d7ey")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_huwjw")
+"texture": ExtResource("24_c5fr1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_4eg78")
+"texture": ExtResource("25_1wqws")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_gq7vp")
+"texture": ExtResource("26_83gey")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_pcc80")
+"texture": ExtResource("27_5khw4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_x7v0s")
+"texture": ExtResource("28_x5u7h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_k6e30")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_c351w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_y14h5")
+"texture": ExtResource("29_0x1kb")
 }],
 "loop": true,
 "name": &"run",
-"speed": 20.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -224,8 +226,8 @@ position = Vector2(-4, -8.625)
 position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
-animation = &"fall"
-frame_progress = 0.344239
+animation = &"run"
+frame_progress = 0.052354
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]

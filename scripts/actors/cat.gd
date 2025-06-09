@@ -45,6 +45,7 @@ func afk_behaviour(delta: float):
 		if (not is_follow_object_walk_only and is_far) or is_follow_object_run:
 			speed = run_speed	
 			accel = run_accel
+			should_run_following = true
 	else:
 		if is_joining:
 			dist = witch().broom.get_node("Dest").global_position - global_position
@@ -52,6 +53,8 @@ func afk_behaviour(delta: float):
 		if is_far:
 			speed = run_speed	
 			accel = run_accel
+			should_run_following = true
+
 		
 	var follow_dist = follow_distance 
 	if is_follow_object:
