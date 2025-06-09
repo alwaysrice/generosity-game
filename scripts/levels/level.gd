@@ -230,6 +230,8 @@ func enter_new_level(level_path: String):
 					#)
 				, CONNECT_ONE_SHOT)
 		, CONNECT_ONE_SHOT)
+		if $Music.autoplay:
+			$Music.fade_to_stop(1.0)
 		cutscenes.play("trans/leave_level")
 		cutscenes.animation_finished.connect(func(anim: StringName):
 			spawn_closest_boundary()

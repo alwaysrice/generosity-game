@@ -308,6 +308,9 @@ stream = SubResource("AudioStreamMP3_3wasf")
 visible = false
 color = Color(0, 0, 0, 0.0628158)
 
+[node name="Graphics" parent="." index="4"]
+modulate = Color(0, 0, 0, 1)
+
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 5.0
 offset_top = -1261.0

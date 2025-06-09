@@ -434,6 +434,9 @@ theme_override_font_sizes/font_size = 30
 text = "Thank you for playing the game."
 horizontal_alignment = 2
 
+[node name="Graphics" parent="." index="4"]
+modulate = Color(0, 0, 0, 1)
+
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
 offset_top = -262.0
@@ -481,7 +484,6 @@ centered = false
 process_mode = 4
 position = Vector2(171, 575)
 following = NodePath("../Cat")
-should_follow = false
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(84, 575)

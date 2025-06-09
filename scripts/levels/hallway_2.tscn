@@ -178,6 +178,9 @@ _data = {
 [node name="Music" parent="." index="1"]
 stream = ExtResource("2_xcxxk")
 
+[node name="Graphics" parent="." index="4"]
+modulate = Color(0, 0, 0, 1)
+
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
 offset_top = -262.0
@@ -224,6 +227,7 @@ centered = false
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(92, 575)
 following = NodePath("../Cat")
+should_follow = false
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(39, 493)

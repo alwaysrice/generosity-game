@@ -2,7 +2,16 @@ class_name AudioPlayer extends AudioStreamPlayer
 
 
 @export var normal_volume: float
-	
+
+
+func _ready() -> void:
+	if autoplay:
+		var music_tween = create_tween()
+		volume_db = -60
+		music_tween.tween_property(self, "volume_db", 0, 0.3)
+		music_tween.tween_property(self, "volume_db", normal_volume, 0.7)
+		play()
+		
 
 func fade_to_stop(time=1.0, callback=func():pass, from=0.0):
 	var music_tween = create_tween()
