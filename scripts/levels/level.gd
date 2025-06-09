@@ -17,7 +17,8 @@ func switch_player(who: Actor = null) -> Actor:
 	if %Witch.process_mode == ProcessMode.PROCESS_MODE_DISABLED or %Cat.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
 		return null
 	if !who:
-		assert(%Cat.is_player != %Witch.is_player)
+		if %Cat.is_player == %Witch.is_player:
+			return null
 		%Cat.is_player = !%Cat.is_player
 		%Witch.is_player = !%Witch.is_player
 		who = %Witch as Actor if %Witch.is_player else %Cat as Actor

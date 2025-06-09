@@ -26,6 +26,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var actor = body as Actor	
 	actor.items.append(self) 
 	holder = actor
+	$CollectSFX.play()
 	$CollectEffect.emitting = true
 	$Graphics.visible = false
 

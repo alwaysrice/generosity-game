@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vh7pmputa7r3"]
+[gd_scene load_steps=9 format=3 uid="uid://vh7pmputa7r3"]
 
 [ext_resource type="Script" uid="uid://dkm6p848i24j2" path="res://scripts/actors/actor.gd" id="1_gr3rb"]
 [ext_resource type="Texture2D" uid="uid://cfk7vuqfandbj" path="res://images/Constellation Mini-Game/Star-Light.PNG" id="2_gr3rb"]
+[ext_resource type="AudioStream" uid="uid://drutj7rulwufp" path="res://audio/set 2 sfx/sfx_fall-respawn.mp3" id="3_7h0px"]
 
 [sub_resource type="Gradient" id="Gradient_pbtue"]
 offsets = PackedFloat32Array(0.183007, 0.418301, 1)
@@ -147,5 +148,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="SFXTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ReviveSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7h0px")
+volume_db = 12.0
 
 [connection signal="finished" from="DeathEffect" to="." method="_on_death_effect_finished"]

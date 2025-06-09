@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://drutj7rulwufp"
+path="res://.godot/imported/sfx_fall-respawn.mp3-5d1c30f81a40a0e7f8b172531fd10c8b.mp3str"
+
+[deps]
+
+source_file="res://audio/set 2 sfx/sfx_fall-respawn.mp3"
+dest_files=["res://.godot/imported/sfx_fall-respawn.mp3-5d1c30f81a40a0e7f8b172531fd10c8b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

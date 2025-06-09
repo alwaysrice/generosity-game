@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wqoc71dl6v4m"
+path="res://.godot/imported/sfx_star-flyaway.mp3-7e950f1294bcb6841d01cbe6d09067d6.mp3str"
+
+[deps]
+
+source_file="res://audio/set 2 sfx/sfx_star-flyaway.mp3"
+dest_files=["res://.godot/imported/sfx_star-flyaway.mp3-7e950f1294bcb6841d01cbe6d09067d6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

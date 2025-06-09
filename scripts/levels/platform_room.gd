@@ -22,13 +22,13 @@ func _ready() -> void:
 var contel_finished = 0
 func cast_barrier(constellation: Constellation):
 	if not constellation.visible and not constellation.is_completely_done:
-		%Witch.spellcast(func():
-			
+		%Witch.spellcast_continous(func():
 			constellation.finished_success.connect(func():
 				contel_finished += 1
 				, CONNECT_ONE_SHOT)
 			fade_music_to_none(1.6, func():
 				get_tree().paused = true
+				%Witch.get_sprite().play("idle")
 				)
 			constellation.show() 
 			constellation.process_mode = Node.PROCESS_MODE_ALWAYS

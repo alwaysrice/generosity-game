@@ -73,6 +73,7 @@ func revive():
 	#if following and absf(following.global_position.x - global_position.x) >= run_speed:
 	is_dead = false
 	graphics.modulate = Color.WHITE
+	$ReviveSFX.play()
 	
 	assert(last_floor_stepped)
 	position = last_floor_stepped_pos
@@ -87,6 +88,15 @@ func spellcast(callable = func():pass):
 	get_sprite().play("spellcast")
 	get_sprite().animation_finished.connect(func():
 		get_sprite().play("idle")
+		if callable:
+			callable.call()
+		print("Finished spellcasting")
+		, CONNECT_ONE_SHOT)
+		
+func spellcast_continous(callable = func():pass):
+	$SpellcastSFX.play()
+	get_sprite().play("spellcast")
+	get_sprite().animation_finished.connect(func():
 		if callable:
 			callable.call()
 		print("Finished spellcasting")

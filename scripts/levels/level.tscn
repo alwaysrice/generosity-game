@@ -184,7 +184,6 @@ offset_left = 370.0
 offset_top = 97.0
 offset_right = 857.0
 offset_bottom = 181.0
-text = "q"
 label_settings = SubResource("LabelSettings_jol3n")
 autowrap_mode = 3
 
