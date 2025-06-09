@@ -43,14 +43,17 @@ func start_flight():
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	
+
 	if is_on_floor():
 		can_fly = true
 		
 	if is_on_flight and not prevent_movement:
 		var direction = Input.get_axis("move_up", "move_down") * vertical_speed
 		velocity.y = move_toward(velocity.y, direction, vertical_accel * vertical_speed * delta)
+		%StaminaFill.scale.x = %FlightTimer.time_left / %FlightTimer.wait_time
 
-
+		
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_player:
 		return
@@ -110,6 +113,7 @@ func _on_flight_timer_timeout() -> void:
 	is_on_flight = false
 	($CollisionShape2D.shape as CapsuleShape2D).height += fly_collision_offset
 	done_flying.emit()
+	create_tween().tween_property(%StaminaOutline, "modulate", Color.TRANSPARENT, 1)
 
 
 func _on_fly_timer_timeout() -> void:
@@ -119,7 +123,12 @@ func _on_fly_timer_timeout() -> void:
 	# If there is NO cat following, then go on your own
 	if following is not Cat:
 		start_flight()
-	
+	%StaminaFill.scale.x = 1.0
+	create_tween().tween_property(%StaminaOutline, "modulate", Color.WHITE, 1)
+
+
+func _ready() -> void:
+	%StaminaOutline.modulate = Color.TRANSPARENT
 
 func _on_max_wait_timer_timeout() -> void:
 	if following is Cat:

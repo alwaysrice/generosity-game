@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://b68iki5mx8dwx"]
+[gd_scene load_steps=89 format=3 uid="uid://b68iki5mx8dwx"]
 
 [ext_resource type="PackedScene" uid="uid://vh7pmputa7r3" path="res://scripts/actors/actor.tscn" id="1_mmq6v"]
 [ext_resource type="Script" uid="uid://dsmld3locmgmk" path="res://scripts/actors/witch.gd" id="2_2mx4y"]
@@ -79,6 +79,8 @@
 [ext_resource type="Texture2D" uid="uid://dbw633ty0f4m8" path="res://images/actors/Run Cycle - Witch/RCW-06.png" id="53_qtm4j"]
 [ext_resource type="Texture2D" uid="uid://dbkwiglpgdp86" path="res://images/actors/Run Cycle - Witch/RCW-07.png" id="54_2g11t"]
 [ext_resource type="Texture2D" uid="uid://d6545hnt2bb6" path="res://images/actors/Run Cycle - Witch/RCW-08.png" id="55_ph3bx"]
+[ext_resource type="Texture2D" uid="uid://ymbieisxli33" path="res://images/UI/Stamina1_Outline.PNG" id="80_hpcpn"]
+[ext_resource type="Texture2D" uid="uid://cc5t6dv0jihhg" path="res://images/UI/Stamina1_Fill.PNG" id="81_guv7i"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s5g81"]
 streams_count = 3
@@ -564,6 +566,22 @@ one_shot = true
 
 [node name="MaxWaitTimer" type="Timer" parent="." index="16"]
 wait_time = 2.7
+
+[node name="StaminaOutline" type="Sprite2D" parent="." index="18"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-32, -168)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("80_hpcpn")
+centered = false
+
+[node name="StaminaFill" type="Sprite2D" parent="StaminaOutline" index="0"]
+unique_name_in_owner = true
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(3, 3)
+texture = ExtResource("81_guv7i")
+centered = false
 
 [connection signal="timeout" from="FlightTimer" to="." method="_on_flight_timer_timeout"]
 [connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]
