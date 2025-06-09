@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://dxnm6d7dnxepy"]
+[gd_scene load_steps=16 format=4 uid="uid://dxnm6d7dnxepy"]
 
 [ext_resource type="Script" uid="uid://ce2iffhf148sw" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="2_jol3n"]
 [ext_resource type="Script" uid="uid://bp3hlaxnp3te4" path="res://scripts/utils/audio_player.gd" id="2_m4kgq"]
+[ext_resource type="Texture2D" uid="uid://jsl761vnl6gw" path="res://images/UI/Textbox.PNG" id="3_552ko"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="3_jol3n"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="4_4dbv1"]
 [ext_resource type="Script" uid="uid://c8w74orqtuwe7" path="res://scripts/utils/camera.gd" id="4_w203f"]
@@ -166,13 +167,25 @@ offset_bottom = 651.0
 color = Color(0, 0, 0, 0)
 metadata/_edit_use_anchors_ = true
 
+[node name="DialogueBox" type="NinePatchRect" parent="Interface"]
+offset_left = 73.0
+offset_right = 1274.0
+offset_bottom = 277.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(469, 137)
+texture = ExtResource("3_552ko")
+patch_margin_left = 72
+patch_margin_top = 72
+patch_margin_right = 72
+patch_margin_bottom = 72
+
 [node name="Dialogue" type="Label" parent="Interface"]
 offset_left = 370.0
 offset_top = 97.0
 offset_right = 857.0
-offset_bottom = 236.0
+offset_bottom = 181.0
+text = "q"
 label_settings = SubResource("LabelSettings_jol3n")
-horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Hint" type="Label" parent="Interface"]
@@ -220,7 +233,7 @@ script = ExtResource("4_w203f")
 offset_target = Vector2(0, -100)
 metadata/_custom_type_script = "uid://c8w74orqtuwe7"
 
-[node name="Cutscenes" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label")]
+[node name="Cutscenes" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label", "dialogue_box")]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("6_4dbv1"),
@@ -232,6 +245,7 @@ dialogue_allow_interrupt = true
 char_speed = 17.715
 dialogue_label = NodePath("../Interface/Dialogue")
 dialogues_file = "res://scripts/story/dialogues.txt"
+dialogue_box = NodePath("../Interface/DialogueBox")
 metadata/_custom_type_script = "uid://bh53gm8u73bnh"
 
 [node name="HintsAnimator" type="AnimationPlayer" parent="."]

@@ -147,7 +147,10 @@ stream = ExtResource("2_7p5fu")
 [node name="DialogueSFX" parent="." index="2"]
 volume_db = 15.0
 
-[node name="Hint" parent="Interface" index="2"]
+[node name="Dialogue" parent="Interface" index="2"]
+text = ""
+
+[node name="Hint" parent="Interface" index="3"]
 text = "Hold \"Shift\" whole moving to run"
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]

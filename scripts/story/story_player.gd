@@ -5,6 +5,7 @@ class_name Playwright extends AnimationPlayer
 @export var char_speed = 20.0
 @export var dialogue_label: Label  
 @export_file("*.txt") var dialogues_file: String
+@export var dialogue_box: NinePatchRect
 var dialogues = {}
 var current_line = 0
 var current_dialogue = ""
@@ -453,9 +454,13 @@ func _ready() -> void:
 		for line in lines.slice(1, lines.size()):
 			if line:
 				dialogues[idx].append(line)
+	dialogue_box.modulate = Color.TRANSPARENT
 
 	#print(dialogues)
 	dialogue_ended.connect(func():
+		var box_tween = create_tween()
+		box_tween.set_ease(Tween.EASE_OUT)
+		box_tween.tween_property(dialogue_box, "modulate", Color.TRANSPARENT, 0.1)
 		dialogue_label.visible_characters = 0
 		has_dialogue_ended = true
 		current_dialogue = ""
@@ -467,6 +472,17 @@ func _ready() -> void:
 
 func _animate_dialogue(on_finished_line: Callable):
 	dialogue_label.visible_characters = 0
+	var box_tween = create_tween()
+	box_tween.set_ease(Tween.EASE_OUT)
+	box_tween.tween_property(dialogue_box, "modulate", Color.WHITE, 0.1)
+	box_tween.set_parallel()
+	box_tween.tween_property(dialogue_box, "scale", Vector2(0.55, 0.55), 0.15)
+	box_tween.set_parallel(false)
+	box_tween.set_ease(Tween.EASE_IN)
+	box_tween.tween_property(dialogue_box, "scale", Vector2(0.5, 0.5), 0.1)
+	box_tween.tween_callback(func():
+		
+		)
 	_dialogue_tween = create_tween()
 	_dialogue_tween.tween_property(
 		dialogue_label, 
