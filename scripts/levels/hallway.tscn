@@ -147,11 +147,11 @@ stream = ExtResource("2_7p5fu")
 [node name="DialogueSFX" parent="." index="2"]
 volume_db = 15.0
 
-[node name="Dialogue" parent="Interface" index="2"]
-text = ""
-
 [node name="Hint" parent="Interface" index="3"]
 text = "Hold \"Shift\" whole moving to run"
+
+[node name="Graphics" parent="." index="4"]
+modulate = Color(0, 0, 0, 1)
 
 [node name="ScreenLimits" type="ColorRect" parent="Graphics" index="0"]
 offset_left = 3.0
@@ -199,6 +199,7 @@ centered = false
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
 position = Vector2(93, 575)
 following = NodePath("../Cat")
+should_follow = false
 is_player = false
 
 [node name="Cat" parent="Graphics/Characters" index="1"]

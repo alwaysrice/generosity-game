@@ -481,9 +481,9 @@ texture = ExtResource("4_kedrn")
 centered = false
 
 [node name="Witch" parent="Graphics/Characters" index="0" node_paths=PackedStringArray("following")]
-process_mode = 4
 position = Vector2(171, 575)
 following = NodePath("../Cat")
+should_follow = false
 
 [node name="Cat" parent="Graphics/Characters" index="1"]
 position = Vector2(84, 575)
