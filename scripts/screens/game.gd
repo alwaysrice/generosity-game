@@ -5,6 +5,7 @@ class_name Game extends Node2D
 @export_file("*.tscn") var preloaded_levels: PackedStringArray = []
 
 func _ready() -> void:
+	GameManager.load_dialogues("res://audio/dialogue set 1")
 	for level in preloaded_levels:
 		GameManager.load_level(level)
 	if initial_level:

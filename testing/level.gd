@@ -1,10 +1,17 @@
 extends Node2D
 
-var counter = 0
-func _process(delta: float) -> void:
-	print(counter)
-	counter += 1
-	if Input.is_action_pressed("enter_game"):
-		print("LOAD")
-		get_tree().change_scene_to_file("res://scripts/screens/game.tscn")
-		print("LOAD 2")
+func list_files_in_folder(folder_path: String) -> Array[String]:
+	var dir := DirAccess.open(folder_path)
+	var array = []
+	dir.list_dir_begin()
+	while true:
+		var file_name := dir.get_next()
+		if file_name == "":
+			break
+		if not dir.current_is_dir() and file_name.to_lower().ends_with(".mp3"):
+			array.append(file_name)
+	dir.list_dir_end()
+	return array
+	
+func _ready() -> void:
+	list_files_in_folder("res://audio/dialogue set 1")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://gl8n5ordkacd"
+path="res://.godot/imported/dialogue_room1-91.mp3-8ebd07a97c829dc89cb65997f7d89a5a.mp3str"
+
+[deps]
+
+source_file="res://audio/dialogue set 1/dialogue_room1-91.mp3"
+dest_files=["res://.godot/imported/dialogue_room1-91.mp3-8ebd07a97c829dc89cb65997f7d89a5a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

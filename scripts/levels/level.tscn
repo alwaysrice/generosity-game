@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://dxnm6d7dnxepy"]
+[gd_scene load_steps=17 format=4 uid="uid://dxnm6d7dnxepy"]
 
 [ext_resource type="Script" uid="uid://ce2iffhf148sw" path="res://scripts/levels/level.gd" id="1_w0h25"]
 [ext_resource type="PackedScene" uid="uid://b68iki5mx8dwx" path="res://scripts/actors/witch.tscn" id="2_jol3n"]
 [ext_resource type="Script" uid="uid://bp3hlaxnp3te4" path="res://scripts/utils/audio_player.gd" id="2_m4kgq"]
+[ext_resource type="AudioStream" uid="uid://dr3vbd5ui4t07" path="res://audio/dialogue set 1/dialogue_room1-1.mp3" id="3_1au1g"]
 [ext_resource type="Texture2D" uid="uid://jsl761vnl6gw" path="res://images/UI/Textbox.PNG" id="3_552ko"]
 [ext_resource type="PackedScene" uid="uid://cyscyuyb1sryd" path="res://scripts/actors/cat.tscn" id="3_jol3n"]
 [ext_resource type="Script" uid="uid://bh53gm8u73bnh" path="res://scripts/story/story_player.gd" id="4_4dbv1"]
@@ -153,10 +154,10 @@ script = ExtResource("2_m4kgq")
 normal_volume = 12.0
 
 [node name="DialogueSFX" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamMP3_4dbv1")
-volume_db = 21.649
-parameters/looping = true
+stream = ExtResource("3_1au1g")
+volume_db = 12.0
 script = ExtResource("2_m4kgq")
+normal_volume = 12.0
 
 [node name="Interface" type="CanvasLayer" parent="."]
 layer = 2
@@ -232,7 +233,7 @@ script = ExtResource("4_w203f")
 offset_target = Vector2(0, -100)
 metadata/_custom_type_script = "uid://c8w74orqtuwe7"
 
-[node name="Cutscenes" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label", "dialogue_box")]
+[node name="Cutscenes" type="AnimationPlayer" parent="." node_paths=PackedStringArray("dialogue_label", "dialogue_box", "dialogue_sfx_player")]
 libraries = {
 &"": SubResource("AnimationLibrary_w203f"),
 &"hints": ExtResource("6_4dbv1"),
@@ -245,6 +246,7 @@ char_speed = 17.715
 dialogue_label = NodePath("../Interface/Dialogue")
 dialogues_file = "res://scripts/story/dialogues.txt"
 dialogue_box = NodePath("../Interface/DialogueBox")
+dialogue_sfx_player = NodePath("../DialogueSFX")
 metadata/_custom_type_script = "uid://bh53gm8u73bnh"
 
 [node name="HintsAnimator" type="AnimationPlayer" parent="."]

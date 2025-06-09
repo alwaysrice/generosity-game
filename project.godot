@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Nyota & The Moon Palace"
+config/description="Follow a young witch — Nyota — and her cat familiar as they traverse the brilliant, yet mysterious Moon Palace."
 config/version="1.0"
 run/main_scene="uid://bwo4k6ylianwv"
 config/features=PackedStringArray("4.4")
@@ -23,6 +24,8 @@ boot_splash/name="Lunar Nyota"
 [audio]
 
 buses/default_bus_layout="res://config/default_bus_layout.tres"
+buses/icon="uid://bew7yq4v6lxsu"
+buses/description="Follow a young witch — Nyota — and her cat familiar as they traverse the brilliant, yet mysterious Moon Palace."
 
 [autoload]
 

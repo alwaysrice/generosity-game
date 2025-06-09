@@ -6,6 +6,7 @@ class_name Playwright extends AnimationPlayer
 @export var dialogue_label: Label  
 @export_file("*.txt") var dialogues_file: String
 @export var dialogue_box: NinePatchRect
+@export var dialogue_sfx_player: AudioStreamPlayer 
 var dialogues = {}
 var current_line = 0
 var current_dialogue = ""
@@ -492,6 +493,11 @@ func _animate_dialogue(on_finished_line: Callable):
 	_dialogue_tween.tween_callback(func():
 		dialogue_line_ended.emit()
 		)
+	dialogue_sfx_player.stream = GameManager.push_dialogue()
+	if dialogue_sfx_player.stream:
+		dialogue_sfx_player.stop()
+		dialogue_sfx_player.play()
+		
 	
 	if dialogue_auto:
 		_dialogue_tween.tween_callback(func(): 
