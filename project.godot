@@ -16,7 +16,7 @@ run/main_scene="uid://bwo4k6ylianwv"
 config/features=PackedStringArray("4.4")
 boot_splash/bg_color=Color(0.0562916, 0.0562916, 0.0562916, 1)
 boot_splash/image="uid://dsyyqv1hjsnec"
-config/icon="uid://blk2xinet8sbf"
+config/icon="uid://bew7yq4v6lxsu"
 boot_splash/icon="res://images/logo/icon.webp"
 boot_splash/name="Lunar Nyota"
 

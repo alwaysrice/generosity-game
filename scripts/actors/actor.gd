@@ -168,7 +168,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		can_double_jump = true
 		
-	var can_move = get_sprite().animation != "pet"
+	var can_move = get_sprite().animation != "pet" and get_sprite().animation != "kneel"
 	if is_player and (Input.is_action_just_pressed("jump") or should_jump) and can_move:
 		try_jump()
 		get_viewport().set_input_as_handled()
@@ -223,7 +223,7 @@ func _physics_process(delta: float) -> void:
 	
 	var animation := get_new_animation()
 	var sprite = $Graphics.get_child(0)
-	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast" and not sprite.animation == "pet":
+	if sprite is AnimatedSprite2D and sprite.animation != animation and not is_flying and not has_joined_other and not sprite.animation == "spellcast" and not sprite.animation == "pet" and not sprite.animation == "kneel":
 		animation_history.append(animation)
 		sprite.play(animation)
 		
@@ -235,7 +235,7 @@ func _physics_process(delta: float) -> void:
 		elif get_sprite().animation == "run":
 			$SFXTimer.start(run_sfx_dur)
 			move_sfx.play()
-		
+	
 
 var animation_history = []
 func get_new_animation() -> String:

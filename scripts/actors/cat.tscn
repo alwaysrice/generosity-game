@@ -227,7 +227,7 @@ position = Vector2(0, -13.125)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_gsgih")
 animation = &"run"
-frame_progress = 0.052354
+frame_progress = 0.467226
 flip_h = true
 
 [node name="CliffDetector" parent="Graphics" index="1"]

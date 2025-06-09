@@ -63,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("Playing flying sfx")
 		$FlySFX.play()
 		
-	if event.is_action_pressed("fly") and can_fly and not is_flying and not is_jumping:
+	if event.is_action_pressed("fly") and can_fly and not is_flying and not is_jumping and not get_sprite().animation == "kneel":
 		is_flying = true
 		can_fly = false
 		global_position -= %FlyOffset.position
@@ -82,6 +82,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			following.has_joined.connect(start_flight, CONNECT_ONE_SHOT)
 	if event.is_action_pressed("pet") and following is Cat and following.following is Witch and get_sprite().animation == "idle" and not is_petting:
 		pet()
+		
+func kneel():
+	if is_flying or get_sprite().animation == "kneel":
+		return
+	velocity = Vector2.ZERO
+	prevent_movement = true
+	get_sprite().play("kneel")
+	global_position -= %PetOffset.position
+	$CollisionShape2D.global_position += %PetOffset.position
+	
+func unkneel():
+	prevent_movement = false
+	if get_sprite().animation == "kneel":
+		get_sprite().play("idle")
+		global_position += %PetOffset.position
+		$CollisionShape2D.global_position -= %PetOffset.position
 		
 var is_petting = false
 func pet():
