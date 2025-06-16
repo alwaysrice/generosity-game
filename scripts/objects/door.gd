@@ -1,6 +1,6 @@
 class_name Door extends Node2D
 
-@export_file("*.tscn") var destination
+@export_file("*.tscn") var destination: String
 @export var target: Node2D
 @export var decline_rotation = 160.0
 ## How far the eyeball can move from center

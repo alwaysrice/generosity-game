@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://bi25syp4pbcfj"]
+[gd_scene load_steps=19 format=4 uid="uid://bi25syp4pbcfj"]
 
 [ext_resource type="PackedScene" uid="uid://dxnm6d7dnxepy" path="res://scripts/levels/level.tscn" id="1_317sn"]
 [ext_resource type="Texture2D" uid="uid://hjtdm8lvlysj" path="res://images/Hallway Rooms/Hallway_BG.PNG" id="2_4t1rw"]
+[ext_resource type="Script" uid="uid://dfb8jm1jk1rqs" path="res://scripts/levels/hallway.gd" id="2_7p5fu"]
 [ext_resource type="AnimationLibrary" uid="uid://e47lvisu13gh" path="res://scripts/story/hints.res" id="3_fo831"]
 [ext_resource type="Texture2D" uid="uid://c5ogwyvlw3j6g" path="res://images/Hallway Rooms/Hallway_Arches.PNG" id="3_h56n8"]
 [ext_resource type="AnimationLibrary" uid="uid://bbn2olopvlmep" path="res://scripts/story/trans.res" id="4_a7ttg"]
@@ -143,6 +144,7 @@ _data = {
 }
 
 [node name="Hallway" instance=ExtResource("1_317sn")]
+script = ExtResource("2_7p5fu")
 
 [node name="Music" parent="." index="1"]
 stream = SubResource("AudioStreamMP3_mnim6")
@@ -262,6 +264,7 @@ position = Vector2(424, 572)
 [node name="SpawnRight" type="Marker2D" parent="Graphics/Markers" index="1"]
 unique_name_in_owner = true
 position = Vector2(2572, 575)
+gizmo_extents = 11.0
 
 [node name="SpawnRight2" type="Marker2D" parent="Graphics/Markers" index="2"]
 unique_name_in_owner = true

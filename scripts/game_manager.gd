@@ -13,7 +13,7 @@ func load_level(file: String) -> Level:
 		
 	# Already loaded
 	if file in level_history:
-		print("Fetched exiting level ", file)
+		print("Fetched existing level ", file)
 		return level_history[file]
 	else:
 		print("Loading new level ", file)
@@ -30,9 +30,10 @@ func _process(delta: float) -> void:
 	for level in level_in_progress:
 		if ResourceLoader.load_threaded_get_status(level) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			var loaded_level = ResourceLoader.load_threaded_get(level).instantiate()
-			level_history[level] = loaded_level
+			var uid = "uid://" + str(ResourceLoader.get_resource_uid(level))
+			level_history[uid] = loaded_level
 			remove_list.append(level)
-			print("Finished loading asynchronous level ", level)
+			print("Finished loading asynchronous level ", uid)
 
 	for i in remove_list:
 		level_in_progress.erase(i)

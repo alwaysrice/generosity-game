@@ -7,7 +7,7 @@
 process_mode = 3
 script = ExtResource("1_fc0e3")
 initial_level = "uid://dirhpaeoq4yqm"
-levels_dir = "res://scripts/levels"
+levels = ["uid://dirhpaeoq4yqm", "uid://bi25syp4pbcfj"]
 metadata/_custom_type_script = "uid://wrr21c6qeca4"
 
 [node name="Level" type="Node2D" parent="."]

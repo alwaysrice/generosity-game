@@ -55,9 +55,12 @@ signal jumped
 
 func _ready() -> void:
 	assert(defer_texture_load)
-	ResourceLoader.load_threaded_request(defer_texture_load)
-	if not is_defer_texture_load:
-		get_sprite().sprite_frames = ResourceLoader.load_threaded_get(defer_texture_load)
+	if ResourceLoader.load_threaded_get_status(defer_texture_load) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS \
+	or ResourceLoader.load_threaded_get_status(defer_texture_load) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		ResourceLoader.load_threaded_request(defer_texture_load)
+		if not is_defer_texture_load:
+			print("Forcing loaded Actor frames ", defer_texture_load)
+			get_sprite().sprite_frames = ResourceLoader.load_threaded_get(defer_texture_load)
 	light_overlay_modulate = %OverlayLight.modulate
 	light_spread_energy = %SpreadLight.energy
 	
