@@ -2,17 +2,22 @@ class_name Game extends Node2D
 
 @onready var level = %Level
 @export_file("*.tscn") var initial_level
-@export_file("*.tscn") var levels: PackedStringArray = []
-
-
+@export_file("*.tscn") var levels: Array[String]
+@export var can_start = false
+ 
 func _ready() -> void:
 	GameManager.load_dialogues("res://audio/dialogue set 1")
 	for level in levels:
 		GameManager.load_level_async(level)
+		
+func start():
+	can_start = true
 	if initial_level:
 		level.add_child(GameManager.load_level(initial_level))
 
 func _input(event: InputEvent) -> void:
+	if not can_start:
+		return
 	if event.is_action_pressed(&"toggle_fullscreen"):
 		var mode := DisplayServer.window_get_mode()
 		if mode == DisplayServer.WINDOW_MODE_FULLSCREEN or \

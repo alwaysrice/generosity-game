@@ -22,6 +22,7 @@ func load_level(file: String) -> Level:
 	return new_level
 	
 func load_level_async(file: String):
+	print("Loading async level ", file)
 	var new_level = ResourceLoader.load_threaded_request(file)
 	level_in_progress.append(file)
 	
@@ -30,10 +31,9 @@ func _process(delta: float) -> void:
 	for level in level_in_progress:
 		if ResourceLoader.load_threaded_get_status(level) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			var loaded_level = ResourceLoader.load_threaded_get(level).instantiate()
-			var uid = "uid://" + str(ResourceLoader.get_resource_uid(level))
-			level_history[uid] = loaded_level
+			level_history[level] = loaded_level
 			remove_list.append(level)
-			print("Finished loading asynchronous level ", uid)
+			print("Finished loading asynchronous level ", level)
 
 	for i in remove_list:
 		level_in_progress.erase(i)

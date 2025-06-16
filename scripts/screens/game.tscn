@@ -1,13 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwo4k6ylianwv"]
+[gd_scene load_steps=6 format=3 uid="uid://bwo4k6ylianwv"]
 
 [ext_resource type="Script" uid="uid://wrr21c6qeca4" path="res://scripts/screens/game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://dh71g61cm8k44" path="res://scripts/ui/pause_menu.tscn" id="4_eow3j"]
+
+[sub_resource type="Animation" id="Animation_3jy5x"]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/BlackOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333, 1.23333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.03333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_841p7"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/BlackOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c27sp"]
+_data = {
+&"RESET": SubResource("Animation_3jy5x"),
+&"start": SubResource("Animation_841p7")
+}
 
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_fc0e3")
 initial_level = "uid://dirhpaeoq4yqm"
-levels = ["uid://dirhpaeoq4yqm", "uid://bi25syp4pbcfj"]
+levels = Array[String](["uid://dirhpaeoq4yqm", "uid://bi25syp4pbcfj", "uid://d2mkct7qra8ke", "uid://crqnw7r70ikhe", "uid://b0004maoqvjhj", "uid://b4evh3wrmnoou", "uid://cmu22ofvmxccq"])
 metadata/_custom_type_script = "uid://wrr21c6qeca4"
 
 [node name="Level" type="Node2D" parent="."]
@@ -19,3 +83,14 @@ layer = 8
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_eow3j")]
 unique_name_in_owner = true
+
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1191.0
+offset_bottom = 673.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c27sp")
+}
+autoplay = "RESET"
