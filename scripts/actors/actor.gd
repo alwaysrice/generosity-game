@@ -50,10 +50,22 @@ signal jump_landed
 signal jumped 
 
 
+@export_file("*.tres") var defer_texture_load: String
+@export var is_defer_texture_load = false
+
 func _ready() -> void:
+	assert(defer_texture_load)
+	ResourceLoader.load_threaded_request(defer_texture_load)
+	if not is_defer_texture_load:
+		get_sprite().sprite_frames = ResourceLoader.load_threaded_get(defer_texture_load)
 	light_overlay_modulate = %OverlayLight.modulate
 	light_spread_energy = %SpreadLight.energy
 	
+func _process(delta: float) -> void:
+	if is_defer_texture_load and ResourceLoader.load_threaded_get_status(defer_texture_load) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		print("Finished async loading Actor ", defer_texture_load)
+		get_sprite().sprite_frames = ResourceLoader.load_threaded_get(defer_texture_load)
+		
 
 func set_light_ratio(value: float):
 	value = clampf(value, 0.0, 1.0)

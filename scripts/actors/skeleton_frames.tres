@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://do5lb0e61jvc"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"fall",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"flight",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"fly",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"kneel",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"pet",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"spellcast",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]

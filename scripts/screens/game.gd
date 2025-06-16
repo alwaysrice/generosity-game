@@ -2,12 +2,32 @@ class_name Game extends Node2D
 
 @onready var level = %Level
 @export_file("*.tscn") var initial_level
-@export_file("*.tscn") var preloaded_levels: PackedStringArray = []
+@export_dir var levels_dir: String
+
+
+func get_levels_to_load(folder_path: String):
+	var dir := DirAccess.open(folder_path)
+	var array = []
+	if dir == null:
+		print("Failed to open directory: ", folder_path)
+		return
+
+	dir.list_dir_begin()
+	while true:
+		var file_name := dir.get_next()
+		if file_name == "":
+			break
+		if not dir.current_is_dir() and file_name.to_lower().ends_with(".tscn") and file_name != "level.tscn":
+			var file_path = folder_path + "/" + file_name
+			array.append(file_path)
+
+	dir.list_dir_end()
+	return array
 
 func _ready() -> void:
 	GameManager.load_dialogues("res://audio/dialogue set 1")
-	for level in preloaded_levels:
-		GameManager.load_level(level)
+	for level in get_levels_to_load(levels_dir):
+		GameManager.load_level_async(level)
 	if initial_level:
 		level.add_child(GameManager.load_level(initial_level))
 

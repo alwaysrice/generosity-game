@@ -144,6 +144,7 @@ func _on_fly_timer_timeout() -> void:
 
 
 func _ready() -> void:
+	super._ready()
 	%StaminaOutline.modulate = Color.TRANSPARENT
 
 func _on_max_wait_timer_timeout() -> void:

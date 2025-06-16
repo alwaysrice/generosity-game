@@ -1,18 +1,41 @@
 extends Node
 
 var level_history = {}
+var level_in_progress = []
 var dialogues: Array[AudioStream] = []
 var dialogue_counter = -1
 
 func load_level(file: String) -> Level:
+	# Block thread and wait 
+	if file in level_in_progress:
+		print("Waiting for asynchronous loaded level ", file)
+		level_history[file] = ResourceLoader.load_threaded_get(file).instantiate()
+		
+	# Already loaded
 	if file in level_history:
-		print("Fetched exiting level")
+		print("Fetched exiting level ", file)
 		return level_history[file]
 	else:
-		print("Loading new level")
+		print("Loading new level ", file)
 	var new_level = load(file).instantiate()
 	level_history[file] = new_level
 	return new_level
+	
+func load_level_async(file: String):
+	var new_level = ResourceLoader.load_threaded_request(file)
+	level_in_progress.append(file)
+	
+func _process(delta: float) -> void:
+	var remove_list = []
+	for level in level_in_progress:
+		if ResourceLoader.load_threaded_get_status(level) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+			var loaded_level = ResourceLoader.load_threaded_get(level).instantiate()
+			level_history[level] = loaded_level
+			remove_list.append(level)
+			print("Finished loading asynchronous level ", level)
+
+	for i in remove_list:
+		level_in_progress.erase(i)
 	
 func upgrade_witch():
 	for level in level_history.values():
